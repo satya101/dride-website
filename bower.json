@@ -5,7 +5,8 @@
     "angular": "^1.4.0",
     "angular-animate": "^1.4.0",
     "angular-route": "^1.4.0",
-    "bootstrap-css-only": "^3.3.6"
+    "bootstrap-css-only": "^3.3.6",
+    "PageTransitions": "https://github.com/codrops/PageTransitions"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

@@ -4,7 +4,146 @@
   color: #000;
   padding: 0.2em 0;
 }
-
+html,body{height:100%;}
 body {
   padding: 0;
+  font-family: 'Comfortaa', cursive;
+}
+.container-fluid {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.full-height{
+  height: 100%;
+}
+.navbar{
+  margin: 0;
+  border: 0 !important;
+  background: 0;
+}
+.bg{
+  height:100%;
+  color: #fff;
+  padding: 0;
+}
+.bg-1{
+  background-color: #F06060;
+}
+.bg-2{
+  background-color: #4A6164;
+}
+.bg-3{
+  background-color: #444222;
+}
+.upperText{
+  padding: 80px;
+}
+.bg p{
+    padding: 50px;
+    font-size: 20px;
+    font-weight: 100;
+}
+.inlineBg1{
+    background-image: url('../images/bg1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+.superCenter{
+  font-size: 550px;
+  text-align: center;
+  margin: auto auto;
+}
+.icon-bigD{
+    transform: translateY(20%);
+}
+
+
+
+
+.card-container {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.card {
+  width: 100%;
+  position: absolute;
+}
+
+.card.ng-animate {
+  transition: .7s ease-in-out all;
+}
+
+.card.ng-enter.toLeft {
+  left: 100%;
+}
+.card.ng-enter-active.toLeft {
+  left: 0;
+}
+.card.ng-leave.toLeft {
+  left: 0;
+}
+.card.ng-leave-active.toLeft {
+  left: -100%;
+}
+
+.card.ng-enter.toRight {
+  left: -100%;
+}
+
+.card.ng-enter-active.toRight {
+  left: 0;
+}
+
+.card.ng-leave.toRight {
+  left: 0;
+}
+
+.card.ng-leave-active.toRight {
+  left: 100%;
+}
+
+
+.ng-hide{
+  -webkit-animation: moveToRight .7s ease-in-out both;
+  animation: moveToRight .7s ease-in-out both;
+}
+.ng-show{
+  -webkit-animation: moveFromRight .1s ease-in-out both;
+  animation: moveFromRight .1s ease-in-out both;
+}
+
+@-webkit-keyframes moveToLeft {
+  from { }
+  to { -webkit-transform: translateX(-100%); }
+}
+@keyframes moveToLeft {
+  from { }
+  to { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+
+@-webkit-keyframes moveFromLeft {
+  from { -webkit-transform: translateX(-100%); }
+}
+@keyframes moveFromLeft {
+  from { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+
+@-webkit-keyframes moveToRight { 
+  from { }
+  to { -webkit-transform: translateX(100%); }
+}
+@keyframes moveToRight { 
+  from { }
+  to { -webkit-transform: translateX(100%); transform: translateX(100%); }
+}
+
+@-webkit-keyframes moveFromRight {
+  from { -webkit-transform: translateX(100%); }
+}
+@keyframes moveFromRight {
+  from { -webkit-transform: translateX(100%); transform: translateX(100%); }
 }

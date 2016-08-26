@@ -1,7 +1,77 @@
 <div class="col-md-6">
-xxxx
+
+    <button ng-click="prev()">view 1</button>
+    <button ng-click="next()">view 2</button>
+
+
+
+    <!-- header -->
+    <div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <a class="navbar-brand" href="#/">dride</a>
+          </div>
+
+          <div class="collapse">
+
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#/">Home</a></li>
+              <li><a ng-href="#/about">About</a></li>
+              <li><a ng-href="#/">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- big D part -->
+    <div class="row text-center">
+      <div class="icon-bigD superCenter"></div>
+    </div>
+
+
+
+
+
 </div>
 
-<div class="col-md-6">
-yyyy
+
+
+
+
+
+
+<div class="card-container" ng-switch="displayCard">
+
+
+  <div class="card col-md-6 bg bg-1" ng-switch-when="1" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+      <div class="upperText">
+        <h1 class="text-center">Welcome to dride</h1>
+        <p >Ipsum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc psum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc</p>
+      </div>
+      <div class="divider container-fluid inlineBg1">
+      </div>
+
+  </div>
+
+  <div class="card col-md-6 bg bg-2" ng-switch-when="2" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+      <div class="upperText">
+        <h1 class="text-center">222222222</h1>
+        <p >Ipsum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc psum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc</p>
+      </div>
+      <div class="divider container-fluid inlineBg1">
+      </div>
+
+  </div>
+
+  <div class="card col-md-6 bg bg-3" ng-switch-when="3" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+      <div class="upperText">
+        <h1 class="text-center">222222222</h1>
+        <p >Ipsum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc psum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc</p>
+      </div>
+
+  </div>
 </div>
+
