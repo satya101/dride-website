@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -57,10 +59,80 @@ body {
   margin: auto auto;
 }
 .icon-bigD{
-    transform: translateY(20%);
+    position: fixed;
+  top: 42%;
+  left: 25%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+.menu{
+  display: block;
+  float: left;
+
+  position: fixed;
+  top: 50%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+
+}
+.node:before{
+    font-size: 30px;
+}
+.icon-bigD:before {
+    font-size: 530px;
+}
+.icon-bigD{
+    left: 24%;
+    position: fixed !important;
+    top: 30%;
+}
+@mixin on-circle($item-count, $circle-size, $item-size) {  
+  position: relative;
+  width:  $circle-size;
+  height: $circle-size;
+  border-radius: 50%;
+  padding: 0; 
+  list-style: none;
+  
+  > * {
+    display: block;
+    position: absolute;
+    top:  50%; 
+    left: 50%;
+    margin: -($item-size / 2);
+    width:  $item-size;
+    height: $item-size;
+  
+    $angle: (32);
+    $rot: 100;
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        transform: rotate($rot * 1deg) translate($circle-size / 2) rotate($rot * -1deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+  }
 }
 
+.circle-container {
+  @include on-circle($item-count: 8, $circle-size: 500px, $item-size: 6em); 
+  margin: 5em auto 0;
 
+  span { 
+    display: block; 
+    max-width: 100%; 
+    border-radius: 50%;
+    filter: grayscale(100%);
+    transition: .15s;
+    margin-top: 95px;
+     
+    &:hover {
+      filter: grayscale(0);
+    }
+  }
+}
 
 
 .card-container {
@@ -105,7 +177,7 @@ body {
 .card.ng-leave-active.toRight {
   left: 100%;
 }
-
+ 
 
 .ng-hide{
   -webkit-animation: moveToRight .7s ease-in-out both;

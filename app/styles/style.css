@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?t5fqhb');
-  src:  url('fonts/icomoon.eot?t5fqhb#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?t5fqhb') format('truetype'),
-    url('fonts/icomoon.woff?t5fqhb') format('woff'),
-    url('fonts/icomoon.svg?t5fqhb#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?ufroyt');
+  src:  url('fonts/icomoon.eot?ufroyt#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?ufroyt') format('truetype'),
+    url('fonts/icomoon.woff?ufroyt') format('woff'),
+    url('fonts/icomoon.svg?ufroyt#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-app:before {
+  content: "\e901";
+}
+.icon-camera:before {
+  content: "\e902";
+}
+.icon-docs:before {
+  content: "\e903";
+}
+.icon-gps:before {
+  content: "\e904";
+}
+.icon-mic:before {
+  content: "\e905";
+}
+.icon-wifi:before {
+  content: "\e906";
+}
 .icon-bigD:before {
   content: "\e900";
 }

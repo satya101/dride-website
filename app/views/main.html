@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-6" ng-init="drawIconsAroundTheD()">
 
     <button ng-click="prev()">view 1</button>
     <button ng-click="next()">view 2</button>
@@ -10,6 +10,8 @@
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
+
+
 
             <a class="navbar-brand" href="#/">dride</a>
           </div>
@@ -28,8 +30,17 @@
 
     <!-- big D part -->
     <div class="row text-center">
-      <div class="icon-bigD superCenter"></div>
-    </div>
+           <div class="menu circle-container icon-bigD">
+              
+              <span class="icon-gps node dot1"></span>
+              <span class="icon-mic node dot2"></span>
+              <span class="icon-camera node dot3"></span>
+              <span class="icon-wifi node dot4"></span>
+              <span class="icon-app node dot5"></span>
+              <span class="icon-docs node dot6"></span>
+          </div>
+
+   </div>
 
 
 
@@ -74,4 +85,3 @@
 
   </div>
 </div>
-
