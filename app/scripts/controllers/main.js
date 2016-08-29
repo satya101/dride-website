@@ -16,6 +16,10 @@ angular.module('drideApp')
   
         $scope.displayCard = 1;
         
+        $scope.video = {
+          id: '6sp2wUMysc0'
+        };
+  
         //when press prev, card slide to right
         $scope.goToView = function(view) {
 
