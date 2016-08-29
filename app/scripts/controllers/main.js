@@ -16,28 +16,17 @@ angular.module('drideApp')
   
         $scope.displayCard = 1;
         
-        //when press prev, card slide to left
-        $scope.prev = function() {
-          $scope.toLeft = true;
-          $scope.toRight = false;
-          if ($scope.displayCard == 1) {
-            $scope.displayCard = 3
-          } else {
-            $scope.displayCard -= 1;
-          }
-        };
-        
         //when press prev, card slide to right
-        $scope.next = function() {
-          $scope.toLeft = false;
-          $scope.toRight = true;
-  
-          if ($scope.displayCard == 3) {
-            $scope.displayCard = 1
-          } else {
-            $scope.displayCard += 1;
-          }
+        $scope.goToView = function(view) {
+
+
+            $scope.toLeft = true;
+            $scope.toRight = false;
+
+            $scope.displayCard = view
+
         };
+
 
 
 

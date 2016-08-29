@@ -1,9 +1,5 @@
 <div class="col-md-6" ng-init="drawIconsAroundTheD()">
 
-    <button ng-click="prev()">view 1</button>
-    <button ng-click="next()">view 2</button>
-
-
 
     <!-- header -->
     <div class="header">
@@ -13,7 +9,7 @@
 
 
 
-            <a class="navbar-brand" href="#/">dride</a>
+            <a class="navbar-brand" ng-click="goToView('1')">dride</a>
           </div>
 
           <div class="collapse">
@@ -32,12 +28,13 @@
     <div class="row text-center">
            <div class="menu circle-container icon-bigD">
               
-              <span class="icon-gps node dot1"></span>
-              <span class="icon-mic node dot2"></span>
-              <span class="icon-camera node dot3"></span>
-              <span class="icon-wifi node dot4"></span>
-              <span class="icon-app node dot5"></span>
-              <span class="icon-docs node dot6"></span>
+              <span ng-click="goToView('6')" class="icon-docs node dot6" ng-class="{'active-6': displayCard==6}"></span>
+              <span ng-click="goToView('5')" class="icon-app node dot5" ng-class="{'active-5': displayCard==5}"></span>
+              <span ng-click="goToView('4')" class="icon-wifi node dot4" ng-class="{'active-4': displayCard==4}"></span>
+              <span ng-click="goToView('3')" class="icon-camera node dot3" ng-class="{'active-3': displayCard==3}"></span>
+              <span ng-click="goToView('2')" class="icon-mic node dot2" ng-class="{'active-2': displayCard==2}"></span>
+              <span ng-click="goToView('1')" class="icon-gps node dot1" ng-class="{'active-1': displayCard==1}"></span>
+              <div class="innerLogo">dride</div>
           </div>
 
    </div>
@@ -58,30 +55,28 @@
 
 
   <div class="card col-md-6 bg bg-1" ng-switch-when="1" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="upperText">
-        <h1 class="text-center">Welcome to dride</h1>
-        <p >Ipsum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc psum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc</p>
-      </div>
-      <div class="divider container-fluid inlineBg1">
-      </div>
-
+      <div class="full-height" ng-include=" 'views/gps.html' "></div>
   </div>
 
   <div class="card col-md-6 bg bg-2" ng-switch-when="2" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="upperText">
-        <h1 class="text-center">222222222</h1>
-        <p >Ipsum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc psum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc</p>
-      </div>
-      <div class="divider container-fluid inlineBg1">
-      </div>
-
+      <div class="full-height" ng-include=" 'views/mic.html' "></div>
   </div>
 
   <div class="card col-md-6 bg bg-3" ng-switch-when="3" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="upperText">
-        <h1 class="text-center">222222222</h1>
-        <p >Ipsum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc psum is not simply random text. It has roots in a piece of classical Latin literature from making it over years old. Richard Mc</p>
-      </div>
-
+      <div class="full-height" ng-include=" 'views/camera.html' "></div>
   </div>
+
+  <div class="card col-md-6 bg bg-4" ng-switch-when="4" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+      <div class="full-height" ng-include=" 'views/wifi.html' "></div>
+  </div>
+
+  <div class="card col-md-6 bg bg-5" ng-switch-when="5" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+      <div class="full-height" ng-include=" 'views/app.html' "></div>
+  </div>
+
+  <div class="card col-md-6 bg bg-6" ng-switch-when="6" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+      <div class="full-height" ng-include=" 'views/docs.html' "></div>
+  </div>
+
+
 </div>

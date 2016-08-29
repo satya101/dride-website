@@ -12,12 +12,14 @@ body {
   font-family: 'Comfortaa', cursive;
 }
 .container-fluid {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
 .full-height{
   height: 100%;
+}
+.full-width{
+  width: 100%;
 }
 .navbar{
   margin: 0;
@@ -29,20 +31,26 @@ body {
   color: #fff;
   padding: 0;
 }
-.bg-1{
-  background-color: #F06060;
-}
-.bg-2{
-  background-color: #4A6164;
-}
-.bg-3{
-  background-color: #444222;
-}
+$color : #F06060, #4A6164, #444222, #333333, #3d33d3, #55d6dd;
+
+
+
+
+  @for $i from 1 through 6 {
+    .bg-#{$i}{
+      background-color: nth($color, $i);
+    }
+    .active-#{$i}{
+      color: nth($color, $i);
+    }
+  }
+
+
 .upperText{
   padding: 80px;
 }
 .bg p{
-    padding: 50px;
+    padding: 50px 0 50px 0;
     font-size: 20px;
     font-weight: 100;
 }
@@ -64,6 +72,12 @@ body {
   left: 25%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
+}
+.innerLogo{
+    font-family: 'Comfortaa', cursive;
+    font-size: 63px;
+    margin-left: -149px !important;
+    height: 72px !important;
 }
 .menu{
   display: block;
@@ -124,13 +138,9 @@ body {
     display: block; 
     max-width: 100%; 
     border-radius: 50%;
-    filter: grayscale(100%);
     transition: .15s;
-    margin-top: 95px;
-     
-    &:hover {
-      filter: grayscale(0);
-    }
+    margin-top: 92px;
+    cursor: pointer;
   }
 }
 
@@ -219,3 +229,28 @@ body {
 @keyframes moveFromRight {
   from { -webkit-transform: translateX(100%); transform: translateX(100%); }
 }
+
+.btn-dride{
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #333;
+    border-radius: 2px;
+}
+
+.bottomIcon{
+    text-align: center;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
