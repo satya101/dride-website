@@ -28,8 +28,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-docs:before {
+.icon-mic:before {
+  content: "\e901";
+}
+.icon-gps:before {
+  content: "\e902";
+}
+.icon-camera:before {
   content: "\e903";
+}
+.icon-icons-10:before {
+  content: "\e904";
+}
+.icon-app:before {
+  content: "\e905";
+}
+.icon-docs:before {
+  content: "\e906";
 }
 .icon-mic-full:before {
   content: "\e907";
@@ -40,6 +55,9 @@
 .icon-camera-full:before {
   content: "\e909";
 }
+.icon-wifi:before {
+  content: "\e90a";
+}
 .icon-wifi-full:before {
   content: "\e90a";
 }
@@ -49,25 +67,9 @@
 .icon-docs-full:before {
   content: "\e90c";
 }
-.icon-app:before {
-  content: "\e901";
-}
-.icon-camera:before {
-  content: "\e902";
-}
-.icon-gps:before {
-  content: "\e904";
-}
-.icon-mic:before {
-  content: "\e905";
-}
-.icon-wifi:before {
-  content: "\e906";
-}
 .icon-bigD:before {
   content: "\e900";
 }
-
 
 
 
@@ -150,7 +152,7 @@ body {
 }
 
 
-$color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
+$color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 
 
 
@@ -263,7 +265,6 @@ $color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
     max-width: 100%; 
     border-radius: 50%;
     transition: .15s;
-    margin-top: 62px;
     cursor: pointer;
   }
 }
@@ -370,7 +371,7 @@ $color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
 
 
 .brick{
-  width: 49.3%;
+  width: 50%;
   height: 50%;
   background-color: #333;
   background-repeat: no-repeat;
@@ -420,7 +421,7 @@ $color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
 
 .inBlueWrap{
     padding: 52px;
-    background-color: rgba(114, 198, 206, 0.85);
+    background-color: rgba(177, 59, 135, 0.9);
     margin-top: 20%;
     height: 39%;
     color: #fff;
@@ -446,14 +447,17 @@ $color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
   height: 60%;
 }
 .gradApp{
-  background: rgba(237,237,237,1);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(237,237,237,1) 0%, rgba(133,132,132,1) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(237,237,237,1)), color-stop(100%, rgba(133,132,132,1)));
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(237,237,237,1) 0%, rgba(133,132,132,1) 100%);
-  background: -o-radial-gradient(center, ellipse cover, rgba(237,237,237,1) 0%, rgba(133,132,132,1) 100%);
-  background: -ms-radial-gradient(center, ellipse cover, rgba(237,237,237,1) 0%, rgba(133,132,132,1) 100%);
-  background: radial-gradient(ellipse at center, rgba(237,237,237,1) 0%, rgba(133,132,132,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#858484', GradientType=1 );
+  background: rgba(221,252,255,1);
+
+  background: radial-gradient(ellipse at center, #72c6ce 0%, #258290 100%);
+
+  // background: -moz-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
+  // background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(221,252,255,1)), color-stop(100%, rgba(0,121,134,1)));
+  // background: -webkit-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
+  // background: -o-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
+  // background: -ms-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
+  // background: radial-gradient(ellipse at center, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
+  // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddfcff', endColorstr='#007986', GradientType=1 );
   height: 100%;
 }
 .btn-dride-flatTop{
@@ -477,9 +481,24 @@ $color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
     margin: auto auto;
 }
 
-.fullIc:before{
-  font-size: 44px !important;
+
+.labelNear{
+    font-family: 'Comfortaa', cursive;
+    padding-right: 10px;
+    padding-top: 11px;
+    font-size: 17px;
+    font-weight: 100;
+    float: right;
 }
-
-
+.node{
+     // width: 188px;
+}
+.node:before{
+  float: right;
+}
+.iW {
+    margin-top: 60px;
+    width: 190px;
+    margin-left: -179px;
+}
 
