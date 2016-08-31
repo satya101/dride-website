@@ -28,14 +28,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-docs:before {
+  content: "\e903";
+}
+.icon-mic-full:before {
+  content: "\e907";
+}
+.icon-gps-full:before {
+  content: "\e908";
+}
+.icon-camera-full:before {
+  content: "\e909";
+}
+.icon-wifi-full:before {
+  content: "\e90a";
+}
+.icon-app-full:before {
+  content: "\e90b";
+}
+.icon-docs-full:before {
+  content: "\e90c";
+}
 .icon-app:before {
   content: "\e901";
 }
 .icon-camera:before {
   content: "\e902";
-}
-.icon-docs:before {
-  content: "\e903";
 }
 .icon-gps:before {
   content: "\e904";
@@ -49,7 +67,6 @@
 .icon-bigD:before {
   content: "\e900";
 }
-
 
 
 
@@ -396,7 +413,7 @@ $color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
 .inWhiteWrap{
     padding: 12px 0 12px 0;
     background-color: rgba(255, 255, 255, 0.85);
-    margin-top: 60%;
+    margin-top: 54%;
     height: 292px;
     color: #000;
 }
@@ -455,9 +472,14 @@ $color : #333, #F3B562, #72C6CE, #F06060, #858484, #4A6164;
 }
 
 
+.appImg{
+    max-width: 650px;
+    margin: auto auto;
+}
 
-
-
+.fullIc:before{
+  font-size: 44px !important;
+}
 
 
 

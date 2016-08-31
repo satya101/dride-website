@@ -30,12 +30,12 @@
     <div class="row text-center {{'color-' + displayCard}}">
            <div class="menu circle-container icon-bigD" >
               
-              <span ng-click="goToView('6')" class="icon-docs node dot6" ng-class="{'active-6': displayCard==6}"></span>
-              <span ng-click="goToView('5')" class="icon-app node dot5" ng-class="{'active-5': displayCard==5}"></span>
-              <span ng-click="goToView('4')" class="icon-wifi node dot4" ng-class="{'active-4': displayCard==4}"></span>
-              <span ng-click="goToView('3')" class="icon-camera node dot3" ng-class="{'active-3': displayCard==3}"></span>
-              <span ng-click="goToView('2')" class="icon-mic node dot2" ng-class="{'active-2': displayCard==2}"></span>
-              <span ng-click="goToView('1')" class="icon-gps node dot1" ng-class="{'active-1': displayCard==1}"></span>
+              <span ng-click="goToView('6')" class="icon-docs node dot6" ng-class="displayCard==6 ? 'active-6 icon-docs-full fullIc': 'icon-docs'"></span>
+              <span ng-click="goToView('5')" class="icon-app node dot5" ng-class="displayCard==5 ? 'active-5 icon-app-full fullIc': 'dicon-app'"></span>
+              <span ng-click="goToView('4')" class="icon-wifi node dot4" ng-class="displayCard==4 ? 'active-4 icon-wifi-full fullIc': 'icon-wifi'"></span>
+              <span ng-click="goToView('3')" class="icon-camera node dot3" ng-class="displayCard==3 ? 'active-3 icon-camera-full fullIc': 'icon-camera'"></span>
+              <span ng-click="goToView('2')" class="icon-mic node dot2" ng-class="displayCard==2 ? 'active-2 icon-mic-full fullIc': 'icon-mic'"></span>
+              <span ng-click="goToView('1')" class="icon-gps node dot1" ng-class="displayCard==1 ? 'active-1 icon-gps-full fullIc': 'icon-gps'"></span>
               <div class="innerLogo">dride</div>
           </div>
 
