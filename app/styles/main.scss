@@ -120,24 +120,27 @@ body {
       margin-top: -19px;
 }
 .navbar-header{
-  background-color: #333;
-  color: #fff;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-  margin-right: 55px;
-  cursor: pointer;
+  padding: 0;
 }
 .navbar-brand{
-  color: #fff !important;
-  float: left;
-  height: 70px;
-  padding: 28px 15px;
-  font-size: 26px;
-  font-weight: 100;
-  line-height: 20px;
+    color: #fff !important;
+    height: 70px;
+    padding: 28px 15px;
+    font-size: 26px;
+    font-weight: 100;
+    line-height: 20px;
+    background-color: #333;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    cursor: pointer;
+}
+.navbar-default .navbar-brand:hover{
+  background-color: #333;
 }
 .navbar-nav{
-      margin-top: 35px;
+    margin-top: 35px;
+    padding: 0;
+    padding-left: 16px;
 }
 .preOrder{
     background-color: #333333;
@@ -314,13 +317,22 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 }
  
 
-.ng-hide{
+.card-container .ng-hide{
   -webkit-animation: moveToRight .7s ease-in-out both;
   animation: moveToRight .7s ease-in-out both;
 }
-.ng-show{
+.card-container .ng-show{
   -webkit-animation: moveFromRight .1s ease-in-out both;
   animation: moveFromRight .1s ease-in-out both;
+}
+
+.circle-container .ng-hide{
+  -webkit-animation: fadeOut .7s ease-in-out both;
+  animation: fadeOut .7s ease-in-out both;
+}
+.circle-container .ng-show{
+  -webkit-animation: fadeIn .1s ease-in-out both;
+  animation: fadeIn .1s ease-in-out both;
 }
 
 @-webkit-keyframes moveToLeft {
@@ -405,7 +417,15 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
     background-color: #000;
     color: #fff;
 }
-
+.btn-dride-black:hover, .btn-dride-black:active{
+      color: #fff;
+      outline: 0;
+      opacity: 0.8;
+}
+.btn-dride-black:focus{
+      color: #fff;
+      outline: 0;
+}
 .bg-1{
   background-repeat: no-repeat;
   background-size: cover;
@@ -447,17 +467,10 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
   height: 60%;
 }
 .gradApp{
-  background: rgba(221,252,255,1);
+  background: #72c6ce;
 
   background: radial-gradient(ellipse at center, #72c6ce 0%, #258290 100%);
 
-  // background: -moz-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
-  // background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(221,252,255,1)), color-stop(100%, rgba(0,121,134,1)));
-  // background: -webkit-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
-  // background: -o-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
-  // background: -ms-radial-gradient(center, ellipse cover, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
-  // background: radial-gradient(ellipse at center, rgba(221,252,255,1) 0%, rgba(0,121,134,1) 100%);
-  // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddfcff', endColorstr='#007986', GradientType=1 );
   height: 100%;
 }
 .btn-dride-flatTop{
@@ -501,5 +514,14 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
     width: 190px;
     margin-left: -179px;
     height: 35px;
+}
+
+
+.txtBrick-inner {
+  position: relative;
+  top: 46%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 

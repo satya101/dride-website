@@ -7,7 +7,8 @@
     "angular-route": "^1.4.0",
     "bootstrap-css-only": "^3.3.6",
     "PageTransitions": "https://github.com/codrops/PageTransitions",
-    "angular-video-bg": "^0.3.3"
+    "angular-video-bg": "^0.3.3",
+    "animate.css": "^3.5.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
