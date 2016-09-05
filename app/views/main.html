@@ -26,7 +26,7 @@
 
     <!-- big D part -->
     <div class="row text-center {{'color-' + displayCard}}">
-           <div class="menu circle-container icon-bigD" >
+           <div class="menu circle-container icon-bigD" ng-mouse-wheel-down="goToView(displayCard+1)" ng-mouse-wheel-up="goToView(displayCard-1)">
               
               <span ng-click="goToView('6')" class="iW dot6">
                 <span class="icon-docs node pull-right" ng-class="displayCard==6 ? 'active-6 icon-docs-full fullIc': 'icon-docs'"></span>
@@ -69,7 +69,7 @@
 
 
 
-<div class="card-container" ng-switch="displayCard">
+<div class="card-container" ng-switch="displayCard" ng-mouse-wheel-down="goToView(displayCard+1)" ng-mouse-wheel-up="goToView(displayCard-1)">
 
 
   <div class="card col-md-6 bg bg-1" ng-switch-when="1" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
