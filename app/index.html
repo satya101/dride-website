@@ -24,7 +24,7 @@
 
 
     <div class="container-fluid full-height">
-      <div ng-view="" class="full-height"></div>
+      <div ng-view="" class="full-height" ng-mouse-wheel-down="goToView(displayCard+1)" ng-mouse-wheel-up="goToView(displayCard-1)" ng-swipe-down="goToView(displayCard+1)" ng-swipe-up="goToView(displayCard-1)"></div>
     </div>
 
 
@@ -37,6 +37,7 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-video-bg/angular-video-bg.min.js"></script>
+    <script src="bower_components/angular-swipe/dist/angular-swipe.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

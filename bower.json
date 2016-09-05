@@ -8,7 +8,8 @@
     "bootstrap-css-only": "^3.3.6",
     "PageTransitions": "https://github.com/codrops/PageTransitions",
     "angular-video-bg": "^0.3.3",
-    "animate.css": "^3.5.2"
+    "animate.css": "^3.5.2",
+    "angular-swipe": "^0.1.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

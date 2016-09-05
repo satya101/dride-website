@@ -5,14 +5,18 @@
     <div class="header">
       <div class="navbar navbar-default row" role="navigation">
 
- 
-            <div class="navbar-header col-xs-2">
-              <a class="navbar-brand" ng-click="goToView('1')">dride</a>
-            </div>  
+         <div class="navbar-header col-md-2">
+                    <button type="button"  data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                   <a class="navbar-brand" ng-click="goToView('1')">dride</a>
+          </div>
 
-          <div >
-
-            <ul class="nav navbar-nav col-xs-10">
+          <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav col-md-10">
               <li class="active"><a href="#/">Home</a></li>
               <li><a ng-href="#/about">About</a></li>
               <li><a ng-href="#/blog">Blog</a></li>
@@ -22,11 +26,13 @@
           </div>
 
       </div>
+
+
     </div>
 
     <!-- big D part -->
     <div class="row text-center {{'color-' + displayCard}}">
-           <div class="menu circle-container icon-bigD" ng-mouse-wheel-down="goToView(displayCard+1)" ng-mouse-wheel-up="goToView(displayCard-1)">
+           <div class="menu circle-container icon-bigD" >
               
               <span ng-click="goToView('6')" class="iW dot6">
                 <span class="icon-docs node pull-right" ng-class="displayCard==6 ? 'active-6 icon-docs-full fullIc': 'icon-docs'"></span>
@@ -69,32 +75,32 @@
 
 
 
-<div class="card-container" ng-switch="displayCard" ng-mouse-wheel-down="goToView(displayCard+1)" ng-mouse-wheel-up="goToView(displayCard-1)">
+<div class="card-container" ng-switch="displayCard">
 
 
-  <div class="card col-md-6 bg bg-1" ng-switch-when="1" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="full-height" ng-include=" 'views/gps.html' "></div>
-  </div>
+    <div class="card col-md-6 bg bg-1" ng-switch-when="1" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+        <div class="full-height" ng-include=" 'views/gps.html' "></div>
+    </div>
 
-  <div class="card col-md-6 bg bg-2" ng-switch-when="2" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="full-height" ng-include=" 'views/mic.html' "></div>
-  </div>
+    <div class="card col-md-6 bg bg-2" ng-switch-when="2" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+        <div class="full-height" ng-include=" 'views/mic.html' "></div>
+    </div>
 
-  <div class="card col-md-6 bg bg-3" ng-switch-when="3" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="full-height" ng-include=" 'views/camera.html' "></div>
-  </div>
+    <div class="card col-md-6 bg bg-3" ng-switch-when="3" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+        <div class="full-height" ng-include=" 'views/camera.html' "></div>
+    </div>
 
-  <div class="card col-md-6 bg bg-4" ng-switch-when="4" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="full-height" ng-include=" 'views/wifi.html' "></div>
-  </div>
+    <div class="card col-md-6 bg bg-4" ng-switch-when="4" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+        <div class="full-height" ng-include=" 'views/wifi.html' "></div>
+    </div>
 
-  <div class="card col-md-6 bg bg-5" ng-switch-when="5" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="full-height" ng-include=" 'views/app.html' "></div>
-  </div>
+    <div class="card col-md-6 bg bg-5" ng-switch-when="5" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+        <div class="full-height" ng-include=" 'views/app.html' "></div>
+    </div>
 
-  <div class="card col-md-6 bg bg-6" ng-switch-when="6" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-      <div class="full-height" ng-include=" 'views/docs.html' "></div>
-  </div>
+    <div class="card col-md-6 bg bg-6" ng-switch-when="6" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+        <div class="full-height" ng-include=" 'views/docs.html' "></div>
+    </div>
 
 
 </div>

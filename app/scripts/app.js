@@ -12,7 +12,8 @@ angular
   .module('drideApp', [
     'ngAnimate',
     'ngRoute',
-    'angularVideoBg'
+    'angularVideoBg',
+    'swipe'
   ])
   .config(function ($routeProvider) {
     $routeProvider

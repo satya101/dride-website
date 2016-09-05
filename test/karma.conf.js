@@ -24,6 +24,7 @@ module.exports = function(config) {
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-video-bg/angular-video-bg.min.js',
+      'bower_components/angular-swipe/dist/angular-swipe.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
