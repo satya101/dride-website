@@ -24,7 +24,13 @@ angular.module('drideApp')
 
         $scope.views = ["product", "gps", "mic", "camera", "wifi", "app", "docs"]
         //when press prev, card slide to right
-        $scope.goToView = function(view) {
+        $scope.goToView = function(view, strict) {
+
+            //validate a gap of at least 1 sec to prevent super fast scroll
+            var dateNow = new Date().getTime();
+            if ($scope.transitionFired && (dateNow - $scope.transitionFired < 1000))
+                return;
+
 
             if (view > 7)
               view = 7
@@ -37,6 +43,10 @@ angular.module('drideApp')
             $scope.toRight = false;
 
             $scope.displayCard = view;
+
+            //save the time of the transition to prevent super fast scroll
+            $scope.transitionFired = dateNow
+
 
         };
 
