@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -14,8 +14,10 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/responsive.css">
     <!-- endbuild -->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400" rel="stylesheet">
+    <base href="/">
   </head>
   <body ng-app="drideApp">
     <!--[if lte IE 8]>
@@ -38,6 +40,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-video-bg/angular-video-bg.min.js"></script>
     <script src="bower_components/angular-swipe/dist/angular-swipe.js"></script>
+    <script src="bower_components/mobile-detect/mobile-detect.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -46,6 +49,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/directives/ngmousewheelup.js"></script>
+    <script src="scripts/controllers/page-not-found.js"></script>
     <!-- endbuild -->
 </body>
 </html>

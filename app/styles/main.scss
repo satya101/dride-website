@@ -28,6 +28,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-mouse:before {
+  content: "\e90d";
+}
+.icon-bigD:before {
+  content: "\e900";
+}
 .icon-mic:before {
   content: "\e901";
 }
@@ -67,8 +74,17 @@
 .icon-docs-full:before {
   content: "\e90c";
 }
-.icon-bigD:before {
-  content: "\e900";
+.icon-file-text2:before {
+  content: "\e926";
+}
+.icon-google-plus:before {
+  content: "\ea8b";
+}
+.icon-facebook2:before {
+  content: "\ea90";
+}
+.icon-youtube:before {
+  content: "\ea9d";
 }
 
 
@@ -158,12 +174,12 @@ body {
 }
 
 
-$color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
+$color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 
 
 
 
-  @for $i from 1 through 6 {
+  @for $i from 1 through 7 {
     .bg-#{$i}{
       background-color: nth($color, $i);
     }
@@ -210,6 +226,7 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
     font-size: 63px;
     margin-left: -149px !important;
     height: 72px !important;
+    cursor: pointer;
 }
 .menu{
   display: block;
@@ -395,7 +412,7 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
   padding: 30px;
 }
 .txtBrick{
-  background-color: nth($color, 2);
+  background-color: nth($color, 3);
 }
 
 .bg_mic_1{
@@ -429,7 +446,7 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
       color: #fff;
       outline: 0;
 }
-.bg-1{
+.bg-2{
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url('../images/gps.jpg');
@@ -527,4 +544,40 @@ $color : #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+.prod{
+  width: 35%;
+  margin: auto auto;
+  margin-top: 100px;
+}
+.preOrderBtn{
+  background-color: inherit;
+  margin-bottom: 10px;
+  border: 1px solid #858484;
+  color: #858484;
+}
+.clearBtn{
+  background-color: inherit;
+  color: #858484;
+}
+.productTtl{
+    font-weight: 100 !important;
+    margin-top: 61px;
+}
+.productSubTtl{
+    font-size: 19px;
+    font-weight: 100;
+    color: #cacaca;
+}
+
+
+.mouseWiggle {
+  color: #cacaca;
+}
+
+
+
+
+
+
 

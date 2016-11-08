@@ -1,0 +1,55 @@
+@media (max-width: 768px) {
+
+
+  .card-container{
+      margin-top: -70px;
+  }
+
+  .navbar-toggle{
+    border: 0;
+    background-color: rgba(0,0,0,0.70);
+    margin: 0;
+    border-bottom-left-radius: 2px !important;
+    border-radius: 0;
+    position: relative;
+    left: 15px;
+    padding: 12px;
+    color: #333;
+  }
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: rgba(0,0,0,0.50);
+}
+.orderNow{
+    float: right;
+    border: 0;
+    background-color: rgba(255,255,255,0.70);
+    margin: 0;
+    border-bottom-left-radius: 2px !important;
+    border-radius: 0;
+    position: relative;
+    left: 13px;
+    padding: 12px;
+    color: #333;
+    font-size: 15px;
+    height: 38px;
+    padding-top: 8px;
+    border-bottom-right-radius: 2px !important;
+}
+  .navbar-default .navbar-toggle .icon-bar {
+      background-color: #fff;
+  }
+
+  .card-container{
+    overflow: visible;
+  }
+  .card{
+    position: static !important;
+  }
+  .productTtl{
+    font-weight: 100 !important;
+    margin-top: 151px;
+    font-size: 40px;
+  }
+
+
+}

@@ -15,17 +15,19 @@ angular.module('drideApp')
         $scope.toRight = false;
   
         $scope.displayCard = 1;
-        
+
+        var md = new MobileDetect(window.navigator.userAgent);
+        $scope.mobile = md.mobile() ? true : false;
         $scope.video = {
           id: '6sp2wUMysc0'
         };
 
-
+        $scope.views = ["product", "gps", "mic", "camera", "wifi", "app", "docs"]
         //when press prev, card slide to right
         $scope.goToView = function(view) {
 
-            if (view > 6)
-              view = 6
+            if (view > 7)
+              view = 7
 
             if (view < 1)
               view = 1
