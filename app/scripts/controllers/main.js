@@ -28,7 +28,7 @@ angular.module('drideApp')
 
             //validate a gap of at least 1 sec to prevent super fast scroll
             var dateNow = new Date().getTime();
-            if ($scope.transitionFired && (dateNow - $scope.transitionFired < 1000))
+            if ($scope.transitionFired && (dateNow - $scope.transitionFired < 700))
                 return;
 
 
