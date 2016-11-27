@@ -32,6 +32,26 @@ angular
         controller: 'PageNotFoundCtrl',
         controllerAs: 'pageNotFound'
       })
+      .when('/blog', {
+        templateUrl: 'views/blog.html',
+        controller: 'BlogCtrl',
+        controllerAs: 'blog'
+      })
+      .when('/features', {
+        templateUrl: 'views/features.html',
+        controller: 'FeaturesCtrl',
+        controllerAs: 'features'
+      })
+      .when('/docs', {
+        templateUrl: 'views/docs.html',
+        controller: 'DocsCtrl',
+        controllerAs: 'docs'
+      })
+      .when('/documentation', {
+        templateUrl: 'views/documentation.html',
+        controller: 'DocumentationCtrl',
+        controllerAs: 'documentation'
+      })
       .otherwise({
         redirectTo: '/page-not-found'
       });
