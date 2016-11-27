@@ -1,54 +1,151 @@
+@media (max-width: 320px) {
+    .bg-2 {
+        .ftgps {
+            font-size: 26px !important;
+        }
+        .bg-2 .inWhiteWrap p {
+            font-size: 17px !important;
+        }
+    }
+    .bg-3 {
+        .brick p {
+            font-size: 16px !important;
+        }
+        .brick h2 {
+            font-size: 20px !important;
+        }
+    }
+    .bg-4 {
+        .ffx1 {
+            font-size: 25px;
+            margin-top: -39px;
+        }
+        .inBlueWrap p {
+            font-size: 16px !important;
+        }
+    }
+    .bg-6 {
+        .upperText {
+            margin-top: 51px;
+        }
+    }
+    .productTtl {
+        margin-top: 91px !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .bg-2 {
+        .ftgps {
+            font-size: 33px;
+            margin-top: 2px;
+        }
+        .inWhiteWrap p {
+            font-size: 20px;
+        }
+    }
+    .bg-3 {
+        .brick {
+            padding: 0;
+        }
+        .brick p {
+            padding: 10px;
+            font-size: 18px;
+        }
+        .brick h2 {
+            font-size: 24px;
+            margin-bottom: 0;
+            padding-left: 9px;
+        }
+        .txtBrick-inner {
+            padding-left: 14px;
+        }
+    }
+    .bg-4 {
+        .ffx1 {
+            font-size: 25px;
+            margin-top: -39px;
+        }
+        .inBlueWrap p {
+            font-size: 19px;
+        }
+        .inBlueWrap {
+            height: 69%;
+            background-color: rgb(177, 59, 135);
+        }
+    }
+    .bg-5 {
+        .upperText {
+            padding: 20px;
+        }
+        h1 {
+            margin-top: 51px;
+        }
+    }
+    .bg-6 {
+        .appImg {
+            max-width: 400px;
+            padding-top: 41px;
+        }
+        h1 {
+            font-size: 21px;
+            margin-top: -23px;
+        }
+        p {
+            font-size: 18px;
+        }
+        .upperText {
+            padding: 20px;
+        }
+    }
+    .prod {
+        margin-top: 50px;
+    }
+}
+
 @media (max-width: 768px) {
-
-
-  .card-container{
-      margin-top: -70px;
-  }
-
-  .navbar-toggle{
-    border: 0;
-    margin: 0;
-    border-bottom-left-radius: 2px !important;
-    border-radius: 0;
-    position: relative;
-    left: 15px;
-    padding: 12px;
-    color: #333;
-  }
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-    background-color: rgba(0,0,0,0.50);
-}
-.orderNow{
-    float: right;
-    border: 0;
-    background-color: rgba(255,255,255,0.70);
-    margin: 0;
-    border-bottom-left-radius: 2px !important;
-    border-radius: 0;
-    position: relative;
-    left: 13px;
-    padding: 12px;
-    color: #333;
-    font-size: 15px;
-    height: 38px;
-    padding-top: 8px;
-    border-bottom-right-radius: 2px !important;
-}
-  .navbar-default .navbar-toggle .icon-bar {
-      background-color: #fff;
-  }
-
-  .card-container{
-    overflow: visible;
-  }
-  .card{
-    position: static !important;
-  }
-  .productTtl{
-    font-weight: 100 !important;
-    margin-top: 151px;
-    font-size: 40px;
-  }
-
-
+    .card-container {
+        margin-top: -70px;
+    }
+    .navbar-toggle {
+        border: 0;
+        margin: 0;
+        border-bottom-left-radius: 2px !important;
+        border-radius: 0;
+        position: relative;
+        left: 15px;
+        padding: 12px;
+        color: #333;
+    }
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus {
+        background-color: rgba(0, 0, 0, 0.50);
+    }
+    .orderNow {
+        float: right;
+        border: 0;
+        background-color: rgba(255, 255, 255, 0.70);
+        margin: 0;
+        border-bottom-left-radius: 2px !important;
+        border-radius: 0;
+        position: relative;
+        left: 13px;
+        padding: 12px;
+        color: #333;
+        font-size: 15px;
+        height: 38px;
+        padding-top: 8px;
+        border-bottom-right-radius: 2px !important;
+    }
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #fff;
+    }
+    .card-container {
+        overflow: visible;
+    }
+    .productTtl {
+        font-weight: 100 !important;
+        margin-top: 151px;
+        font-size: 40px;
+    }
 }

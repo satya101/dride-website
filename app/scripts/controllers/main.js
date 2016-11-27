@@ -17,7 +17,6 @@ angular.module('drideApp')
         $scope.displayCard = 1;
 
         var md = new MobileDetect(window.navigator.userAgent);
-        $scope.mobile = md.mobile() ? true : false;
         $scope.video = {
           id: '6sp2wUMysc0'
         };
@@ -26,6 +25,7 @@ angular.module('drideApp')
         //when press prev, card slide to right
         $scope.goToView = function(view, strict) {
 
+            console.log('goto: ' + view)
             //validate a gap of at least 1 sec to prevent super fast scroll
             var dateNow = new Date().getTime();
             if ($scope.transitionFired && (dateNow - $scope.transitionFired < 700))
