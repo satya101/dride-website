@@ -14,7 +14,7 @@
         .brick h2 {
             font-size: 20px !important;
         }
-    }
+    } 
     .bg-4 {
         .ffx1 {
             font-size: 25px;
@@ -34,7 +34,7 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 414px) {
     .bg-2 {
         .ftgps {
             font-size: 33px;
@@ -147,5 +147,8 @@
         font-weight: 100 !important;
         margin-top: 151px;
         font-size: 40px;
+    }
+    .card.ng-animate {
+      transition: .2s ease-in-out all;
     }
 }
