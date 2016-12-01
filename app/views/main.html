@@ -2,63 +2,36 @@
 
 
     <!-- header -->
-    <div class="header">
-      <div class="navbar navbar-default row" role="navigation">
+    <div ng-include="'views/sharedTemplates/header.html'"></div>
 
-         <div class="navbar-header col-md-2">
-                    <button type="button"  data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                   <button type="button"  class="orderNow" ng-show="{{mobile}}">Order</button>
-                   <a class="navbar-brand" ng-click="goToView('1')">dride</a>
-          </div>
-
-          <div id="navbarCollapse" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav col-md-10">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a ng-href="/features">Features</a></li>
-              <li><a ng-href="/documentation">Docs</a></li>
-              <li><a ng-href="/blog">Blog</a></li>
-              <li><a target="_BLANK" href="https://github.com/dride">GitHub</a></li>
-              <li class="pull-right"><a class="preOrder" ng-href="/preOrder">Pre-Order</a></li>
-            </ul>
-          </div>
-
-      </div>
-
-
-    </div>
 
     <!-- big D part -->
     <div class="row text-center {{'color-' + displayCard}} hidden-xs hidden-sm">
            <div class="menu circle-container icon-bigD" >
               
-              <span ng-click="goToView('7')" class="iW dot6">
+              <span ng-click="goToView('7')" class="iW dot6" ng-mouseover="show[7] = true" ng-mouseleave="show[7] = false">
                 <span class="icon-docs node pull-right" ng-class="displayCard==7 ? 'active-7 icon-docs-full': 'icon-docs'"></span>
-                <label class="labelNear" ng-show="displayCard==7">Hackable</label>
+                <label class="labelNear" ng-show="displayCard==7 || show[7]">Hackable</label>
               </span>
-              <span ng-click="goToView('6')" class="iW dot5" >
+              <span ng-click="goToView('6')" class="iW dot5"  ng-mouseover="show[6] = true" ng-mouseleave="show[6] = false">
                 <span class="icon-app node pull-right " ng-class="displayCard==6 ? 'active-6 icon-app-full': 'dicon-app'"></span>
-                <label class="labelNear" ng-show="displayCard==6">App</label>
+                <label class="labelNear" ng-show="displayCard==6 || show[6]">App</label>
               </span>
-              <span ng-click="goToView('5')" class="iW dot4" >
+              <span ng-click="goToView('5')" class="iW dot4"  ng-mouseover="show[5] = true" ng-mouseleave="show[5] = false">
                 <span class="icon-wifi node pull-right" ng-class="displayCard==5 ? 'active-5 icon-wifi-full': 'icon-wifi'"></span>
-                <label class="labelNear" ng-show="displayCard==5">Connected</label>
+                <label class="labelNear" ng-show="displayCard==5 || show[5]">Connected</label>
               </span>
-              <span ng-click="goToView('4')" class="iW dot3" >
+              <span ng-click="goToView('4')" class="iW dot3"  ng-mouseover="show[4] = true" ng-mouseleave="show[4] = false">
                 <span class="icon-camera node pull-right" ng-class="displayCard==4 ? 'active-4 icon-camera-full': 'icon-camera'"></span>
-                <label class="labelNear" ng-show="displayCard==4">Dashcam</label>
+                <label class="labelNear" ng-show="displayCard==4 || show[4]">Dashcam</label>
               </span>
-              <span ng-click="goToView('3')" class="iW dot2" >
+              <span ng-click="goToView('3')" class="iW dot2"  ng-mouseover="show[3] = true" ng-mouseleave="show[3] = false">
                 <span class="icon-mic node pull-right" ng-class="displayCard==3 ? 'active-3 icon-mic-full': 'icon-mic'"></span>
-                <label class="labelNear" ng-show="displayCard==3">Virtual Assistant</label>
+                <label class="labelNear" ng-show="displayCard==3 || show[3]">Virtual Assistant</label>
               </span>
-              <span ng-click="goToView('2')" class="iW dot1" >
+              <span ng-click="goToView('2')" class="iW dot1"  ng-mouseover="show[2] = true" ng-mouseleave="show[2] = false">
                 <span class="icon-gps node pull-right" ng-class="displayCard==2 ? 'active-2 icon-gps-full': 'icon-gps'"></span>
-                <label class="labelNear" ng-show="displayCard==2">Navigator</label>
+                <label class="labelNear" ng-show="displayCard==2 || show[2]">Navigator</label>
               </span>
               <div class="innerLogo" ng-click="goToView('1')">dride</div>
           </div>
