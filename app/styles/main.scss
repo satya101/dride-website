@@ -28,7 +28,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+.icon-twitter:before {
+  content: "\e90e";
+}
+.icon-github:before {
+  content: "\e90f";
+}
 .icon-mouse:before {
   content: "\e90d";
 }
