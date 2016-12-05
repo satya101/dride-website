@@ -521,6 +521,9 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
     margin: auto auto;
 }
 
+.greyBg{
+  background-color: #ECECEC;
+}
 
 .labelNear{
     font-family: 'Comfortaa', cursive;
@@ -576,12 +579,13 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
     font-weight: 100;
     color: #cacaca;
 }
-
+.clear{
+  clear: both;
+}
 
 .mouseWiggle {
   color: #cacaca;
 }
-
 
 .profile {
   .headerBg{
@@ -591,6 +595,74 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
     background-size: cover;
     background-repeat: no-repeat;
   }
+
+  .profilePic img{
+    border-radius: 2px;
+    border: 1px solid #fff;
+    width:  87px;
+    height:  87px;
+  }
+  .profilePic{
+    margin-top: -70px;
+  }
+  .profilePic p{
+    margin-top: 20px;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+
+  .profilePic span{
+    font-size: 16px;
+    font-weight: 100;
+  }
+
+  .gradBg{
+    background: linear-gradient(to top, #2b2b2b 0%, transparent 100%);
+    height: 90px;
+    position: relative;
+    top: 160px;
+  }
+
+  .box{
+    background-color: #fff;
+    border: 5px solid #ECECEC;
+    min-height: 100px;
+    padding: 0;
+
+  }
+
+  .videoPlayer{
+    padding: 5px 0 5px 0;
+  }
+  .pad5{
+    padding: 5px;
+  }
+
+
+  .actionBar{
+    margin: 7px 10px 0 10px;
+    border-bottom: 1px dashed #666666;
+    height: 22px;
+  }
+
+  .actions{
+    list-style: none;
+  }
+  .actions li{
+        float: right;
+        margin-right: 10px;
+  }
+ 
+  .views{
+    font-weight: 600;
+  }
+
+
+
+
+
 
 }
 
