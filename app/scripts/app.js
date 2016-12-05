@@ -13,7 +13,9 @@ angular
     'ngAnimate',
     'ngRoute',
     'angularVideoBg',
-    'swipe'
+    'swipe',
+    'ui.bootstrap',
+    'firebase'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

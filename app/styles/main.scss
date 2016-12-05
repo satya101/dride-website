@@ -27,7 +27,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.icon-like:before {
+  content: "\e910";
+}
+.icon-edit:before {
+  content: "\e911";
+}
+.icon-share:before {
+  content: "\e912";
+}
 .icon-twitter:before {
   content: "\e90e";
 }
@@ -588,6 +596,9 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 }
 
 .profile {
+
+  color: #666666;
+
   .headerBg{
     background-color: #333;
     background-image: url(../images/profile/defaultBg.jpg);
@@ -642,26 +653,56 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 
 
   .actionBar{
-    margin: 7px 10px 0 10px;
+    margin: 20px 0px 20px 0px;
     border-bottom: 1px dashed #666666;
-    height: 22px;
+    height: 29px;
   }
 
   .actions{
     list-style: none;
   }
+
   .actions li{
-        float: right;
-        margin-right: 10px;
+      float: left;
+      margin-right: 20px;
+      font-size: 15.6px;
+      font-weight: 100;
   }
  
   .views{
     font-weight: 600;
+    font-size: 19px;
+    margin-top: -5px;
+  }
+
+  .innerPad{
+    padding: 0 25px 0 25px;
+  }
+
+  p{
+    font-weight: 100;
+    font-size: 16px;
+    color: #8E8E8E;
+  }
+  p b{
+    color: #666666;
+  }
+
+  .dateLabel{
+    font-size: 12px;
+    float: right;
   }
 
 
+  .moreClips {
+        padding: 12px;
+  }
 
-
+  .dvdrOfClips{
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+  }
 
 
 }

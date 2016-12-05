@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="scripts/angualr-ui/ui-bootstrap-custom-2.3.0-csp.css" />
+
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -45,7 +47,22 @@
     <script src="bower_components/angular-video-bg/angular-video-bg.min.js"></script>
     <script src="bower_components/angular-swipe/dist/angular-swipe.js"></script>
     <script src="bower_components/mobile-detect/mobile-detect.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
     <!-- endbower -->
+    <script src="scripts/angualr-ui/ui-bootstrap-custom-2.3.0.min.js"></script>
+    <script src="scripts/angualr-ui/ui-bootstrap-custom-tpls-2.3.0.min.js"></script>
+    <script>
+      // Initialize the Firebase SDK
+      var config = {
+        apiKey: "AIzaSyDi0egNqUM-dZDjIiipjW-aSRYuXlFc3Ds",
+        authDomain: "dride-2384f.firebaseapp.com",
+        databaseURL: "https://dride-2384f.firebaseio.com",
+        storageBucket: "dride-2384f.appspot.com",
+        messagingSenderId: "802741428178"
+      };
+      firebase.initializeApp(config);
+    </script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
