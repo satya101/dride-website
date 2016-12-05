@@ -126,7 +126,9 @@ body {
   background: 0;
   z-index: 100;
 }
-
+.no-padding{
+      padding: 0;
+}
 
 .bg{
   height:100%;
@@ -581,7 +583,16 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 }
 
 
+.profile {
+  .headerBg{
+    background-color: #333;
+    background-image: url(../images/profile/defaultBg.jpg);
+    height: 250px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
+}
 
 
 

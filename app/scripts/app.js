@@ -18,10 +18,15 @@ angular
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile'
       })
+      // .when('/', {
+      //   templateUrl: 'views/main.html',
+      //   controller: 'MainCtrl',
+      //   controllerAs: 'main'
+      // })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
@@ -51,6 +56,11 @@ angular
         templateUrl: 'views/documentation.html',
         controller: 'DocumentationCtrl',
         controllerAs: 'documentation'
+      })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile'
       })
       .otherwise({
         redirectTo: '/page-not-found'
