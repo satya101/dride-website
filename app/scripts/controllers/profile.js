@@ -12,6 +12,8 @@ angular.module('drideApp')
 
 
     $scope.openLogin = function(){
+
+
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'views/modals/login.html',
@@ -48,6 +50,32 @@ angular.module('drideApp')
 
             }]
         });
+
+    }
+
+
+
+    $scope.editClip = function(){
+
+    	if ($rootScope.uid){
+
+    		alert('edit');
+
+    	}
+    	else
+    		$scope.openLogin();
+
+    }
+
+    $scope.likeClip = function(){
+
+    	if ($rootScope.uid){
+
+    		alert('like');
+
+    	}
+    	else
+    		$scope.openLogin();
 
     }
 
