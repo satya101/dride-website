@@ -27,6 +27,34 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-media-pause:before {
+  content: "\e919";
+}
+.icon-full-screen:before {
+  content: "\e91a";
+}
+.icon-play:before {
+  content: "\e91b";
+}
+.icon-password:before {
+  content: "\e916";
+}
+.icon-google:before {
+  content: "\e915";
+}
+.icon-userName:before {
+  content: "\e917";
+}
+.icon-facebook:before {
+  content: "\e918";
+}
+.icon-toyCar-1:before {
+  content: "\e913";
+}
+.icon-dride-cloud:before {
+  content: "\e914";
+}
 .icon-like:before {
   content: "\e910";
 }
@@ -701,12 +729,14 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
   .dvdrOfClips{
     text-align: center;
     font-size: 12px;
-    margin-top: 5px;
+    margin-top: 14px;
   }
 
 
 }
-
+.videogular-container{
+  height: 560px;
+}
 
 
 

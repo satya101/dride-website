@@ -15,11 +15,24 @@ angular
     'angularVideoBg',
     'swipe',
     'ui.bootstrap',
-    'firebase'
+    'firebase',
+    'com.2fdevs.videogular',
+    'com.2fdevs.videogular.plugins.controls',
+    'com.2fdevs.videogular.plugins.overlayplay',
+    'com.2fdevs.videogular.plugins.poster'
   ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+      // Allow same origin resource loads.
+      'self',
+      // Allow loading from our assets domain.  Notice the difference between * and **.
+      'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/**'
+    ]);
+
+
     $routeProvider
-      .when('/', {
+      .when('/profile/:uid/:videoId', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
         controllerAs: 'profile'
@@ -68,5 +81,5 @@ angular
         redirectTo: '/page-not-found'
       });
 
-      $locationProvider.html5Mode(true).hashPrefix('!');
+      //$locationProvider.html5Mode(true).hashPrefix('!');
   });

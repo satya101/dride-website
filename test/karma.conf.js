@@ -28,6 +28,11 @@ module.exports = function(config) {
       'bower_components/mobile-detect/mobile-detect.js',
       'bower_components/firebase/firebase.js',
       'bower_components/angularfire/dist/angularfire.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/videogular/videogular.js',
+      'bower_components/videogular-overlay-play/vg-overlay-play.js',
+      'bower_components/videogular-controls/vg-controls.js',
+      'bower_components/videogular-poster/vg-poster.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

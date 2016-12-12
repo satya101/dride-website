@@ -6,7 +6,7 @@
 
     
 </div>
-<div class="profile">
+<div class="profile" ng-init="initProfile()">
     <div class="container-fluid">
         <div class="col-md-12 no-padding">
             <div class="headerBg">
@@ -32,15 +32,35 @@
                 	<!-- video player -->
                     <div class="col-md-8">
                     	<div class="box">
-	                   		<video id="videoPLayer" width="100%" height="100%" controls class="videoPlayer" poster="images/profile/1.png">
-				                <source src="images/profile/1459721366.h264.mp4" type="video/mp4" />
-				            </video>
+
+                        <div class="videogular-container">
+                            <videogular vg-theme="config.theme.url">
+                                <vg-media vg-src="config.sources" vg-native-controls="false" >
+                                </vg-media>
+
+                                <vg-controls>
+                                    <vg-play-pause-button></vg-play-pause-button>
+
+                                    <vg-scrub-bar>
+                                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                    </vg-scrub-bar>
+                                    <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }} / {{totalTime | date:'mm:ss':'+0000'}}</vg-time-display>
+
+                                    <vg-fullscreen-button></vg-fullscreen-button>
+                                </vg-controls>
+
+                                <vg-overlay-play></vg-overlay-play>
+                                <vg-poster vg-url='config.plugins.poster'></vg-poster>
+
+                            </videogular>
+                        </div>
+
+
 	                    </div>
 	                    <div class="box innerPad">
 	                    		
-
 	                    		<div class="actionBar">
-	                    				<div class="views pull-left">1,452 Views</div>
+	                    				<div class="views pull-left">{{currentVideo.views | number:0}} Views</div>
 	                    				<ul class="pull-right actions">
 	                    					<li ng-click="likeClip()"><span class="icon-like"></span> Like</li>
 	                    					<li><span class="icon-share"></span> Share</li>
@@ -51,9 +71,9 @@
 
 
                                 <div class="desc">
-                                    <p><b>License Plate: </b> AJ87J8</p>
-                                    <p><b>Description: </b> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p>
-                                    <p class="dateLabel">12.1.16 16:41</p>
+                                    <p><b>License Plate: </b> ...</p>
+                                    <p><b>Description: </b> ...</p>
+                                    <p class="dateLabel">{{videoId*1000 | date:'medium'}}</p>
                                 </div>
 
                                 <div class="clear"></div>
@@ -76,19 +96,25 @@
 
                     <div class="col-md-4">
                     	
-                            <div ng-repeat="clip in [1,2,]" class="box moreClips">
-                                
-                                <img class="img-responsive" src="images/profile/1.png" />
+                            <div ng-repeat="(daysKey, clipsInDay) in orderedClips" >
+                             <p class="dvdrOfClips">{{preatifyDate(daysKey)  | date:'MMM d' }}</p>
 
+                                <div ng-repeat="(key, clip) in clipsInDay" class="box moreClips">
+                                    
+                                    <a ng-href="profile/{{uid}}/{{key}}">
+                                        <img class="img-responsive" src="{{clip.thumbs.src}}" />
+                                    </a>
+
+                                </div>
                             </div>
 
-                            <p class="dvdrOfClips">Feb 4</p>
+<!--                             <p class="dvdrOfClips">Feb 4</p>
 
                              <div ng-repeat="clip in [1,2,3,4]" class="box moreClips">
                                 
                                 <img class="img-responsive" src="images/profile/1.png" />
 
-                            </div>
+                            </div> -->
 
                             
 
