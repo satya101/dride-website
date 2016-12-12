@@ -10,17 +10,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
+    <!-- build:css(.) /styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
     <!-- endbower -->
-    <link rel="stylesheet" href="scripts/angualr-ui/ui-bootstrap-custom-2.3.0-csp.css" />
 
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/responsive.css">
+    <!-- build:css(.tmp) /styles/main.css -->
+    <link rel="stylesheet" type="text/css" href="/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="/styles/videoPlayer.css">
+    <link rel="stylesheet" type="text/css" href="/scripts/angualr-ui/ui-bootstrap-custom-2.3.0-csp.css" />
     <!-- endbuild -->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400" rel="stylesheet">
     <base href="/">
@@ -55,19 +56,6 @@
     <script src="bower_components/videogular-controls/vg-controls.js"></script>
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
     <!-- endbower -->
-    <script src="scripts/angualr-ui/ui-bootstrap-custom-2.3.0.min.js"></script>
-    <script src="scripts/angualr-ui/ui-bootstrap-custom-tpls-2.3.0.min.js"></script>
-    <script>
-      // Initialize the Firebase SDK
-      var config = {
-        apiKey: "AIzaSyDi0egNqUM-dZDjIiipjW-aSRYuXlFc3Ds",
-        authDomain: "dride-2384f.firebaseapp.com",
-        databaseURL: "https://dride-2384f.firebaseio.com",
-        storageBucket: "dride-2384f.appspot.com",
-        messagingSenderId: "802741428178"
-      };
-      firebase.initializeApp(config);
-    </script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -81,7 +69,22 @@
     <script src="scripts/controllers/docs.js"></script>
     <script src="scripts/controllers/documentation.js"></script>
     <script src="scripts/controllers/profile.js"></script>
+
+    <script src="scripts/angualr-ui/ui-bootstrap-custom-2.3.0.min.js"></script>
+    <script src="scripts/angualr-ui/ui-bootstrap-custom-tpls-2.3.0.min.js"></script>
+
     <!-- endbuild -->
+    <script>
+      // Initialize the Firebase SDK
+      var config = {
+        apiKey: "AIzaSyDi0egNqUM-dZDjIiipjW-aSRYuXlFc3Ds",
+        authDomain: "dride-2384f.firebaseapp.com",
+        databaseURL: "https://dride-2384f.firebaseio.com",
+        storageBucket: "dride-2384f.appspot.com",
+        messagingSenderId: "802741428178"
+      };
+      firebase.initializeApp(config);
+    </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -67,7 +67,7 @@ angular
         controller: 'DocumentationCtrl',
         controllerAs: 'documentation'
       })
-      .when('/profile', {
+      .when('/profile/:uid/:videoId', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
         controllerAs: 'profile'
