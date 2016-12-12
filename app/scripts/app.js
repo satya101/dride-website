@@ -13,9 +13,24 @@ angular
     'ngAnimate',
     'ngRoute',
     'angularVideoBg',
-    'swipe'
+    'swipe',
+    'ui.bootstrap',
+    'firebase',
+    'com.2fdevs.videogular',
+    'com.2fdevs.videogular.plugins.controls',
+    'com.2fdevs.videogular.plugins.overlayplay',
+    'com.2fdevs.videogular.plugins.poster'
   ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+      // Allow same origin resource loads.
+      'self',
+      // Allow loading from our assets domain.  Notice the difference between * and **.
+      'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/**'
+    ]);
+
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -51,6 +66,11 @@ angular
         templateUrl: 'views/documentation.html',
         controller: 'DocumentationCtrl',
         controllerAs: 'documentation'
+      })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile'
       })
       .otherwise({
         redirectTo: '/page-not-found'
