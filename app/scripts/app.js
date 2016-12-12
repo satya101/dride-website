@@ -32,16 +32,11 @@ angular
 
 
     $routeProvider
-      .when('/profile/:uid/:videoId', {
-        templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl',
-        controllerAs: 'profile'
+      .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
       })
-      // .when('/', {
-      //   templateUrl: 'views/main.html',
-      //   controller: 'MainCtrl',
-      //   controllerAs: 'main'
-      // })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
