@@ -81,5 +81,5 @@ angular
         redirectTo: '/page-not-found'
       });
 
-      //$locationProvider.html5Mode(true).hashPrefix('!');
+      $locationProvider.html5Mode(true).hashPrefix('!');
   });
