@@ -1,4 +1,4 @@
-<div class="col-md-6" ng-init="drawIconsAroundTheD()" ng-mouse-wheel-down="goToView(displayCard+1, false)" ng-mouse-wheel-up="goToView(displayCard-1, false)" ng-swipe-up="goToView(displayCard+1, false)" ng-swipe-down="goToView(displayCard-1, false)">
+<div class="col-md-6 halfPage" ng-init="drawIconsAroundTheD()" ng-mouse-wheel-down="goToView(displayCard+1, false)" ng-mouse-wheel-up="goToView(displayCard-1, false)" ng-swipe-up="goToView(displayCard+1, false)" ng-swipe-down="goToView(displayCard-1, false)">
 
 
     <!-- header -->
@@ -11,7 +11,7 @@
               
               <span ng-click="goToView('7')" class="iW dot6" ng-mouseover="show[7] = true" ng-mouseleave="show[7] = false">
                 <span class="icon-docs node pull-right" ng-class="displayCard==7 ? 'active-7 icon-docs-full': 'icon-docs'"></span>
-                <label class="labelNear" ng-show="displayCard==7 || show[7]">Hackable</label>
+                <label class="labelNear" ng-show="displayCard==7 || show[7]">SDK</label>
               </span>
               <span ng-click="goToView('6')" class="iW dot5"  ng-mouseover="show[6] = true" ng-mouseleave="show[6] = false">
                 <span class="icon-app node pull-right " ng-class="displayCard==6 ? 'active-6 icon-app-full': 'dicon-app'"></span>
@@ -23,7 +23,7 @@
               </span>
               <span ng-click="goToView('4')" class="iW dot3"  ng-mouseover="show[4] = true" ng-mouseleave="show[4] = false">
                 <span class="icon-camera node pull-right" ng-class="displayCard==4 ? 'active-4 icon-camera-full': 'icon-camera'"></span>
-                <label class="labelNear" ng-show="displayCard==4 || show[4]">Dashcam</label>
+                <label class="labelNear" ng-show="displayCard==4 || show[4]">Safty</label>
               </span>
               <span ng-click="goToView('3')" class="iW dot2"  ng-mouseover="show[3] = true" ng-mouseleave="show[3] = false">
                 <span class="icon-mic node pull-right" ng-class="displayCard==3 ? 'active-3 icon-mic-full': 'icon-mic'"></span>
@@ -31,13 +31,12 @@
               </span>
               <span ng-click="goToView('2')" class="iW dot1"  ng-mouseover="show[2] = true" ng-mouseleave="show[2] = false">
                 <span class="icon-gps node pull-right" ng-class="displayCard==2 ? 'active-2 icon-gps-full': 'icon-gps'"></span>
-                <label class="labelNear" ng-show="displayCard==2 || show[2]">Navigator</label>
+                <label class="labelNear" ng-show="displayCard==2 || show[2]">Cloud</label>
               </span>
               <div class="innerLogo" ng-click="goToView('1')">dride</div>
           </div>
 
    </div>
-
 
 
 

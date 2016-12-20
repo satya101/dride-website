@@ -19,10 +19,48 @@ angular
     'com.2fdevs.videogular',
     'com.2fdevs.videogular.plugins.controls',
     'com.2fdevs.videogular.plugins.overlayplay',
-    'com.2fdevs.videogular.plugins.poster'
+    'com.2fdevs.videogular.plugins.poster',
+    'hljs'
   ])
-  .config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
+   .run(function($rootScope, $location, $anchorScroll) {
 
+        $rootScope.haveSideBar = false;
+
+        $rootScope.$on('$locationChangeSuccess', function(event){
+                  $rootScope.currentPage = $location.path();
+                  $rootScope.showOverlay = false;
+                  $rootScope.haveSideBar = $rootScope.haveSideBarF()
+                  $rootScope.collapse = '';
+                  $anchorScroll();
+
+        })
+
+        $rootScope.showOverlay =  false;
+      
+        $rootScope.toggleOverlay = function(){
+
+          $rootScope.showOverlay =  !$rootScope.showOverlay;
+          $rootScope.collapse =  !$rootScope.collapse;
+        }
+
+        $rootScope.haveSideBarF = function(){
+          console.log($rootScope.currentPage)
+          console.log($rootScope.currentPage.indexOf('/c/'))
+          if ($rootScope.currentPage == '/documentation' || $rootScope.currentPage.indexOf('/c/')!=-1){
+            return true;
+          }else
+            return false;
+
+        }
+     
+  })
+  .config(function ($routeProvider, $locationProvider, $sceDelegateProvider, hljsServiceProvider) {
+
+    hljsServiceProvider.setOptions({
+      // replace tab with 4 spaces
+      tabReplace: '    '
+    });
+    
     $sceDelegateProvider.resourceUrlWhitelist([
       // Allow same origin resource loads.
       'self',
@@ -32,6 +70,7 @@ angular
 
 
     $routeProvider
+
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
@@ -71,6 +110,11 @@ angular
         templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
         controllerAs: 'profile'
+      })
+      .when('/c/:pageTtl', {
+        templateUrl: 'views/innercontentpage.html',
+        controller: 'InnercontentpageCtrl',
+        controllerAs: 'innerContentPage'
       })
       .otherwise({
         redirectTo: '/page-not-found'

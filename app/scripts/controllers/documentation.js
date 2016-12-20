@@ -8,10 +8,17 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('DocumentationCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('DocumentationCtrl', function ($scope, devMenu, $rootScope, $timeout) {
+
+	$scope.show = false;
+  	$scope.sideNav = devMenu.getMenu();
+
+  	$scope.showDevMenu = function(){
+  		$scope.show = true;
+  	}
+
+	$timeout(function(){
+		$scope.show = true;
+	}, 100);  
+
   });

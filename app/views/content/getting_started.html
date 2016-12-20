@@ -1,0 +1,95 @@
+
+
+		    
+		        <div class="textBox">
+		            <h1>Automated Setup</h1>
+		        </div>
+		        
+		        <div class="textBox">
+		            <p>In order to setup your raspberryPi with dride you can need to download the preinstalled <b>Raspberrian Jessie</b> image with all the software needed or use this tutorial:</p>
+
+		            <h2>Download & run the install script</h2>
+		            <div hljs hljs-language="bash">wget https://dride.io/code/install.sh 
+. install.sh</div>
+
+
+					<p>This script will take a while so you can grab a cup of coffee.</p>
+					<br>
+					<p>After the script is done we will have the following pakages insatlled on our dride:</p>
+					<ul>
+						<li>OpenCV</li>
+						<li>pip</li>
+						<li>Python</li>
+						<li>omxplayer</li>
+						<li>Cardigan (Dride-core)</li>
+						<li>Wifi setup</li>
+					</ul>
+		        </div>   
+
+		        <br>
+		        <br>
+		        <div class="textBox">
+		            <h1>Manual Setup</h1>
+		        </div>
+		        <div class="textBox">
+		            <h2>Make sure everything is up to date </h2>
+		            <div hljs hljs-language="bash">sudo apt-get update</div>
+
+		            <h2>Install build-essential</h2>
+		            <div hljs hljs-language="bash">sudo apt-get install build-essential</div>
+
+
+		            <h2>Install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libjasper-dev python2.7-dev</h2>
+		            <div hljs hljs-language="bash">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libjasper-dev python2.7-dev</div>
+
+		            <h2>Install pip</h2>
+		            <div hljs hljs-language="bash">wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py</div>
+
+		            <h2>Install NumPy</h2>
+		            <div hljs hljs-language="bash">sudo pip install numpy</div>
+
+		            <h2>Install OpenCV</h2>
+		            <div hljs hljs-language="bash">cd ~
+git clone https://github.com/Itseez/opencv.git
+cd opencv
+git checkout 3.1.0
+cd ~/opencv
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local ..
+make -j4
+
+sudo make install
+sudo ldconfig</div>
+
+		            <h2>Install Nodejs</h2>
+		            <div hljs hljs-language="bash">sudo wget http://node-arm.herokuapp.com/node_latest_armhf.deb 
+sudo dpkg -i node_latest_armhf.deb</div>
+
+		            <h2>Install Dride-core</h2>
+		            <div hljs hljs-language="bash">cd /home
+sudo git clone --recursive https://github.com/CardiganCam/Cardigan.git
+cd Cardigan</div>
+
+
+		            <h2>Install Pi-camera</h2>
+		            <div hljs hljs-language="bash">sudo pip install "picamera[array]"</div>
+
+		            <h2>Install omxplayer</h2>
+		            <div hljs hljs-language="bash">sudo apt-get install omxplayer -y</div>
+
+
+		            <h2>Setup WIFI</h2>
+		            <div hljs hljs-language="bash">...</div>
+
+
+
+
+
+
+
+
+		        </div>   
+		</div>

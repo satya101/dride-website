@@ -1,19 +1,53 @@
-<div class="col-md-6">
-
-
+<div class="col-md-12 wrapTopMenu">
     <!-- header -->
     <div ng-include="'views/sharedTemplates/header.html'"></div>
+    
+</div>
+	
+<div id="wrapper" ng-class="show ? '' : 'toggled' " >
+
+	<div class="docs" id="page-content-wrapper" >
+
+	        <!-- dev menu -->
+	        <div class="sideMenu" id="sidebar-wrapper">
+	            <div ng-include="'views/sharedTemplates/devVanMenu.html'"></div>
+	        </div>
+
+			<div class="contaier">
+			    <div class="row">
+
+
+			        <div class="col-lg-12 content">
+			            <div class="textBox paddedTtl">
+			                <h1 ng-click="showDevMenu()">Developer van</h1>
+			                <br>
+			                <p>Dride was build for simplicity both inside and out, That's why we believe that the simpler we make the process of creating for dride, The bigger the community will grow.</p>
+			                <p>Dride is build on Node.js, Every API is a Node module. You can check out how to integrate, test and publish apps on the sections bellow. Also make sure to check out our <a href="#">sample app</a></p>
+			            </div>
+			            <ul class="apisBox">
+			                <li class="col-md-4 col-xs-12 text-center featureBox" ng-repeat="node in sideNav">
+			                    <a ng-href="c/{{node.url}}">
+			                        <span class="{{node.icon}}"></span>
+			                        <div class="desc">
+			                            <p><b>{{node.ttl}}</b></p>
+			                            <p class="more">{{node.more}}</p>
+			                        </div>
+			                    </a>
+			                </li>
+			            </ul>
+			            <div class="clear"></div>
+			        </div>
+
+			    </div>
+
+			</div>
+
+	</div>
+	<!-- header -->
+	<div ng-include="'views/sharedTemplates/footer.html'"></div>
+
+
 
 </div>
-
-<div class="col-md-12">
-
-	<h1 class="text-center" style="margin-top: 20%;">We're not ready yet ;)</h1>
-
-</div>
-
-
-
-
 
 

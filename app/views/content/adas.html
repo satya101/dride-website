@@ -1,0 +1,60 @@
+<div class="textBox">
+    <h1>ADAS | Advanced driver assistance system</h1>
+</div>
+<div class="textBox">
+    <div class="alert alert-warning" role="alert">This document is incomplete</div>
+    <p>Dride-core is our road vision engine, this node_module is making the heavy lifting of computer vision and give you access to the following API's</p>
+    <div hljs hljs-language="javaScript">var core = require('dride-core')</div>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="panel panel-default">
+  <div class="panel-heading">Return the road area</div>
+  <div class="panel-body">
+		            <div hljs hljs-language="javaScript">core.getRoad().then(function(res){
+	console.log(res)	//{"topLeft": "40.556" ,"topRight": "48.441","bottomLeft": "251.11","bottomLeft": "1.44}
+})</div>
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">Represent a line from the left corner of the object to the right</div>
+  <div class="panel-body">
+		            <div hljs hljs-language="javaScript">core.getFrontCar().then(function(res){
+	console.log(res)	//{"left": {"x": 80.156" : "y": 4.48"},"right": {"x": "71.18","y": "49.41}}
+})</div>
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">A number between 0-360 that represent the road angle.</div>
+  <div class="panel-body">
+		            <div hljs hljs-language="javaScript">core.roadAngle().then(function(res){
+	console.log(res)	//{"angle": "45.5"}
+})</div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">A number between 0-250 that represent the current speed.</div>
+  <div class="panel-body">
+		            <div hljs hljs-language="javaScript">core.getSpeed().then(function(res){
+	console.log(res)	//{"speed": "90", "unit": "mph"}
+})</div>
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">A point that represent the current latitude and longitude.</div>
+  <div class="panel-body">
+		            <div hljs hljs-language="javaScript">core.getCurrenPosition().then(function(res){
+	console.log(res)	//{"lat": "34.54454", "lon": "30.488474"}
+})</div>
+  </div>
+</div>
+
+</div>

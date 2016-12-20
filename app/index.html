@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>dride - Passenger seat driver</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <link rel="manifest" href="/manifest.json">
@@ -20,8 +20,8 @@
     <!-- build:css(.tmp) /styles/main.css -->
     <link rel="stylesheet" type="text/css" href="/styles/main.css">
     <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
-    <link rel="stylesheet" type="text/css" href="/styles/videoPlayer.css">
-    <link rel="stylesheet" type="text/css" href="/scripts/angualr-ui/ui-bootstrap-custom-2.3.0-csp.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/modules/videoPlayer.css">
+    <link rel="stylesheet" type="text/css" href="/styles/modules/highlight.css" />
     <!-- endbuild -->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:300,400" rel="stylesheet">
     <base href="/">
@@ -36,11 +36,11 @@
       <div ng-view="" class="full-height"></div>
     </div>
 
-
-
+    <div class="darkOverlay" ng-show="showOverlay" ng-click="toggleOverlay()"></div>
 
 
     <!-- build:js(.) scripts/vendor.js -->
+    <script src="scripts/modules/highlight.pack.js"></script>
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -55,6 +55,7 @@
     <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
     <script src="bower_components/videogular-controls/vg-controls.js"></script>
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
+    <script src="bower_components/angular-highlightjs/build/angular-highlightjs.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -69,10 +70,12 @@
     <script src="scripts/controllers/docs.js"></script>
     <script src="scripts/controllers/documentation.js"></script>
     <script src="scripts/controllers/profile.js"></script>
-
     <script src="scripts/angualr-ui/ui-bootstrap-custom-2.3.0.min.js"></script>
     <script src="scripts/angualr-ui/ui-bootstrap-custom-tpls-2.3.0.min.js"></script>
 
+    <script src="scripts/controllers/innercontentpage.js"></script>
+    <script src="scripts/services/devmenu.js"></script>
+    <script src="scripts/controllers/menu.js"></script>
     <!-- endbuild -->
     <script>
       // Initialize the Firebase SDK
