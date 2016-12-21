@@ -1,4 +1,4 @@
-<div class="col-md-6 halfPage" ng-init="drawIconsAroundTheD()" ng-mouse-wheel-down="goToView(displayCard+1, false)" ng-mouse-wheel-up="goToView(displayCard-1, false)" ng-swipe-up="goToView(displayCard+1, false)" ng-swipe-down="goToView(displayCard-1, false)">
+<div class="col-md-6 halfPage" ng-init="drawIconsAroundTheD()" ng-mouse-wheel-down="goToView(displayCard+1, false)" ng-mouse-wheel-up="goToView(displayCard-1, false)" >
 
 
     <!-- header -->
@@ -49,10 +49,10 @@
 
 
 <!-- the screens are controlled from main.js -->
-<div class="card-container" ng-mouse-wheel-down="goToView(displayCard+1, false)" ng-mouse-wheel-up="goToView(displayCard-1, false)" ng-swipe-up="goToView(displayCard+1, false)" ng-swipe-down="goToView(displayCard-1, false)">
+<div class="card-container" ng-mouse-wheel-down="goToView(displayCard+1, false)" ng-mouse-wheel-up="goToView(displayCard-1, false)" >
 
 
-    <div ng-repeat="curretnView in views  track by $index " class="card col-md-6 col-xs-12 bg bg-{{$index+1}}" ng-if="displayCard==$index+1" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
+    <div ng-repeat="curretnView in views  track by $index " class="card col-md-6 col-xs-12 bg bg-{{$index+1}}" ng-if="displayCard==$index+1 || isMobile" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
         <div class="full-height" ng-include=" 'views/'+curretnView+'.html' "></div>
     </div>
 

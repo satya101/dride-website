@@ -20,7 +20,8 @@ angular
     'com.2fdevs.videogular.plugins.controls',
     'com.2fdevs.videogular.plugins.overlayplay',
     'com.2fdevs.videogular.plugins.poster',
-    'hljs'
+    'hljs',
+    'ngTouch'
   ])
    .run(function($rootScope, $location, $anchorScroll) {
 
@@ -38,7 +39,7 @@ angular
         $rootScope.showOverlay =  false;
       
         $rootScope.toggleOverlay = function(){
-
+          console.log('x')
           $rootScope.showOverlay =  !$rootScope.showOverlay;
           $rootScope.collapse =  !$rootScope.collapse;
         }
@@ -51,6 +52,11 @@ angular
           }else
             return false;
 
+        }
+
+
+        $rootScope.log = function(){
+            alert('xx')
         }
      
   })

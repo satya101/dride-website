@@ -21,6 +21,8 @@ angular.module('drideApp')
           id: '6sp2wUMysc0'
         };
 
+        $scope.isMobile = md.mobile();
+
         $scope.views = ["product", "gps", "mic", "camera", "wifi", "app", "docs"]
         //when press prev, card slide to right
         $scope.goToView = function(view, strict) {

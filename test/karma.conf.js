@@ -34,6 +34,7 @@ module.exports = function(config) {
       'bower_components/videogular-controls/vg-controls.js',
       'bower_components/videogular-poster/vg-poster.js',
       'bower_components/angular-highlightjs/build/angular-highlightjs.js',
+      'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
