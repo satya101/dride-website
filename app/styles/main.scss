@@ -1085,9 +1085,13 @@ footer {
 
 .editDocsLabel{
     float: right;
-    margin-top: -16px;
-    margin-right: -10px;
-    color: #a7a7a7;
+    color: #c5c5c5;
+    border-left: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+    padding: 3px 9px 4px 10px;
+    border-bottom-left-radius: 4px;
+    margin-top: -20px;
+    margin-right: -20px;
 }
 
 .editDocsLabel a{
