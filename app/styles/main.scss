@@ -804,6 +804,10 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
       margin: 22px 10px;
       border-radius: 4px;
     }
+    .textBox a{
+      border-bottom: 1px dashed #929292;
+      cursor: pointer;
+    }
     .apisBox{
       list-style: none;
       margin-top: 25px;
@@ -1078,3 +1082,17 @@ footer {
 #wrapper{
     height: 100%;
 }
+
+.editDocsLabel{
+    float: right;
+    margin-top: -16px;
+    margin-right: -10px;
+    color: #a7a7a7;
+}
+
+.editDocsLabel a{
+    border-bottom: 0 !important;
+}
+
+
+
