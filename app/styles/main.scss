@@ -171,7 +171,9 @@ body {
 .no-padding{
       padding: 0;
 }
-
+.mtop0{
+  margin-top: 0 !important;
+}
 .bg{
   height:100%;
   color: #fff;
@@ -1099,4 +1101,70 @@ footer {
 }
 
 
+/* pre order window */
+  .bg-9{
+    background-color: #F2F2F2;
+    animation-duration: 0.5s;
+  }
+  .preOrderTop{
+    height: 70%;
+  }
+  .preOrderBg{
+    position: fixed;
+    top: 0;
+    width: 50%;
+    right: 0;
+  }
+
+  .preOrderBlock h2{
+    color: #333;
+    font-weight: 100;
+    font-size: 20px;
+    padding-bottom: 25px;
+
+  }
+  .kickstarerLabel{
+    width: 35%;
+  }
+  .preOrderFooter{
+      background-color: #333;
+      height: 30%;
+
+      input{
+        background-color: #333;
+        font-size: 16px;
+        padding: 21px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        color: #fff;
+      }
+      button{
+          padding: 11px;
+          font-weight: 100;
+          border-radius: 4px;
+      }
+      input:focus{
+          border-color: #fff;
+          outline: 0;
+          box-shadow: none;
+      }
+      button:focus, button:active, input:focus{
+        outline: 0 !important;
+      }
+      h3{
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+  }
+  .modalClose{
+      color: #333;
+      padding: 20px!important;
+      font-size: 31px!important;
+      padding-top: 8px!important;
+      cursor:pointer;
+  }
+  .submitted img{
+        max-width: 100px;
+        margin-top: -37px;
+  }
 

@@ -13,7 +13,8 @@ angular.module('drideApp')
 
         $scope.toLeft = false;
         $scope.toRight = false;
-  
+        $scope.showPreOrder = false;
+        $scope.preSubmit = true;
         $scope.displayCard = 1;
 
         var md = new MobileDetect(window.navigator.userAgent);
@@ -27,7 +28,10 @@ angular.module('drideApp')
         //when press prev, card slide to right
         $scope.goToView = function(view, strict) {
 
-            console.log('goto: ' + view)
+            //dont run if popup is there
+            if ($scope.showPreOrder)
+                return;
+
             //validate a gap of at least 1 sec to prevent super fast scroll
             var dateNow = new Date().getTime();
             if ($scope.transitionFired && (dateNow - $scope.transitionFired < 700))
@@ -53,7 +57,15 @@ angular.module('drideApp')
         };
 
 
-
+        $scope.openPreOrder = function(){
+            $scope.showPreOrder = true;
+        }
+        $scope.closePreOrder = function(){
+            $scope.showPreOrder = false;
+        }
+        $scope.sendDetails = function(){
+            $scope.preSubmit = false;
+        }
 
 
 
