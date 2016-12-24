@@ -8,7 +8,7 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $http) {
 
 
         $scope.toLeft = false;
@@ -21,7 +21,9 @@ angular.module('drideApp')
         $scope.video = {
           id: '6sp2wUMysc0'
         };
-
+        
+        $scope.email = '';
+        
         $scope.isMobile = md.mobile();
 
         $scope.views = ["product", "gps", "mic", "camera", "wifi", "app", "docs"]
@@ -63,7 +65,14 @@ angular.module('drideApp')
         $scope.closePreOrder = function(){
             $scope.showPreOrder = false;
         }
-        $scope.sendDetails = function(){
+        $scope.sendDetails = function(email){
+            console.log(email)
+            $http({
+                  method: 'GET',
+                  url: 'https://getcardigan.com/validator/subscribe.php?email=' + email
+            });
+
+
             $scope.preSubmit = false;
         }
 
