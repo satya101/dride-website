@@ -17,7 +17,7 @@ describe('Controller: PageNotFoundCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(PageNotFoundCtrl.awesomeThings.length).toBe(3);
-  });
+  // it('should attach a list of awesomeThings to the scope', function () {
+  //   expect(PageNotFoundCtrl.awesomeThings.length).toBe(3);
+  // });
 });
