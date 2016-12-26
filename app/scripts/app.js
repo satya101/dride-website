@@ -122,6 +122,11 @@ angular
         controller: 'InnercontentpageCtrl',
         controllerAs: 'innerContentPage'
       })
+      .when('/buy', {
+        templateUrl: 'views/buy.html',
+        controller: 'BuyCtrl',
+        controllerAs: 'buy'
+      })
       .otherwise({
         redirectTo: '/page-not-found'
       });

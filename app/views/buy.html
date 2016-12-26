@@ -1,23 +1,27 @@
-<p class="pull-right closeModal modalClose" ng-click="closePreOrder()">x</p>
-
-<div class="upperText preOrderTop">
-
-    <div class="text-center preOrderBlock">
-        <img class="img-responisve prod mtop0" src="images/product/1.png" alt="dride" />
+<div class="col-md-6">
 
 
-        <h2>Coming Soon On</h2>
-        <img class="img-responisve kickstarerLabel" src="images/kickstarter.svg" alt="soon on kickstarer" />
+    <!-- header -->
+    <div ng-include="'views/sharedTemplates/header.html'"></div>
 
-    </div>
-
-
-
-
+    
 </div>
 
+<div class="container buy">
 
-<div class="text-center preOrderFooter">
+    <div class="col-md-12">
+        <div class="upperText preOrderTop">
+            <div class="text-center preOrderBlock">
+                <img class="img-responisve prod mtop0" src="images/product/1.png" alt="dride" />
+                <h2>Coming Soon On</h2>
+                <img class="img-responisve kickstarerLabel" src="images/kickstarter.svg" alt="soon on kickstarer" />
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+<div class="text-center preOrderFooter buy">
 
     <div ng-if="preSubmit">
         <h3>Subscribe for updates</h3>
@@ -46,3 +50,7 @@
 
 
 </div>
+
+
+
+
