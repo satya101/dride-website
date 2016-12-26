@@ -17,7 +17,5 @@ describe('Controller: BuyCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(BuyCtrl.awesomeThings.length).toBe(3);
-  });
+
 });
