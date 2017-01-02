@@ -30,6 +30,14 @@ a{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-cloud-full:before {
+  content: "\e91e";
+}
+.icon-cloud:before {
+  content: "\e91f";
+}
+
 .icon-indicator:before {
   content: "\e91d";
 }
@@ -133,10 +141,21 @@ a{
   content: "\ea9d";
 }
 
-
-
-
-
+h1, h2, h3, h4, h5, h6{
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+h2{
+    font-size: 30px;
+}
+p{
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1px;
+}
+.text-center {
+    text-align: center !important;
+}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -235,7 +254,7 @@ body {
       z-index: 10;
 }
 
-$color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
+$color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
 
 
 
@@ -476,12 +495,17 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
   background-color: nth($color, 3);
 }
 
-.bg_mic_1{
-  background-image: url('../images/mic1.png');
+.bg_cloud_1{
+  background-image: url('../images/cloud.png');
 }
 
-.bg_mic_2{
-  background-image: url('../images/mic2.png');
+.bg_cloud_2{
+  background-image: url('../images/cloud-2.png');
+}
+.redCloud{
+  font-size: 70px;
+  color: #f06060;
+  margin-left: 29px;
 }
 .black .node{
   color: #333;
@@ -507,10 +531,31 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
       color: #fff;
       outline: 0;
 }
-.bg-2{
+
+.btn-dride-white{
+    background-color: #fff;
+    color: #333 !important;
+}
+.btn-dride-white:hover, .btn-dride-white:active{
+      color: #333;
+      outline: 0;
+      opacity: 0.8;
+}
+.btn-dride-white:focus{
+      color: #333;
+      outline: 0;
+}
+
+.bg-1{
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('../images/gps.jpg');
+  background-image: url('../images/hp.png');
+}
+
+.bg-3{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../images/micBg.png');
 }
 .inWhiteWrap{
     padding: 12px 0 12px 0;
@@ -519,12 +564,16 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
     height: 292px;
     color: #000;
 }
-
+.micWrap{
+    background-color: #f3b562;
+    margin-top: 71%;
+    height: 302px;
+    color: #fff;
+}
 .inBlueWrap{
     padding: 52px;
-    background-color: rgba(177, 59, 135, 0.9);
-    margin-top: 20%;
-    height: 39%;
+    background-color: #b68cbf;
+    margin-top: 0;
     color: #fff;
     float: right;
 }
@@ -533,7 +582,7 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
   background-color: #fff;
 }
 .fxtp3{
-  margin-top: -19px;
+  margin-top: -109px;
   background-color: #333;
 }
 .fxtp4{
@@ -549,9 +598,6 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 }
 .gradApp{
   background: #72c6ce;
-
-  background: radial-gradient(ellipse at center, #72c6ce 0%, #258290 100%);
-
   height: 100%;
 }
 .btn-dride-flatTop{
@@ -571,7 +617,7 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 
 
 .appImg{
-    max-width: 650px;
+    max-width: 430px;
     margin: auto auto;
 }
 
@@ -582,7 +628,7 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
 .labelNear{
     font-family: 'Comfortaa', cursive;
     padding-right: 10px;
-    padding-top: 11px;
+    padding-top: 6px;
     font-size: 17px;
     font-weight: 100;
     float: right;
@@ -615,23 +661,28 @@ $color : #333333, #333, #F3B562, #b13b87, #F06060, #72C6CE, #4A6164;
   margin-top: 100px;
 }
 .preOrderBtn{
-  margin-bottom: 10px;
-  border: 1px solid #858484;
-  color: #313131;
-  background-color: #dadada;
+    margin-bottom: 10px;
+    border: 0;
+    color: #333;
+    background-color: #ffffff;
+    margin-top: 39px;
 }
 .clearBtn{
   background-color: inherit;
-  color: #858484;
+  color: #484848;
 }
 .productTtl{
-    font-weight: 100 !important;
-    margin-top: 61px;
+    margin-top: 75%;
+    color: #333;
+    font-size: 60px;
+    margin-bottom: -22px;
+    text-transform: lowercase;
 }
 .productSubTtl{
     font-size: 19px;
     font-weight: 100;
-    color: #cacaca;
+    color: #404040;
+    text-transform: capitalize;
 }
 .clear{
   clear: both;
@@ -1179,11 +1230,62 @@ footer {
 
 
 
-
-
-
-
-
-
+.cloudBox .txtBrick{
+  background-color: #333;
+  color: #fff;
+}
+.getDrideApp{
+    margin-top: 91px;
+    word-spacing: 10px;
+    margin-bottom: -23px;
+}
+.mTtlInApp{
+    margin: 0;
+    padding-top: 50px;
+    padding-bottom: 39px;
+}
+.miniDocs{
+  .apisBox{
+    list-style: none;
+    margin-top: 25px;
+    padding: 0;
+  }
+  .apisBox li{
+    background-color: #4a6164;
+    border: 1px solid #ffffff;
+    margin-bottom: 10px;
+    display: inline-block;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 21px;
+    margin: 11px;
+    width: 243px;
+    height: 243px;
+  }
+  .featureBox span{
+    font-size: 54px;
+    position: relative;
+    top: 41px;
+  }
+  .featureBox .desc{
+    margin-top: 80px;
+    font-size: 20px;
+  }
+  .featureBox p{
+    text-align: center;
+  }
+  .featureBox .more{
+    font-size: 15px;
+    color: #ffffff;
+    margin-top: -37px;
+  }
+  .featureBox a{
+    color: inherit;
+    text-style: inherit;
+  }
+  .featureBox a:hover, .featureBox a:focus, .featureBox a:active{
+    text-decoration: inherit; 
+  }
+}
 
 

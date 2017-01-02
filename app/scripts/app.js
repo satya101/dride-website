@@ -39,14 +39,12 @@ angular
         $rootScope.showOverlay =  false;
       
         $rootScope.toggleOverlay = function(){
-          console.log('x')
           $rootScope.showOverlay =  !$rootScope.showOverlay;
           $rootScope.collapse =  !$rootScope.collapse;
         }
 
         $rootScope.haveSideBarF = function(){
-          console.log($rootScope.currentPage)
-          console.log($rootScope.currentPage.indexOf('/c/'))
+
           if ($rootScope.currentPage == '/documentation' || $rootScope.currentPage.indexOf('/c/')!=-1){
             return true;
           }else
@@ -54,10 +52,6 @@ angular
 
         }
 
-
-        $rootScope.log = function(){
-            alert('xx')
-        }
      
   })
   .config(function ($routeProvider, $locationProvider, $sceDelegateProvider, hljsServiceProvider) {

@@ -414,6 +414,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt,json,xml}',
             '*.html',
             'images/{,*/}*.{webp}',
+            'code/{,*/}*.*',
             'styles/icomoon/fonts/{,*/}*.*'
           ]
         }, {

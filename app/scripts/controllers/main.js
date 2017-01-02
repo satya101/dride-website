@@ -8,7 +8,7 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, devMenu) {
 
 
         $scope.toLeft = false;
@@ -16,6 +16,9 @@ angular.module('drideApp')
         $scope.showPreOrder = false;
         $scope.preSubmit = true;
         $scope.displayCard = 1;
+
+        $scope.sideNav = devMenu.getMenu();
+        
 
         var md = new MobileDetect(window.navigator.userAgent);
         $scope.video = {
@@ -26,7 +29,7 @@ angular.module('drideApp')
         
         $scope.isMobile = md.mobile();
 
-        $scope.views = ["product", "gps", "mic", "camera", "wifi", "app", "docs"]
+        $scope.views = ["product", "cloud", "mic", "camera", "wifi", "app", "docs"]
         //when press prev, card slide to right
         $scope.goToView = function(view, strict) {
 
