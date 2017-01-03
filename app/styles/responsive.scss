@@ -163,7 +163,16 @@
     }
 }
 @media (max-width: 768px) {
+    .nav li:first-child{
+        margin-top: 60px;
+    }
+    .navbar-default .navbar-nav > .active > a{
+        top: 0px;
+    }
     .navbar-nav{
+        background-color: #fff;
+        margin-top: 81px;
+
         text-align: center;
         padding: 0;
         margin: 0;
