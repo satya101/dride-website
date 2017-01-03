@@ -557,9 +557,10 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
 }
 .micWrap{
     background-color: #f3b562;
-    margin-top: 71%;
-    height: 302px;
+    height: 281px;
     color: #fff;
+    position: absolute;
+    bottom: 0;
 }
 .inBlueWrap{
     padding: 52px;
@@ -573,7 +574,7 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
   background-color: #fff;
 }
 .fxtp3{
-  margin-top: -109px;
+  margin-top: 11px;
   background-color: #333;
 }
 .fxtp4{
