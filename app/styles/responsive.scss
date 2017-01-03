@@ -169,6 +169,10 @@
     .navbar-default .navbar-nav > .active > a{
         top: 0px;
     }
+    .micWrap{
+        position: static;
+    }
+
     .navbar-nav{
         background-color: #fff;
         margin-top: 81px;
@@ -311,7 +315,7 @@
             height: 404px;
         }
         .fxtp3 {
-            margin-top: -59px;
+            margin-top: 41px;
         }
         .node:before {
             font-size: 70px;
