@@ -31,15 +31,14 @@ a{
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-indicator:before {
+  content: "\e914";
+}
 .icon-cloud-full:before {
   content: "\e91e";
 }
 .icon-cloud:before {
   content: "\e91f";
-}
-
-.icon-indicator:before {
-  content: "\e91d";
 }
 .icon-media-pause:before {
   content: "\e919";
@@ -64,9 +63,6 @@ a{
 }
 .icon-toyCar-1:before {
   content: "\e913";
-}
-.icon-dride-cloud:before {
-  content: "\e914";
 }
 .icon-like:before {
   content: "\e910";
@@ -128,17 +124,11 @@ a{
 .icon-docs-full:before {
   content: "\e90c";
 }
-.icon-file-text2:before {
-  content: "\e926";
+.icon-youtube-play:before {
+  content: "\e91c";
 }
-.icon-google-plus:before {
-  content: "\ea8b";
-}
-.icon-facebook2:before {
-  content: "\ea90";
-}
-.icon-youtube:before {
-  content: "\ea9d";
+.icon-radio-unchecked:before {
+  content: "\ea56";
 }
 
 h1, h2, h3, h4, h5, h6{

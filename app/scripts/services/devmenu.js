@@ -24,7 +24,7 @@ angular.module('drideApp')
                   {
                     "url": "dride_cloud",
                     "ttl": "Dride Cloud",
-                    "icon": "icon-dride-cloud",
+                    "icon": "icon-cloud",
                     "more": "A network of driving footage",
                     'hp': true
                   },
