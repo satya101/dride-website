@@ -22,9 +22,9 @@ angular.module('drideApp')
 
         var md = new MobileDetect(window.navigator.userAgent);
         $scope.video = {
-          id: '6sp2wUMysc0'
+          id: 'F-GzkYJyKpI'
         };
-        
+
         $scope.email = '';
         
         $scope.isMobile = md.mobile();
