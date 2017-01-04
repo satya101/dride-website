@@ -11,8 +11,9 @@
 		                <a ng-href="c/{{node.url}}">
 		                    <span class="{{node.icon}}"></span>
 		                    <div class="desc">
-		                        <p><b>{{node.ttl}}</b></p>
-		                        <p class="more">{{node.more}}</p>
+		                        <p ng-class="node.url=='getting_started' ? 'mmffx1' : '' ">
+		                        	<b>{{node.ttl}}</b>
+		                        </p>
 		                    </div>
 		                </a>
 		            </li>

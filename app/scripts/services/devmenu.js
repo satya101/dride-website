@@ -30,7 +30,7 @@ angular.module('drideApp')
                   },
                   {
                     "url": "adas",
-                    "ttl": "ADAS Cloud",
+                    "ttl": "ADAS",
                     "icon": "icon-camera",
                     "more": "Take advantage of drid's road vision.",
                     'hp': true

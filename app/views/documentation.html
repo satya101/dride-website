@@ -28,8 +28,10 @@
 			                <li class="col-md-4 col-xs-12 text-center featureBox" ng-repeat="node in sideNav">
 			                    <a ng-href="c/{{node.url}}">
 			                        <span class="{{node.icon}}"></span>
-			                        <div class="desc">
-			                            <p><b>{{node.ttl}}</b></p>
+			                        <div class="desc" ng-class="node.url=='getting_started' ? 'mptpToFx' : ''">
+			                            <p>
+			                            	<b class="docsTtl" >{{node.ttl}}</b>
+			                            </p>
 			                            <p class="more">{{node.more}}</p>
 			                        </div>
 			                    </a>
