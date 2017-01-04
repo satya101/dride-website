@@ -139,12 +139,9 @@
             display: inline;
         }
         .miniDocs .apisBox li{
-            width: 423px;
+            min-width: 180px;
         }
-        .miniDocs .apisBox li:last-child{
-            display: inline-table;
-            width: 290px;
-        }
+
 
     }
 
@@ -154,12 +151,29 @@
     }
 }
 
+@media (max-width: 442px) {
+    .features .whatWhy p, .features .app p{
+        font-size: 22px;
+    }
+    .features .indicators .hBlcok {
+    height: 470px;
+    }
+    .productWrap{
+        bottom: -17px;
+    }
+}
 @media (max-width: 991px) {
     .halfPage{
         height: initial !important;
     }
     .preOrderBg{
         width: 100%;
+    }
+    .bg_cloud_2{
+            background-position-y: 110%;
+    }
+    .bg_cloud_1{
+            background-position-y: 50%;
     }
 }
 @media (max-width: 768px) {
@@ -322,11 +336,7 @@
             color: #333;
         }
         .bottomIcon{
-            position: relative;
-            top: -422px;
-            left: 35px;
-            float: left;
-
+            display: none;
         }
     }
     .bg-2{
@@ -338,13 +348,13 @@
         }
         .bottomIcon{
             position: relative;
-            top: -677px;
+            top: 283px;
             left: 35px;
             float: left;
         }
         .node:before {
             font-size: 70px;
-            color: #333;
+            color: #fff;
         }
         .btn-block{
             margin-left: -7px;
