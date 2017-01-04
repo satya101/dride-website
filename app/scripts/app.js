@@ -71,6 +71,11 @@ angular
 
     $routeProvider
 
+      // .when('/', {
+      //   templateUrl: 'views/features.html',
+      //   controller: 'FeaturesCtrl',
+      //   controllerAs: 'features'
+      // })
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
