@@ -45,7 +45,7 @@ angular.module('drideApp')
                   {
                     "url": "connectivity",
                     "ttl": "Connectivity",
-                    "icon": "icon-gps",
+                    "icon": "icon-wifi",
                     "more": "Use dride's build in GPS, Bluetooth & WIFI.",
                     'hp': true
                   },

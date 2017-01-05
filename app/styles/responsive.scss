@@ -41,6 +41,13 @@
     .productTtl {
         margin-top: 91px !important;
     }
+    .features .tech .forkUs {
+        width: 266px;
+        height: 295px;
+    }
+    .features .indicators .hBlcokTxt {
+        height: 540px;
+    }
 }
 .halfPage{
     @media (max-width:1361px) and (min-width:768px) {
@@ -193,6 +200,9 @@
     }
     .features .tech {
         height: 780px;
+    }
+    .appHead {
+        height: 66%;
     }
 }
 @media (max-width: 991px) {
@@ -359,7 +369,7 @@
 
         .inWhiteWrap {
             margin-top: 70%;
-            height: 404px;
+            height: 446px;
         }
         .fxtp3 {
             margin-top: 41px;
@@ -381,7 +391,7 @@
         }
         .bottomIcon{
             position: relative;
-            top: 283px;
+            top: 257px;
             left: 35px;
             float: left;
         }
@@ -418,7 +428,7 @@
         }
     }
     .bg-5{
-            height: 507px;
+        height: 557px;
 
         .node:before {
             font-size: 40px;
