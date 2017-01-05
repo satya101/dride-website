@@ -71,16 +71,16 @@ angular
 
     $routeProvider
 
-      // .when('/', {
-      //   templateUrl: 'views/features.html',
-      //   controller: 'FeaturesCtrl',
-      //   controllerAs: 'features'
-      // })
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/features.html',
+        controller: 'FeaturesCtrl',
+        controllerAs: 'features'
       })
+      // .when('/', {
+      //   templateUrl: 'views/main.html',
+      //   controller: 'MainCtrl',
+      //   controllerAs: 'main'
+      // })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',

@@ -17,31 +17,31 @@
             <img class="modelGif img-responsive" src="images/features/rotatingDride.gif" alt="rotating model of dride" />
         </div>
         <div class="container featuresList">
-            <h2>One Device, Killer Features.</h2>
+            <h2>One Device. Killer Features.</h2>
             <ul class="col-md-12 text-center">
                 <li class="col-md-4">
                     <span class="icon-camera-full"></span>
-                    <p>Safety Alerts</p>
+                    <h3>Safety</h3>
                 </li>
                 <li class="col-md-4">
                     <span class="icon-cloud-full"></span>
-                    <p>Cloud</p>
+                    <h3>Cloud</h3>
                 </li>
                 <li class="col-md-4">
                     <span class="icon-mic-full"></span>
-                    <p>Assistant</p>
+                    <h3>Assistant</h3>
                 </li>
                 <li class="col-md-4">
                     <span class="icon-app-full"></span>
-                    <p>App</p>
+                    <h3>App</h3>
                 </li>
                 <li class="col-md-4">
                     <span class="icon-wifi-full"></span>
-                    <p>Connectivity</p>
+                    <h3>Connectivity</h3>
                 </li>
                 <li class="col-md-4">
                     <span class="icon-docs-full"></span>
-                    <p>SDK</p>
+                    <h3>SDK</h3>
                 </li>
             </ul>
         </div>
@@ -62,12 +62,12 @@
     	</div>
     	<div class="col-md-6 hBlcok">
     		<h2>INDICATOR RING</h2>
-    		<p>While driving you cant interact with screens or small icons, The interaction have to be simpler, That why we've created the indicator ring, A simple and intuitive way to get information without getting distracted.</p>
+    		<p class="col-md-10">While driving you cant interact with screens or small icons, The interaction have to be simpler, That why we've created the indicator ring, A simple and intuitive way to get information without getting distracted.</p>
     	</div>
 
     	<div class="col-md-6 hBlcok">
-    		<h2>FRON INDICATOR</h2>
-    		<p>The front indicator is a way for your car to interact with the environment, Blink when you are approaching too fast, Alert when you forgot a child in the car.</p>
+    		<h2>FRONT INDICATOR</h2>
+    		<p class="col-md-10">The front indicator is soft light placed in the front of your car aimed to interact with the environment, Blink when you are approaching too fast, Alert when you forgot a child in the car.</p>
     	</div>
     	<div class="col-md-6 hBlcok">
     		<img class="img-responsive" src="images/features/front.png" alt="back side of dride"/>
@@ -107,10 +107,117 @@
     </div>
 
 
+    <div class="container-fluid cloud">
+
+
+	    <div class="container icns">
+	    	<div class="col-md-offset-3 text-center">
+	    		<div class="col-md-4">
+			    	<span class="icon-cloud"></span>
+			    	<p>Cloud</p>
+		    	</div>
+		    	<div class="col-md-4">
+			    	<span class="icon-share"></span>
+			    	<p>Share</p>
+		    	</div>
+	    	</div>
+	    </div>
+            
+   		<div class="pic_1 pic_3"></div>
+
+
+   		<div class="container cloudPlatfrom">
+   			
+
+   			<div class="col-md-8">
+   				<img class="img-responsive"  src="images/features/pic4.png" alt="dride cloud demo"/>
+   			</div>
+
+   			<div class="col-md-4 txt">
+   				<p>The Dride cloud is built to help our driving community stay safe.</p> 
+                <p>The cloud gives you your own space to save your driving history and upload or report footage of dangerous drivers within minutes. </p>
+   			</div>
+
+
+   		</div>
+
+        <h2 class="text-center">Keeping your community safe.</h2>
+
+
+    </div>
+
+
+    <div class="container-fluid tech">
+
+        <div class="container">
+
+            <h2 class="text-center">Technology developers know & love</h2>
+        
+
+            <div class="techStack">
+                <div class="bx ">
+                    <img class="img-responsive" src="images/features/openSource.svg" alt="open Source"/>
+                </div> 
+                <div class="bx ">
+                    <img class="img-responsive" src="images/features/nodeJs.png" alt="node js"/>
+                </div>
+                <div class="bx ">
+                    <img class="img-responsive" src="images/features/openCv.svg" alt="openCv"/>
+                </div>
+
+            </div>
+
+            <div class="forkUs">
+                <img class="img-responsive" src="images/features/gitHUb.svg" alt="github"/>
+                <div class="fork">
+                    <a href="https://github.com/dride/" target="_BLANK">FORK US</a>
+                </div>
+            </div>    
+
+
+        </div>
+
+    </div>
+
+    <div class="container-fluid subscribe">
+
+        <div class="text-center preOrderFooter buy">
+
+            <div ng-if="preSubmit">
+                <h3>Subscribe for updates</h3>
+
+
+                <div class="row ">
+
+                  <div class="col-xs-offset-3 col-xs-6">
+                    <div class="input-group">
+                      <input type="email" class="form-control" placeholder="Email" ng-model="email">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="sendDetails(email)">Send</button>
+                      </span>
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+            </div>
+
+            <div ng-if="!preSubmit" class="submitted">
+                <h3>See you soon</h3>
+                <img class="img-responisve" src="images/thanks.svg" alt="kiss" />
 
 
 
-    <br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
 </div>
 <!-- header -->
 <div ng-include="'views/sharedTemplates/footer.html'"></div>

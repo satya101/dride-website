@@ -8,10 +8,22 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('FeaturesCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('FeaturesCtrl', function ($scope, $http) {
+
+  	    $scope.preSubmit = true;
+
+
+        $scope.sendDetails = function(email){
+            console.log(email)
+            $http({
+                  method: 'GET',
+                  url: 'https://getcardigan.com/validator/subscribe.php?email=' + email
+            });
+
+
+            $scope.preSubmit = false;
+        }
+
+
+
   });

@@ -31,14 +31,47 @@ a{
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-indicator:before {
-  content: "\e914";
+.icon-app-full:before {
+  content: "\e901";
+}
+.icon-app:before {
+  content: "\e902";
+}
+.icon-camera-full:before {
+  content: "\e903";
+}
+.icon-camera:before {
+  content: "\e904";
 }
 .icon-cloud-full:before {
-  content: "\e91e";
+  content: "\e905";
 }
 .icon-cloud:before {
-  content: "\e91f";
+  content: "\e906";
+}
+.icon-docs-full:before {
+  content: "\e907";
+}
+.icon-docs:before {
+  content: "\e908";
+}
+.icon-indicator:before {
+  content: "\e909";
+}
+.icon-indicator.svg-full:before {
+  content: "\e90a";
+}
+.icon-mic-full:before {
+  content: "\e90b";
+}
+.icon-mic:before {
+  content: "\e90c";
+}
+.icon-wifi-full:before {
+  content: "\e914";
+}
+.icon-wifi:before {
+  content: "\e91c";
 }
 .icon-media-pause:before {
   content: "\e919";
@@ -85,52 +118,9 @@ a{
 .icon-bigD:before {
   content: "\e900";
 }
-.icon-mic:before {
-  content: "\e901";
-}
-.icon-gps:before {
-  content: "\e902";
-}
-.icon-camera:before {
-  content: "\e903";
-}
-.icon-icons-10:before {
-  content: "\e904";
-}
-.icon-app:before {
-  content: "\e905";
-}
-.icon-docs:before {
-  content: "\e906";
-}
-.icon-mic-full:before {
-  content: "\e907";
-}
-.icon-gps-full:before {
-  content: "\e908";
-}
-.icon-camera-full:before {
-  content: "\e909";
-}
-.icon-wifi:before {
-  content: "\e90a";
-}
-.icon-wifi-full:before {
-  content: "\e90a";
-}
-.icon-app-full:before {
-  content: "\e90b";
-}
-.icon-docs-full:before {
-  content: "\e90c";
-}
-.icon-youtube-play:before {
-  content: "\e91c";
-}
 .icon-radio-unchecked:before {
   content: "\ea56";
 }
-
 h1, h2, h3, h4, h5, h6{
     font-weight: 300;
     text-transform: uppercase;
@@ -1167,7 +1157,7 @@ footer {
     color: #333;
     font-weight: 100;
     font-size: 20px;
-    padding-bottom: 25px;
+    padding-bottom: 5px;
 
   }
   .kickstarerLabel{
@@ -1175,7 +1165,7 @@ footer {
   }
   .preOrderFooter{
       background-color: #333;
-      height: 30%;
+      height: 160px;
 
       input{
         background-color: #333;
@@ -1199,9 +1189,15 @@ footer {
         outline: 0 !important;
       }
       h3{
-        padding-top: 50px;
-        padding-bottom: 50px;
+        padding-top: 40px;
+        padding-bottom: 5px;
       }
+      input{
+        text-transform: capitalize;
+      }
+      button{
+        text-transform: uppercase;
+      }  
   }
   .modalClose{
       color: #333;
@@ -1325,6 +1321,10 @@ footer {
   .pic_2{
     background-image: url('../images/features/pic2.png');
   }
+  .pic_3{
+    background-image: url('../images/features/pic3.png');
+    min-height: 780px;
+  }
   .logo{
     text-transform: lowercase;
     font-size: 90px;
@@ -1332,14 +1332,20 @@ footer {
   }
   .slogen{
     text-transform: initial;
-    margin-bottom: 150px;
+    margin-bottom: 99px;
   }
 
   .featuresList{
     background-color: #333;
   }
+  .featuresList h3{
+    font-weight: 100;
+    font-family: raleway;
+  }
   .modelGif{
-    margin-top: 90px;
+    padding-top: 90px;
+    margin: auto auto;
+    padding-bottom: 50px;
   }
   .featuresList h2{
     color: #fff;
@@ -1354,18 +1360,20 @@ footer {
     color: #fff;
     list-style: none;
     margin-top: 50px;
+    padding-top: 40px;
+    padding-bottom: 80px;
   }
   .featuresList li{
       height: 170px;
   }
   .featuresList span{
-    font-size: 65px;
+    font-size: 55px;
   }
 
 
   .whatWhy, .app {
     p{
-      font-size: 26px;
+      font-size: 24px;
       text-align: left;
       margin-bottom: 100px;
     }
@@ -1377,14 +1385,18 @@ footer {
   }
 
   .indicators{
-    margin-top: 100px;
+    margin-top: 140px;
     
     h2{
       font-size: 48px;
       width: 50%;
+      padding-bottom: 30px;
+      line-height: 56px;
     }
     p{
       font-size: 26px;
+      padding: 0;
+      margin: 0;
     }
 
     .hBlcok{
@@ -1421,11 +1433,141 @@ footer {
     img{
       margin-bottom: 50px;
     }
+    h2{
+      margin-top: 61px;
+    }
+    p{
+      margin-top: 40px;
+    }
 
+  }
+  .cloud{
+    background-color: #333;
+    .icns{
+      color: #EC6061;
+      font-size: 135px;
+      padding-top: 50px;
+      padding-bottom: 80px;
+    }
+    p{
+      font-size: 47px;
+      margin-top: -24px;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 100;
+    }
+
+    .cloudPlatfrom{
+      color: #fff;
+      height: 800px;
+      text-align: center;
+      margin-top: 148px;
+    }
+    h2{
+      color: #fff;
+      margin-top: -59px;
+      margin-bottom: 80px;
+      text-transform: capitalize;
+    }
+    .txt {
+        margin-top: 17px;
+        p{
+          font-size: 28px;
+          text-transform: initial;
+          margin-bottom: 50px;
+          text-align: left;
+        }
+    }
 
   }
 
 
+
+  .tech{
+
+      background-color: #EAEAEA;
+      height: 1000px;
+
+
+      h2{
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+      .wrp{
+        border: 1px solid #333;
+      }
+      .techStack{
+           display: -webkit-flex;
+           display: flex;
+           -webkit-flex-direction: row; /* works with row or column */
+           flex-direction: row;
+           -webkit-align-items: center;
+           align-items: center;
+           -webkit-justify-content: center;
+           justify-content: center;
+
+      }
+      .techStack .bx, .forkUs{
+        background-color: #fff;
+        border: 1px solid #c9c9c9;
+        width: 360px;
+        height: 360px;
+        margin: 10px;
+        text-align: center;
+        border-radius: 4px;
+        position: relative;
+      }
+      .bx img, .forkUs img{
+          max-height: 100%;  
+          max-width: 50%; 
+          width: auto;
+          height: auto;
+          position: absolute;  
+          top: 0;  
+          bottom: 0;  
+          left: 0;  
+          right: 0;  
+          margin: auto;
+      }
+
+      .forkUs{
+        margin: auto auto;
+        margin-top: 10px;
+       
+        img{
+              max-width: 37%;
+              margin-top: 71px;
+        }
+      }
+      .fork{
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+          background-color: #333;
+          height: 50px;
+          color: #fff;
+          padding-top: 9px;
+          font-size: 25px;
+          font-weight: 100;
+          font-family: raleway;
+          border-radius: 4px;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+      }
+
+  }
+
+  .subscribe{
+    background-color: #333;
+    height: 400px;
+    .submitted img {
+      margin-top: 13px;
+    }
+    .preOrderFooter h3 {
+      padding-top: 120px;
+    }
+  }
 
 }
 
