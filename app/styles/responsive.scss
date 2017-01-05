@@ -224,6 +224,9 @@
     .docs h1 {
         text-transform: capitalize;
     }
+    .bg p {
+        font-weight: 200 !important;
+    }
 }
 @media (max-width: 991px) {
     .halfPage{
