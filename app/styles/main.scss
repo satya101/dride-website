@@ -1165,6 +1165,15 @@ footer {
   .kickstarerLabel{
     width: 35%;
   }
+
+  .hpPreOrde{
+      .preOrderFooter{
+        position: fixed;
+        bottom: 0;
+      }
+  }
+
+
   .preOrderFooter{
       background-color: #333;
       height: 160px;

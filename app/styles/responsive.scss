@@ -204,6 +204,25 @@
     .appHead {
         height: 66%;
     }
+    .preOrderFooter{
+        position: fixed;
+        bottom: 0;
+    }
+    .buy .prod {
+        width: 75%;
+        padding: 0;
+    }
+    .prod {
+        width: 100%;
+        padding: 70px;
+        padding-top: 0;
+    }
+    .preOrderFooter h3 {
+        padding-top: 19px;
+    }
+    .docs h1 {
+        text-transform: capitalize;
+    }
 }
 @media (max-width: 991px) {
     .halfPage{

@@ -63,7 +63,8 @@ angular.module('drideApp')
 
 
         $scope.openPreOrder = function(){
-            $scope.hideNav = true;
+            if ($scope.isMobile)
+                $scope.hideNav = true;
             $scope.showPreOrder = true;
         }
         $scope.closePreOrder = function(){
