@@ -154,12 +154,45 @@
 @media (max-width: 442px) {
     .features .whatWhy p, .features .app p{
         font-size: 22px;
+        padding: 30px;
     }
     .features .indicators .hBlcok {
-    height: 470px;
+        height: 360px;
+    }
+    .features .indicators .hBlcokTxt {
+        height: 540px;
     }
     .productWrap{
         bottom: -17px;
+    }
+    .features .whatWhy h2, .features .app h2 {
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+    .features .indicators {
+        margin-top: 60px;
+    }
+    .features .app h2{
+        margin-top: -60px;
+        margin-bottom: 80px;
+    }
+    .features .cloud .cloudPlatfrom {
+        margin-top: 68px;
+    }
+    .features .cloudPlatfrom img{
+        margin-bottom: 90px;
+    }
+    .features .cloud .txt p {
+        font-size: 25px;
+    }
+    .features .cloud h2 {
+        margin-top: 1px;
+    }
+    .tech .bx{
+        height: 100px !important;
+    }
+    .features .tech {
+        height: 780px;
     }
 }
 @media (max-width: 991px) {

@@ -45,7 +45,7 @@ angular
 
         $rootScope.haveSideBarF = function(){
 
-          if ($rootScope.currentPage == '/documentation' || $rootScope.currentPage.indexOf('/c/')!=-1){
+          if ($rootScope.currentPage == '/features' || $rootScope.currentPage == '/documentation' || $rootScope.currentPage.indexOf('/c/')!=-1){
             return true;
           }else
             return false;

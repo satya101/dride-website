@@ -268,7 +268,9 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
     background-size: contain;
 }
 
-
+.navbar-default .navbar-brand:focus{
+  background-color: #333 !important;
+}
 .superCenter{
   font-size: 550px;
   text-align: center;
@@ -1443,6 +1445,7 @@ footer {
   }
   .cloud{
     background-color: #333;
+    margin-top: 101px;
     .icns{
       color: #EC6061;
       font-size: 135px;
@@ -1510,8 +1513,8 @@ footer {
       .techStack .bx, .forkUs{
         background-color: #fff;
         border: 1px solid #c9c9c9;
-        width: 360px;
-        height: 360px;
+        width: 325px;
+        height: 325px;
         margin: 10px;
         text-align: center;
         border-radius: 4px;
