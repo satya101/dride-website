@@ -63,9 +63,11 @@ angular.module('drideApp')
 
 
         $scope.openPreOrder = function(){
+            $scope.hideNav = true;
             $scope.showPreOrder = true;
         }
         $scope.closePreOrder = function(){
+            delete $scope.hideNav;
             $scope.showPreOrder = false;
         }
         $scope.sendDetails = function(email){
