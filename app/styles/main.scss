@@ -253,7 +253,7 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
 
 
 .upperText{
-  padding: 80px;
+  padding: 80px !important;
   padding-top: 40px;
 }
 .bg p{
@@ -549,6 +549,7 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
     position: absolute;
     bottom: 0;
     width: 100%;
+    padding-top: 0!important;
 }
 .inBlueWrap{
     padding: 52px;

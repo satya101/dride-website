@@ -359,6 +359,13 @@
     .wrapTopMenu .navbar-header {
         margin-left: 10px !important;
     }
+
+    .micWrap{
+        padding-top: 20px !important;
+    }
+    .upperText{
+        padding: 20px !important;
+    }
     footer{
         display: none;
     }
@@ -389,10 +396,11 @@
         }
     }
     .bg-3{
-
+        height: 830px;
+        background-position: center;
         .inWhiteWrap {
             margin-top: 70%;
-            height: 446px;
+            height: 100%;
         }
         .fxtp3 {
             margin-top: 41px;
