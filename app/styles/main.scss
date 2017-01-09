@@ -535,6 +535,9 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
   background-size: cover;
   background-image: url('../images/micBg.png');
 }
+.bg-3-mobile{
+  display: none;
+}
 .inWhiteWrap{
     padding: 12px 0 12px 0;
     background-color: rgba(255, 255, 255, 0.85);
@@ -754,6 +757,9 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
       font-weight: 100;
   }
  
+  .actions li:last-child{
+      margin-right: 0px;
+  }
   .views{
     font-weight: 600;
     font-size: 19px;

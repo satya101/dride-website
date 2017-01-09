@@ -53,7 +53,7 @@
 
 
     <div ng-repeat="curretnView in views  track by $index " class="card col-md-6 col-xs-12 bg bg-{{$index+1}}" ng-if="displayCard==$index+1 || isMobile" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-        <div class="full-height" ng-include=" 'views/'+curretnView+'.html' "></div>
+        <div class="full-height inner-bg-{{$index+1}}"  ng-include=" 'views/'+curretnView+'.html' "></div>
     </div>
 
 

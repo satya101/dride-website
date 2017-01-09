@@ -231,6 +231,7 @@
         margin-top: -25px;
     }
     .bg-3-mobile{
+        display: block;
         background-repeat: no-repeat;
         background-size: cover;
         background-image: url(../images/micBg.png);
@@ -239,6 +240,9 @@
     }
     .bg-3{
         background: none;
+    }
+    .inner-bg-4{
+        height: 28%;
     }
 }
 @media (max-width: 991px) {
@@ -459,10 +463,13 @@
         }
         .bottomIcon{
             position: relative;
-            top: -422px;
-            left: 35px;
-            float: left;
+            top: -503px;
+            right: 80px;
 
+        }
+        .icon-camera-full:before{
+            font-size: 40px;
+            color: #fff;
         }
         .fxtp2 {
             margin-top: -59px !important;
@@ -480,7 +487,7 @@
         }
         .bottomIcon{
             position: relative;
-            top: -177px;
+            top: -194px;
             left: 60px;
             float: left;
         }
@@ -493,6 +500,15 @@
     }
     .mouseWiggle{
         display: none;
+    }
+    .fx8{
+        margin-top: 22px;
+    }
+    .actions t{
+        display: none;
+    }
+    .profile .innerPad{
+        padding: 0 10px 0 10px;
     }
 }
 

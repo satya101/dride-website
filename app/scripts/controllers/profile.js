@@ -49,9 +49,13 @@ angular.module('drideApp')
                         console.error("Error:", error);
                       });
 
-        cVideoRef.$bindTo($scope, "currentVideo");
+        cVideoRef.$bindTo($scope, "currentVideo").then(function(){
 
+            $scope.currentVideo.views = $scope.currentVideo.views!=undefined ? parseInt($scope.currentVideo.views) + 1 : 0;
 
+        });
+
+        
     }
 
 
