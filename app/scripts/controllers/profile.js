@@ -135,6 +135,7 @@ angular.module('drideApp')
                 clipsBydate[iKey] = {};
 
             clipsBydate[iKey][key] = value;
+
         });
 
         return clipsBydate;
@@ -157,7 +158,7 @@ angular.module('drideApp')
 
         if ($rootScope.uid){
 
-            alert('like');
+            alert('not ready yet :(');
 
         }
         else
