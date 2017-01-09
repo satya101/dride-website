@@ -11,6 +11,9 @@ angular.module('drideApp')
         return function(scope, element, attrs) {
             element.bind("DOMMouseScroll mousewheel onmousewheel", function(event) {
 
+                if (window.innerWidth <= 991)
+                    return;
+
                 // cross-browser wheel delta
                 var event = window.event || event; // old IE support
                 var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
@@ -35,6 +38,9 @@ angular.module('drideApp')
     .directive('ngMouseWheelDown', function() {
         return function(scope, element, attrs) {
             element.bind("DOMMouseScroll mousewheel onmousewheel", function(event) {
+
+                if (window.innerWidth <= 991)
+                    return;
 
                 // cross-browser wheel delta
                 var event = window.event || event; // old IE support

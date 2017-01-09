@@ -26,16 +26,16 @@ angular.module('drideApp')
         };
 
         $scope.email = '';
-        
-        $scope.isMobile = md.mobile();
+
+        $scope.isMobile = md.mobile() || window.innerWidth <= 768;
 
         $scope.views = ["product", "cloud", "mic", "camera", "wifi", "app", "docs"]
         //when press prev, card slide to right
         $scope.goToView = function(view, strict, addOrSub) {
 
+
             view = addOrSub ? (parseInt(view) + addOrSub) : view;
-            
-            console.log(view)
+  
             //dont run if popup is there
             if ($scope.showPreOrder)
                 return;
