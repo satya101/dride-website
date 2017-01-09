@@ -49,13 +49,7 @@
         height: 540px;
     }
 }
-.halfPage{
-    @media (max-width:1361px) and (min-width:768px) {
-        .preOrder{
-            display: none !important;
-        }
-    }
-}
+
 @media (max-width: 620px) {
     .bg-2 {
         .ftgps {
