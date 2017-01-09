@@ -204,7 +204,7 @@
     .appHead {
         height: 66%;
     }
-    .preOrderFooter{
+    .buy2 .preOrderFooter{
         position: fixed;
         bottom: 0;
     }
@@ -226,6 +226,19 @@
     }
     .bg p {
         font-weight: 200 !important;
+    }
+    .fx7{
+        margin-top: -25px;
+    }
+    .bg-3-mobile{
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url(../images/micBg.png);
+        height: 30%;
+        margin-bottom: -30%;
+    }
+    .bg-3{
+        background: none;
     }
 }
 @media (max-width: 991px) {
@@ -399,7 +412,7 @@
         height: 830px;
         background-position: center;
         .inWhiteWrap {
-            margin-top: 70%;
+            margin-top: 30%;
             height: 100%;
         }
         .fxtp3 {
@@ -422,7 +435,7 @@
         }
         .bottomIcon{
             position: relative;
-            top: 257px;
+            top: 244px;
             left: 35px;
             float: left;
         }
