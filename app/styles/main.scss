@@ -561,10 +561,7 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
     color: #fff;
     float: right;
 }
-.bg-6 .upperText{
-      padding: 30px !important;
-      padding-top: 47px !important;
-}
+
 .fxtp2{
   margin-top: -17px !important;
   background-color: #fff;
@@ -582,7 +579,7 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
 }
 
 .appHead{
-   height: 56%;
+  height: 48%;
 }
 .gradApp{
   background: #72c6ce;
@@ -605,7 +602,8 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
 
 
 .appImg{
-    max-width: 330px;
+    max-height: 100%;
+    width: inherit;
     margin: auto auto;
 }
 

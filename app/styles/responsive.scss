@@ -196,7 +196,7 @@
         height: 780px;
     }
     .appHead {
-        height: 66%;
+        height: 59%;
     }
     .buy2 .preOrderFooter{
         position: fixed;
@@ -239,10 +239,10 @@
         height: 28%;
     }
 }
-@media (max-width: 1260px) {
+@media (max-height: 750px) {
     .upperText {
-        padding: 20px !important;
-        padding-top: 5px !important;
+        padding: 40px !important;
+        padding-top: 35px !important;
     }
 }
 @media (max-width: 991px) {
@@ -618,5 +618,8 @@ and (max-device-width : 991px) {
     }
     .features .tech .techStack .bx{
         height: 225px;
+    }
+    .appHead {
+        height: 50%;
     }
 }
