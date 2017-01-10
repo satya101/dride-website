@@ -13,6 +13,11 @@ angular.module('drideApp')
   	    $scope.preSubmit = true;
 
 
+        $scope.video = {
+          id: 'F-GzkYJyKpI'
+        };
+        
+
         $scope.sendDetails = function(email){
             console.log(email)
             $http({
