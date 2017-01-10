@@ -17,7 +17,8 @@
     "videogular-controls": "^1.4.4",
     "videogular-poster": "^1.4.4",
     "angular-highlightjs": "^0.6.2",
-    "angular-touch": "^1.6.0"
+    "angular-touch": "^1.6.0",
+    "angular-scroll-animate": "^0.9.9"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

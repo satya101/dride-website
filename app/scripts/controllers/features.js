@@ -25,5 +25,9 @@ angular.module('drideApp')
         }
 
 
+       $scope.animateElementIn = function($el) {
+          $el.addClass('animated fadeInUp'); // this example leverages animate.css classes
+        };
+
 
   });

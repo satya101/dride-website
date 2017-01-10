@@ -2,7 +2,7 @@
     <!-- header -->
     <div ng-include="'views/sharedTemplates/header.html'"></div>
 </div>
-<div class="features">
+<div class="features" >
     <div class="pic_1"></div>
     <div class="container">
         <div class="row">
@@ -17,8 +17,8 @@
             <img class="modelGif img-responsive" src="images/features/rotatingDride.gif" alt="rotating model of dride" />
         </div>
         <div class="container featuresList">
-            <h2>One Device. Killer Features.</h2>
-            <ul class="col-md-12 text-center">
+            <h2 when-visible="animateElementIn">One Device. Killer Features.</h2>
+            <ul when-visible="animateElementIn" class="col-md-12 text-center">
                 <li class="col-md-4">
                     <span class="icon-camera-full"></span>
                     <h3>Safety</h3>
@@ -48,39 +48,128 @@
     </div>
 
     <div class="container text-center whatWhy">
-        <h2>Drivers of the world, unite.</h2>
-        <p class="col-md-offset-1 col-md-10">We’re a bunch of car fanatics who believe that the vehicles we are driving are unnecessarily primitive and downright dangerous! We’ve designed Dride to change that, and with it, the way we drive. Just as the time when no-one used seat belts rapidly faded we believe that the era of unintelligent cars should be a distant memory, and we are here to bring it about sooner than anyone expects. </p>
+        <h2 when-visible="animateElementIn">Drivers of the world, unite.</h2>
+        <p when-visible="animateElementIn" class="col-md-offset-1 col-md-10">We’re a bunch of car fanatics who believe that the vehicles we are driving are unnecessarily primitive and downright dangerous! We’ve designed Dride to change that, and with it, the way we drive. Just as the time when no-one used seat belts rapidly faded we believe that the era of unintelligent cars should be a distant memory, and we are here to bring it about sooner than anyone expects. </p>
     </div>
 
     <div class="pic_2 pic_1"></div>
 
+
+
+    <div class="container-fluid">
+            <div class="assistant-stirp">
+                <img src="images/features/mic.svg" alt="mic"/>
+            </div>
+    </div>
+
+    <div class="container assistant">
+        <h2 when-visible="animateElementIn">Assistant</h2>
+        <p when-visible="animateElementIn" class="col-md-offset-1 col-md-10">Use your voice to ask the assistant of your choice whatever you need.</p>
+
+
+        <div class="col-md-6" when-visible="animateElementIn">
+            <img src="images/features/assistant.png" alt="dride apps"/>
+        </div>
+        <div class="col-md-6">
+            <p when-visible="animateElementIn">"Take me home"</p>
+            <p when-visible="animateElementIn">"Send a text to mom I will be home soon."</p>
+            <p when-visible="animateElementIn">"How’s the weather tomorrow?"</p>
+
+        </div>
+
+        <div class="col-md-12">
+            <br>
+        </div>
+    </div>
+
+    <div class="container-fluid cloud">
+
+
+        <div class="container icns">
+            <div class="col-md-offset-3 text-center">
+                <div when-visible="animateElementIn" class="col-md-4">
+                    <span class="icon-cloud"></span>
+                    <p>Cloud</p>
+                </div>
+                <div when-visible="animateElementIn" class="col-md-4">
+                    <span class="icon-share"></span>
+                    <p>Share</p>
+                </div>
+            </div>
+        </div>
+            
+        <div class="pic_1 pic_3"></div>
+
+
+        <div class="container cloudPlatfrom">
+            
+
+            <div class="col-md-8 col-xs-12" when-visible="animateElementIn">
+                <img class="img-responsive"  src="images/features/pic4.png" alt="dride cloud demo"/>
+            </div>
+
+            <div class="col-md-4 col-xs-12 txt">
+                <p when-visible="animateElementIn">The Dride cloud is built to help our driving community stay safe.</p> 
+                <p when-visible="animateElementIn">The cloud gives you your own space to save your driving history and upload or report footage of dangerous drivers within minutes. </p>
+            </div>
+
+
+        </div>
+
+        <h2 when-visible="animateElementIn" class="text-center">Keeping your community safe.</h2>
+
+
+    </div>
+
+
     <div class="container indicators">
        
 
-    	<div class="col-md-6 hBlcok">
+    	<div class="col-md-6 hBlcok" when-visible="animateElementIn">
     		<img class="img-responsive" src="images/features/back.png" alt="back side of dride"/>
     	</div>
     	<div class="col-md-6 hBlcok hBlcokTxt">
-    		<h2>INDICATOR RING</h2>
-    		<p class="col-md-10">While driving you cant interact with screens or small icons, The interaction have to be simpler, That why we've created the indicator ring, A simple and intuitive way to get information without getting distracted.</p>
+    		<h2 when-visible="animateElementIn">INDICATOR RING</h2>
+    		<p when-visible="animateElementIn" class="col-md-10">While driving you cant interact with screens or small icons, The interaction have to be simpler, That why we've created the indicator ring, A simple and intuitive way to get information without getting distracted.</p>
     	</div>
 
     	<div class="col-md-6 hBlcok hBlcokTxt">
-    		<h2>FRONT INDICATOR</h2>
-    		<p class="col-md-10">The front indicator is soft light placed in the front of your car aimed to interact with the environment, Blink when you are approaching too fast, Alert when you forgot a child in the car.</p>
+    		<h2 when-visible="animateElementIn">FRONT INDICATOR</h2>
+    		<p when-visible="animateElementIn" class="col-md-10">The front indicator is soft light placed in the front of your car aimed to interact with the environment, Blink when you are approaching too fast, Alert when you forgot a child in the car.</p>
     	</div>
-    	<div class="col-md-6 hBlcok">
+    	<div class="col-md-6 hBlcok" when-visible="animateElementIn">
     		<img class="img-responsive" src="images/features/front.png" alt="back side of dride"/>
     	</div>
 
 
      </div>
 
+    <div class="container-fluid">
+            <div class="apps-stirp">
+                <img src="images/features/apps.svg" alt="mic"/>
+            </div>
+    </div>
+   
+    <div class="container apps">
+        <h2 when-visible="animateElementIn">Apps</h2>
+        <p when-visible="animateElementIn" class="col-md-offset-1 col-md-10">Dride apps are unique actions created by our community, They can control every aspect of your device from navigation to the personal assistant you use.</p>
+
+
+        <div class="col-md-12 text-center" when-visible="animateElementIn">
+            <img class="img-responsive" src="images/features/appsScreen.png" alt="dride apps"/>
+        </div>
+
+
+        <div class="col-md-12">
+            <br>
+        </div>
+    </div>
+
 
     <div class="container-fluid adas">
 
 
-            <h2>Keeping you safe. Always.</h2>
+            <h2 when-visible="animateElementIn">Keeping you safe. Always.</h2>
             <div class="videoWrapper">
 			    <!-- Copy & Pasted from YouTube -->
 			    <iframe width="854" height="480" src="https://www.youtube.com/embed/F-GzkYJyKpI" frameborder="0" allowfullscreen></iframe>
@@ -90,15 +179,17 @@
     </div>
 
     <div class="container text-center app">
-        <h2 class="capitalize">Access. Control. Share.</h2>
-        <img class="img-responsive" src="images/features/app.png" alt="app"/>
-        <p class="col-md-offset-1 col-md-10">Our app provides you with your customizable account where you can discover new and exciting Dride apps designed by our Dride community. On our application, you can also upload your own driving videos, share with other Dride drivers, control your Dride and personalize it to your car.</p>
+        <h2 when-visible="animateElementIn" class="capitalize">Access. Control. Share.</h2>
+        <div when-visible="animateElementIn">
+            <img class="img-responsive" src="images/features/app.png" alt="app"/>
+        </div>
+        <p when-visible="animateElementIn" class="col-md-offset-1 col-md-10">Our app provides you with your customizable account where you can discover new and exciting Dride apps designed by our Dride community. On our application, you can also upload your own driving videos, share with other Dride drivers, control your Dride and personalize it to your car.</p>
         
         <div class="getDrideApp text-center">
-			<a href="https://itunes.apple.com/us/app/dride/id1185398002?ls=1&mt=8" target="_BLANK">
+			<a when-visible="animateElementIn" href="https://itunes.apple.com/us/app/dride/id1185398002?ls=1&mt=8" target="_BLANK">
 				<img src="images/ios.png" alt="app store" />
 			</a>
-			<a href="https://play.google.com/store/apps/details?id=io.dride" target="_BLANK">
+			<a when-visible="animateElementIn" href="https://play.google.com/store/apps/details?id=io.dride" target="_BLANK">
 				<img src="images/android.png" alt="google play" />
 			</a>
 		</div>
@@ -107,67 +198,29 @@
     </div>
 
 
-    <div class="container-fluid cloud">
-
-
-	    <div class="container icns">
-	    	<div class="col-md-offset-3 text-center">
-	    		<div class="col-md-4">
-			    	<span class="icon-cloud"></span>
-			    	<p>Cloud</p>
-		    	</div>
-		    	<div class="col-md-4">
-			    	<span class="icon-share"></span>
-			    	<p>Share</p>
-		    	</div>
-	    	</div>
-	    </div>
-            
-   		<div class="pic_1 pic_3"></div>
-
-
-   		<div class="container cloudPlatfrom">
-   			
-
-   			<div class="col-md-8 col-xs-12">
-   				<img class="img-responsive"  src="images/features/pic4.png" alt="dride cloud demo"/>
-   			</div>
-
-   			<div class="col-md-4 col-xs-12 txt">
-   				<p>The Dride cloud is built to help our driving community stay safe.</p> 
-                <p>The cloud gives you your own space to save your driving history and upload or report footage of dangerous drivers within minutes. </p>
-   			</div>
-
-
-   		</div>
-
-        <h2 class="text-center">Keeping your community safe.</h2>
-
-
-    </div>
 
 
     <div class="container-fluid tech">
 
         <div class="container">
 
-            <h2 class="text-center">Technology developers know & love</h2>
+            <h2 when-visible="animateElementIn" class="text-center">Technology developers know & love</h2>
         
 
             <div class="techStack">
-                <div class="bx ">
+                <div class="bx " when-visible="animateElementIn">
                     <img class="img-responsive" src="images/features/openSource.png" alt="open Source"/>
                 </div> 
-                <div class="bx">
+                <div class="bx" when-visible="animateElementIn">
                     <img class="img-responsive" src="images/features/nodejs.png" alt="node js"/>
                 </div>
-                <div class="bx">
+                <div class="bx" when-visible="animateElementIn">
                     <img class="img-responsive" src="images/features/opencv.png" alt="openCv"/>
                 </div>
 
             </div>
 
-            <div class="forkUs">
+            <div class="forkUs" when-visible="animateElementIn">
                 <img class="img-responsive" src="images/features/github.svg" alt="github"/>
                 <div class="fork">
                     <a href="https://github.com/dride/" target="_BLANK">FORK US</a>

@@ -21,7 +21,8 @@ angular
     'com.2fdevs.videogular.plugins.overlayplay',
     'com.2fdevs.videogular.plugins.poster',
     'hljs',
-    'ngTouch'
+    'ngTouch',
+    'angular-scroll-animate'
   ])
    .run(function($rootScope, $location, $anchorScroll) {
 
@@ -71,12 +72,16 @@ angular
 
     $routeProvider
 
-
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/features.html',
+        controller: 'FeaturesCtrl',
+        controllerAs: 'features'
       })
+      // .when('/', {
+      //   templateUrl: 'views/main.html',
+      //   controller: 'MainCtrl',
+      //   controllerAs: 'main'
+      // })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
