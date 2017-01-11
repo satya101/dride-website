@@ -14,9 +14,10 @@ angular.module('drideApp')
 
 
         $scope.video = {
-          id: 'F-GzkYJyKpI'
+          id: '9Y5fFTuXkMM',
+          maxresdefault: 'maxresdefault'
         };
-        
+
 
         $scope.sendDetails = function(email){
             console.log(email)

@@ -32,35 +32,35 @@ angular.module('drideApp')
                     "url": "adas",
                     "ttl": "ADAS",
                     "icon": "icon-camera",
-                    "more": "Take advantage of drid's road vision.",
+                    "more": "Access the road programmatically",
                     'hp': true
                   },
                   {
                     "url": "assistant",
                     "ttl": "Assistant",
                     "icon": "icon-mic",
-                    "more": "Use natural language to interact with your users",
+                    "more": "Use Dride’s voice engine",
                     'hp': true
                   },
                   {
                     "url": "connectivity",
                     "ttl": "Connectivity",
                     "icon": "icon-wifi",
-                    "more": "Use dride's build in GPS, Bluetooth & WIFI.",
+                    "more": "GPS, Bluetooth & Wifi",
                     'hp': true
                   },
                   {
                     "url": "indicators",
                     "ttl": "Indicators",
                     "icon": "icon-indicator",
-                    "more": "Contorl Dride's light indicators",
+                    "more": "Control Dride’s light indicators",
                     'hp': true
                   },
                   {
                     "url": "publish",
-                    "ttl": "Publish an app",
+                    "ttl": "Publish",
                     "icon": "icon-app",
-                    "more": "How to publish an app to Dride",
+                    "more": "Learn how to publish an app to Dride",
                     'hp': false
                   }
 
