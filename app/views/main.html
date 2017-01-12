@@ -49,7 +49,7 @@
 
 
 <!-- the screens are controlled from main.js -->
-<div class="card-container" ng-mouse-wheel-down="isMobile && goToView(displayCard, false, 1)" ng-mouse-wheel-up="isMobile && goToView(displayCard, false, -1)" >
+<div class="card-container" ng-mouse-wheel-down="goToView(displayCard, false, 1)" ng-mouse-wheel-up="goToView(displayCard, false, -1)" >
 
 
     <div ng-repeat="curretnView in views  track by $index " class="card col-md-6 col-xs-12 bg bg-{{$index+1}}" ng-if="displayCard==$index+1 || isMobile" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
