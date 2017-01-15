@@ -84,6 +84,10 @@ echo "   ========================="
 echo ""
 echo ""
 
+
+
+cd /home
+
 # Install dependencies
 echo "========== Update Aptitude ==========="
 sudo apt-get update -y
