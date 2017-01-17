@@ -97,10 +97,11 @@ echo "========== Installing build-essential ============"
 sudo apt-get install build-essential -y
 
 echo "========== Installing libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libjasper-dev python2.7-dev ============"
-sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libjasper-dev python2.7-dev
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libjasper-dev python2.7-dev -y
 
 echo "========== Installing pip ============"
-wget https://bootstrap.pypa.io/get-pip.py
+sudo wget https://bootstrap.pypa.io/get-pip.py
+sudo chmod +x get-pip.py
 sudo python get-pip.py
 
 echo "========== Installing Numpy ============"
@@ -141,21 +142,113 @@ cd /home
 sudo git clone --recursive https://github.com/CardiganCam/Cardigan.git
 cd Cardigan
 
+# make the video dir writable
+sudo chmod 777 -R modules/video/
+
 
 echo "========== Install picamera  ============"
 sudo pip install "picamera[array]"
 # enable camera on raspi-config
+grep "start_x=1" /boot/config.txt
+if grep "start_x=1" /boot/config.txt
+then
+        echo "Already enabled."
+else
+        sed -i "s/start_x=0/start_x=1/g" /boot/config.txt
+        reboot
+fi
 
 echo "========== Install omxplayer  ============"
 sudo apt-get install omxplayer -y
 
 
+# Install WIFi
+sudo apt-get install hostapd isc-dhcp-server -y
+sudo apt-get install iptables-persistent -y
+
+cd /home 
+# get the dhcpd config file
+sudo wget https://dride.io/code/dhcpd.conf
+
+sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
+sudo rm dhcpd.conf
+
+
+sudo bash -c 'echo "INTERFACES=\"wlan0\""> /etc/default/isc-dhcp-server'
+
+sudo ifdown wlan0
+
+
+sudo wget https://dride.io/code/interfaces
+
+sudo cp interfaces /etc/network/interfaces
+sudo rm interfaces
+
+
+sudo ifconfig wlan0 192.168.42.1
+
+
+sudo wget https://dride.io/code/hostapd.conf
+
+sudo cp hostapd.conf /etc/hostapd/hostapd.conf
+sudo rm hostapd.conf
+
+sudo bash -c 'echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\""> /etc/default/hostapd'
+
+sudo wget https://dride.io/code/hostapd
+
+sudo cp hostapd /etc/init.d/hostapd
+sudo rm hostapd
+
+
+sudo bash -c 'echo "net.ipv4.ip_forward=1"> /etc/sysctl.conf'
+sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
+
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+
+sudo mv /usr/share/dbus-1/system-services/fi.epitest.hostap.WPASupplicant.service ~/
+
+
+sudo service hostapd start 
+sudo service isc-dhcp-server start
+sudo update-rc.d hostapd enable 
+sudo update-rc.d isc-dhcp-server enable
+
+
+# dride-ws
+cd /home/Cardigan/dride-ws
+sudo npm i
+
+
+sudo wget https://dride.io/code/startup/dride-ws
+sudo wget https://dride.io/code/startup/dride-core
+
+#startup script's
+
+# express on startup
+sudo cp dride-ws /etc/init.d/dride-ws
+sudo chmod +x /etc/init.d/dride-ws
+sudo update-rc.d dride-ws defaults
+
+
+sudo rm dride-ws
+
+# dride-core on startup
+sudo cp dride-core /etc/init.d/dride-core
+sudo chmod +x /etc/init.d/dride-core
+sudo update-rc.d dride-core defaults
+sudo rm dride-core
 
 
 
 
+sudo reboot
 
-# TODO: Setup WIFI  + startup script's + dride-ws
 
 
 

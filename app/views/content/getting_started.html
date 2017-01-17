@@ -10,22 +10,27 @@
 		            <p>You can also download a pre-installed pre-configured <b><a target="_BLANK" href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian Jessie</a></b> image with all the software needed.
 		           Or use the <a href="c/manual_setup">Manual Installation Guide</a>. </p>
 
-
+		           	<br>
 		            <h2>Download & run the install script</h2>
-		            <div hljs hljs-language="bash">wget https://dride.io/code/install.sh &#13;&#10;
-. install.sh</div>
+		            <div hljs hljs-language="bash">bash -c "$(curl -s https://dride.io/code/install.sh)"</div>
 
 
-					<p>This script may take you a while so grab a cup of coffee before starting.</p>
+					<p class="hint">This script may take up to 3 hours so grab a cup of coffee before starting.</p>
 					<br>
 					<p>After the script is completed, you will have the following packages installed on your Dride:</p>
 					<ul>
 						<li>OpenCV</li>
 						<li>pip</li>
+						<li>numpy</li>
 						<li>Python</li>
 						<li>omxplayer</li>
-						<li>Cardigan (Dride-core)</li>
+						<li>hostapd</li>
+						<li><a href="https://github.com/dride/Cardigan">Cardigan (Dride-core)</a></li>
 					</ul>
+					<br>
+					<h2>Testing</h2>
+					<p>Downlaod Dride's app for <a href="https://itunes.apple.com/us/app/dride/id1185398002?ls=1&mt=8">iOS</a> or <a href="https://play.google.com/store/apps/details?id=io.dride">Android</a></p>
+					<p>Go to Settings > Wi-Fi on your phone and select <u>dride</u>, enter the password "<u>ilovedride</u>", then return to the app.</p>
 		        </div>   
 
 		        <br>

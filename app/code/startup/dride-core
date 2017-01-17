@@ -1,0 +1,25 @@
+
+#! /bin/sh
+# /etc/init.d/dride-core
+
+case "$1" in
+  start)
+    echo "Starting dride-core"
+    # run application you want to start
+    python /home/Cardigan/mainPi.py &
+    ;;
+  stop)
+    echo "Stopping dride-core"
+    # kill application you want to stop
+    killall python
+    ;;
+  *)
+    echo "Usage: /etc/init.d/dride-core{start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
+
+
+
