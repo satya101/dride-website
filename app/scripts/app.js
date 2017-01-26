@@ -53,6 +53,15 @@ angular
 
         }
 
+        $rootScope.needForum = function(){
+
+          if ($rootScope.currentPage == '/forum' || $rootScope.currentPage == '/documentation' || $rootScope.currentPage.indexOf('/c/')!=-1){
+            return true;
+          }else
+            return false;
+
+        }
+
      
   })
   .config(function ($routeProvider, $locationProvider, $sceDelegateProvider, hljsServiceProvider) {
@@ -122,6 +131,11 @@ angular
         templateUrl: 'views/buy.html',
         controller: 'BuyCtrl',
         controllerAs: 'buy'
+      })
+      .when('/forum', {
+        templateUrl: 'views/forum.html',
+        controller: 'ForumCtrl',
+        controllerAs: 'forum'
       })
       .otherwise({
         redirectTo: '/page-not-found'

@@ -36,6 +36,11 @@ USAGE="Usage: $0 {start|stop|restart|status} [--force]"
 FORCE_OP=false
 
 pid_file_exists() {
+    # remove pid file 
+    # This should be remoed after 'easy shut down' will be implemented.
+
+    sudo rm -R $PID_DIR
+
     [ -f "$PID_FILE" ]
 }
 
