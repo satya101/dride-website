@@ -8,7 +8,9 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('DocumentationCtrl', function ($scope, devMenu, $rootScope, $timeout) {
+  .controller('DocumentationCtrl', function ($scope, devMenu, $rootScope, $timeout, $mixpanel) {
+
+  $mixpanel.track('Docs visit');
 
 	$scope.show = false;
   	$scope.sideNav = devMenu.getMenu();
@@ -16,6 +18,7 @@ angular.module('drideApp')
   	$scope.showDevMenu = function(){
   		$scope.show = true;
   	}
+
 
 	$timeout(function(){
 		$scope.show = true;

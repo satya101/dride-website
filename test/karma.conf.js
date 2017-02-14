@@ -36,6 +36,8 @@ module.exports = function(config) {
       'bower_components/angular-highlightjs/build/angular-highlightjs.js',
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-scroll-animate/dist/angular-scroll-animate.js',
+      'bower_components/mixpanel/mixpanel-jslib-snippet.js',
+      'bower_components/angular-mixpanel/src/angular-mixpanel.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

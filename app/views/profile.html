@@ -88,7 +88,7 @@
                                   height="470"
                                   frameborder="0" 
                                   src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAfDshH5P8j2TGnpRTcVIFvEwUe6LKEeEU
-                                    &center=31.979805, 34.778177&zoom=17" allowfullscreen>
+                                    &center=37.764742, -122.432631&zoom=17" allowfullscreen>
                                 </iframe>
 	                    </div>	                    
                     </div>
@@ -96,7 +96,7 @@
 
                     <div class="col-md-4">
                     	
-                            <div ng-repeat="(daysKey, clipsInDay) in orderedClips" >
+                            <div ng-repeat="(daysKey, clipsInDay) in orderedClips" ng-if="clipsInDay">
                              <p class="dvdrOfClips">{{preatifyDate(daysKey)  | date:'MMM d' }}</p>
 
                                 <div ng-repeat="(key, clip) in clipsInDay" class="box moreClips">

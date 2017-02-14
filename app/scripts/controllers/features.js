@@ -8,10 +8,11 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('FeaturesCtrl', function ($scope, $http) {
+  .controller('FeaturesCtrl', function ($scope, $http, $mixpanel) {
 
   	    $scope.preSubmit = true;
 
+        $mixpanel.track('Features visit');
 
         $scope.video = {
           id: '9Y5fFTuXkMM',

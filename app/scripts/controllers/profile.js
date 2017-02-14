@@ -21,9 +21,13 @@ angular.module('drideApp')
         }
       }
     ])
-  .controller('ProfileCtrl', function ($scope, $uibModal, $rootScope, $routeParams, $firebaseObject, $firebaseArray, currentVideo) {
+  .controller('ProfileCtrl', function ($scope, $uibModal, $rootScope, $routeParams, $firebaseObject, $firebaseArray, currentVideo, $mixpanel) {
 
     $scope.initProfile = function() {
+
+
+        $mixpanel.track('Videos visit');
+
 
         $scope.uid = $routeParams.uid;
         $scope.videoId = $routeParams.videoId;

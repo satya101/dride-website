@@ -8,7 +8,7 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('InnercontentpageCtrl', function ($scope, devMenu, $routeParams, $rootScope) {
+  .controller('InnercontentpageCtrl', function ($scope, devMenu, $routeParams, $rootScope, $mixpanel) {
   	
 
   	$scope.sideNav = devMenu.getMenu();
@@ -18,6 +18,8 @@ angular.module('drideApp')
   	$scope.pageTtl = $routeParams.pageTtl;
 
 
-
+    $scope.trackDownload = function(){
+       $mixpanel.track('Download drideOS');
+    }
 
   });

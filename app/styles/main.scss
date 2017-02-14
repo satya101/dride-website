@@ -148,6 +148,9 @@ body {
   font-family: 'Comfortaa', cursive;
   overflow-x: hidden;
 }
+.text-left{
+  text-align: left !important;
+}
 .container-fluid {
   margin: 0;
   padding: 0;
@@ -668,6 +671,9 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
     margin-bottom: -22px;
     text-transform: lowercase;
 }
+.regCase{
+    text-transform: inherit;
+}
 .productSubTtl{
     font-size: 18px;
     font-weight: 100;
@@ -761,6 +767,7 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
       margin-right: 20px;
       font-size: 15.6px;
       font-weight: 100;
+      cursor: pointer;
   }
  
   .actions li:last-child{
@@ -905,6 +912,23 @@ $color : #333333, #333, #F3B562, #b68cbf, #F06060, #72C6CE, #4A6164;
     }
     p{
           margin: 0 0 4px;
+     }
+     .getDride{
+        background-color: #333;
+        height: 90px;
+        width: 190px;
+        margin: auto;
+        border-radius: 4px;
+        margin-bottom: 41px;
+        padding-top: 13px;
+        color: #fff;
+        margin-top: 11px;
+        .smallTag{
+          font-size: 14px !important;
+        }
+        p{
+          font-size: 25px;
+        }
      }
 }
 

@@ -8,7 +8,7 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('MainCtrl', function ($scope, $http, devMenu) {
+  .controller('MainCtrl', function ($scope, $http, devMenu, $mixpanel) {
 
 
         $scope.toLeft = false;
@@ -18,6 +18,8 @@ angular.module('drideApp')
         $scope.displayCard = 1;
 
         $scope.sideNav = devMenu.getMenu();
+        
+        $mixpanel.track('HP visit');
         
 
         var md = new MobileDetect(window.navigator.userAgent);
@@ -32,7 +34,6 @@ angular.module('drideApp')
         $scope.views = ["product", "cloud", "mic", "camera", "wifi", "app", "docs"]
         //when press prev, card slide to right
         $scope.goToView = function(view, strict, addOrSub) {
-
 
             view = addOrSub ? (parseInt(view) + addOrSub) : view;
   

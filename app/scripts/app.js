@@ -22,11 +22,12 @@ angular
     'com.2fdevs.videogular.plugins.poster',
     'hljs',
     'ngTouch',
-    'angular-scroll-animate'
+    'analytics.mixpanel'
   ])
-   .run(function($rootScope, $location, $anchorScroll) {
+   .run(function($rootScope, $location, $anchorScroll, $mixpanel) {
 
         $rootScope.haveSideBar = false;
+
 
         $rootScope.$on('$locationChangeSuccess', function(event){
                   $rootScope.currentPage = $location.path();
@@ -36,6 +37,8 @@ angular
                   $anchorScroll();
 
         })
+
+        
 
         $rootScope.showOverlay =  false;
       
@@ -64,7 +67,7 @@ angular
 
      
   })
-  .config(function ($routeProvider, $locationProvider, $sceDelegateProvider, hljsServiceProvider) {
+  .config(function ($routeProvider, $locationProvider, $sceDelegateProvider, hljsServiceProvider, $mixpanelProvider) {
 
     hljsServiceProvider.setOptions({
       // replace tab with 4 spaces
@@ -78,6 +81,7 @@ angular
       'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/**'
     ]);
 
+    $mixpanelProvider.apiKey('eae916fa09f65059630c5ae451682939');
 
     $routeProvider
 
@@ -136,6 +140,11 @@ angular
         templateUrl: 'views/forum.html',
         controller: 'ForumCtrl',
         controllerAs: 'forum'
+      })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl',
+        controllerAs: 'about'
       })
       .otherwise({
         redirectTo: '/page-not-found'

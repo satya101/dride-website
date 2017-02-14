@@ -18,7 +18,8 @@
     "videogular-poster": "^1.4.4",
     "angular-highlightjs": "^0.6.2",
     "angular-touch": "^1.6.0",
-    "angular-scroll-animate": "^0.9.9"
+    "angular-scroll-animate": "^0.9.9",
+    "angular-mixpanel": "^1.1.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
