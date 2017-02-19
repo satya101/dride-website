@@ -24,7 +24,7 @@ angular
     'ngTouch',
     'analytics.mixpanel'
   ])
-   .run(function($rootScope, $location, $anchorScroll, $mixpanel) {
+   .run(function($rootScope, $location, $anchorScroll, $mixpanel, $uibModal, $http) {
 
         $rootScope.haveSideBar = false;
 
@@ -65,6 +65,42 @@ angular
 
         }
 
+        $rootScope.initBuyProcess = function(){
+
+
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'views/modals/subscribe.html',
+                    controller: ['$uibModalInstance', '$rootScope', '$scope', function($uibModalInstance, $rootScope, $scope) {
+
+
+                        $scope.closeModal = function() {
+
+                            $uibModalInstance.dismiss('cancel');
+                        };
+
+                        $scope.goToPurchase = function(email){
+                            console.log(email)
+                            $http({
+                                  method: 'GET',
+                                  url: 'https://getcardigan.com/validator/subscribe.php?email=' + email
+                            });
+
+
+                            $uibModalInstance.dismiss('cancel');
+
+                            location.href = "https://www.kickstarter.com/projects/1969971763/dride-connected-dashcam-with-safety-alerts-and-app?ref=7wieq3"
+                        }
+
+
+
+                    }]
+                });
+
+            
+
+
+        }
      
   })
   .config(function ($routeProvider, $locationProvider, $sceDelegateProvider, hljsServiceProvider, $mixpanelProvider) {
