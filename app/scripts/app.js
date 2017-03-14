@@ -71,7 +71,7 @@ angular
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'views/modals/subscribe.html',
-                    controller: ['$uibModalInstance', '$rootScope', '$scope', function($uibModalInstance, $rootScope, $scope) {
+                    controller: ['$uibModalInstance', '$rootScope', '$scope', '$location', function($uibModalInstance, $rootScope, $scope, $location) {
 
 
                         $scope.closeModal = function() {
@@ -80,16 +80,18 @@ angular
                         };
 
                         $scope.goToPurchase = function(email){
-                            console.log(email)
+
                             $http({
                                   method: 'GET',
-                                  url: 'https://getcardigan.com/validator/subscribe.php?email=' + email
+                                  url: 'https://api.dride.io/validator/subscribe.php?email=' + email
                             });
-
 
                             $uibModalInstance.dismiss('cancel');
 
-                            location.href = "https://www.kickstarter.com/projects/1969971763/dride-connected-dashcam-with-safety-alerts-and-app?ref=7wieq3"
+                            $mixpanel.track('subscribe ' + email);
+                            
+                            $location.path('/buy');
+                            //location.href = "https://www.kickstarter.com/projects/1969971763/dride-connected-dashcam-with-safety-alerts-and-app?ref=7wieq3"
                         }
 
 

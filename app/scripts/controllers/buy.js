@@ -15,10 +15,10 @@ angular.module('drideApp')
         $mixpanel.track("buy visited");
 
 
-        window.location.href = 'https://www.kickstarter.com/projects/1969971763/dride-connected-dashcam-with-safety-alerts-and-app?ref=7wieq3';
+        //window.location.href = 'https://www.kickstarter.com/projects/1969971763/dride-connected-dashcam-with-safety-alerts-and-app?ref=7wieq3';
  
         $scope.sendDetails = function(email){
-            console.log(email)
+
             $http({
                   method: 'GET',
                   url: 'https://getcardigan.com/validator/subscribe.php?email=' + email

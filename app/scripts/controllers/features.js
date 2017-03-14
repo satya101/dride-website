@@ -24,7 +24,7 @@ angular.module('drideApp')
             console.log(email)
             $http({
                   method: 'GET',
-                  url: 'https://getcardigan.com/validator/subscribe.php?email=' + email
+                  url: 'https://api.dride.io/validator/subscribe.php?email=' + email
             });
 
 
