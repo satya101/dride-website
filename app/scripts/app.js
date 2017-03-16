@@ -184,6 +184,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/invoice', {
+        templateUrl: 'views/invoice.html',
+        controller: 'InvoiceCtrl',
+        controllerAs: 'invoice'
+      })
       .otherwise({
         redirectTo: '/page-not-found'
       });
