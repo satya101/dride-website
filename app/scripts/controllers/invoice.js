@@ -8,7 +8,7 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('InvoiceCtrl', function ($mixpanel, $location) {
+  .controller('InvoiceCtrl', function ($mixpanel, $location, $http) {
 
 	var token_triggered = false;
 	var handler = StripeCheckout.configure({
@@ -19,7 +19,15 @@ angular.module('drideApp')
 	    // You can access the token ID with `token.id`.
 	    // Get the token ID to your server-side code for use.
 	    token_triggered = true;
-	    $mixpanel.track('purchase! ' + token);
+
+        $http({
+            method: 'GET',
+            url: 'https://simplest.co.il/lab/dride/payment.php',
+            params: { token: token.id, amount: document.getElementById('quantity').value }
+        });
+
+
+	    $mixpanel.track('purchase! ' + token.id);
 	  },
 	  closed: function() {
           if (!token_triggered) {
@@ -31,9 +39,6 @@ angular.module('drideApp')
               alert('Your Purchase Was Completed Successfully');
               $location.path('/')
           }
-     },
-     token: function(token) {
-          token_triggered = true;
      }
 	});
 
