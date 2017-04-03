@@ -35,7 +35,7 @@ angular.module('drideApp')
     }
   ])
 
-  .controller('ForumThreadCtrl', function ($scope, Thread, $routeParams, Conversation, $rootScope, $mixpanel) {
+  .controller('ForumThreadCtrl', function ($scope, Thread, $routeParams, Conversation, $rootScope, $mixpanel, login) {
 
       $scope.initThread = function(){
         //if we dont have an thread Id redirect to forum main page
@@ -92,6 +92,10 @@ angular.module('drideApp')
       }
 
       $scope.send = function(){
+
+         login.verifyLoggedIn();
+
+
 
          firebase.database().ref("conversations").child($routeParams.threadId.split('__').pop()).push({
               'autherId': $rootScope.firebaseUser.uid,
