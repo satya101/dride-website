@@ -37,6 +37,9 @@ angular.module('drideApp')
 
             view = addOrSub ? (parseInt(view) + addOrSub) : view;
   
+            $mixpanel.track('HP view changed');
+            $mixpanel.track('view ' + view);
+
             //dont run if popup is there
             if ($scope.showPreOrder)
                 return;

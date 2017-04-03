@@ -1,3 +1,17 @@
 {
-	"rules": {".read": false, ".write": false}
+    "rules": {
+      "clips": {
+        ".read": true,
+        ".write": true,
+        ".indexOn": ["id"]
+      },
+      "threads": {
+        ".read": true,
+        ".write": "auth != null"
+      },
+      "conversations": {
+        ".read": true,
+        ".write": "auth != null"
+      }
+ 	 }
 }

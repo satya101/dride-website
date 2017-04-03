@@ -11,8 +11,8 @@ describe('Service: devMenu', function () {
     devMenu = _devMenu_;
   }));
 
-  it('should do something', function () {
-    expect(!!devMenu).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!devMenu).toBe(true);
+  // });
 
 });

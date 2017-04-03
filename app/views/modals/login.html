@@ -1,23 +1,39 @@
-<div class="modal-header">
-    <p class="pull-right closeModal" ng-click="closeModal()">x</p>
-    <h3 class="modal-title" ng-show="!switchToVarification">Login to Dride</h3>
+<div class="loginBox">
 
-</div>
-<div class="modal-body">
-    <div class="container-fluid">
-        <div class="row" class="animate-show">
-            <div class="col-md-12 tc" >
-
-
-                <button ng-click="connectWithFacebook()" class="btn btn-info btn-block" >Continue with Facebook</button>
-                <button class="btn btn-warning btn-block" >Continue with Google</button>
-
-
-            </div>
-
-        </div>
+    <div class="modal-header">
+        <p class="pull-right closeModal" ng-click="closeModal()">x</p>
+        <h3 class="modal-title" ng-show="!switchToVarification"><span class="f50 icon-cloud"></span></h3>
 
     </div>
-</div>
-<div class="modal-footer">
+    <span class="icon-toyCar-1" ng-class="isLoaded ? 'animatedCar' : ''"></span>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row" class="animate-show">
+                <div class="col-md-12 tc" >
+
+                        <p ng-if="loginError" class="alert alert-warning">{{loginError}}</p>
+                    <div class="loginBox">
+
+                        <h2 class="text-center">Social Login</h2>
+
+                        <button class="btn btn-info btn-block socialButtons"  ng-click="connectWithFacebook()">
+                             <span class="sideIcon icon-facebook"></span>
+                             Login with Facebook
+                         </button>
+                        <button class="btn btn-info btn-block socialButtons"  ng-click="connectWithGoogle()">
+                             <span class="sideIcon icon-google"></span>
+                             Login with Google
+                         </button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer text-left">
+     * We will never post anything on your behalf.
+    </div>
+
 </div>

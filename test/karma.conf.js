@@ -38,6 +38,9 @@ module.exports = function(config) {
       'bower_components/angular-scroll-animate/dist/angular-scroll-animate.js',
       'bower_components/mixpanel/mixpanel-jslib-snippet.js',
       'bower_components/angular-mixpanel/src/angular-mixpanel.js',
+      'bower_components/angular-timeago/dist/angular-timeago.js',
+      'bower_components/showdown/dist/showdown.js',
+      'bower_components/angular-markdown-filter/markdown.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

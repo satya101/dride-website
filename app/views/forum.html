@@ -5,16 +5,118 @@
 </div>
 	
 
-	
-<div class="col-md-12">
+<div class="container-fluid forum" ng-init="initForum()">
+	<div class="container">
+		
 
-	<h1 class="text-center" style="margin-top: 20%;">We're not ready yet ;)</h1>
-	<p class="text-center" >If you're having problems, please use <a target="_BLANK" href="https://github.com/dride"><u>GitHub</u></a> or send us an email <a href="mailto:hello@dride.io"><u>hello@dride.io</u></a></p>
+		<div class="clear spacer25"></div>
 
+		<div class="col-md-8 col-xs-12">
+				<ul class="sorter">
+					<li class="selected">New</li>
+					<li class="disabled">Trending</li>
+					<li class="disabled">Most Viewed</li>
+
+				</ul>
+
+
+		</div>
+
+
+		<div class="col-md-2 col-xs-12 pull-right">
+		    <button class="btn btn-dride-black ask" ng-click="ask()">Ask A Question</button>
+		</div>
+
+
+		<div class="clear spacer25"></div>
+
+
+		<div class="col-md-12">
+			
+
+			<div class="posts">
+					
+				<div class="post" ng-repeat="post in threads | reverse" ng-click="goTo('thread/' + post.slug)">
+					<div class="col-xs-2 usr pad10 partRow1" ng-href="thread/{{post.slug}}">
+						<span class="cmntCount">{{post.cmntsCount}}</span>
+						<span>Comments</span>
+					
+					</div>
+
+					<div class="col-xs-8 padS40 partRow2" ng-href="thread/{{post.slug}}">
+
+						<h2>
+							<a ng-href="thread/{{post.slug}}">
+								{{post.title}}
+							</a>
+							<span class="ago">{{post.lastUpdate | timeAgo}}</span>
+						</h2>
+
+						<p class="promoDesc">
+							Is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The po.{{post.description}}
+						</p>
+
+
+					</div>
+					<div class="col-xs-2 readMore partRow3" ng-href="thread/{{post.slug}}">
+						<span class="icon-moreArrow"></span>
+						<span class="readMore">Read More</span>
+					</div>
+
+				</div>
+
+
+				<div ng-if="!threads.length" ng-repeat="i in [1,2,3,4]">
+					<div class="timeline-wrapper">
+					    <div class="timeline-item">
+						        <div class="animated-background">
+						            <div class="background-masker content-first-end"></div>
+						            <div class="background-masker content-second-line"></div>
+						            <div class="background-masker content-second-end"></div>
+						            <div class="background-masker content-third-line"></div>
+						            <div class="background-masker content-third-end"></div>
+						        </div>
+						    </div>
+						</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		
+
+	</div>
 </div>
 
 
 
+				<div ng-if="!threads.length" ng-repeat="i in [1,2,3,4]">
+					<div class="timeline-wrapper">
+					    <div class="timeline-item">
+						        <div class="animated-background">
+						            <div class="background-masker content-first-end"></div>
+						            <div class="background-masker content-second-line"></div>
+						            <div class="background-masker content-second-end"></div>
+						            <div class="background-masker content-third-line"></div>
+						            <div class="background-masker content-third-end"></div>
+						        </div>
+						    </div>
+						</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		
+
+	</div>
+</div>
+
+
+<!-- footer -->
+<div ng-include="'views/sharedTemplates/footer.html'"></div>
 
 
 

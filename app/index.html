@@ -35,7 +35,7 @@
 
 
     <div class="container-fluid full-height">
-      <div ng-view="" class="full-height" ></div>
+      <div ng-view="" class="full-height"></div>
     </div>
 
     <div class="darkOverlay" ng-show="showOverlay" ng-click="toggleOverlay()"></div>
@@ -63,6 +63,9 @@
     <script src="bower_components/angular-scroll-animate/dist/angular-scroll-animate.js"></script>
     <script src="bower_components/mixpanel/mixpanel-jslib-snippet.js"></script>
     <script src="bower_components/angular-mixpanel/src/angular-mixpanel.js"></script>
+    <script src="bower_components/angular-timeago/dist/angular-timeago.js"></script>
+    <script src="bower_components/showdown/dist/showdown.js"></script>
+    <script src="bower_components/angular-markdown-filter/markdown.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -85,19 +88,19 @@
     <script src="scripts/controllers/menu.js"></script>
     <script src="scripts/controllers/buy.js"></script>
     <script src="scripts/controllers/forum.js"></script>
+
+    <script src="scripts/controllers/cloud.js"></script>
+    <script src="scripts/controllers/uploadtocloud.js"></script>
     <script src="scripts/controllers/invoice.js"></script>
+
+
+    <script src="scripts/controllers/thread.js"></script>
+    <script src="scripts/services/login.js"></script>
+    <script src="scripts/services/askquestion.js"></script>
+    <script src="scripts/controllers/invoice.js"></script>
+
     <!-- endbuild -->
-    <script>
-      // Initialize the Firebase SDK
-      var config = {
-        apiKey: "AIzaSyDi0egNqUM-dZDjIiipjW-aSRYuXlFc3Ds",
-        authDomain: "dride-2384f.firebaseapp.com",
-        databaseURL: "https://dride-2384f.firebaseio.com",
-        storageBucket: "dride-2384f.appspot.com",
-        messagingSenderId: "802741428178"
-      };
-      firebase.initializeApp(config);
-    </script>
+
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

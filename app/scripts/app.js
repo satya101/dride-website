@@ -1,5 +1,17 @@
 'use strict';
 
+
+// Initialize the Firebase SDK
+var config = {
+  apiKey: "AIzaSyDi0egNqUM-dZDjIiipjW-aSRYuXlFc3Ds",
+  authDomain: "dride-2384f.firebaseapp.com",
+  databaseURL: "https://dride-2384f.firebaseio.com",
+  storageBucket: "dride-2384f.appspot.com",
+  messagingSenderId: "802741428178"
+};
+firebase.initializeApp(config);
+
+
 /**
  * @ngdoc overview
  * @name drideApp
@@ -22,26 +34,35 @@ angular
     'com.2fdevs.videogular.plugins.poster',
     'hljs',
     'ngTouch',
-    'analytics.mixpanel'
+    'analytics.mixpanel',
+    'yaru22.angular-timeago',
+    'markdown'
   ])
-   .run(function($rootScope, $location, $anchorScroll, $mixpanel, $uibModal, $http) {
+   .run(function($rootScope, $location, $anchorScroll, $mixpanel, $uibModal, $http, login, Auth) {
 
         $rootScope.haveSideBar = false;
 
 
         $rootScope.$on('$locationChangeSuccess', function(event){
-                  $rootScope.currentPage = $location.path();
+                  $rootScope.currentPage = '/' + $location.path().split('/')[1];
                   $rootScope.showOverlay = false;
                   $rootScope.haveSideBar = $rootScope.haveSideBarF()
                   $rootScope.collapse = '';
                   $anchorScroll();
-
         })
 
         
 
         $rootScope.showOverlay =  false;
       
+
+        $rootScope.auth = Auth;
+
+        // any time auth state changes, add the user data to scope
+        $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
+          $rootScope.firebaseUser = firebaseUser;
+        });
+
         $rootScope.toggleOverlay = function(){
           $rootScope.showOverlay =  !$rootScope.showOverlay;
           $rootScope.collapse =  !$rootScope.collapse;
@@ -63,6 +84,22 @@ angular
           }else
             return false;
 
+        }
+
+        $rootScope.login = function($state){
+        
+          login.openLogin($state);
+
+        }
+
+        $rootScope.logOut = function(){
+        
+          login.logOut();
+
+        }
+
+        $rootScope.goTo = function(state){
+          $location.path(state);
         }
 
         $rootScope.initBuyProcess = function(){
@@ -105,6 +142,11 @@ angular
         }
      
   })
+  .factory("Auth", ["$firebaseAuth",
+    function($firebaseAuth) {
+      return $firebaseAuth();
+    }
+  ])
   .config(function ($routeProvider, $locationProvider, $sceDelegateProvider, hljsServiceProvider, $mixpanelProvider) {
 
     hljsServiceProvider.setOptions({
@@ -184,10 +226,28 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+
+      .when('/cloud', {
+        templateUrl: 'views/cloud.html',
+        controller: 'CloudCtrl',
+        controllerAs: 'cloud'
+      })
+      .when('/uploadToCloud', {
+        templateUrl: 'views/uploadtocloud.html',
+        controller: 'UploadtocloudCtrl',
+        controllerAs: 'uploadToCloud'
+      })
+      .when('/thread/:threadId', {
+        templateUrl: 'views/thread.html',
+        controller: 'ForumThreadCtrl',
+        controllerAs: 'thread'
+      })
+
       .when('/invoice', {
         templateUrl: 'views/invoice.html',
         controller: 'InvoiceCtrl',
         controllerAs: 'invoice'
+
       })
       .otherwise({
         redirectTo: '/page-not-found'

@@ -21,7 +21,7 @@ angular.module('drideApp')
         }
       }
     ])
-  .controller('ProfileCtrl', function ($scope, $uibModal, $rootScope, $routeParams, $firebaseObject, $firebaseArray, currentVideo, $mixpanel) {
+  .controller('ProfileCtrl', function ($scope, $uibModal, $rootScope, $routeParams, $firebaseObject, $firebaseArray, currentVideo, $mixpanel, login) {
 
     $scope.initProfile = function() {
 
@@ -87,42 +87,7 @@ angular.module('drideApp')
 
     $scope.openLogin = function(){
 
-
-        var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'views/modals/login.html',
-            controller: ['$uibModalInstance','$scope', '$firebaseAuth', '$rootScope', function($uibModalInstance, $scope, $firebaseAuth, $rootScope) {
-
-
-                $scope.closeModal = function() {
-
-                    $uibModalInstance.dismiss('cancel');
-                };
-
-
-
-                $scope.connectWithFacebook = function(){
-
-					  var auth = $firebaseAuth();
-
-					  // login with Facebook
-					  auth.$signInWithPopup("facebook").then(function(firebaseUser) {
-
-					    $rootScope.uid = firebaseUser.user.uid;
-					    $scope.closeModal();
-
-					  }).catch(function(error) {
-					    console.log("Authentication failed:", error);
-					    //TODO: Show friendly message and log
-
-
-					  });
-
-
-                }
-
-            }]
-        });
+            login.openLogin('profile/' + $scope.videoId);
 
     }
 

@@ -2,7 +2,10 @@
   "name": "functions",
   "description": "Firebase Functions",
   "dependencies": {
-    "firebase": "http://www.gstatic.com/firebasejs/staging/3.1.0-functions/firebase.tgz",
-    "firebase-functions": "https://storage.googleapis.com/firebase-preview-drop/node/firebase-functions/firebase-functions-0.2.1.tar.gz"
+    "@google-cloud/storage": "^0.8.0",
+    "firebase-admin": "^4.1.4",
+    "firebase-functions": "^0.5.3",
+    "get-urls": "^7.0.0",
+    "request": "^2.81.0"
   }
 }
