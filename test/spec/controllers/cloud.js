@@ -18,6 +18,10 @@ describe('Controller: CloudCtrl', function () {
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
+<<<<<<< HEAD
+    expect(CloudCtrl.awesomeThings.length).toBe(3);
+=======
     expect(3).toBe(3);
+>>>>>>> master
   });
 });

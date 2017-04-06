@@ -9,141 +9,248 @@
  */
 angular.module('drideApp')
 
-    .factory("currentVideo", ["$firebaseObject",
-      function($firebaseObject) {
-        return function(uid, videoId) {
-          // create a reference to the database node where we will store our data
-          var ref = firebase.database().ref("clips");
-          var clipRef = ref.child(uid).child(videoId)
+.factory("currentVideo", ["$firebaseObject",
+        function($firebaseObject) {
+            return function(uid, videoId) {
+                // create a reference to the database node where we will store our data
+                var ref = firebase.database().ref("clips");
+                var clipRef = ref.child(uid).child(videoId)
 
-          // return it as a synchronized object
-          return $firebaseObject(clipRef)
+                // return it as a synchronized object
+                return $firebaseObject(clipRef)
+            }
         }
-      }
     ])
-  .controller('ProfileCtrl', function ($scope, $uibModal, $rootScope, $routeParams, $firebaseObject, $firebaseArray, currentVideo, $mixpanel, login) {
+.factory("userData", ["$firebaseObject",
+        function($firebaseObject) {
+            return function(uid) {
+                // create a reference to the database node where we will store our data
+                var ref = firebase.database().ref("userData");
+                var clipRef = ref.child(uid);
 
-    $scope.initProfile = function() {
+                // return it as a synchronized object
+                return $firebaseObject(clipRef)
+            }
+        }
+    ])
+    .controller('ProfileCtrl', function($scope, $uibModal, $rootScope, $routeParams, $firebaseObject, $firebaseArray, currentVideo, $mixpanel, login, $window, $http, userData) {
 
-
-        $mixpanel.track('Videos visit');
-
-
-        $scope.uid = $routeParams.uid;
-        $scope.videoId = $routeParams.videoId;
-        var ref = firebase.database().ref();
-        $scope.clips = $firebaseObject(ref.child('clips').child($routeParams.uid)).$loaded()
-                          .then(function(data) {
-                               //order clips by date
-                               $scope.orderedClips = $scope.orderClipsByDate(data);
-                          })
-                          .catch(function(error) {
-                            console.error("Error:", error);
-                          });
+        $scope.initProfile = function() {
 
 
+            $mixpanel.track('Videos visit');
 
-        var cVideoRef = currentVideo($scope.uid, $scope.videoId);
-        
-        cVideoRef.$loaded()
-                      .then(function(data) {
-                            $scope.createVideoObj(data.clips.src, data.thumbs.src)
-                      })
-                      .catch(function(error) {
-                        console.error("Error:", error);
-                      });
+            $scope.uid = '40qmIeGnJqdn3rBT9pUSVJIcc6w1'; //$routeParams.uid;
+            $scope.videoId = '1491468732551'; //$routeParams.videoId;
 
-        cVideoRef.$bindTo($scope, "currentVideo").then(function(){
 
-            $scope.currentVideo.views = $scope.currentVideo.views!=undefined ? parseInt($scope.currentVideo.views) + 1 : 0;
+            $scope.opData = userData($scope.uid);
+            console.log($scope.opData);
+            $scope.comments = {};
+            var ref = firebase.database().ref();
+            $scope.clips = $firebaseObject(ref.child('clips').child($scope.uid)).$loaded()
+                .then(function(data) {
+                    //order clips by date
+                    $scope.orderedClips = $scope.orderClipsByDate(data);
 
-        });
-
-        
-    }
+                })
+                .catch(function(error) {
+                    console.error("Error:", error);
+                });
 
 
 
-    //create the video object for videogular
-    $scope.createVideoObj = function(clipURL, posterURL){
+            var cVideoRef = currentVideo($scope.uid, $scope.videoId);
 
-        $scope.config = {
-            preload: "none",
-            sources: [
-                {src: clipURL, type: "video/mp4"},
-            ],
-            theme: {
-                url: "styles/videoPlayer.css"
-            },
-            plugins: {
+            cVideoRef.$loaded()
+                .then(function(data) {
+                    $scope.createVideoObj(data.clips.src, data.thumbs.src)
+                    $scope.comments = data.comments;
+                })
+                .catch(function(error) {
+                    console.error("Error:", error);
+                });
+
+            cVideoRef.$bindTo($scope, "currentVideo").then(function() {
+
+                $scope.currentVideo.views = $scope.currentVideo.views != undefined ? parseInt($scope.currentVideo.views) + 1 : 0;
+
+            });
+
+
+        }
+
+
+
+        //create the video object for videogular
+        $scope.createVideoObj = function(clipURL, posterURL) {
+
+            $scope.config = {
+                preload: "none",
+                sources: [
+                    { src: clipURL, type: "video/mp4" },
+                ],
+                theme: {
+                    url: "styles/videoPlayer.css"
+                },
+                plugins: {
                     controls: {
                         autoHide: true,
                         autoHideTime: 5000
                     },
                     poster: posterURL
                 }
-        };
-    }
+            };
+        }
 
-    $scope.openLogin = function(){
+        $scope.openLogin = function() {
 
             login.openLogin('profile/' + $scope.videoId);
 
-    }
+        }
+
+      $scope.sideThreadByAuther = function(threadData) {
 
 
+          if (typeof threadData === "undefined")
+              return;
 
-    $scope.orderClipsByDate = function(clips){
-        var clipsBydate = {};
+          var previusKey = null;
+          angular.forEach(threadData, function(k, key) {
+              if (key == '$id' || key== '$priority')
+                return;
 
-        angular.forEach(clips, function(value, key) {
-            var d = new Date(key*1000);
-            var iKey = d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
-            
-            if (!clipsBydate[iKey])
-                clipsBydate[iKey] = {};
+              if (!previusKey) {
+                  previusKey = key;
+                  return;
+              }
+              //if same author posted again
+              if (threadData[key].autherId == threadData[previusKey].autherId) {
+                  $scope.conversationPreviusIsMine[previusKey] = true;
+              } else {
+                  $scope.conversationPreviusIsMine[previusKey] = false;
+              }
+              previusKey = key;
+          });
 
-            clipsBydate[iKey][key] = value;
+         
+      }
 
-        });
+        $scope.orderClipsByDate = function(clips) {
+            var clipsBydate = {};
 
-        return clipsBydate;
-    }
+            angular.forEach(clips, function(value, key) {
+                var d = new Date(key * 1000);
+                var iKey = d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
+
+                if (!clipsBydate[iKey])
+                    clipsBydate[iKey] = {};
+
+                clipsBydate[iKey][key] = value;
+
+            });
+
+            return clipsBydate;
+        }
 
 
-    $scope.editClip = function(){
+        $scope.editClip = function() {
 
-    	if ($rootScope.uid){
+            if ($rootScope.uid) {
 
-    		alert('edit');
+                alert('edit');
 
-    	}
-    	else
-    		$scope.openLogin();
-
-    }
-
-    $scope.likeClip = function(){
-
-        if ($rootScope.uid){
-
-            alert('not ready yet :(');
+            } else
+                $scope.openLogin();
 
         }
-        else
-            $scope.openLogin();
+        //TODO: infinite scroll would be nice
+        $scope.loadMoreComments = function(vId) {
+            var url = "https://dride-2384f.firebaseio.com/conversations_video/40qmIeGnJqdn3rBT9pUSVJIcc6w1/" + vId + ".json";
+            $http.jsonp(url).then(function(data) {
 
-    }
+                var items = data.data;
+                $scope.comments = items;
 
-    $scope.preatifyDate = function(date){
-        var exp = date.split('-');
-        var d = new Date(exp[2], exp[1], exp[0], 0, 0, 0, 0);
-       
-        return d;
+                $scope.conversationPreviusIsMine = [];
+                $scope.$watch(
+                    "comments",
+                    function handleUpdate( newValue, oldValue ) {
+                         if (typeof $scope.comments !== "undefined")
+                            $scope.sideThreadByAuther($scope.comments);
+                    }
+                );
 
-    }
+            })
+
+
+
+        }
+
+        $scope.hasComments = function(comments) {
+            return comments && Object.keys(comments).length ? true : false;
+        }
+
+        $scope.hasMoreToLoad = function() {
+            if (!$scope.comments || typeof $scope.comments == 'undefined') return false;
+
+            return $scope.currentVideo && $scope.currentVideo.cmntsCount > Object.keys($scope.comments).length ? true : false;
+        }
+
+        $scope.sendComment = function() {
+
+
+            if (!$scope.replyBox) {
+                alert('Please write something');
+                return;
+            }
+
+
+            login.verifyLoggedIn();
+
+            firebase.database().ref("conversations_video").child($scope.uid).child($scope.videoId).push({
+                'autherId': $rootScope.firebaseUser.uid,
+                'auther': $rootScope.firebaseUser.displayName,
+                'pic': $rootScope.firebaseUser.photoURL,
+                'body': $scope.replyBox,
+                'timestamp': (new Date).getTime()
+            }).then(function() {
+                $scope.loadMoreComments($scope.videoId);
+                $scope.replyBox = '';
+
+            });
+
+
+            $mixpanel.track('posted a comment');
+
+
+
+        }
+
+
+        $scope.fbShare = function(uid, vId) {
+            $window.open(
+                'https://www.facebook.com/sharer/sharer.php?u=https://dride.io/profile/' + uid + '/' + vId,
+                'Facebook', 'toolbar=0,status=0,resizable=yes,width=' + 500 + ',height=' + 600 + ',top=' + ($window.innerHeight - 600) / 2 + ',left=' + ($window.innerWidth - 500) / 2);
+        }
+        $scope.twShare = function(uid, vId) {
+            var url = 'https://dride.io/profile/' + uid + '/' + vId;
+            var txt = encodeURIComponent('You need to see this! #dride ' + url);
+            $window.open(
+                'https://www.twitter.com/intent/tweet?text=' + txt,
+                'Twitter', 'toolbar=0,status=0,resizable=yes,width=' + 500 + ',height=' + 600 + ',top=' + ($window.innerHeight - 600) / 2 + ',left=' + ($window.innerWidth - 500) / 2);
+        }
+
+
+        $scope.preatifyDate = function(date) {
+            var exp = date.split('-');
+            var d = new Date(exp[2], exp[1], exp[0], 0, 0, 0, 0);
+
+            return d;
+
+        }
 
 
 
 
-  });
+    });

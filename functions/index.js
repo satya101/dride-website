@@ -1,6 +1,7 @@
 var functions = require('firebase-functions');
-
-// Add updated cmntsCount to threads
+/*
+* Add updated cmntsCount to threads
+*/
 exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
     .onWrite(event => {
 
@@ -12,13 +13,8 @@ exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
 
         event.data.adminRef.root.child("conversations/" + event.params.threadId).once('value').then(function(conversation) {
 
-            event.data.adminRef.root.child("threads/" + event.params.threadId + "/cmntsCount").once('value').then(function(cmntsCount) {
-
-
-
                 event.data.adminRef.root.child("threads/" + event.params.threadId + "/cmntsCount").set(conversation.numChildren());
 
-            });
         });
 
 
@@ -27,6 +23,34 @@ exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
 
 
     });
+/*
+* Add updated cmntsCount to clips
+*/
+exports.cmntsCountVideo = functions.database.ref('/conversations_video/{uid}/{videId}/{conversationId}')
+    .onWrite(event => {
+
+        if (!event.params.videId || !event.params.uid || !event.params.conversationId) {
+            console.log('not enough data');
+            return null;
+        }
+
+
+        event.data.adminRef.root.child("conversations_video/"+ event.params.uid + '/' + event.params.videId).once('value').then(function(conversationVideo) {
+
+                event.data.adminRef.root.child("clips/" + event.params.uid+ '/' + event.params.videId + "/cmntsCount").set(conversationVideo.numChildren());
+                var r = {}
+                r[event.params.conversationId] = event.data.val()
+                event.data.adminRef.root.child("clips/" + event.params.uid+ '/' + event.params.videId + "/comments").set(r);
+
+        });
+
+
+        return event.data.adminRef.root.child('clips').child(event.params.uid).child(event.params.videId).child('lastUpdate').set((new Date).getTime());
+
+
+
+    });
+
 
 
 /*
@@ -69,5 +93,6 @@ exports.generateThumbnail = functions.storage.object().onChange(event => {
       }
       console.log('Upload successful!  Server responded with:', body);
     });
+
 });
 

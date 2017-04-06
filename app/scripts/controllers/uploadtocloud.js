@@ -85,7 +85,8 @@ angular.module('drideApp')
                           firebase.database().ref('clips/' + $rootScope.firebaseUser.uid + '/' + $scope.timestamp).set({
                             clips: {'src': downloadURL},
                             thumbs: {'src': 'http://localhost:9000/images/profile/10.jpg'},
-                            views: 0
+                            views: 0,
+                            cmntsCount: 0
                           });
                         
 

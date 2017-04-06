@@ -13,9 +13,9 @@
                 <div class="gradBg">
                     <div class="container">
                         <div class="profilePic">
-                            <img src="images/profile/10.jpg" />
-                            <p>Kelly Dox
-                                <span> 450 pt </span>
+                            <img src="{{opData.pic}}" />
+                            <p>{{opData.name}}
+                               <!-- TROPHYS HERE -->
                             </p>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
 
                         <div class="videogular-container">
                             <videogular vg-theme="config.theme.url">
-                                <vg-media vg-src="config.sources" vg-native-controls="false" >
+                                <vg-media vg-src="config.sources" vg-native-controls="false" vg-preload="'none'">
                                 </vg-media>
 
                                 <vg-controls>
@@ -60,19 +60,19 @@
 	                    <div class="box innerPad">
 	                    		
 	                    		<div class="actionBar">
-	                    				<div class="views pull-left">{{currentVideo.views | number:0}} Views</div>
-	                    				<ul class="pull-right actions">
-	                    					<li ng-click="likeClip()"><span class="icon-like"></span> <t>Like</t></li>
-	                    					<li><span class="icon-share"></span> <t>Share</t></li>
-	                    					<li ng-click="editClip()"><span class="icon-edit"></span> <t>Edit</t></li>
-	                    				</ul>
+                                        <ul class="pull-right actions">
+                                            <li ng-click="fbShare(uid, videoId)"><span class="icon-facebookMedium shareIcon"></span></li>
+                                            <li ng-click="twShare(uid, videoId)"><span class="icon-twitterMedium shareIcon"></span></li>
+                                            <li ng-click="editClip()"><span class="icon-edit"></span> <t>Edit</t></li>
+                                        </ul>
+                                        <div class="views pull-left">{{currentVideo.views | number:0}} Views &nbsp;&nbsp;&nbsp; {{currentVideo.cmntsCount | number:0}} Comments</div>
 	                    				<div class="clear"></div>
 	                    		</div>
 
 
                                 <div class="desc">
-                                    <p><b>License Plate: </b> ...</p>
-                                    <p><b>Description: </b> ...</p>
+                                    <p><b>License Plate: </b> {{currentVideo.plates}}</p>
+                                    <p><b>Description: </b> {{currentVideo.description}}</p>
                                     <p class="dateLabel">{{videoId*1000 | date:'medium'}}</p>
                                 </div>
 
@@ -80,6 +80,39 @@
 
 
 	                    </div>
+
+                                <div class="box">
+                                        
+                                        <div class="cmntsBox innerPad">
+                                            <div ng-repeat="(key, node) in comments track by $index" class="listItem">
+                                                <div class="bubble">
+                                                    <div class="auther pull-left pl">
+                                                        <img src="{{node.pic}}" alt="{{node.auther}}" />
+                                                    </div>
+                                                    <div class="ago">{{node.timestamp | timeAgo}}</div>
+                                                    <a class="bold" href="profile/{{node.autherId}}">@{{node.auther}}</a>
+                                                    <div class="bdy" ng-bind-html2="node.body | markdown">{{node.body}}</div>
+
+                                                </div>
+                                                <div class="connectorLine" ng-if="conversationPreviusIsMine[key]"></div> <!--@#@#@#-->
+                                            </div>
+                                                <p ng-if="!hasComments(currentVideo.comments)" class="firstToCmnt">Be the first to comment</p>
+                                                <p ng-if="hasMoreToLoad()" class="moreCmnts" ng-click="loadMoreComments(videoId)">Load More Comments</p>
+                                        </div>
+                                        <div class="postBox">
+                                            <div class="wrapReplyBox">
+                                                <textarea ctrl-enter="sendComment()" class="form-control replyBox" elastic ng-model="replyBox" type="text" name="reply" placeholder="@{{firebaseUser.displayName}}:" ></textarea>
+                                                <button class="btn btn-dride-black sendBtn pull-right" ng-click="sendComment(r)">Send</button>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clear"></div>
+
+
+                                </div>
+
+
 	                    <div class="box">
 	                    		
                                 <iframe
@@ -119,6 +152,8 @@
 
 </div>
 
+
+<div ng-include="'views/sharedTemplates/footer.html'"></div>
 
 
 
