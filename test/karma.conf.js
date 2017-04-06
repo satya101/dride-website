@@ -41,6 +41,7 @@ module.exports = function(config) {
       'bower_components/angular-timeago/dist/angular-timeago.js',
       'bower_components/showdown/dist/showdown.js',
       'bower_components/angular-markdown-filter/markdown.js',
+      'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

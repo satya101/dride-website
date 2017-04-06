@@ -58,7 +58,6 @@ angular.module('drideApp')
                 }
             );
 
-
         });
 
 
@@ -93,9 +92,8 @@ angular.module('drideApp')
 
       $scope.send = function(){
 
+
          login.verifyLoggedIn();
-
-
 
          firebase.database().ref("conversations").child($routeParams.threadId.split('__').pop()).push({
               'autherId': $rootScope.firebaseUser.uid,
@@ -121,9 +119,12 @@ angular.module('drideApp')
                 restrict: 'A',
                 link: function($scope, element) {
                     $scope.initialHeight = $scope.initialHeight || element[0].style.height;
+
                     var resize = function() {
+
                         element[0].style.height = $scope.initialHeight;
-                        element[0].style.height = "" + element[0].scrollHeight + "px";
+                        element[0].style.height = "" + (/\r|\n/.exec(element[0].value) ? element[0].scrollHeight  : element[0].scrollHeight - 9) + "px";
+                        element[0].style.data =  "" + (element[0].scrollHeight);
                     };
                     element.on("input change", resize);
                     $timeout(resize, 0);

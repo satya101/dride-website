@@ -261,14 +261,85 @@
     .inner-bg-4{
         height: 28%;
     }
+    .cloudMain {
+        h1{
+            font-size: 17px;
+        }
+        .top {
+            height: 107px;
+            background-size: 280%;
+            background-position: center;
+            div{
+                top: 20px !important;
+            }
+            a {
+                margin-top: 9px;
+                padding: 5px 25px;
+                font-size: 16px;
+            }
+        }
+    }
+    .profile, .cloudMain{
+        .videogular-container {
+            height: 253px !important;
+        }
+        .views{
+            font-size: 13px;
+        }
+        .actions{
+            padding-left: 0;
+            li{
+                margin-right: 10px;
+                margin-top: -7px;
+                font-size: 15.6px;
+            }
+        }
+        .postBox .wrapReplyBox textarea {
+            width: 67%;
+        }
+        .cmntsBox {
+            .ago {
+                width: 106px;
+                font-size: 10px;
+            }
+            .auther {
+                margin-top: 0px;
+                position: relative;
+                top: 56px;
+                img {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 2px;
+                    margin-top: -92px;
+                }
+            }
+            .pl {
+                margin-left: -14px;
+            }
+            .bubble {
+                a{
+                    display: inline-block;
+                }
+                .bdy{
+                    margin-top: 0px;
+                    min-height: 35px;
+                    padding-bottom: 17px;
+                }
+             }
+        }
+    }
+
 }
+
 @media (max-height: 750px) {
     .upperText {
         padding: 40px !important;
         padding-top: 35px !important;
     }
+
 }
 @media (max-width: 991px) {
+
     .halfPage{
         height: initial !important;
     }
@@ -286,9 +357,46 @@
       left: 0 !important;
       padding-right: inherit !important;
     }
+    .profile{
+        .videogular-container {
+            height: 530px;
+        }
+        .container, .col-md-8{
+            padding: 0!important;
+        }
+        .mainVid {
+            margin-top: 1px;
+        }
+        .headerBg{
+            height: 90px;
+        }
+        .gradBg {
+            top: 0px;
+        }
+         .profilePic {
+            margin-top: 10px;
+        }
+        .profilePic p {
+            display: inline;
+            font-size: 22px;
+            padding-left: 13px;
+            position: relative;
+            top: 4px;
+        }
+        .profilePic img {
+            width: 47px;
+            height: 47px;
+        }
+    }
 }
 
 @media (max-width: 769px) {
+    
+    .profile, .cloudMain{
+         .postBox .wrapReplyBox textarea {
+            width: 50%;
+        }
+    }
     .navbar-header {
         float: none;
     }

@@ -1,17 +1,32 @@
 {
     "rules": {
-      "clips": {
-        ".read": true,
-        ".write": true,
-        ".indexOn": ["id"]
-      },
-      "threads": {
-        ".read": true,
-        ".write": "auth != null"
-      },
-      "conversations": {
-        ".read": true,
-        ".write": "auth != null"
-      }
- 	 }
+        "clips": {
+            ".read": true,
+            ".indexOn": "views",
+            "$uid": {
+                ".read": true,
+                ".write": "auth!=null",
+                "$clipId": {
+                    ".indexOn": "views"
+                }
+            }
+        },
+        "threads": {
+            ".read": true,
+            ".write": "auth != null",
+            ".indexOn": ["id", "created"]
+        },
+        "conversations": {
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "conversations_video": {
+            ".read": true,
+            ".write": "auth != null"
+        },
+        "userData": {
+            ".read": true,
+            ".write": false
+        }
+    }
 }

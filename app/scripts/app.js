@@ -36,11 +36,13 @@ angular
     'ngTouch',
     'analytics.mixpanel',
     'yaru22.angular-timeago',
-    'markdown'
+    'markdown',
+    'infinite-scroll'
   ])
    .run(function($rootScope, $location, $anchorScroll, $mixpanel, $uibModal, $http, login, Auth) {
 
         $rootScope.haveSideBar = false;
+
 
 
         $rootScope.$on('$locationChangeSuccess', function(event){
@@ -57,6 +59,8 @@ angular
       
 
         $rootScope.auth = Auth;
+
+        console.log($rootScope.auth)
 
         // any time auth state changes, add the user data to scope
         $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
@@ -158,12 +162,14 @@ angular
       // Allow same origin resource loads.
       'self',
       // Allow loading from our assets domain.  Notice the difference between * and **.
-      'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/**'
+      'https://dride-2384f.firebaseio.com/**',
+      'https://api.reddit.com/hot?after**'
     ]);
 
     $mixpanelProvider.apiKey('eae916fa09f65059630c5ae451682939');
 
     $routeProvider
+
 
 
       .when('/', {
