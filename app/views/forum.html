@@ -37,19 +37,19 @@
 			<div class="posts">
 					
 				<div class="post" ng-repeat="post in threads | reverse" ng-click="goTo('thread/' + post.slug)">
-					<div class="col-xs-2 usr pad10 partRow1" ng-href="thread/{{post.slug}}">
+					<div class="col-md-2 hidden-xs usr pad10 partRow1" ng-href="thread/{{post.slug}}">
 						<span class="cmntCount">{{post.cmntsCount}}</span>
 						<span>Comments</span>
 					
 					</div>
 
-					<div class="col-xs-8 padS40 partRow2" ng-href="thread/{{post.slug}}">
+					<div class="col-md-8 col-xs-12 padS40 partRow2" ng-href="thread/{{post.slug}}">
 
 						<h2>
 							<a ng-href="thread/{{post.slug}}">
 								{{post.title}}
 							</a>
-							<span class="ago">{{post.lastUpdate | timeAgo}}</span>
+							<span class="ago hidden-xs">{{post.lastUpdate | timeAgo}}</span>
 						</h2>
 
 						<p class="promoDesc">
@@ -58,7 +58,7 @@
 
 
 					</div>
-					<div class="col-xs-2 readMore partRow3" ng-href="thread/{{post.slug}}">
+					<div class="col-md-2 hidden-xs readMore partRow3" ng-href="thread/{{post.slug}}">
 						<span class="icon-moreArrow"></span>
 						<span class="readMore">Read More</span>
 					</div>
