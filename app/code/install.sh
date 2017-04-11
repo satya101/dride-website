@@ -158,6 +158,7 @@ else
         reboot
 fi
 
+# DEPRACATED USE mpg123
 echo "========== Install omxplayer  ============"
 sudo apt-get install omxplayer -y
 
@@ -250,12 +251,31 @@ sudo rm dride-core
 # neo pixles
 # sudo apt-get install build-essential python-dev git scons swig
 
-# GPS  https://www.raspberrypi.org/forums/viewtopic.php?p=947968#p947968
-# sudo apt-get install gpsd gpsd-clients cmake subversion build-essential espeak freeglut3-dev imagemagick libdbus-1-dev libdbus-glib-1-dev libdevil-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libgarmin-dev libglc-dev libgps-dev libgtk2.0-dev libimlib2-dev libpq-dev libqt4-dev libqtwebkit-dev librsvg2-bin libsdl-image1.2-dev libspeechd-dev libxml2-dev ttf-liberation
 
+## GPS  https://www.raspberrypi.org/forums/viewtopic.php?p=947968#p947968
+#echo "========== Install GPS  ============"
+#sudo apt-get install gpsd gpsd-clients cmake subversion build-essential espeak freeglut3-dev imagemagick libdbus-1-dev libdbus-glib-1-dev libdevil-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libgarmin-dev libglc-dev libgps-dev libgtk2.0-dev libimlib2-dev libpq-dev libqt4-dev libqtwebkit-dev librsvg2-bin libsdl-image1.2-dev libspeechd-dev libxml2-dev ttf-liberation -y
 
+# 1) sudo nano /boot/config.txt
+# add
+# core_freq=250
+# enable_uart=1
 
+# 2) sudo nano /boot/cmdline.txt
+# Change the file to the following:
+# dwc_otg.lpm_enable=0  console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4  elevator=deadline fsck.repair=yes   rootwait
 
+# 3)Run
+# sudo systemctl stop serial-getty@ttyS0.service
+# sudo systemctl disable serial-getty@ttyS0.service
+# sudo systemctl stop gpsd.socket
+# sudo systemctl disable gpsd.socket
+
+# reboot
+
+# 5) Execute the daemon reset
+# sudo killall gpsd
+# sudo gpsd /dev/ttyS0 -F /var/run/gpsd.sock
 
 
 sudo reboot

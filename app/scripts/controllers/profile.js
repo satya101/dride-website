@@ -40,8 +40,8 @@ angular.module('drideApp')
 
             $mixpanel.track('Videos visit');
 
-            $scope.uid = '40qmIeGnJqdn3rBT9pUSVJIcc6w1'; //$routeParams.uid;
-            $scope.videoId = '1491468732551'; //$routeParams.videoId;
+            $scope.uid = $routeParams.uid;
+            $scope.videoId = $routeParams.videoId;
 
 
             $scope.opData = userData($scope.uid);
