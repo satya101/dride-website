@@ -1,7 +1,10 @@
 var functions = require('firebase-functions');
+var admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
+
 /*
-* Add updated cmntsCount to threads
-*/
+ * Add updated cmntsCount to threads
+ */
 exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
     .onWrite(event => {
 
@@ -13,7 +16,7 @@ exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
 
         event.data.adminRef.root.child("conversations/" + event.params.threadId).once('value').then(function(conversation) {
 
-                event.data.adminRef.root.child("threads/" + event.params.threadId + "/cmntsCount").set(conversation.numChildren());
+            event.data.adminRef.root.child("threads/" + event.params.threadId + "/cmntsCount").set(conversation.numChildren());
 
         });
 
@@ -24,8 +27,8 @@ exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
 
     });
 /*
-* Add updated cmntsCount to clips
-*/
+ * Add updated cmntsCount to clips
+ */
 exports.cmntsCountVideo = functions.database.ref('/conversations_video/{uid}/{videId}/{conversationId}')
     .onWrite(event => {
 
@@ -35,12 +38,12 @@ exports.cmntsCountVideo = functions.database.ref('/conversations_video/{uid}/{vi
         }
 
 
-        event.data.adminRef.root.child("conversations_video/"+ event.params.uid + '/' + event.params.videId).once('value').then(function(conversationVideo) {
+        event.data.adminRef.root.child("conversations_video/" + event.params.uid + '/' + event.params.videId).once('value').then(function(conversationVideo) {
 
-                event.data.adminRef.root.child("clips/" + event.params.uid+ '/' + event.params.videId + "/cmntsCount").set(conversationVideo.numChildren());
-                var r = {}
-                r[event.params.conversationId] = event.data.val()
-                event.data.adminRef.root.child("clips/" + event.params.uid+ '/' + event.params.videId + "/comments").set(r);
+            event.data.adminRef.root.child("clips/" + event.params.uid + '/' + event.params.videId + "/cmntsCount").set(conversationVideo.numChildren());
+            var r = {}
+            r[event.params.conversationId] = event.data.val()
+            event.data.adminRef.root.child("clips/" + event.params.uid + '/' + event.params.videId + "/comments").set(r);
 
         });
 
@@ -52,10 +55,28 @@ exports.cmntsCountVideo = functions.database.ref('/conversations_video/{uid}/{vi
     });
 
 
+/*
+*   Save users data upon register
+*/
+exports.saveNewUserData = functions.auth.user().onCreate(event => {
+
+
+    const user = event.data; // The Firebase user.
+    var usersRef = admin.database().ref("userData").child(event.data.uid);
+
+    return usersRef.set({
+            'name': user.displayName,
+            'pic': user.photoURL
+        });
+    
+
+});
+
+
 
 /*
-*   Call cloud-analyser to push new thumbnail and CV extracted data to DB.
-*/
+ *   Call cloud-analyser to push new thumbnail and CV extracted data to DB.
+ */
 
 var gcs = require('@google-cloud/storage')();
 var request = require('request');
@@ -82,17 +103,23 @@ exports.generateThumbnail = functions.storage.object().onChange(event => {
 
     console.log(cloudAnalyserUrl + '?uid=' + uid + '&filename=' + filename);
     var formData = {
-      // Pass a simple key-value pair 
-      uid: uid,
-      filename: filename
+        // Pass a simple key-value pair 
+        uid: uid,
+        filename: filename
 
     };
-    return request.get({url: cloudAnalyserUrl + '?uid=' + uid + '&filename=' + filename}, function optionalCallback(err, httpResponse, body) {
-      if (err) {
-        return console.error('upload failed:', err + '--' + httpResponse);
-      }
-      console.log('Upload successful!  Server responded with:', body);
+    return request.get({ url: cloudAnalyserUrl + '?uid=' + uid + '&filename=' + filename }, function optionalCallback(err, httpResponse, body) {
+        if (err) {
+            return console.error('upload failed:', err + '--' + httpResponse);
+        }
+        console.log('Upload successful!  Server responded with:', body);
     });
 
 });
+
+
+
+
+
+
 
