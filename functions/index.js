@@ -2,6 +2,13 @@ var functions = require('firebase-functions');
 var admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
+// grab the Mixpanel factory
+var Mixpanel = require('mixpanel');
+
+// create an instance of the mixpanel client
+var mixpanel = Mixpanel.init('eae916fa09f65059630c5ae451682939');
+
+
 /*
  * Add updated cmntsCount to threads
  */
@@ -67,10 +74,55 @@ exports.saveNewUserData = functions.auth.user().onCreate(event => {
     return usersRef.set({
             'name': user.displayName,
             'pic': user.photoURL
+        }).then(function(){
+            // create a user in Mixpanel Engage
+            mixpanel.people.set(user.displayName, {
+                $first_name: user.displayName.split(' ')[0],
+                $last_name: user.displayName.split(' ')[1],
+                $created: (new Date()).toISOString(),
+                email: user.email,
+                distinct_id: event.data.uid
+            });
+
+
         });
     
 
 });
+
+
+// /*
+//  * push clip to HP if marked as HP ready
+//  */
+// exports.populateHP = functions.database.ref('/HPclips/{videId}/')
+//     .onWrite(event => {
+
+//         if (!event.params.videId) {
+//             console.log('not enough data');
+//             return null;
+//         }
+
+//         console.log(event.data);
+//         // event.data.adminRef.root.child("clips/" + event.params.videId + '/' + event.params.videId).once('value').then(function(conversationVideo) {
+
+//         //     event.data.adminRef.root.child("clips/" + event.params.uid + '/' + event.params.videId + "/cmntsCount").set(conversationVideo.numChildren());
+//         //     var r = {}
+//         //     r[event.params.conversationId] = event.data.val()
+//         //     event.data.adminRef.root.child("clips/" + event.params.uid + '/' + event.params.videId + "/comments").set(r);
+
+//         // });
+
+
+//         //return event.data.adminRef.root.child('clips').child(event.params.uid).child(event.params.videId).child('lastUpdate').set((new Date).getTime());
+
+
+
+//     });
+
+
+
+
+
 
 
 
@@ -101,7 +153,6 @@ exports.generateThumbnail = functions.storage.object().onChange(event => {
 
     var cloudAnalyserUrl = 'http://54.246.250.130:9000/api/getThumb';
 
-    console.log(cloudAnalyserUrl + '?uid=' + uid + '&filename=' + filename);
     var formData = {
         // Pass a simple key-value pair 
         uid: uid,

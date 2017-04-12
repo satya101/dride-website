@@ -24,9 +24,8 @@ angular.module('drideApp')
 		$scope.show = true;
 	}, 100);  
 
-  }).directive('editPage',function($rootScope){
+  }).directive('editPage',function($rootScope, $location){
      return function(scope, element, attrs){
-          element.prepend('<div class="editDocsLabel"><a href="https://github.com/dride/dride-website/blob/master/app/views/content/'+($rootScope.currentPage.split('/'))[2]+'.html">Edit</a></div>')
-
+          element.prepend('<div class="editDocsLabel"><a href="https://github.com/dride/dride-website/blob/master/app/views/content/'+($location.path().split('/'))[2]+'.html">Edit</a></div>')
       }
 })
