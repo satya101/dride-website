@@ -100,9 +100,7 @@ echo "========== Installing libgtk2.0-dev pkg-config libavcodec-dev libavformat-
 sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libjasper-dev python2.7-dev -y
 
 echo "========== Installing pip ============"
-sudo wget https://bootstrap.pypa.io/get-pip.py
-sudo chmod +x get-pip.py
-sudo python get-pip.py
+sudo apt-get install python-pip
 
 echo "========== Installing Numpy ============"
 sudo pip install numpy
@@ -147,6 +145,7 @@ sudo chmod 777 -R modules/video/
 
 
 echo "========== Install picamera  ============"
+sudo pip install picamera
 sudo pip install "picamera[array]"
 # enable camera on raspi-config
 grep "start_x=1" /boot/config.txt
