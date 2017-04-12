@@ -135,8 +135,6 @@ angular
                             //location.href = "https://www.kickstarter.com/projects/1969971763/dride-connected-dashcam-with-safety-alerts-and-app?ref=7wieq3"
                         }
 
-
-
                     }]
                 });
 
@@ -170,6 +168,11 @@ angular
 
     $routeProvider
 
+      // .when('/', {
+      //   templateUrl: 'views/cloud.html',
+      //   controller: 'CloudCtrl',
+      //   controllerAs: 'cloud'
+      // })
 
 
       .when('/', {
