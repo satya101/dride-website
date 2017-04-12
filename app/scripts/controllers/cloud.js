@@ -28,8 +28,11 @@ angular.module('drideApp')
         $scope.replyBox = [];
  		$scope.bindedViews = [];
 
+
         $scope.init = function() {
             $scope.hpClips = new dCloud();
+
+
         }
 
 

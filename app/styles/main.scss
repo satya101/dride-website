@@ -2201,27 +2201,32 @@ footer {
 
 .cloudMain {
     background-color: #ECECEC;
-    height: 100%;
+    min-height: 100%;
     .wrapTop{
         height: 270px;
         margin-top: -99px;
     }
+
+
     .top {
         background-image: url(../images/popUpHeader.svg);
+        background-position: center center;
         background-repeat: no-repeat;
-        background-size: 100%;
-        width: 100%;
+        background-size: 1900px;
         height: 100%;
         color: #fff;
-        border-bottom: 0 !important;
-        background-position: center;
+        border-bottom: 0!important;
         div {
             margin: auto auto;
             text-align: center;
+            h1{
+                position: relative;
+                top: 100px;
+            }
 
         }
         .icon-cloud-full{
-            font-size: 35px;
+            font-size: 65px;
         }
     }
     .mtop30 {
@@ -2238,7 +2243,7 @@ footer {
         text-align: center;
         margin: auto auto;
         display: inline-block;
-        margin-top: 10%;
+        margin-top: 121px;
         padding: 10px 45px;
         border-radius: 2px;
         font-weight: 100;

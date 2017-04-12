@@ -266,16 +266,19 @@
             font-size: 17px;
         }
         .top {
-            height: 107px;
+            height: 100%;
             background-size: 280%;
             background-position: center;
             div{
                 top: 20px !important;
             }
             a {
-                margin-top: 9px;
-                padding: 5px 25px;
-                font-size: 16px;
+                margin-top: 102px;
+                padding: 10px 23px;
+                font-size: 14px;
+            }
+           .icon-cloud-full {
+                font-size: 50px;
             }
         }
     }

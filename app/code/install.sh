@@ -100,7 +100,7 @@ echo "========== Installing libgtk2.0-dev pkg-config libavcodec-dev libavformat-
 sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libjasper-dev python2.7-dev -y
 
 echo "========== Installing pip ============"
-sudo apt-get install python-pip
+sudo apt-get install python-pip -y
 
 echo "========== Installing Numpy ============"
 sudo pip install numpy
