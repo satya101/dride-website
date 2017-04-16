@@ -8,7 +8,9 @@ FCM = {
 
         // Subscribe the poster to the topic
         var cleanTopic = topic.replace('a-zA-Z0-9-_.~%', '');
-        admin.messaging().subscribeToTopic(registrationToken, cleanTopic);
+        admin.messaging().subscribeToTopic(registrationToken, cleanTopic).then(function(){
+            console.log('unsubscribed: ' + registrationToken)
+        });
 
     },
 
@@ -37,6 +39,8 @@ FCM = {
         //un-subscribe OP from topic
         admin.messaging().unsubscribeFromTopic(initiaterToken, cleanTopic)
           .then(function(response) {
+            console.log('unsubscribed: ' + initiaterToken)
+            console.log('topic: ' + cleanTopic)
                 admin.messaging().sendToTopic(cleanTopic, payload)
                     .then(function(response) {
                         // See the MessagingDevicesResponse reference documentation for

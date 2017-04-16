@@ -30,8 +30,8 @@
 							</a>
 							<span class="ago hidden-xs">{{post.lastUpdate | timeAgo}}</span>
 						</h2>
-                        <p class="promoDesc">
-                            Is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The po.{{post.description}}
+                        <p class="promoDesc" >
+                            {{post.description | cut:true:200:' ...'}}
                         </p>
                     </div>
                     <div class="col-md-2 hidden-xs readMore partRow3" ng-href="thread/{{post.slug}}">

@@ -34,28 +34,28 @@ exports.cmntsCount = functions.database.ref('/conversations/{threadId}/{conversa
 
             var conv = event.data.val()
 
-            FCM.sendToTopic(slug.val(), conv.autherId);
-
             event.data.adminRef.root.child("pushTokens").child(conv.autherId).child('value').once('value').then(function(pushToken) {
                 FCM.subscribeUserToTopic(pushToken.val(), slug.val());
+
+                return event.data.adminRef.root.child("conversations").child(event.params.threadId).once('value').then(function(conversation) {
+
+                    //dispatch notifications
+                    FCM.sendToTopic(slug.val(), pushToken.val());
+                    
+                    var resObj = {
+                        cmntsCount: conversation.numChildren(),
+                        description: conv.body
+                    }
+                    if (conversation.numChildren() > 1 ) delete resObj['description'];
+
+                    return event.data.adminRef.root.child("threads").child(event.params.threadId).update(resObj);
+
+                });
+
+
+                return event.data.adminRef.root.child('threads').child(event.params.threadId).child('lastUpdate').set((new Date).getTime());
+
             });
-
-            return event.data.adminRef.root.child("conversations").child(event.params.threadId).once('value').then(function(conversation) {
-
-
-                var conv = conversation.val(), lastProperty;
-                for (lastProperty in conv);
-                    lastProperty;
-
-                console.log(lastProperty)
-
-                return event.data.adminRef.root.child("threads").child(event.params.threadId).child("cmntsCount").set(conversation.numChildren());
-
-            });
-
-
-            return event.data.adminRef.root.child('threads').child(event.params.threadId).child('lastUpdate').set((new Date).getTime());
-
 
 
            
