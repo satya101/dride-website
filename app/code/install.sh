@@ -106,26 +106,6 @@ echo "========== Installing Numpy ============"
 sudo pip install numpy
 
 
-echo "========== Downloading and installing OpenCV ============"
-cd ~
-git clone https://github.com/Itseez/opencv.git
-cd opencv
-git checkout 3.1.0
-echo "==>>>====== Building OpenCV ============"
-cd ~/opencv
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CMAKE_INSTALL_PREFIX=/usr/local ..
-echo "==>>>====== This might take a long time.. ============"
-make -j4
-
-sudo make install
-sudo ldconfig
-
-
-
-
 # Install Node
 echo "========== Installing Node ============"
 sudo wget http://node-arm.herokuapp.com/node_latest_armhf.deb 
@@ -137,8 +117,13 @@ sudo dpkg -i node_latest_armhf.deb
 
 echo "========== Install Dride-core [Cardigan]  ============"
 cd /home
-sudo git clone --recursive https://github.com/CardiganCam/Cardigan.git
-cd Cardigan
+# https://github.com/dride/Cardigan/archive/0.3.zip
+sudo wget -c -O "cardigan-0.3.zip" "https://github.com/dride/Cardigan/releases/download/0.3/Cardigan.zip"
+sudo mkdir Cardigan
+sudo unzip "cardigan-0.3.zip" -d Cardigan
+
+sudo rm -R __MACOSX
+
 
 # make the video dir writable
 sudo chmod 777 -R modules/video/
@@ -254,29 +239,57 @@ sudo rm dride-core
 
 
 ## GPS  https://www.raspberrypi.org/forums/viewtopic.php?p=947968#p947968
-#echo "========== Install GPS  ============"
-#sudo apt-get install gpsd gpsd-clients cmake subversion build-essential espeak freeglut3-dev imagemagick libdbus-1-dev libdbus-glib-1-dev libdevil-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libgarmin-dev libglc-dev libgps-dev libgtk2.0-dev libimlib2-dev libpq-dev libqt4-dev libqtwebkit-dev librsvg2-bin libsdl-image1.2-dev libspeechd-dev libxml2-dev ttf-liberation -y
+echo "========== Install GPS  ============"
+sudo apt-get install gpsd gpsd-clients cmake subversion build-essential espeak freeglut3-dev imagemagick libdbus-1-dev libdbus-glib-1-dev libdevil-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libgarmin-dev libglc-dev libgps-dev libgtk2.0-dev libimlib2-dev libpq-dev libqt4-dev libqtwebkit-dev librsvg2-bin libsdl-image1.2-dev libspeechd-dev libxml2-dev ttf-liberation -y
 
-# 1) sudo nano /boot/config.txt
-# add
-# core_freq=250
-# enable_uart=1
+sudo pip install pyserial
 
-# 2) sudo nano /boot/cmdline.txt
-# Change the file to the following:
-# dwc_otg.lpm_enable=0  console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4  elevator=deadline fsck.repair=yes   rootwait
+
+echo "" >> /boot/config.txt
+echo "core_freq=250" >> /boot/config.txt
+echo "enable_uart=1" >> /boot/config.txt
+
+echo "dwc_otg.lpm_enable=0  console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4  elevator=deadline fsck.repair=yes   rootwait" > /boot/cmdline.txt
+
+
 
 # 3)Run
-# sudo systemctl stop serial-getty@ttyS0.service
-# sudo systemctl disable serial-getty@ttyS0.service
-# sudo systemctl stop gpsd.socket
-# sudo systemctl disable gpsd.socket
+sudo systemctl stop serial-getty@ttyS0.service
+sudo systemctl disable serial-getty@ttyS0.service
+sudo systemctl stop gpsd.socket
+sudo systemctl disable gpsd.socket
 
 # reboot
 
 # 5) Execute the daemon reset
-# sudo killall gpsd
-# sudo gpsd /dev/ttyS0 -F /var/run/gpsd.sock
+sudo killall gpsd
+sudo gpsd /dev/ttyS0 -F /var/run/gpsd.sock
+
+
+
+
+
+
+echo "========== Downloading and installing OpenCV ============"
+cd ~
+git clone https://github.com/Itseez/opencv.git
+cd opencv
+git checkout 3.1.0
+echo "==>>>====== Building OpenCV ============"
+cd ~/opencv
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local ..
+echo "==>>>====== This might take a long time.. ============"
+make -j4
+
+sudo make install
+sudo ldconfig
+
+
+
+
 
 
 sudo reboot
