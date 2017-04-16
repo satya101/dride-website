@@ -2,12 +2,12 @@
     "rules": {
         "clips": {
             ".read": true,
-            ".indexOn": "views",
+            ".indexOn": ["views", "hp"],
             "$uid": {
                 ".read": true,
                 ".write": "auth!=null",
                 "$clipId": {
-                    ".indexOn": "views"
+                    ".indexOn": ["views", "hp"]
                 }
             }
         },
@@ -27,6 +27,12 @@
         "userData": {
             ".read": true,
             ".write": false
+        },
+        "pushTokens": {
+            "$uid": {
+                ".read": "auth != null && auth.uid == $uid",
+                ".write": "auth != null && auth.uid == $uid"
+            }
         }
     }
 }

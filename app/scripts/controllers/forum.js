@@ -18,7 +18,7 @@ angular.module('drideApp')
     }
 ])
 
-.controller('ForumCtrl', function($scope, askQuestion, threads) {
+.controller('ForumCtrl', function($scope, askQuestion, threads, pushNotification, $rootScope) {
 
 
 
@@ -27,10 +27,18 @@ angular.module('drideApp')
 	$scope.initForum = function(){
 
 		$scope.threads = threads;
-		
+        // Retrieve Firebase Messaging object.
+        console.log($rootScope.firebaseUser)
+        if ($rootScope.firebaseUser.uid)
+            $scope.ensurePushToken($rootScope.firebaseUser.uid)
+        		
 	}
 
 
+
+    $scope.ensurePushToken = function(uid){
+        pushNotification.getPushToken(uid)
+    }
 
     $scope.ask = function() {
         askQuestion.ask();

@@ -169,7 +169,7 @@ h2 {
 
 p {
     font-family: 'Raleway', sans-serif;
-    letter-spacing: 1px;
+    letter-spacing: 0.2px;
 }
 
 .text-center {
@@ -337,8 +337,8 @@ $color: #333333,
         color: nth($color, $i);
     }
 }
-.bold {
-    font-weight: 600;
+.bold, b {
+    font-weight: 400;
 }
 //models
 .modal-content {
@@ -534,6 +534,10 @@ $item-size) {
 .card {
     width: 100%;
     position: absolute;
+    .icon-toyCar-1{
+        font-size: 19px !important;
+        top: 36px !important;
+    }
 }
 
 .card.ng-animate {
@@ -2747,6 +2751,9 @@ footer {
     .chatBox {
         margin-top: 15px;
         padding: 10px;
+        .bdy{
+            padding-left: 9px;
+        }
     }
     .replyBox {
         margin-top: 5px;
@@ -2756,45 +2763,42 @@ footer {
         border: 1px solid rgba(0, 0, 0, .09);
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .04);
     }
-.ago {
-     float: right;
-     margin-top: 27px;
-     position: relative;
-     left: -25px;
-     color: #d4d4d4;
-     transition: all 0.5s ease;
- }
- 
- .bubble:hover .ago {
-     color: #999;
- }
- 
- .bubble {
-     border: 1px solid rgba(0, 0, 0, .09);
-     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .04);
-     background-color: #fff;
-     margin: auto;
-     margin-bottom: 50px;
-     margin-top: 25px;
-     border-radius: 2px;
-     padding: 23px;
-     font-weight: 100;
-     .bdy a {
-         color: #337ab7 !important;
-     }
-     .bdy p {
-         font-weight: 300;
-     }
-     .bdy img {
-         max-width: 100%;
-     }
- }
-  
- .pl {
-     margin-left: -59px;
-     margin-right: 18px;
- }
- 
+    .ago {
+        float: right;
+        margin-top: 27px;
+        position: relative;
+        left: -25px;
+        color: #d4d4d4;
+        transition: all 0.5s ease;
+    }
+    .bubble:hover .ago {
+        color: #999;
+    }
+    .bubble {
+        border: 1px solid rgba(0, 0, 0, .09);
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .04);
+        background-color: #fff;
+        margin: auto;
+        margin-bottom: 50px;
+        margin-top: 25px;
+        border-radius: 2px;
+        padding: 23px;
+        font-weight: 100;
+        .bdy a {
+            color: #337ab7 !important;
+        }
+        .bdy p {
+            font-weight: 300;
+            font-size: 16px;
+        }
+        .bdy img {
+            max-width: 100%;
+        }
+    }
+    .pl {
+        margin-left: -59px;
+        margin-right: 18px;
+    }
     .auther {
         height: 48px;
         margin-top: 45px;
@@ -2812,7 +2816,6 @@ footer {
             font-weight: 100;
         }
     }
-
     .replyInput {
         input {
             height: 40px;
@@ -2822,7 +2825,7 @@ footer {
         border: 1px dashed #b7b7b7;
         width: 1px;
         height: 33px;
-        margin-top: -41px;
+        margin-top: -49px;
         margin-bottom: -26px;
         margin-left: 51px;
     }
@@ -2853,9 +2856,6 @@ footer {
         top: 39px;
         left: -9
     }
-    .bdy {
-        white-space: pre-wrap;
-    }
     .auther {
         height: 48px;
         margin-top: 45px;
@@ -2873,8 +2873,8 @@ footer {
             font-weight: 100;
         }
     }
-
 }
+
 
 .replyInput {
     input {

@@ -9,10 +9,14 @@ var Mixpanel = require('mixpanel');
 var mixpanel = Mixpanel.init('eae916fa09f65059630c5ae451682939');
 
 
+
+var FCM = require(__dirname + '/FCM/subscribe.js');
+
+
 /*
- * Add updated cmntsCount to threads
+ * Add updated cmntsCount to threads & update the description for the thread with the latest post
  */
-exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
+exports.cmntsCount = functions.database.ref('/conversations/{threadId}/{conversationId}')
     .onWrite(event => {
 
         if (!event.params.threadId) {
@@ -20,18 +24,42 @@ exports.cmntsCount = functions.database.ref('/conversations/{threadId}')
             return null;
         }
 
+        // Only process data when it is first created.
+        if (event.data.previous.exists()) {
+            return;
+        }
 
-        event.data.adminRef.root.child("conversations/" + event.params.threadId).once('value').then(function(conversation) {
+        return event.data.adminRef.root.child("threads").child(event.params.threadId).child("slug").once('value').then(function(slug) {
 
-            event.data.adminRef.root.child("threads/" + event.params.threadId + "/cmntsCount").set(conversation.numChildren());
 
+            var conv = event.data.val()
+
+            FCM.sendToTopic(slug.val(), conv.autherId);
+
+            event.data.adminRef.root.child("pushTokens").child(conv.autherId).child('value').once('value').then(function(pushToken) {
+                FCM.subscribeUserToTopic(pushToken.val(), slug.val());
+            });
+
+            return event.data.adminRef.root.child("conversations").child(event.params.threadId).once('value').then(function(conversation) {
+
+
+                var conv = conversation.val(), lastProperty;
+                for (lastProperty in conv);
+                    lastProperty;
+
+                console.log(lastProperty)
+
+                return event.data.adminRef.root.child("threads").child(event.params.threadId).child("cmntsCount").set(conversation.numChildren());
+
+            });
+
+
+            return event.data.adminRef.root.child('threads').child(event.params.threadId).child('lastUpdate').set((new Date).getTime());
+
+
+
+           
         });
-
-
-        return event.data.adminRef.root.child('threads').child(event.params.threadId).child('lastUpdate').set((new Date).getTime());
-
-
-
     });
 /*
  * Add updated cmntsCount to clips

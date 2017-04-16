@@ -408,6 +408,7 @@ module.exports = function (grunt) {
             '*.html',
             'images/{,*/}*.{webp}',
             'code/{,*/}*',
+            'firebase-messaging-sw.js',
             'styles/icomoon/fonts/{,*/}*.*'
           ]
         }, {
