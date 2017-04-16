@@ -6,6 +6,7 @@ case "$1" in
     echo "Starting dride-core"
     # run application you want to start
     python /home/Cardigan/mainPi.py &
+    python /home/Cardigan/daemons/gps/helper.py &
     ;;
   stop)
     echo "Stopping dride-core"
