@@ -6,7 +6,7 @@
 </div>
 
 
-<div class="profile" ng-init="initProfile()">
+<div class="profile full-height-footer-profile" ng-init="initProfile()">
     <div class="container-fluid">
         <div class="col-md-12 no-padding">
             <div class="headerBg">
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="container-fluid greyBg">
+    <div class="container-fluid greyBg" ng-if="!userHaveNoVideos">
         <div class="col-md-12 no-padding">
             <div class="clearfix container">
                 <div class="row">
@@ -149,6 +149,19 @@
             </div>
         </div>
     </div>
+
+    <div class="container-fluid greyBg full-height" ng-if="userHaveNoVideos">
+        <div class="col-md-12 no-padding">
+            <div class="clearfix container">
+                <div class="row">
+                    <h3 class="noVideos">This user doesn't have any videos yet..</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 </div>
 

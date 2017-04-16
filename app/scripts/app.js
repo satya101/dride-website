@@ -165,12 +165,11 @@ angular
     $mixpanelProvider.apiKey("eae916fa09f65059630c5ae451682939");
 
     $routeProvider
-      // .when('/', {
-      //   templateUrl: 'views/cloud.html',
-      //   controller: 'CloudCtrl',
-      //   controllerAs: 'cloud'
+      // .when("/", {
+      //   templateUrl: "views/cloud.html",
+      //   controller: "CloudCtrl",
+      //   controllerAs: "cloud"
       // })
-
       .when("/", {
         templateUrl: "views/main.html",
         controller: "MainCtrl",
@@ -205,6 +204,11 @@ angular
         templateUrl: "views/documentation.html",
         controller: "DocumentationCtrl",
         controllerAs: "documentation"
+      })
+      .when("/profile/:uid", {
+        templateUrl: "views/profile.html",
+        controller: "ProfileCtrl",
+        controllerAs: "profile"
       })
       .when("/profile/:uid/:videoId", {
         templateUrl: "views/profile.html",

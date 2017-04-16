@@ -33,13 +33,17 @@ angular
         $rootScope,
         $mixpanel,
         $window,
-        clipViews
+        clipViews,
+        pushNotification
     ) {
         $scope.replyBox = [];
         $scope.bindedViews = [];
 
         $scope.init = function() {
             $scope.hpClips = new dCloud();
+
+            // Retrieve Firebase Messaging object.
+            if ($rootScope.uid) pushNotification.getPushToken($rootScope.uid);
         };
 
         $scope.getRandomPos = function() {

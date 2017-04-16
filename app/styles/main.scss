@@ -211,7 +211,9 @@ body {
     //height: calc(100% - 23px) !important;
     height: 100% !important;
 }
-
+.full-height-footer {
+    height: calc(100% - 23px) !important;
+}
 .no-footer {
     height: 100% !important;
 }
@@ -922,7 +924,9 @@ $item-size) {
 .mouseWiggle {
     color: #333;
 }
-
+.full-height-footer-profile {
+    height: calc(100% - 67px) !important;
+}
 .profile {
     color: #666666;
     .headerBg {
@@ -1009,6 +1013,10 @@ $item-size) {
     }
     p b {
         color: #666666;
+    }
+    .noVideos{
+        text-align: center;
+        padding-top: 100px;
     }
     .dateLabel {
         font-size: 12px;
