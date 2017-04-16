@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -7,11 +7,6 @@
  * # AboutCtrl
  * Controller of the drideApp
  */
-angular.module('drideApp')
-  .controller('AboutCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+angular.module("drideApp").controller("AboutCtrl", function() {
+	this.awesomeThings = ["HTML5 Boilerplate", "AngularJS", "Karma"];
+});

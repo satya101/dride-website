@@ -8,9 +8,10 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-    .controller('UploadtocloudCtrl', function($scope, $rootScope, $location) {
+    .controller('UploadtocloudCtrl', function($scope, $rootScope, $location, login) {
 
     		$scope.uploadStarted = false;
+
 
             $scope.handleFileSelect = function(evt) {
                 evt.stopPropagation();
@@ -99,8 +100,8 @@ angular.module('drideApp')
 
             $scope.init = function(){
 
-
-
+                    //verify user is logged in
+                    login.verifyLoggedIn();
 
 		            // Setup the dnd listeners.
 		            var dropZone = document.getElementById('drop_zone');
