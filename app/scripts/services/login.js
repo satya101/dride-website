@@ -8,7 +8,7 @@
  * Service in the drideApp.
  */
 angular.module('drideApp')
-  .service('login', function ($uibModal, Auth) {
+  .service('login', function ($uibModal, Auth, pushNotification) {
     
     return {
 		openLogin: function($state){
@@ -44,6 +44,10 @@ angular.module('drideApp')
 							  auth.$signInWithPopup("facebook").then(function(firebaseUser) {
 							  	$mixpanel.track('successful login');
 							    $rootScope.uid = firebaseUser.user.uid;
+
+							    //ensure push token
+						        pushNotification.getPushToken($rootScope.uid)
+
 							    $scope.closeModal();
 
 							  }).catch(function(error) {
@@ -66,6 +70,9 @@ angular.module('drideApp')
 							  auth.$signInWithPopup("google").then(function(firebaseUser) {
 							  	$mixpanel.track('successful login');
 							    $rootScope.uid = firebaseUser.user.uid;
+							    //ensure push token
+						        pushNotification.getPushToken($rootScope.uid)
+						        
 							    $scope.closeModal();
 
 							  }).catch(function(error) {

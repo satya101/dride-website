@@ -27,10 +27,10 @@ angular.module('drideApp')
 	$scope.initForum = function(){
 
 		$scope.threads = threads;
+
         // Retrieve Firebase Messaging object.
-        console.log($rootScope.firebaseUser)
-        if ($rootScope.firebaseUser.uid)
-            $scope.ensurePushToken($rootScope.firebaseUser.uid)
+        if ($rootScope.uid)
+            $scope.ensurePushToken($rootScope.uid)
         		
 	}
 
