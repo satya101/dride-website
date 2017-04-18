@@ -65,13 +65,25 @@ angular
         $http,
         userData,
         getRandomVideo,
-        $location
+        $location,
+        uiGmapGoogleMapApi
     ) {
         $scope.initProfile = function() {
             $mixpanel.track("Videos visit");
 
-            $scope.userHaveNoVideos = false;
 
+            $scope.map = {
+                stroke: {
+                    "color": "#6060FB",
+                    "weight": 4
+                },
+                zoom: 16
+            };
+
+
+
+            $scope.userHaveNoVideos = false;
+            $scope.videoRoute = [];
             $scope.uid = $routeParams.uid;
             if (typeof $routeParams.videoId == "undefined") {
                 var url =
@@ -114,6 +126,30 @@ angular
                     .then(function(data) {
                         $scope.createVideoObj(data.clips.src, data.thumbs.src);
                         $scope.comments = data.comments;
+                        //load gps location
+                        if (!data.gps)
+                            return;
+                        
+                        $http({
+                            url: "https://storage.googleapis.com/dride-2384f.appspot.com/gps/" +
+                                $scope.uid +
+                                "/" +
+                                $scope.videoId +
+                                ".json",
+                            method: "GET"
+                        })
+                            .then(function(data) {
+                                var s = $scope.prepGeoJsonToGoogleMaps(
+                                    data.data
+                                );
+                                var middleRoad = Math.ceil(s.length / 2)
+                                $scope.map['center'] = {latitude: s[middleRoad].latitude, longitude: s[middleRoad].longitude};
+                                $scope.map['path'] = s;
+                                
+                            })
+                            .catch(function(e) {
+                                console.log(e);
+                            });
                     })
                     .catch(function(error) {
                         console.error("Error:", error);
@@ -299,5 +335,21 @@ angular
             var d = new Date(exp[2], exp[1], exp[0], 0, 0, 0, 0);
 
             return d;
+        };
+
+        $scope.prepGeoJsonToGoogleMaps = function(geoJson) {
+            var videoRoute = [];
+            Object.keys(geoJson).forEach(function(key) {
+                geoJson[key] = JSON.parse(geoJson[key]);
+
+                videoRoute.push({
+                    latitude: geoJson[key].latitude * -1,
+                    longitude: geoJson[key].longitude * -1
+                });
+
+
+            });
+
+            return videoRoute;
         };
     });

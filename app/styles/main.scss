@@ -311,7 +311,7 @@ body {
     margin-top: 6px;
     padding-top: 8px !important;
 }
-
+.angular-google-map-container { height: 400px; }
 .preOrder a {
     background-color: #333 !important;
     color: #fff !important;
@@ -962,6 +962,9 @@ $item-size) {
         height: 90px;
         position: relative;
         top: 160px;
+    }
+    ui-gmap-google-map{
+        display: inherit;
     }
     .box {
         background-color: #fff;

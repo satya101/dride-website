@@ -35,7 +35,8 @@ angular
     "analytics.mixpanel",
     "yaru22.angular-timeago",
     "markdown",
-    "infinite-scroll"
+    "infinite-scroll",
+    "uiGmapgoogle-maps"
   ])
   .run(function(
     $rootScope,
@@ -65,6 +66,13 @@ angular
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
       $rootScope.firebaseUser = firebaseUser;
     });
+
+    /*
+    *
+    *       REMOVE!!
+    * 
+    */
+    $location.path("/profile/40qmIeGnJqdn3rBT9pUSVJIcc6w1/1492443305");
 
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;
@@ -129,7 +137,6 @@ angular
               $mixpanel.track("subscribe " + email);
 
               $location.path("/buy");
-              //location.href = "https://www.kickstarter.com/projects/1969971763/dride-connected-dashcam-with-safety-alerts-and-app?ref=7wieq3"
             };
           }
         ]
@@ -147,11 +154,18 @@ angular
     $locationProvider,
     $sceDelegateProvider,
     hljsServiceProvider,
-    $mixpanelProvider
+    $mixpanelProvider,
+    uiGmapGoogleMapApiProvider
   ) {
     hljsServiceProvider.setOptions({
       // replace tab with 4 spaces
       tabReplace: "    "
+    });
+
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyD_9g0R-z2-NpCQpiQrFrJ7_NzWK6rRyRM',
+        v: '3.26', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
     });
 
     $sceDelegateProvider.resourceUrlWhitelist([
@@ -159,7 +173,7 @@ angular
       "self",
       // Allow loading from our assets domain.  Notice the difference between * and **.
       "https://dride-2384f.firebaseio.com/**",
-      "https://api.reddit.com/hot?after**"
+      "https://firebasestorage.googleapis.com/**"
     ]);
 
     $mixpanelProvider.apiKey("eae916fa09f65059630c5ae451682939");

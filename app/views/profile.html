@@ -113,16 +113,17 @@
                                 </div>
 
 
-	                    <div class="box">
-	                    		
-                                <iframe
-                                  class="pad5"
-                                  width="740"
-                                  height="470"
-                                  frameborder="0" 
-                                  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAfDshH5P8j2TGnpRTcVIFvEwUe6LKEeEU
-                                    &center=37.764742, -122.432631&zoom=17" allowfullscreen>
-                                </iframe>
+	                    <div class="box" ng-if="map.path">
+	 
+                             <ui-gmap-google-map class="pad5" center="map.center" zoom="map.zoom" path="map.path">
+
+                                    <ui-gmap-polyline path="map.path" stroke="map.stroke" visible='true'
+                                                        geodesic='true' fit="false" editable="false" draggable="false" >
+                                    </ui-gmap-polyline>
+
+                             </ui-gmap-google-map>
+
+                   		
 	                    </div>	                    
                     </div>
 
