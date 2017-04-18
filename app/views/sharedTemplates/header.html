@@ -28,10 +28,6 @@
               <li><a target="_BLANK" href="https://twitter.com/drideHQ"><span class="icon-twitter"></span></a></li>
               <li><a target="_BLANK" href="https://github.com/dride"><span class="icon-github"></span></a></li>
 
-              <li ng-if="firebaseUser" class="login" class="login" ng-click="logOut()">
-                  <img class="profilePicM" src="{{firebaseUser.photoURL}}" alt="{{firebaseUser.displayName}}"/>
-              </li>
-
 <!-- 
               <li class="col-xs-4 pull-right" ng-if="currentPage=='/forum' || currentPage=='/thread'">
 
@@ -54,6 +50,12 @@
 
 
               <li class="preOrder" ><a ng-click="initBuyProcess()">Buy</a></li>
+              <li class="uploadVideo"><a href="/uploadToCloud">Upload</a></li>
+
+              <li ng-if="firebaseUser" class="login" class="login" ng-click="logOut()">
+                  <img class="profilePicM" src="{{firebaseUser.photoURL}}" alt="{{firebaseUser.displayName}}"/>
+              </li>
+
 
               <li ng-if="!firebaseUser" class="login" class="login" ng-click="login()">Login</li>
 

@@ -72,7 +72,7 @@ angular
     *       REMOVE!!
     * 
     */
-    $location.path("/profile/40qmIeGnJqdn3rBT9pUSVJIcc6w1/1492443305");
+    $location.path("/cloud");
 
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;

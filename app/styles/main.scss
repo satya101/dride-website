@@ -299,11 +299,11 @@ body {
     margin-top: -17px;
 }
 
-.preOrder {
+.preOrder, .uploadVideo, .login{
     float: right !important;
 }
 
-.preOrder a {
+.uploadVideo a, .preOrder a {
     background-color: #333333;
     color: #fff !important;
     border-radius: 4px;
@@ -312,10 +312,6 @@ body {
     padding-top: 8px !important;
 }
 .angular-google-map-container { height: 400px; }
-.preOrder a {
-    background-color: #333 !important;
-    color: #fff !important;
-}
 
 .z10 {
     z-index: 10;
@@ -1484,7 +1480,11 @@ footer {
     .preOrder a {
         background-color: #333 !important;
         color: #fff !important;
-    }
+    } 
+    .uploadVideo a {
+        background-color: #72c6ce !important;
+        margin-right: 8px;
+    } 
 }
 
 .darkOverlay {
@@ -2264,6 +2264,14 @@ footer {
         font-weight: 100;
         font-size: 19px;
 
+    }
+    .bVideosT{
+        text-align: center;
+        font-size: 18px;
+        color: #8c8c8c;
+        text-transform: capitalize;
+        padding-bottom: 29px;
+        letter-spacing: 1px;
     }
     .box {
         background-color: #fff;

@@ -5,17 +5,6 @@
 
 <div class="cloudMain" ng-init="init()">
     <div class="container-fluid greyBg">
-        <div class="col-md-12 no-padding">
-
-		        <div class="wrapTop">
-			        <div class="top">
-				        <div>
-				        	<h1><span class="icon-cloud-full"></span></h1>
-				        	<a href="/uploadToCloud">Upload</a>
-				        </div>
-			        </div>
-		        </div>
-		</div>
 
 	    <div class="container-fluid" >
 
@@ -24,8 +13,11 @@
 
 	        	    <div class="container" infinite-scroll='hpClips.nextPage()' infinite-scroll-disabled='hpClips.busy' infinite-scroll-distance='2'>
 
-
+	        	    	<div class="col-md-offset-2 col-md-8">
+	        	   			<h2 class="bVideosT">Best Videos Today</h2>
+	        	   		</div>
 		        		<div ng-if="hpClips.items" class="col-md-offset-2 col-md-8 whiteBg no-padding" ng-repeat="(key, currentVideo) in hpClips.items">
+
 	        	    			<span class="icon-toyCar-1 pull-right" style="right: %;"></span>
 		                    	<div class="box mainVid">
 		                              
