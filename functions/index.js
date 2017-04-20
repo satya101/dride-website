@@ -11,6 +11,7 @@ var mixpanel = Mixpanel.init('eae916fa09f65059630c5ae451682939');
 
 
 var FCM = require(__dirname + '/FCM/subscribe.js');
+var anonymizer = require(__dirname + '/user/anonymizer.js');
 
 
 /*
@@ -117,6 +118,25 @@ exports.saveNewUserData = functions.auth.user().onCreate(event => {
     
 
 });
+
+/*
+ * Anonymise a user upon request
+ */
+exports.anonymizer = functions.database.ref('/userData/{uid}/anonymous')
+    .onWrite(event => {
+
+        if (!event.params.uid) {
+            console.log('not enough data');
+            return null;
+        }
+        var anonymStatus = event.data.val()
+
+        return anonymizer.start(anonymStatus, event.params.uid)
+
+    });
+
+
+
 
 
 // /*

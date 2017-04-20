@@ -247,7 +247,13 @@ body {
     padding: 0;
 }
 
-
+.checked {
+    background: #333 !important;
+    border-color: #333 !important;
+}
+.switch {
+    background: #c5c5c5;
+}
 
 .navbar-default .navbar-nav > .active > a {
     background: none !important;
@@ -295,7 +301,6 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-left: 28px;
     margin-top: -17px;
 }
 
@@ -443,7 +448,7 @@ $color: #333333,
 
 .login {
     margin-top: -5px !important;
-    margin-right: 19px;
+    margin-left: 19px;
     float: right !important;
 }
 
@@ -2134,8 +2139,51 @@ footer {
     }
 }
 
-
+.regBox{
+    min-height: 458px;
+    .lbl1{
+        text-transform: none;
+        font-size: 18px;
+    }
+    .tc{
+        padding: 0;
+    }
+    .modal-body{
+        min-height: 332px;
+        margin-bottom: 90px;
+    }
+    .welcomeBox{
+        h2{
+            font-size: 21px;
+            color: #f06060;
+            text-transform: initial;
+        }
+        img{
+            width: 40%;
+            margin-top: -36px;
+        }
+        p{
+            color: #777777;
+            font-size: 15px;
+            width: 80%;
+            margin: auto;
+        }
+        .privacy{
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+            height: 50px;
+            padding: 0;
+            padding-top: 11px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        switch{
+            text-align: left;
+        }
+    }
+}
 .loginBox {
+
     input:focus,
     button:focus {
         border: 0;
@@ -2212,6 +2260,21 @@ footer {
     .f50 {
         font-size: 50px;
     }
+    .tc{
+        transition: all 0.5s linear;
+    }
+    .boxme.ng-hide {
+      opacity: 0;
+    }
+    .boxme.ng-hide-remove-active {
+        transition-delay: 0.4s;
+    }
+    .boxme.ng-hide-animate {
+      position:absolute;
+    }
+
+
+
 }
 
 .cloudMain {

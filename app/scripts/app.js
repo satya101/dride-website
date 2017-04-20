@@ -36,7 +36,8 @@ angular
     "yaru22.angular-timeago",
     "markdown",
     "infinite-scroll",
-    "uiGmapgoogle-maps"
+    "uiGmapgoogle-maps",
+    "uiSwitch"
   ])
   .run(function(
     $rootScope,
@@ -64,15 +65,14 @@ angular
 
     // any time auth state changes, add the user data to scope
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
+      console.log(firebaseUser)
       $rootScope.firebaseUser = firebaseUser;
+
+      //let mixpanel know who this is
+      if (firebaseUser)
+        mixpanel.identify(firebaseUser.uid)
     });
 
-    /*
-    *
-    *       REMOVE!!
-    * 
-    */
-    $location.path("/cloud");
 
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;

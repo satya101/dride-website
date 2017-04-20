@@ -17,10 +17,11 @@ angular.module('drideApp')
 		        var modalInstance = $uibModal.open({
 		            animation: true,
 		            templateUrl: 'views/modals/login.html',
-		            controller: ['$uibModalInstance','$scope', '$firebaseAuth', '$rootScope', '$timeout', '$mixpanel', function($uibModalInstance, $scope, $firebaseAuth, $rootScope, $timeout, $mixpanel) {
+		            controller: ['$uibModalInstance','$scope', '$firebaseAuth', '$rootScope', '$timeout', '$mixpanel', 'userData', function($uibModalInstance, $scope, $firebaseAuth, $rootScope, $timeout, $mixpanel, userData) {
 
 
 	                    $scope.isLoaded = false;
+	                    $scope.onWelcome = false;
 
 	                    $uibModalInstance.opened.then(function() {
 	                        $timeout(function() {
@@ -30,7 +31,6 @@ angular.module('drideApp')
 
 
 		                $scope.closeModal = function() {
-
 		                    $uibModalInstance.dismiss('cancel');
 		                };
 
@@ -48,7 +48,20 @@ angular.module('drideApp')
 							    //ensure push token
 						        pushNotification.getPushToken($rootScope.uid)
 
-							    $scope.closeModal();
+						        userData($rootScope.uid).$loaded(function(data){
+						        	console.log('data')
+						        	console.log(data)
+							        if (data.showedAnonymous == true){
+								    	$scope.closeModal();
+								    }else{
+								    	//first time logged in
+								    	mixpanel.alias($rootScope.uid)
+								    	$scope.onWelcome = true;
+								    	firebase.database().ref('userData').child($rootScope.uid).set({ showedAnonymous: true });
+								    }
+
+						        });
+
 
 							  }).catch(function(error) {
 							  	$scope.loginError = error.message;
@@ -73,7 +86,19 @@ angular.module('drideApp')
 							    //ensure push token
 						        pushNotification.getPushToken($rootScope.uid)
 						        
-							    $scope.closeModal();
+						        userData($rootScope.uid).$loaded(function(data){
+						        	console.log('data')
+						        	console.log(data)
+							        if (data.showedAnonymous == true){
+								    	$scope.closeModal();
+								    }else{
+								    	//first time logged in
+								    	mixpanel.alias($rootScope.uid)
+								    	$scope.onWelcome = true;
+								    	firebase.database().ref('userData').child($rootScope.uid).update({ showedAnonymous: true });
+								    }
+
+						        });
 
 							  }).catch(function(error) {
 							  	$scope.loginError = error.message;
@@ -85,6 +110,15 @@ angular.module('drideApp')
 
 
 		                };
+
+
+
+		                $scope.closeAfterWelcome = function(){
+
+		                	//firebase functions will take it from there..
+							firebase.database().ref('userData').child($rootScope.uid).update({ anonymous: $scope.anonymous });
+							$scope.closeModal()
+		                }
 
 
 		            }]

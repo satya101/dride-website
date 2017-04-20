@@ -25,8 +25,10 @@
             ".write": "auth != null"
         },
         "userData": {
+          "$uid": {
             ".read": true,
-            ".write": false
+            ".write": "auth != null && auth.uid == $uid"
+          }
         },
         "pushTokens": {
             "$uid": {

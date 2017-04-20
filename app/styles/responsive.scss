@@ -168,13 +168,19 @@
 
 
     }
-
-
     .prod {
         margin-top: 50px;
     }
 }
 
+@media (max-width: 537px) {
+    .regBox .welcomeBox .privacy{
+        height: 80px;
+        .lbl1{
+            text-align: left;
+        }
+    }
+}
 @media (max-width: 442px) {
     .features .whatWhy p, .features .app p{
         font-size: 22px;

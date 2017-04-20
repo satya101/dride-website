@@ -6,6 +6,9 @@ FCM = {
      */
     subscribeUserToTopic: function(registrationToken, topic) {
 
+        if (!registrationToken)
+            return;
+
         // Subscribe the poster to the topic
         var cleanTopic = topic.replace('a-zA-Z0-9-_.~%', '');
         admin.messaging().subscribeToTopic(registrationToken, cleanTopic).then(function(){
