@@ -269,8 +269,9 @@ angular
         };
 
         $scope.sendComment = function() {
-            if (!$scope.replyBox) {
-                alert("Please write something");
+
+            if (!document.getElementById("replyBox").value) {
+                alert("Please write something");              
                 return;
             }
 
@@ -285,12 +286,13 @@ angular
                     autherId: $rootScope.firebaseUser.uid,
                     auther: $rootScope.firebaseUser.displayName,
                     pic: $rootScope.firebaseUser.photoURL,
-                    body: $scope.replyBox,
+                    body: document.getElementById("replyBox").value,
                     timestamp: new Date().getTime()
                 })
                 .then(function() {
                     $scope.loadMoreComments($scope.videoId);
-                    $scope.replyBox = "";
+                    //TODO: figure why $scope.replyBox is not working..
+                    document.getElementById("replyBox").value = '';
                 });
 
             $mixpanel.track("posted a comment");
@@ -352,4 +354,25 @@ angular
 
             return videoRoute;
         };
+
+
+        $scope.removeClip = function(uid, vId) {
+
+            //TODO: promt before remove
+
+            //firebase functions will take it from here..
+            firebase.database().ref('clips').child(uid).child(vId).update({
+                'deleted': true
+            });
+
+            $location.path('profile/' + uid)
+
+        };
+
+        $scope.commentFoucs = function(){
+
+            document.getElementById("replyBox").focus();
+
+        }
+
     });

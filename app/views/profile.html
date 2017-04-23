@@ -63,9 +63,13 @@
                                         <ul class="pull-right actions">
                                             <li ng-click="fbShare(uid, videoId)"><span class="icon-facebookMedium shareIcon"></span></li>
                                             <li ng-click="twShare(uid, videoId)"><span class="icon-twitterMedium shareIcon"></span></li>
-                                            <li ng-click="editClip()"><span class="icon-edit"></span> <t>Edit</t></li>
+                                            <li ng-click="removeClip(uid, videoId)"><span class="icon-trash-can" alt="remove clip"></span></li>
                                         </ul>
-                                        <div class="views pull-left">{{currentVideo.views | number:0}} Views &nbsp;&nbsp;&nbsp; {{currentVideo.cmntsCount | number:0}} Comments</div>
+                                        <div class="views pull-left">
+                                            <label>{{currentVideo.views | number:0}} Views </label>
+                                            &nbsp;&nbsp;&nbsp; 
+                                            <label ng-click="commentFoucs()">{{currentVideo.cmntsCount | number:0}} Comments</label>
+                                        </div>
 	                    				<div class="clear"></div>
 	                    		</div>
 
@@ -84,7 +88,7 @@
                                 <div class="box">
                                         
                                         <div class="cmntsBox innerPad">
-                                            <div ng-repeat="(key, node) in comments track by $index" class="listItem">
+                                            <div ng-repeat="(key, node) in comments track by $index" class="listItem animBox">
                                                 <div class="bubble">
                                                     <div class="auther pull-left pl">
                                                         <img src="{{node.pic}}" alt="{{node.auther}}" />
@@ -101,7 +105,7 @@
                                         </div>
                                         <div class="postBox">
                                             <div class="wrapReplyBox">
-                                                <textarea ctrl-enter="sendComment()" class="form-control replyBox" elastic ng-model="replyBox" type="text" name="reply" placeholder="@{{firebaseUser.displayName}}:" ></textarea>
+                                                <textarea id="replyBox" ctrl-enter="sendComment()" class="form-control replyBox" elastic ng-model="replyBox" type="text" name="reply" placeholder="What's on your mind?" ></textarea>
                                                 <button class="btn btn-dride-black sendBtn pull-right" ng-click="sendComment(r)">Send</button>
                                             </div>
                                         </div>
