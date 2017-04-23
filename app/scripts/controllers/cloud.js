@@ -50,13 +50,14 @@ angular
             return Math.random() * 100;
         };
 
-        $scope.loadMoreComments = function(vId, index) {
+        $scope.loadMoreComments = function(vId, op, index) {
             var url =
-                "https://dride-2384f.firebaseio.com/conversations_video/40qmIeGnJqdn3rBT9pUSVJIcc6w1/" +
+                "https://dride-2384f.firebaseio.com/conversations_video/"+op+"/" +
                 vId +
                 ".json";
             $http.jsonp(url).then(function(data) {
                 console.log(index);
+                console.log($scope.hpClips.items[index]);
                 var items = data.data;
                 $scope.hpClips.items[index].comments = items;
             });
@@ -97,7 +98,7 @@ angular
                     timestamp: new Date().getTime()
                 })
                 .then(function() {
-                    $scope.loadMoreComments(videoId, index);
+                    $scope.loadMoreComments(videoId, op, index);
                     body = "";
                     $scope.replyBox[index] = "";
 
@@ -190,23 +191,22 @@ angular
         var dCloud = function() {
             this.items = [];
             this.busy = false;
-            this.after = "ZZZZZZZZZZZZZZZZZZZZZZZZ"; //highest key possible
+            this.after = "9999999999999"; //highest key possible
             this.before = "";
             this.end = false;
         };
-
         dCloud.prototype.nextPage = function() {
             if (this.busy || this.end) return;
             this.busy = true;
 
             var url =
-                "https://dride-2384f.firebaseio.com/clips/40qmIeGnJqdn3rBT9pUSVJIcc6w1.json?orderBy=%22$key%22&endAt=%22" +
+                "https://dride-2384f.firebaseio.com/clips_homepage.json?orderBy=%22hpInsertTime%22&endAt=%22" +
                 this.after +
                 "%22&limitToLast=5";
             $http.jsonp(url).then(
                 function(data) {
-                    var items = reverseObject(data.data);
 
+                    var items = reverseObject(data.data);
                     for (var item in items) {
                         var config = {
                             config: {
@@ -225,19 +225,21 @@ angular
                                         autoHide: true,
                                         autoHideTime: 5000
                                     },
-                                    poster: items[item].thumbs.src
+                                    poster: 'https://storage.cloud.google.com/dride-2384f.appspot.com/thumbs/'+items[item].op+'/'+items[item].videoId+'.jpg'
                                 }
                             }
                         };
 
-                        item = angular.extend(items[item], config, {
-                            videoId: item,
-                            op: "40qmIeGnJqdn3rBT9pUSVJIcc6w1"
-                        });
-                        this.items.push(item);
-                        this.after = Object.keys(items)[
-                            Object.keys(items).length - 1
-                        ];
+                        items[item] = angular.extend(items[item], config);
+
+                        if (item.comments)
+                            item.comments = [];
+
+                        this.items.push(items[item]);
+                        console.log(items)
+                        console.log(item)
+                        this.after = items[item].hpInsertTime;
+
                     }
 
                     this.busy = false;
@@ -266,7 +268,9 @@ angular
 
                 return newObject;
             }
+
         };
+
 
         return dCloud;
     });

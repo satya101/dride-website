@@ -65,14 +65,12 @@ angular
 
     // any time auth state changes, add the user data to scope
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
-      console.log(firebaseUser)
-      $rootScope.firebaseUser = firebaseUser;
 
+      $rootScope.firebaseUser = firebaseUser;
       //let mixpanel know who this is
       if (firebaseUser)
         mixpanel.identify(firebaseUser.uid)
     });
-
 
 
     $rootScope.toggleOverlay = function() {

@@ -11,6 +11,11 @@
                 }
             }
         },
+        "clips_homepage": {
+            ".read": true,
+            ".write": false,
+            ".indexOn": ["hpInsertTime"]
+        },
         "threads": {
             ".read": true,
             ".write": "auth != null",
@@ -18,7 +23,8 @@
         },
         "conversations": {
             ".read": true,
-            ".write": "auth != null"
+            ".write": "auth != null",
+            ".indexOn": ["autherId"]
         },
         "conversations_video": {
             ".read": true,

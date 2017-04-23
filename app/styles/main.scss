@@ -314,7 +314,8 @@ body {
 }
 
 .uploadVideo a, .preOrder a {
-    background-color: #333333;
+    background-color: #333 !important;
+    cursor: pointer;
     color: #fff !important;
     border-radius: 4px;
     height: 33px;

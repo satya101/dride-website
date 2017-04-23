@@ -155,6 +155,28 @@ exports.deleteVideo = functions.database.ref('/clips/{uid}/{videoId}/deleted')
     });
 
 
+/*
+ * move clip to the homePage
+ */
+exports.copyToHP = functions.database.ref('/clips/{uid}/{videoId}')
+    .onWrite(event => {
+
+        // Exit when the data is deleted.
+        if (!event.data.exists()) {
+            return;
+        }
+
+        if (!event.params.uid || !event.params.videoId) {
+            console.log('not enough data');
+            return null;
+        }
+        console.log('copy ' + event.params.videoId)
+        var clip = event.data.val()
+        if (clip.homepage)
+            return cloud.copyToHP(event.params.videoId, event.params.uid, clip, clip.hpRef)
+
+    });
+
 
 
 

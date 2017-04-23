@@ -63,7 +63,7 @@
                                         <ul class="pull-right actions">
                                             <li ng-click="fbShare(uid, videoId)"><span class="icon-facebookMedium shareIcon"></span></li>
                                             <li ng-click="twShare(uid, videoId)"><span class="icon-twitterMedium shareIcon"></span></li>
-                                            <li ng-click="removeClip(uid, videoId)"><span class="icon-trash-can" alt="remove clip"></span></li>
+                                            <li ng-if="uid == firebaseUser.uid" ng-click="removeClip(uid, videoId)"><span class="icon-trash-can" alt="remove clip"></span></li>
                                         </ul>
                                         <div class="views pull-left">
                                             <label>{{currentVideo.views | number:0}} Views </label>
