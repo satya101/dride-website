@@ -225,7 +225,7 @@ angular
                                         autoHide: true,
                                         autoHideTime: 5000
                                     },
-                                    poster: 'https://storage.cloud.google.com/dride-2384f.appspot.com/thumbs/'+items[item].op+'/'+items[item].videoId+'.jpg'
+                                    poster: items[item].thumbs.src
                                 }
                             }
                         };
