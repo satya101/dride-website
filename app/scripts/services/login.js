@@ -22,6 +22,7 @@ angular.module('drideApp')
 
 	                    $scope.isLoaded = false;
 	                    $scope.onWelcome = false;
+	                    $scope.anonymous = false;
 
 	                    $uibModalInstance.opened.then(function() {
 	                        $timeout(function() {
@@ -49,8 +50,6 @@ angular.module('drideApp')
 						        pushNotification.getPushToken($rootScope.uid)
 
 						        userData($rootScope.uid).$loaded(function(data){
-						        	console.log('data')
-						        	console.log(data)
 							        if (data.showedAnonymous == true){
 								    	$scope.closeModal();
 								    }else{
@@ -87,8 +86,6 @@ angular.module('drideApp')
 						        pushNotification.getPushToken($rootScope.uid)
 						        
 						        userData($rootScope.uid).$loaded(function(data){
-						        	console.log('data')
-						        	console.log(data)
 							        if (data.showedAnonymous == true){
 								    	$scope.closeModal();
 								    }else{

@@ -16,7 +16,7 @@
 	        	    	<div class="col-md-offset-2 col-md-8">
 	        	   			<h2 class="bVideosT">Best Videos Today</h2>
 	        	   		</div>
-		        		<div ng-if="hpClips.items" class="col-md-offset-2 col-md-8 whiteBg no-padding" ng-repeat="(key, currentVideo) in hpClips.items">
+		        		<div ng-if="hpClips.items" class="col-md-offset-2 col-md-8 whiteBg no-padding animBox" ng-repeat="(key, currentVideo) in hpClips.items">
 
 	        	    			<span class="icon-toyCar-1 pull-right" style="right: %;"></span>
 		                    	<div class="box mainVid">
@@ -52,11 +52,15 @@
 			                    <div class="box">
 			                    		
 			                    		<div class="actionBar innerPad">
-			                    				<div class="views pull-left">{{currentVideo.views | number:0}} Views &nbsp;&nbsp;&nbsp; {{currentVideo.cmntsCount | number:0}} Comments</div>
+			                    				<div class="views pull-left">
+			                    					<label>{{currentVideo.views | number:0}} Views </label>
+			                    					&nbsp;&nbsp;&nbsp; 
+			                    					<label ng-click="commentFoucs()">{{currentVideo.cmntsCount | number:0}} Comments</label>
+			                    				</div>
 			                    				<ul class="pull-right actions">
 			                    					<li ng-click="fbShare(currentVideo.op, currentVideo.videoId)"><span class="icon-facebookMedium shareIcon"></span></li>
 			                    					<li ng-click="twShare(currentVideo.op, currentVideo.videoId)"><span class="icon-twitterMedium shareIcon"></span></li>
-			                    					<li ng-if="op == firebaseUser.uid" ng-click="editClip()"><span class="icon-edit"></span> <t>Edit</t></li>
+			                    					<li ng-click="removeClip(currentVideo.op, currentVideo.videoId, key)"><span class="icon-trash-can"></span></li>
 			                    				</ul>
 			                    				<div class="clear"></div>
 			                    		</div>

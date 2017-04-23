@@ -18,7 +18,7 @@
         <div class="clear spacer25"></div>
         <div class="col-md-12">
             <div class="posts">
-                <div class="post" ng-repeat="post in threads | reverse" ng-click="goTo('thread/' + post.slug)">
+                <div class="post animBox" ng-repeat="post in threads | reverse" ng-click="goTo('thread/' + post.slug)">
                     <div class="col-md-2 hidden-xs usr pad10 partRow1" ng-href="thread/{{post.slug}}">
                         <span class="cmntCount">{{post.cmntsCount}}</span>
                         <span>Comments</span>

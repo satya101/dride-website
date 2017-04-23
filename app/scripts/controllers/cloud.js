@@ -169,6 +169,21 @@ angular
 
             $scope.bindedViews[index] = true;
         };
+
+
+        $scope.removeClip = function(op, vId, index) {
+
+            //firebase functions will take it from here..
+            firebase.database().ref('clips').child(op).child(vId).update({
+                'deleted': true
+            });
+            $scope.hpClips.items.splice(index, 1)
+
+        };
+
+
+
+
     })
     // drideCloud constructor function to encapsulate HTTP and pagination logic
     .factory("dCloud", function($http) {

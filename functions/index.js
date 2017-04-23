@@ -12,6 +12,7 @@ var mixpanel = Mixpanel.init('eae916fa09f65059630c5ae451682939');
 
 var FCM = require(__dirname + '/FCM/subscribe.js');
 var anonymizer = require(__dirname + '/user/anonymizer.js');
+var cloud = require(__dirname + '/cloud/cloud.js');
 
 
 /*
@@ -134,6 +135,26 @@ exports.anonymizer = functions.database.ref('/userData/{uid}/anonymous')
         return anonymizer.start(anonymStatus, event.params.uid)
 
     });
+
+
+
+/*
+ * remove clips on event
+ */
+exports.deleteVideo = functions.database.ref('/clips/{uid}/{videoId}/deleted')
+    .onWrite(event => {
+
+        if (!event.params.uid || !event.params.videoId) {
+            console.log('not enough data');
+            return null;
+        }
+        var clipDeleteStatus = event.data.val()
+        if (clipDeleteStatus)
+            return cloud.remvoeClip(event.params.videoId, event.params.uid)
+
+    });
+
+
 
 
 

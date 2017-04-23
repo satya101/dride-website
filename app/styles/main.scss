@@ -29,6 +29,10 @@ a {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-trash-can:before {
+  content: "\e925";
+}
 .icon-medal:before {
   content: "\e91f";
 }
@@ -146,6 +150,7 @@ a {
 .icon-trophy:before {
   content: "\e99e";
 }
+
 
 .disabled {
     cursor: not-allowed !important;
@@ -316,6 +321,24 @@ body {
     margin-top: 6px;
     padding-top: 8px !important;
 }
+.animBox.ng-enter.ng-enter-active, 
+.animBox.ng-leave {
+    opacity: 1;
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
+
+/* Remove animation */
+.animBox.ng-leave.ng-leave-active, 
+.animBox.ng-enter {
+    opacity: 0;
+    -webkit-transition: opacity 300ms linear;
+    -moz-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
+
+    
 .angular-google-map-container { height: 400px; }
 
 .z10 {
@@ -1036,6 +1059,11 @@ $item-size) {
     }
     .videogular-container {
         height: 560px;
+    }
+    .icon-trash-can{
+        font-size: 24px;
+        position: relative;
+        top: -2px;
     }
     .shareIcon{
         font-size: 28px;
@@ -2408,6 +2436,12 @@ footer {
         font-size: 12px;
         margin-top: 14px;
     }
+    .icon-trash-can{
+        font-size: 29px;
+        position: relative;
+        top: -8px;
+    }
+
     .postBox{
         height: 40px;
         border-top: 1px solid #ececec;

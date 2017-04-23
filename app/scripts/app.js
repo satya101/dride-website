@@ -74,6 +74,7 @@ angular
     });
 
 
+
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;
       $rootScope.collapse = !$rootScope.collapse;
@@ -179,11 +180,6 @@ angular
     $mixpanelProvider.apiKey("eae916fa09f65059630c5ae451682939");
 
     $routeProvider
-      // .when("/", {
-      //   templateUrl: "views/cloud.html",
-      //   controller: "CloudCtrl",
-      //   controllerAs: "cloud"
-      // })
       .when("/", {
         templateUrl: "views/main.html",
         controller: "MainCtrl",

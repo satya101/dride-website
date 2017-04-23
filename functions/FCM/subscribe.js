@@ -40,6 +40,8 @@ FCM = {
 
 
         //un-subscribe OP from topic
+        if (!initiaterToken) initiaterToken = '-';
+        
         admin.messaging().unsubscribeFromTopic(initiaterToken, cleanTopic)
           .then(function(response) {
             console.log('unsubscribed: ' + initiaterToken)
