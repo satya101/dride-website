@@ -85,12 +85,11 @@ angular.module('drideApp')
                         //push to db
                           firebase.database().ref('clips/' + $rootScope.firebaseUser.uid + '/' + $scope.timestamp).set({
                             clips: {'src': downloadURL},
-                            thumbs: {'src': 'http://localhost:9000/images/profile/10.jpg'},
+                            thumbs: {'src': 'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fplaceholder.png?alt=media&token=07c50ad0-781b-4266-a0c7-8cfcbd421c91'},
                             views: 0,
                             cmntsCount: 0
                           });
                         
-
                     });
 
 
@@ -149,8 +148,8 @@ angular.module('drideApp')
 
                 //push meta to DB
                   firebase.database().ref('clips/' + $rootScope.firebaseUser.uid + '/' + $scope.timestamp).update({
-                    description: $scope.description,
-                    plates: $scope.plates,
+                    description: $scope.description ? $scope.description : '',
+                    plates: $scope.plates ? $scope.plates : '',
                     location: ''//$scope.location
                   });
 

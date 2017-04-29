@@ -49,9 +49,9 @@
                         </div>
                         <div class="form-group ">
                           <label >Description:</label>
-                          <input type="text" class="form-control" placeholder="Tell us what happened" ng-model="description">
+                          <textarea class="form-control" placeholder="Tell us what happened" ng-model="description" elastic></textarea>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group " ng-if="false">
                           <label class="block">Location:</label>
                                 <iframe
                                   class="pad5 block"
@@ -62,7 +62,11 @@
                                     &center=37.764742, -122.432631&zoom=17" allowfullscreen>
                                 </iframe>
                         </div>
-
+                       <div class="form-group " ng-if="true">
+                        <br>
+                        <br>
+                        <br>
+                       </div>
             		</div>
 
 

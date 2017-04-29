@@ -131,11 +131,7 @@ angular
                             return;
                         
                         $http({
-                            url: "https://storage.googleapis.com/dride-2384f.appspot.com/gps/" +
-                                $scope.uid +
-                                "/" +
-                                $scope.videoId +
-                                ".json",
+                            url: data.gps.src,
                             method: "GET"
                         })
                             .then(function(data) {

@@ -14,7 +14,7 @@
         "clips_homepage": {
             ".read": true,
             ".write": false,
-            ".indexOn": ["hpInsertTime"]
+            ".indexOn": ["hpInsertTime", "cmntsCount", "views"]
         },
         "threads": {
             ".read": true,
@@ -29,6 +29,10 @@
         "conversations_video": {
             ".read": true,
             ".write": "auth != null"
+        },
+        "latestVersion": {
+            ".read": true,
+            ".write": false
         },
         "userData": {
           "$uid": {

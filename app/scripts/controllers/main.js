@@ -40,6 +40,7 @@ angular
         ];
         //when press prev, card slide to right
         $scope.goToView = function(view, strict, addOrSub) {
+
             view = addOrSub ? parseInt(view) + addOrSub : view;
 
             //dont run if popup is there
@@ -60,15 +61,15 @@ angular
             $scope.toLeft = true;
             $scope.toRight = false;
 
+            if (view != $scope.displayCard) {
+                $mixpanel.track("HP view " + view);
+            }
+
             $scope.displayCard = view;
 
             //save the time of the transition to prevent super fast scroll
             $scope.transitionFired = dateNow;
 
-            if (view != $scope.displayCard) {
-                $mixpanel.track("HP view changed");
-                $mixpanel.track("view " + view);
-            }
         };
 
         $scope.openPreOrder = function() {
