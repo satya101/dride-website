@@ -2695,6 +2695,9 @@ footer {
         display: inline-block;
         cursor: pointer;
         width: 100%;
+        h2{
+            text-transform: inherit;
+        }
     }
     .recent {
         min-height: 500px;
@@ -2888,6 +2891,9 @@ footer {
         left: -25px;
         color: #d4d4d4;
         transition: all 0.5s ease;
+    }
+    h1{
+        text-transform: inherit;
     }
     .bubble:hover .ago {
         color: #999;
