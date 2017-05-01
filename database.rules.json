@@ -34,6 +34,16 @@
             ".read": true,
             ".write": false
         },
+        "devicesAll": {
+            ".read": false,
+            ".write": true
+        },
+        "devices": {
+            "$uid": {
+                ".read": "auth != null && auth.uid == $uid",
+                ".write": "auth != null && auth.uid == $uid"
+            }
+        },
         "userData": {
           "$uid": {
             ".read": true,
