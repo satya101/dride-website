@@ -341,8 +341,8 @@ angular
                 geoJson[key] = JSON.parse(geoJson[key]);
 
                 videoRoute.push({
-                    latitude: geoJson[key].latitude * -1,
-                    longitude: geoJson[key].longitude * -1
+                    latitude: parseFloat(geoJson[key].latitude),
+                    longitude: parseFloat(geoJson[key].longitude)
                 });
 
 
