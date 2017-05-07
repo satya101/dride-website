@@ -1,6 +1,17 @@
 #! /bin/sh
 # /etc/init.d/dride-core
 
+### BEGIN INIT INFO
+# Provides:          dride-core
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: will run the main dride-core process
+# Description:       
+### END INIT INFO
+
+
 case "$1" in
   start)
     echo "Starting dride-core"
