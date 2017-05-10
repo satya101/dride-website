@@ -1761,6 +1761,9 @@ footer {
 
 .features {
     height: 100%;
+    p{
+        font-weight: 100;
+    }
     .pic_1 {
         background-image: url('../images/features/pic1.png');
         height: 70%;

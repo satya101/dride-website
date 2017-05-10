@@ -18,27 +18,25 @@
         <div class="clear spacer25"></div>
         <div class="col-md-12">
             <div class="posts">
-                <div class="post animBox" ng-repeat="post in threads | reverse" ng-click="goTo('thread/' + post.slug)">
-                    <div class="col-md-2 hidden-xs usr pad10 partRow1" ng-href="thread/{{post.slug}}">
+                <a class="post animBox" ng-repeat="post in threads | reverse" ng-href="thread/{{post.slug}}">
+                    <div class="col-md-2 hidden-xs usr pad10 partRow1">
                         <span class="cmntCount">{{post.cmntsCount}}</span>
                         <span>Comments</span>
                     </div>
-                    <div class="col-md-8 col-xs-12 padS40 partRow2" ng-href="thread/{{post.slug}}">
+                    <div class="col-md-8 col-xs-12 padS40 partRow2">
                         <h2>
-							<a ng-href="thread/{{post.slug}}">
-								{{post.title}}
-							</a>
+							{{post.title}}
 							<span class="ago hidden-xs">{{post.lastUpdate | timeAgo}}</span>
 						</h2>
                         <p class="promoDesc" >
                             {{post.description | cut:true:200:' ...'}}
                         </p>
                     </div>
-                    <div class="col-md-2 hidden-xs readMore partRow3" ng-href="thread/{{post.slug}}">
+                    <div class="col-md-2 hidden-xs readMore partRow3" >
                         <span class="icon-moreArrow"></span>
                         <span class="readMore">Read More</span>
                     </div>
-                </div>
+                </a>
                 <div ng-if="!threads.length" ng-repeat="i in [1,2,3,4]">
                     <div class="timeline-wrapper">
                         <div class="timeline-item">
