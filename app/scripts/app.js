@@ -37,7 +37,8 @@ angular
     "markdown",
     "infinite-scroll",
     "uiGmapgoogle-maps",
-    "uiSwitch"
+    "uiSwitch",
+    "angular-carousel"
   ])
   .run(function(
     $rootScope,
@@ -262,6 +263,16 @@ angular
         templateUrl: "views/invoice.html",
         controller: "InvoiceCtrl",
         controllerAs: "invoice"
+      })
+      .when('/store', {
+        templateUrl: 'views/store.html',
+        controller: 'StoreCtrl',
+        controllerAs: 'store'
+      })
+      .when('/product/:productName', {
+        templateUrl: 'views/product.html',
+        controller: 'ProductCtrl',
+        controllerAs: 'product'
       })
       .otherwise({
         redirectTo: "/page-not-found"

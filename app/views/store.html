@@ -1,0 +1,101 @@
+<div class="greyBg">
+    <div class="col-md-12 wrapTopMenu">
+        <!-- header -->
+        <div ng-include="'views/sharedTemplates/header.html'"></div>
+    </div>
+    <div class="container store" ng-init="init()">
+        <div class="col-md-12">
+
+
+        	<div class="row product">
+	        	<div class="i col-md-8">
+	        		
+	        		<h2>dride</h2>
+	        		<h3>Connected Dashcam With Safety Alerts & Apps</h3>
+	        		<p class="price">$149</p>
+
+	        		<div class="divider"></div>
+	        		<a href="product/dride" class="btn btn-buy">Buy Now</a>
+	        	</div>
+	        	<div class="i col-md-4 gallery">
+
+					<ul rn-carousel rn-carousel rn-carousel-controls rn-carousel-auto-slide="3" rn-carousel-index="carouselIndex1" rn-carousel-controls-allow-loop rn-carousel-duration="900" rn-carousel-easing="easeInOutCubic" class="image">
+					  <li ng-repeat="image in product1">
+					    <div class="layer">
+					    	<img class="img-responsive" src="{{ image.url }}" />
+					    </div>
+					  </li>
+					</ul>
+
+					<div class="indicators" rn-carousel-indicators ng-if="product1.length > 1" slides="product1" rn-carousel-index="carouselIndex1"></div>
+
+
+	        	</div>
+        	</div>
+
+
+        	<div class="row product">
+	        	<div class="i col-md-4 gallery">
+
+					<ul rn-carousel rn-carousel rn-carousel-controls rn-carousel-auto-slide="3" rn-carousel-index="carouselIndex2" rn-carousel-controls-allow-loop rn-carousel-duration="900" rn-carousel-easing="easeInOutCubic" class="image">
+					  <li ng-repeat="image in product2">
+					    <div class="layer">
+					    	<img src="{{ image.url }}" />
+					    </div>
+					  </li>
+					</ul>
+
+					<div class="indicators" rn-carousel-indicators ng-if="product2.length > 1" slides="product2" rn-carousel-index="carouselIndex2"></div>
+
+
+	        	</div>
+	        	<div class="i col-md-8">
+	        		
+	        		<h2>dride zero</h2>
+	        		<h3>Worlds smallest connected dashcam.</h3>
+	        		<p class="price">$49</p>
+
+	        		<div class="divider"></div>
+	        		<a href="product/drideZero" class="btn btn-buy">Buy Now</a>
+
+	        	</div>
+
+        	</div>
+
+
+        	<div class="row product">
+	        	<div class="i col-md-8">
+	        		
+	        		<h2>dride KIT</h2>
+	        		<h3>Connected Dashcam With Safety Alerts & Apps</h3>
+	        		<p class="price">$149</p>
+
+	        		<div class="divider"></div>
+	        		<a href="product/drideKIT" class="btn btn-buy">Buy Now</a>
+	        	</div>
+	        	<div class="i col-md-4 gallery">
+
+					<ul rn-carousel rn-carousel rn-carousel-controls rn-carousel-auto-slide="3" rn-carousel-index="carouselIndex3" rn-carousel-controls-allow-loop rn-carousel-duration="900" rn-carousel-easing="easeInOutCubic" class="image">
+					  <li ng-repeat="image in product3">
+					    <div class="layer">
+					    	<img src="{{ image.url }}" />
+					    </div>
+					  </li>
+					</ul>
+
+					<div class="indicators" rn-carousel-indicators ng-if="product3.length > 1" slides="product3" rn-carousel-index="carouselIndex3"></div>
+
+
+	        	</div>
+        	</div>
+
+
+
+
+
+
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>
