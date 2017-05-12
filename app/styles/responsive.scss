@@ -4,8 +4,14 @@
         padding: 0;
         animation-duration: 0.3s;
         animation-delay: 0s;
-
+        .socialIcon{
+            display:none;
+        }
     }
+
+
+
+
 }
 @media (max-width: 320px) {
     .bg-3 {
