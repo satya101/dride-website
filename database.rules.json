@@ -38,6 +38,10 @@
             ".read": false,
             ".write": true
         },
+        "content": {
+            ".read": true,
+            ".write": false
+        },
         "devices": {
             "$uid": {
                 ".read": "auth != null && auth.uid == $uid",

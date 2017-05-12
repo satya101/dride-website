@@ -9,9 +9,22 @@
         }
     }
 
-
-
-
+}
+@media (max-width: 1200px) {
+    .productHead{
+        width: 100% !important;
+        padding: 0;
+        .col-md-12{
+            padding: 0;
+        }
+    }
+    .product {
+        .productPics li {
+            display: inline-block;
+            margin-right: 0px;
+            margin-left: 0px;
+        }
+    }
 }
 @media (max-width: 320px) {
     .bg-3 {
@@ -341,6 +354,15 @@
                     padding-bottom: 17px;
                 }
              }
+        }
+    }
+    .product {
+        .productHeader .i {
+            height: 380px;
+            padding: 19px 25px;
+        }
+        .productPics li img {
+            width: 80px;
         }
     }
 

@@ -74,6 +74,7 @@ angular
     });
 
 
+
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;
       $rootScope.collapse = !$rootScope.collapse;

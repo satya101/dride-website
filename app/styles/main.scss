@@ -3248,4 +3248,30 @@ footer {
             font-weight: 100;
         }
     }
+    .upper{
+        text-transform: uppercase;
+    }
+    .productMain{
+        width: 80%;
+        text-align: center;
+        margin: auto auto;
+        padding-bottom: 40px;
+    }
+    .productInfo{
+        margin: 70px 0 !important;
+    }
+    .productPics{
+        list-style: none;
+        text-align: center;
+        padding: 0;
+        li{ 
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+            img{
+                width: 100px;
+            }
+        }
+    }
 }
