@@ -57,6 +57,7 @@ angular
       $rootScope.showOverlay = false;
       $rootScope.haveSideBar = $rootScope.haveSideBarF();
       $rootScope.collapse = "";
+      $rootScope.showDropDown = "";
       $anchorScroll();
     });
 
@@ -74,6 +75,7 @@ angular
     });
 
 
+    $location.path('user')
 
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;
@@ -274,6 +276,11 @@ angular
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
         controllerAs: 'product'
+      })
+      .when('/user', {
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl',
+        controllerAs: 'user'
       })
       .otherwise({
         redirectTo: "/page-not-found"

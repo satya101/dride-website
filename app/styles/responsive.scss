@@ -429,6 +429,10 @@
 
 @media (max-width: 769px) {
     
+    .login{
+        display: none !important;
+    }
+
     .profile, .cloudMain{
          .postBox .wrapReplyBox textarea {
             width: 50%;

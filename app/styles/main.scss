@@ -274,6 +274,16 @@ body {
     padding-right: 0;
     padding-left: 0;
 }
+.dropdown-menu {
+    display: block;
+    margin-left: -109px;
+    li{
+        margin-top: inherit;
+        padding-right: inherit;
+        padding-left: inherit;
+        cursor: pointer;
+    }
+}
 
 .navbar-header {
     padding: 0;
@@ -474,6 +484,7 @@ $color: #333333,
     margin-top: -5px !important;
     margin-left: 19px;
     float: right !important;
+    cursor: pointer;
 }
 
 .innerLogo {
@@ -3272,4 +3283,15 @@ footer {
             }
         }
     }
+}
+.user{
+    min-height: calc(100% - 70px);
+    .box {
+        min-height: 100px;
+        background-color: #fff;
+        margin-top: 21px;
+        border-radius: 2px;
+        border: 20px solid #f9f9f9;
+    }
+
 }

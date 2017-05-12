@@ -18,7 +18,7 @@
           </div>
 
           <div id="navbarCollapse" class="navbar-collapse animated fadeIn {{!collapse ? 'collapse' : ''}}" >
-            <ul class="nav navbar-nav col-md-10">
+            <ul class="nav navbar-nav mNav col-md-10">
               <li ng-class="currentPage=='/' ? 'active' : ''"><a href="/">Home</a></li>
               <li ng-class="currentPage=='/features' ? 'active' : ''"><a href="/features">Features</a></li>
               <li ng-class="currentPage=='/documentation' ? 'active' : ''"><a href="/documentation">Docs</a></li>
@@ -47,8 +47,16 @@
  -->
 
 
-              <li ng-if="firebaseUser" class="login" class="login" ng-click="logOut()">
+              <li ng-if="firebaseUser" class="login" ng-click="showDropDown=!showDropDown">
                   <img class="profilePicM" src="{{firebaseUser.photoURL}}" alt="{{firebaseUser.displayName}}"/>
+                  <div class="dropdown">
+                     <ul class="dropdown-menu" ng-show="showDropDown">
+                      <li><a href="/user">Settings</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a ng-click="logOut()">Logout</a></li>
+                    </ul>
+                </div>
+
               </li>
 
               <li ng-if="!firebaseUser" class="login" class="login" ng-click="login()">Login</li>
