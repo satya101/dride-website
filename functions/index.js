@@ -11,6 +11,7 @@ var mixpanel = Mixpanel.init('eae916fa09f65059630c5ae451682939');
 
 
 var FCM = require(__dirname + '/FCM/subscribe.js');
+var mailer = require(__dirname + '/mailer/send.js');
 var anonymizer = require(__dirname + '/user/anonymizer.js');
 var cloud = require(__dirname + '/cloud/cloud.js');
 
@@ -38,11 +39,14 @@ exports.cmntsCount = functions.database.ref('/conversations/{threadId}/{conversa
 
             event.data.adminRef.root.child("pushTokens").child(conv.autherId).child('value').once('value').then(function(pushToken) {
                 FCM.subscribeUserToTopic(pushToken.val(), slug.val());
+                mailer.subscribeUserToTopic(conv.autherId, event.params.threadId);
 
                 return event.data.adminRef.root.child("conversations").child(event.params.threadId).once('value').then(function(conversation) {
 
                     //dispatch notifications
                     FCM.sendToTopic(slug.val(), pushToken.val());
+                    //dispatch email
+                    mailer.sendToTopic(event.params.threadId, event.params.threadId, conv);
                     
                     var resObj = {
                         cmntsCount: conversation.numChildren(),

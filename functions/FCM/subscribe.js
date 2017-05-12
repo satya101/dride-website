@@ -24,8 +24,6 @@ FCM = {
     sendToTopic: function(topic, initiaterToken) {
 
 
-        // See the "Defining the message payload" section below for details
-        // on how to define a message payload.
         var payload = {
             notification: {
                 title: "A new post",
