@@ -110,15 +110,5 @@ mailer = {
 
 }
 
-mailer.send({
-    "fname" : "Louis Northmore",
-    "title" : "Getting Started with my Pi",
-    "profilePic" : "https://lh4.googleusercontent.com/-4sawCwFjv2k/AAAAAAAAAAI/AAAAAAAAHiA/YnTX2XHh-XY/photo.jpg",
-    "body" : "Hi Guys, Awesome idea, can't wait to see this a success! I've got a few questions that I'm hoping you can help with. I've installed dride onto my Pi, everything appears to be working, camera module & wifi. I have connected using my iPhone to the dride wifi network, but now I'm not sure what to do? The dride app shows a video on the first screen and I can see the settings option also. Do I need anything else for my Pi? A GPS module? Microphone? How do I get it to navigate?",
-    "topicURL" : "https://dride.io/thread/getting-started-with-my-pi__-Kjj-YD3YLUnswqCuL3C",
-    "type" : "1"
-});
 
-
-
-// module.exports = FCM;
+module.exports = mailer;
