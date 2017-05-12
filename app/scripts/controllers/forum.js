@@ -19,17 +19,14 @@ angular
             return $firebaseArray(ref);
         }
     ])
-    .controller("ForumCtrl", function(
-        $scope,
-        askQuestion,
-        threads,
-        pushNotification,
-        $rootScope
-    ) {
+    .controller("ForumCtrl", function($scope, askQuestion, threads, pushNotification, $rootScope, $mixpanel) {
         $scope.newPosts = 1;
 
         $scope.initForum = function() {
+
             $scope.threads = threads;
+
+            $mixpanel.track('Forum visit');
 
             // Retrieve Firebase Messaging object.
             if ($rootScope.uid) pushNotification.getPushToken($rootScope.uid);

@@ -1446,8 +1446,7 @@ footer {
         list-style: none;
     }
     .social li {
-        background: none repeat scroll 0 0 #B5B5B5;
-        border: 2px solid #B5B5B5;
+        background: none repeat scroll 0 0 #e0e0e0;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
         -o-border-radius: 50%;
@@ -1474,12 +1473,11 @@ footer {
         -o-transform: scale(1.1) rotate(360deg);
     }
     .social li a {
-        color: #EDEFF1;
+        color: #444 !important;
     }
     .social li:hover {
-        border: 2px solid #333;
-        background: #333;
-        color: #fff;
+        border: 0;
+        background: #bfbfbf;
     }
     .social li a i {
         font-size: 16px;

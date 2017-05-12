@@ -6,6 +6,7 @@
     "firebase-admin": "^4.1.4",
     "firebase-functions": "^0.5.3",
     "get-urls": "^7.0.0",
+    "mandrill-api": "^1.0.45",
     "mixpanel": "^0.7.0",
     "request": "^2.81.0"
   }
