@@ -35,9 +35,9 @@
             		<div class="detailsBox">
 
                         <div class="privacy">
-                            <div class="col-md-9 lbl1">Keep your activity anonymous</div>
+                            <label class="col-md-9 lbl1">Keep your activity anonymous</label>
                             <div class="col-md-3"> 
-                                 <switch id="anonymous" name="anonymous" ng-model="anonymous" class="green"></switch>
+                                 <switch id="anonymous" name="anonymous" ng-model="toggle.anonymous" class="green"></switch>
                             </div>
                         </div>
             		</div>
@@ -45,22 +45,24 @@
             		<br>
             		<h2>Notifications</h2>
                         <div >
-                            <div class="col-md-9 lbl1">Get notified on post comment</div>
+                            <label class="col-md-9 lbl1">Get notified on post comment</label>
                             <div class="col-md-3"> 
-                                 <switch id="anonymous" name="anonymous" ng-model="anonymous" class="green"></switch>
+                                 <switch id="anonymous" name="anonymous" ng-model="toggle.subscribeComments" class="green"></switch>
                             </div>
                         </div>
                         <div >
-                            <div class="col-md-9 lbl1">Subscribe to our newsletter</div>
+                            <label class="col-md-9 lbl1">Subscribe to our newsletter</label>
                             <div class="col-md-3"> 
-                                 <switch id="anonymous" name="anonymous" ng-model="anonymous" class="green"></switch>
+                                 <switch id="anonymous" name="anonymous" ng-model="toggle.subscribe" class="green"></switch>
                             </div>
                         </div>
+                    <div class="clear"></div>
             		<h2>Web Notifications</h2>
                         <div >
-                        	You are currently receiving notifications on this device.
-                        		<button>Turn off</button>
-                        		<button>Turn on</button>
+                            <label class="col-md-9 lbl1">Receive web notification</label>
+                            <div class="col-md-3"> 
+                                 <switch id="anonymous" name="anonymous" ng-model="toggle.FCM" class="green"></switch>
+                            </div>
                         </div>
 
             </div>
