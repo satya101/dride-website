@@ -63,15 +63,15 @@ angular.module('drideApp')
   	    	//update email
   	    	if ($rootScope.firebaseUser.email != $scope.email){
 				$rootScope.firebaseUser.updateEmail($scope.email).then(function() {
-					alert('Ok')
+					
 				  // Update successful.
 				}, function(error) {
 				  // An error happened.
 				  alert(error.message)
 				});
   	    	}
-
-
+			//TODO: pretty message
+			alert('Ok')
 
 
   	    }
