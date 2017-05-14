@@ -37,8 +37,7 @@ angular
     "markdown",
     "infinite-scroll",
     "uiGmapgoogle-maps",
-    "uiSwitch",
-    "angular-carousel"
+    "uiSwitch"
   ])
   .run(function(
     $rootScope,
@@ -65,6 +64,8 @@ angular
 
     $rootScope.auth = Auth;
 
+    $location.path('store')
+
     // any time auth state changes, add the user data to scope
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
 
@@ -73,9 +74,6 @@ angular
       if (firebaseUser)
         mixpanel.identify(firebaseUser.uid)
     });
-
-
-    $location.path('user')
 
 
     $rootScope.toggleOverlay = function() {
@@ -277,6 +275,11 @@ angular
         templateUrl: 'views/product.html',
         controller: 'ProductCtrl',
         controllerAs: 'product'
+      })
+      .when('/user', {
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl',
+        controllerAs: 'user'
       })
       .when('/user', {
         templateUrl: 'views/user.html',
