@@ -37,6 +37,7 @@ angular.module('drideApp')
             	push.setPushObject();
 
 				this.messaging.onMessage(function(payload) {
+                  // TODO: add internal messaging 
 				  console.log("Message received. ", payload);
 				  // ...
 				});
@@ -44,10 +45,25 @@ angular.module('drideApp')
 
 
             },
+            havePush: function() {
+                $rootScope.FCM = false;
+                
+                if (!this.messaging)
+                    this.setPushObject()
+
+                this.messaging.requestPermission()
+                    .then(function() {
+                        $rootScope.FCM = true;
+
+                    })
+                    .catch(function(err) {
+                        $rootScope.FCM = false;
+                    });
+
+            },
             getToken: function(uid) {
 
-            	console.log($rootScope)
-
+ 
                 // Get Instance ID token. Initially this makes a network call, once retrieved
                 // subsequent calls to getToken will return from cache.
                 this.messaging.getToken()

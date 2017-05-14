@@ -74,7 +74,6 @@ angular
         mixpanel.identify(firebaseUser.uid)
     });
 
-
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;
       $rootScope.collapse = !$rootScope.collapse;
@@ -180,6 +179,7 @@ angular
     $mixpanelProvider.apiKey("eae916fa09f65059630c5ae451682939");
 
     $routeProvider
+
       .when("/", {
         templateUrl: "views/main.html",
         controller: "MainCtrl",

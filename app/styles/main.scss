@@ -3367,19 +3367,16 @@ footer {
     .box {
         min-height: 100px;
         background-color: #fff;
-        margin-top: 21px;
         border-radius: 2px;
-        border: 20px solid #f9f9f9;
+        border: 15px solid #f9f9f9;
         padding: 25px;
         padding-top: 0px;
-    }
-    .form-group {
-        padding: 10px 0px;
     }
     label {
         font-size: 18px;
         padding: 8px;
         padding-left: 0;
+        font-weight: 100;
     }
     input:focus,
     button:focus {
@@ -3395,6 +3392,15 @@ footer {
         font-size: 16px;
         height: initial;
         font-weight: 100;
+    }
+    .respRight{
+        float: right;
+    }
+    .forgetPass{
+        padding: 17px;
+        padding-left: 0;
+        text-decoration: underline !important;
+        cursor: pointer;
     }
 
 }
