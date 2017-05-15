@@ -34,7 +34,7 @@
 	    <div class="productInfo animBox" ng-repeat="node in data.productInfo">
 		    <div class="row">
 		        <div class="col-md-2 upper">{{node.title}}</div>
-		        <div class="col-md-10 txtFnt">{{node.body}}</div>
+		        <div class="col-md-10 txtFnt" ng-bind-html="node.body"></div>
 		    </div>
 	    </div>
 	    <br>

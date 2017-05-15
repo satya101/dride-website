@@ -3276,6 +3276,9 @@ footer {
             }
         }
     }
+    .learnMorePrime{
+        margin-left: 15px;
+    }
     .btn-buy-white {
         background-color: #fff;
         color: #333 !important;
@@ -3360,6 +3363,10 @@ footer {
         font-family: Raleway, sans-serif;
         color: #444;
         padding-left: 0;
+        ul{
+            margin-left: -25px;
+            line-height: 40px;
+        }
     }
     .productMain{
         width: 80%;

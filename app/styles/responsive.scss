@@ -428,6 +428,17 @@
             height: 47px;
         }
     }
+    .store{
+        .promo-frame-left{
+            margin-right: 0!important;
+        }
+        .promo-frame-right{
+            margin-left: 0!important;
+        }
+        .product .i{
+            padding: 0!important;
+        }
+    }
 }
 
 @media (max-width: 769px) {

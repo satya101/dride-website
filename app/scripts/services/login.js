@@ -99,7 +99,7 @@ angular.module('drideApp')
 
 							  }).catch(function(error) {
 							  	$scope.loginError = error.message;
-							    //console.log("Authentication failed:", error);
+							    console.log("Authentication failed:", error);
 							    //TODO: Show friendly message and log
 
 

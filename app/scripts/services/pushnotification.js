@@ -17,19 +17,20 @@ angular.module('drideApp')
         		this.messaging = firebase.messaging();
             },
             getPushToken: function(uid) {
-            	push.setPushObject();
+                if ('Notification' in window) {
+                	push.setPushObject();
 
-                this.messaging.requestPermission()
-                    .then(function() {
-                        console.log('Notification permission granted.');
-                        push.getToken(uid)
+                    this.messaging.requestPermission()
+                        .then(function() {
+                            console.log('Notification permission granted.');
+                            push.getToken(uid)
 
-                    })
-                    .catch(function(err) {
-                        console.log(err);
-                        console.log('Unable to get permission to notify.', err);
-                    });
-
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                            console.log('Unable to get permission to notify.', err);
+                        });
+                }
 
             },
             onPushRecieved: function() {

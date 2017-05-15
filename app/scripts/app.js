@@ -64,9 +64,6 @@ angular
 
     $rootScope.auth = Auth;
 
-
-    $location.path('store')
-
     // any time auth state changes, add the user data to scope
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
 
