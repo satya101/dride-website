@@ -3136,20 +3136,16 @@ footer {
     }
 }
 .store{
-    background-color: #f9f9f9;
+    margin-bottom: 40px;
     .product {
-        margin-bottom: 30px;
-        background-color: #fff;
+        background-color: #f9f9f9;
         .i{
-            background-color: #fff; 
+            background-color: #f9f9f9; 
             color: #333;
             padding: 70px 65px 70px 65px;
         }
         .pb{
-            background-color: #fff;
-            img{
-                padding: 20px;
-            }
+            background-color: #f9f9f9;
         }
         h2{
             font-size: 55px;
@@ -3157,6 +3153,7 @@ footer {
         h3{
             font-family: Raleway,sans-serif;
             font-weight: 100;
+            line-height: 32px;
         }
         h2, h3{
             text-transform: initial;
@@ -3166,6 +3163,7 @@ footer {
             font-weight: 100;
             margin: 21px;
             margin-left: 0;
+            font-family: 'Comfortaa', cursive;
         }
         .btn-buy{
             background-color: #333;
@@ -3182,28 +3180,34 @@ footer {
     }
     .promo-frame-right{
         margin-left: 10px;
-        background-image: url(../images/product/kit.jpg);
+        background-image: url(../images/product/kit.png);
         background-size: cover;
         background-position-y: 50%;
-        text-align: center;
+        text-align: left;
+        a{
+            margin-left: 60px;
+        }
         h2{
             text-transform: inherit;
             font-size: 75px;
-            margin-top: 50px;
-
+            margin-top: 150px;
+            text-align: left;
+            padding-left: 60px;
             span{
                 font-family: Raleway,sans-serif;
                 font-weight: 100;
                 font-size: 45px;
+                padding-left: 5px;
             }
         }
         h3{
             font-family: Raleway,sans-serif;
             font-weight: 100;
             text-transform: inherit;
+            text-align: left;
+            padding-left: 60px;
         }
         .layer{
-            background-color: rgba(0, 0, 0, 0.6);
             position: absolute;
             margin-right: 10px;
             top: 0;
@@ -3212,19 +3216,24 @@ footer {
             height: 100%;
             .divider{
                 border-bottom: 1px dashed #fff;
-                margin: auto auto;
                 margin-top: 20px;
                 margin-bottom: 20px;
+                margin-left: 60px;
             }
             .price{
-                font-size: 50px;
+                font-size: 24px;
                 font-weight: 100;
+                text-align: left;
+                padding-left: 60px;
+                font-family: 'Comfortaa', cursive;
+                margin-top: 25px;
+
             }
         }
     }
     .promo-frame-left{
         margin-right: 10px;
-        background-image: url(../images/product/zero.jpg);
+        background-image: url(../images/product/zero.png);
         background-size: cover;
         background-position-y: 50%;
         h2{
@@ -3237,6 +3246,7 @@ footer {
                 font-family: Raleway,sans-serif;
                 font-weight: 100;
                 font-size: 45px;
+                padding-left: 5px;
             }
         }
         h3{
@@ -3245,9 +3255,9 @@ footer {
             font-family: Raleway,sans-serif;
             font-weight: 100;
             text-transform: inherit;
+            line-height: 30px;
         }
         .layer{
-            background-color: rgba(0, 0, 0, 0.6);
             position: absolute;
             margin-right: 10px;
             top: 0;
@@ -3300,10 +3310,13 @@ footer {
         }
         h2 {
             font-size: 55px;
+            margin-top: -10px;
+            margin-bottom: 20px;
         }
         h3 {
             font-family: Raleway, sans-serif;
             font-weight: 100;
+            line-height: 32px;
         }
         h2,
         h3 {
@@ -3314,6 +3327,7 @@ footer {
             font-weight: 100;
             margin: 21px;
             margin-left: 0;
+            font-family: 'Comfortaa', cursive;
         }
         .btn-buy {
             background-color: #333;
@@ -3334,9 +3348,18 @@ footer {
             font-size: 16px;
             font-weight: 100;
         }
+        h2{
+            font-size: 26px;
+        }
     }
     .upper{
         text-transform: uppercase;
+        padding-left: 0;
+    }
+    .txtFnt{
+        font-family: Raleway, sans-serif;
+        color: #444;
+        padding-left: 0;
     }
     .productMain{
         width: 80%;
@@ -3364,12 +3387,16 @@ footer {
 }
 .user{
     min-height: calc(100% - 70px);
+    h2{
+        padding-bottom: 22px;
+        padding-top: 10px;
+    }
     .box {
         min-height: 100px;
         background-color: #fff;
         border-radius: 2px;
         border: 15px solid #f9f9f9;
-        padding: 25px;
+        padding: 35px;
         padding-top: 0px;
     }
     label {
