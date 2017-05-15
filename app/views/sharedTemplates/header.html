@@ -27,6 +27,7 @@
               <li ng-class="currentPage=='/about' ? 'active' : ''"><a href="/about">About</a></li>
               <li><a target="_BLANK" href="https://twitter.com/drideHQ"><span class="icon-twitter"></span></a></li>
               <li><a target="_BLANK" href="https://github.com/dride"><span class="icon-github"></span></a></li>
+              <li ng-if="firebaseUser && pType()==2"><a ng-click="logOut()">Logout</a></li>
 
 <!-- 
               <li class="col-xs-4 pull-right" ng-if="currentPage=='/forum' || currentPage=='/thread'">

@@ -64,6 +64,10 @@ angular
 
     $rootScope.auth = Auth;
 
+
+
+    $location.path('store')
+    
     // any time auth state changes, add the user data to scope
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
 
@@ -72,7 +76,9 @@ angular
       if (firebaseUser)
         mixpanel.identify(firebaseUser.uid)
     });
-
+    $rootScope.pType = function(){
+      return window.innerWidth <= 991 ? 2 : 1;
+    }
     $rootScope.toggleOverlay = function() {
       $rootScope.showOverlay = !$rootScope.showOverlay;
       $rootScope.collapse = !$rootScope.collapse;

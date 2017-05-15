@@ -1774,17 +1774,17 @@ footer {
         font-weight: 100;
     }
     .pic_1 {
-        background-image: url('../images/features/pic1.png');
+        background-image: url('../images/features/pic1.jpg');
         height: 70%;
         max-height: 550px;
         background-size: cover;
         background-position: center;
     }
     .pic_2 {
-        background-image: url('../images/features/pic2.png');
+        background-image: url('../images/features/pic2.jpg');
     }
     .pic_3 {
-        background-image: url('../images/features/pic3.png');
+        background-image: url('../images/features/pic3.jpg');
         min-height: 780px;
     }
     .logo {
@@ -3146,6 +3146,9 @@ footer {
         }
         .pb{
             background-color: #f9f9f9;
+            img{
+                padding: 15px;
+            }
         }
         h2{
             font-size: 55px;
@@ -3180,7 +3183,7 @@ footer {
     }
     .promo-frame-right{
         margin-left: 10px;
-        background-image: url(../images/product/kit.png);
+        background-image: url(../images/product/kit.jpg);
         background-size: cover;
         background-position-y: 50%;
         text-align: left;
