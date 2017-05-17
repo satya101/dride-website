@@ -97,7 +97,7 @@ angular
                                 $scope.uid +
                                 "/" +
                                 Object.keys(data.data)[0]
-                        );
+                        ).replace();
                     } else {
                         $scope.userHaveNoVideos = true;
                     }
