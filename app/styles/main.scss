@@ -198,15 +198,6 @@ body {
     font-family: 'Comfortaa', cursive;
     overflow-x: hidden;
 }
-input, textarea {
-    background-color: #eaeaea !important;
-    border: 0!important;
-    box-shadow: none!important;
-    padding: 12px 22px!important;
-    font-size: 16px!important;
-    height: initial!important;
-    font-weight: 100!important;
-}
 .block {
     display: block;
 }
@@ -2245,6 +2236,15 @@ footer {
     textarea{
         padding: 30px !important;
     }
+    input, textarea {
+        background-color: #eaeaea !important;
+        border: 0!important;
+        box-shadow: none!important;
+        padding: 12px 22px!important;
+        font-size: 16px!important;
+        height: initial!important;
+        font-weight: 100!important;
+    }
 
 }
 .loginBox, .modalUI {
@@ -3391,7 +3391,8 @@ footer {
     }
     .txtFnt{
         font-family: Raleway, sans-serif;
-        color: #444;
+        font-weight: 400;
+        color: #5d5d5d;
         padding-left: 0;
         ul{
             margin-left: -25px;
