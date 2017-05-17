@@ -12,7 +12,7 @@
 	                    <h3>{{data.title}}</h3>
 	                    <p class="price">${{data.price}}</p>
 	                    <div class="divider"></div>
-	                    <a ng-click="purchase()" class="btn btn-buy">Buy Now</a>
+	                    <a ng-click="purchase()" class="btn btn-buy">{{data.actionBtn}}</a>
 	                </div>
 	                <div class="col-md-6 gallery" ng-show="data">
 	                    <img class="productMain img-responsive" src="{{mainPic}}" alt="dride" />

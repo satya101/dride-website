@@ -8,10 +8,11 @@
  * Service in the drideApp.
  */
 angular.module('drideApp')
-  .service('login', function ($uibModal, Auth, pushNotification) {
+  .service('login', function ($uibModal, Auth, pushNotification, $q) {
     
-    return {
-		openLogin: function($state){
+		var deferred = $q.defer();
+		
+		this.openLogin =  function($state){
  
 
 		        var modalInstance = $uibModal.open({
@@ -24,6 +25,7 @@ angular.module('drideApp')
 	                    $scope.onWelcome = false;
 	                    $scope.anonymous = false;
 
+
 	                    $uibModalInstance.opened.then(function() {
 	                        $timeout(function() {
 	                            $scope.isLoaded = true;
@@ -32,10 +34,13 @@ angular.module('drideApp')
 
 
 		                $scope.closeModal = function() {
-		                    $uibModalInstance.dismiss('cancel');
+		                    $uibModalInstance.close();
 		                };
 
 
+		                $scope.dismissModal = function() {
+		                    $uibModalInstance.dismiss();
+		                };
 
 		                $scope.connectWithFacebook = function(){
 
@@ -97,6 +102,8 @@ angular.module('drideApp')
 
 						        });
 
+
+
 							  }).catch(function(error) {
 							  	$scope.loginError = error.message;
 							    console.log("Authentication failed:", error);
@@ -119,10 +126,16 @@ angular.module('drideApp')
 
 
 		            }]
+
+
+
 		        });
 
-		    },
-		logOut: function(){
+		        //return promise
+		        return modalInstance.result
+
+		    }
+		this.logOut = function(){
 
 			firebase.auth().signOut().then(function() {
 			  // Sign-out successful.
@@ -132,17 +145,24 @@ angular.module('drideApp')
 			});
 
 
-		},
-		verifyLoggedIn: function(){
+		};
+
+		this.verifyLoggedIn =  function(){
+
 
 			var user = Auth.$getAuth();
 			if (!user){
-				this.openLogin('');
+				return this.openLogin('')
+			}else{
+				deferred.resolve('done');
 			}
+			
+			return deferred.promise;
+			
 
-		}
+		};
 
-    };
+
 
 
   });

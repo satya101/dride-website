@@ -8,7 +8,7 @@
  * Controller of the drideApp
  */
 angular.module('drideApp')
-  .controller('ProductCtrl', function ($scope, $http, $routeParams, $location) {
+  .controller('ProductCtrl', function ($scope, $http, $routeParams, $location, login, $mixpanel, payment) {
 
 
 
@@ -29,6 +29,8 @@ angular.module('drideApp')
 
 
             });
+
+          $mixpanel.track('product visit');
   	}
 
   	$scope.updateMainPicture = function(i){
@@ -38,9 +40,15 @@ angular.module('drideApp')
   	$scope.purchase =function(){
 
 
-  		alert('Coming soon');
-
+  		login.verifyLoggedIn().then(
+            function (result) {
+              
+                  payment.makePayment($scope.data.price, $scope.data.key, $scope.data.actionBtn)
+                
+              })
 
   	}
+
+
 
   });

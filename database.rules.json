@@ -48,6 +48,12 @@
                 ".write": "auth != null && auth.uid == $uid"
             }
         },
+        "queue": {
+            "$uid": {
+                ".read": false,
+                ".write": "auth != null && auth.uid == $uid"
+            }
+        },
         "userData": {
           "$uid": {
             ".read": true,

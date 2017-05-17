@@ -60,6 +60,7 @@ angular.module('drideApp')
 
         });
 
+        $mixpanel.track('Thread visit');
 
       }
 
@@ -93,18 +94,22 @@ angular.module('drideApp')
       $scope.send = function(){
 
 
-         login.verifyLoggedIn();
+      login.verifyLoggedIn().then(
+       function(result) {
 
-         firebase.database().ref("conversations").child($routeParams.threadId.split('__').pop()).push({
-              'autherId': $rootScope.firebaseUser.uid,
-              'auther': $rootScope.firebaseUser.displayName,
-              'pic': $rootScope.firebaseUser.photoURL,
-              'body': $scope.replyBox,
-              'timestamp': (new Date).getTime()
-          });
+           firebase.database().ref("conversations").child($routeParams.threadId.split('__').pop()).push({
+               'autherId': $rootScope.firebaseUser.uid,
+               'auther': $rootScope.firebaseUser.displayName,
+               'pic': $rootScope.firebaseUser.photoURL,
+               'body': $scope.replyBox,
+               'timestamp': (new Date).getTime()
+           });
 
-          $scope.replyBox = '';
-          $mixpanel.track('posted a comment');
+           $scope.replyBox = '';
+           $mixpanel.track('posted a comment');
+
+       })
+
 
 
 

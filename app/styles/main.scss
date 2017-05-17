@@ -198,7 +198,15 @@ body {
     font-family: 'Comfortaa', cursive;
     overflow-x: hidden;
 }
-
+input, textarea {
+    background-color: #eaeaea !important;
+    border: 0!important;
+    box-shadow: none!important;
+    padding: 12px 22px!important;
+    font-size: 16px!important;
+    height: initial!important;
+    font-weight: 100!important;
+}
 .block {
     display: block;
 }
@@ -2223,13 +2231,32 @@ footer {
         }
     }
 }
-.loginBox {
+.modalUI{
+    .txtHeadline{
+        font-size: 25px;
+    }
+    h3, p{
+        text-align: center;
+        text-transform: inherit;
+    }
+    .form-group{
+        margin: 30px;
+    }
+    textarea{
+        padding: 30px !important;
+    }
+
+}
+.loginBox, .modalUI {
 
     input:focus,
     button:focus {
         border: 0;
         box-shadow: none;
         outline: none;
+    }
+    .closeModal{
+        cursor: pointer;
     }
     .padWrap {
         padding: 0 15px;
