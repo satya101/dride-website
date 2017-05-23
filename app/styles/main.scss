@@ -2953,6 +2953,11 @@ footer {
         .bdy p {
             font-weight: 400;
             font-size: 16px;
+            img{
+                margin: auto auto;
+                display: block;
+                padding: 30px;
+            }
         }
         .bdy img {
             max-width: 100%;
@@ -3400,7 +3405,7 @@ footer {
         }
     }
     .productMain{
-        width: 80%;
+        max-height: 310px;
         text-align: center;
         margin: auto auto;
         padding-bottom: 40px;

@@ -7,6 +7,7 @@
                 ".read": true,
                 ".write": "auth!=null",
                 "$clipId": {
+                    ".validate": "newData.hasChildren(['clips', 'thumbs'])",
                     ".indexOn": ["views", "hp"]
                 }
             }
@@ -22,9 +23,14 @@
             ".indexOn": ["id", "created"]
         },
         "conversations": {
+          "$threadId": {
             ".read": true,
-            ".write": "auth != null",
-            ".indexOn": ["autherId"]
+            "$conversationId": {
+                ".read": true,
+                ".write": "auth != null && newData.child('body').isString() && newData.child('body').val().length > 1",
+                ".indexOn": ["autherId"]
+           }
+         }
         },
         "conversations_video": {
             ".read": true,

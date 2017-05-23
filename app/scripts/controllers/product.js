@@ -44,6 +44,7 @@ angular.module('drideApp')
             function (result) {
               
                   payment.makePayment($scope.data.price, $scope.data.key, $scope.data.actionBtn)
+                  $mixpanel.track('purchase pressed!');
                 
               })
 

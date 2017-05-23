@@ -5,10 +5,8 @@
   "hosting": {
     "public": "dist",
     "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
+      {"source": "/profile2/**", "function": "profile"},
+      {"source": "**", "destination": "/index.html"}
     ]
   }
 }

@@ -124,6 +124,13 @@ angular
                 cVideoRef
                     .$loaded()
                     .then(function(data) {
+                    
+                       //if video does not exist
+                       if (typeof data.views == 'undefined')
+                            $location.path('/page-not-found')
+
+
+
                         $scope.createVideoObj(data.clips.src, data.thumbs.src);
                         $scope.comments = data.comments;
                         //load gps location

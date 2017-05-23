@@ -117,35 +117,36 @@ angular
     };
 
     $rootScope.initBuyProcess = function() {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modals/subscribe.html",
-        controller: [
-          "$uibModalInstance",
-          "$rootScope",
-          "$scope",
-          "$location",
-          function($uibModalInstance, $rootScope, $scope, $location) {
-            $scope.closeModal = function() {
-              $uibModalInstance.dismiss("cancel");
-            };
+      // var modalInstance = $uibModal.open({
+      //   animation: true,
+      //   templateUrl: "views/modals/subscribe.html",
+      //   controller: [
+      //     "$uibModalInstance",
+      //     "$rootScope",
+      //     "$scope",
+      //     "$location",
+      //     function($uibModalInstance, $rootScope, $scope, $location) {
+      //       $scope.closeModal = function() {
+      //         $uibModalInstance.dismiss("cancel");
+      //       };
 
-            $scope.goToPurchase = function(email) {
-              $http({
-                method: "GET",
-                url: "https://api.dride.io/validator/subscribe.php?email=" +
-                  email
-              });
+      //       $scope.goToPurchase = function(email) {
+      //         $http({
+      //           method: "GET",
+      //           url: "https://api.dride.io/validator/subscribe.php?email=" +
+      //             email
+      //         });
 
-              $uibModalInstance.dismiss("cancel");
+      //         $uibModalInstance.dismiss("cancel");
 
-              $mixpanel.track("subscribe " + email);
+      //         $mixpanel.track("subscribe " + email);
 
-              $location.path("/buy");
-            };
-          }
-        ]
-      });
+      //         $location.path("/store");
+      //       };
+      //     }
+      //   ]
+      // });
+
     };
   })
   .factory("Auth", [
@@ -226,6 +227,11 @@ angular
         controllerAs: "profile"
       })
       .when("/profile/:uid/:videoId", {
+        templateUrl: "views/profile.html",
+        controller: "ProfileCtrl",
+        controllerAs: "profile"
+      })
+      .when("/profile_dynamic/:uid/:videoId", {
         templateUrl: "views/profile.html",
         controller: "ProfileCtrl",
         controllerAs: "profile"

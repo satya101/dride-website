@@ -24,7 +24,7 @@ angular.module('drideApp')
 	                    $scope.isLoaded = false;
 	                    $scope.onWelcome = false;
 	                    $scope.anonymous = false;
-						$scope.shareTxt = "I've just entered the queue for #dride and you should too 🚗";
+						$scope.shareTxt = "I just joined the waitlist for #dride. You should too! 🚗";
 
 						
 
@@ -53,7 +53,7 @@ angular.module('drideApp')
 
 						    var urlString = 'https://www.twitter.com/intent/tweet?';
 						    urlString += 'text=' + encodeURIComponent($scope.shareTxt);
-						    urlString += '&hashtags=' + encodeURIComponent('dride #connected_dashcam');
+						    urlString += '&hashtags=' + encodeURIComponent('connected_dashcam');
 
 						    //default to the current page if a URL isn't specified
 						    urlString += '&url=' + encodeURIComponent('https://dride.io/store');

@@ -263,6 +263,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '!<%= yeoman.dist %>/images/pwa/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '!<%= yeoman.dist %>/images/product/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '!<%= yeoman.dist %>/images/product/kit/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/styles/fonts/*'
         ]
       }
@@ -408,6 +409,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt,json,xml}',
             '*.html',
             'images/{,*/}*.{webp}',
+            'images/product/kit/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             'code/{,*/}*',
             'firebase-messaging-sw.js',
             'styles/icomoon/fonts/{,*/}*.*'
