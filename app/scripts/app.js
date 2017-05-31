@@ -117,35 +117,37 @@ angular
     };
 
     $rootScope.initBuyProcess = function() {
-      // var modalInstance = $uibModal.open({
-      //   animation: true,
-      //   templateUrl: "views/modals/subscribe.html",
-      //   controller: [
-      //     "$uibModalInstance",
-      //     "$rootScope",
-      //     "$scope",
-      //     "$location",
-      //     function($uibModalInstance, $rootScope, $scope, $location) {
-      //       $scope.closeModal = function() {
-      //         $uibModalInstance.dismiss("cancel");
-      //       };
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modals/subscribe.html",
+        controller: [
+          "$uibModalInstance",
+          "$rootScope",
+          "$scope",
+          "$location",
+          function($uibModalInstance, $rootScope, $scope, $location) {
+            $mixpanel.track("subscribe popup opened");
+            
+            $scope.closeModal = function() {
+              $uibModalInstance.dismiss("cancel");
+            };
 
-      //       $scope.goToPurchase = function(email) {
-      //         $http({
-      //           method: "GET",
-      //           url: "https://api.dride.io/validator/subscribe.php?email=" +
-      //             email
-      //         });
+            $scope.goToPurchase = function(email) {
+              $http({
+                method: "GET",
+                url: "https://api.dride.io/validator/subscribe.php?email=" +
+                  email
+              });
 
-      //         $uibModalInstance.dismiss("cancel");
+              $uibModalInstance.dismiss("cancel");
 
-      //         $mixpanel.track("subscribe " + email);
+              $mixpanel.track("subscribe " + email);
 
-      //         $location.path("/store");
-      //       };
-      //     }
-      //   ]
-      // });
+              $location.path("/store");
+            };
+          }
+        ]
+      });
 
     };
   })
