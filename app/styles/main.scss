@@ -198,6 +198,10 @@ body {
     font-family: 'Comfortaa', cursive;
     overflow-x: hidden;
 }
+.disabled{
+    opacity: 0.4;
+    cursor: not-allowed;
+}
 .block {
     display: block;
 }
