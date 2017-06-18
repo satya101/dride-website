@@ -7,7 +7,6 @@
                 ".read": true,
                 ".write": "auth!=null",
                 "$clipId": {
-                    ".validate": "newData.hasChildren(['clips', 'thumbs'])",
                     ".indexOn": ["views", "hp"]
                 }
             }
@@ -29,8 +28,8 @@
                 ".read": true,
                 ".write": "auth != null && newData.child('body').isString() && newData.child('body').val().length > 1",
                 ".indexOn": ["autherId"]
-           }
-         }
+           },
+         },
         },
         "conversations_video": {
             ".read": true,
@@ -42,7 +41,7 @@
         },
         "devicesAll": {
             ".read": false,
-            ".write": true
+            ".write": "newData.child('lastSeen').val().length > 1"
         },
         "content": {
             ".read": true,
