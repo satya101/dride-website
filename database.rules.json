@@ -28,8 +28,8 @@
                 ".read": true,
                 ".write": "auth != null && newData.child('body').isString() && newData.child('body').val().length > 1",
                 ".indexOn": ["autherId"]
-           },
-         },
+           }
+         }
         },
         "conversations_video": {
             ".read": true,

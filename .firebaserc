@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "dride-2384f"
+    "default": "dride-2384f",
+    "prod": "dride-2384f"
   }
 }

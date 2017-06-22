@@ -22,4 +22,7 @@ angular.module('drideApp')
        $mixpanel.track('Download drideOS');
     }
 
+    $scope.trackDownloadZ = function(){
+       $mixpanel.track('Download drideOSZ');
+    }
   });
