@@ -1,0 +1,55 @@
+<div class="container-fluid forum" [ngClass]="{'greyBg vh': isFull}">
+    <div class="container">
+        <div class="clear spacer25"></div>
+        <div class="col-xs-12" *ngIf="isFull">
+            <ul class="sorter">
+                <li class="selected">New</li>
+                <li class="disabled">Trending</li>
+                <li class="disabled">Most Viewed</li>
+            </ul>
+        </div>
+        <div class="float-right" *ngIf="isFull">
+            <button class="btn btn-dride-black ask" (click)="ask()">Ask A Question</button>
+        </div>
+        <div class="clear spacer25"></div>
+        <div class="col-md-12 p-0">
+            <div class="posts">
+                <a class="post animBox row mx-auto" *ngFor="let post of threads | async" routerLink="/forum/{{post.slug}}" [@introAnim]>
+                    <div class="col-md-2 hidden-sm-down usr pad10 partRow1">
+                        <span class="cmntCount">{{post.cmntsCount}}</span>
+                        <span>Comments</span>
+                    </div>
+                    <div class="col-md-8 col-sm-12 padS40 partRow2">
+                        <h2>
+							{{post.title}}
+							<span class="ago hidden-xs-down">{{post.lastUpdate | timeAgo}}</span>
+						</h2>
+                        <p class="promoDesc" >
+                            {{post.description | truncate : 200 : "…" }}
+                        </p>
+                    </div>
+                    <div class="col-md-2 hidden-sm-down readMore partRow3" >
+                        <span class="icon-moreArrow"></span>
+                        <span class="readMore">Read More</span>
+                    </div>
+                </a>
+                <div *ngIf="!(threads | async)?.length" class="loadersLines mx-auto" >
+					<div *ngFor="let i of [1,2,3,4]">
+						<div class="timeline-wrapper">
+							<div class="timeline-item">
+								<div class="animated-background">
+									<div class="background-masker content-first-end"></div>
+									<div class="background-masker content-second-line"></div>
+									<div class="background-masker content-second-end"></div>
+									<div class="background-masker content-third-line"></div>
+									<div class="background-masker content-third-end"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

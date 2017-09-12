@@ -1,0 +1,203 @@
+.docs{
+	.mptpToFx {
+		margin-top: 74px !important;
+	}
+
+	#wrapper {
+		padding-left: 0;
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+	}
+
+	#wrapper.toggled {
+		padding-left: 170px;
+	}
+
+	#sidebar-wrapper {
+		z-index: 1000;
+		position: fixed;
+		left: 170px;
+		top: 100px;
+		width: 0;
+		height: 100%;
+		margin-left: -170px;
+		overflow-y: auto;
+		background: #333;
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+		overflow: hidden;
+	}
+
+	#wrapper.toggled #sidebar-wrapper {
+		width: 170px;
+	}
+
+	#page-content-wrapper {
+		width: 100%;
+		position: absolute;
+		padding: 15px;
+	}
+
+	#wrapper.toggled #page-content-wrapper {
+		position: absolute;
+		margin-right: -170px;
+	}
+
+	.docs {
+		background-color: #f9f9f9;
+		min-height: 100%;
+		height: 100%;
+	}
+
+	p {
+		font-size: 16px;
+	}
+
+	h1 {
+		text-transform: uppercase;
+		font-weight: 100;
+		margin-top: 19px;
+		font-size: 36px;
+	}
+
+	h2 {
+		font-size: 20px;
+		color: #636363;
+		font-weight: 100;
+	}
+	.alert-warning{
+		margin-top: -7px;
+		font-size: 14px;
+		margin-left: -4px;
+	}
+	.contaier,
+	.row {
+		height: 100%;
+	}
+	.greyBg{
+		background-color: #f9f9f9;
+	}
+	.content {
+		background-color: #f9f9f9;
+		min-height: 100%;
+		padding: 70px;
+		padding-top: 1px;
+	}
+
+	.hint {
+		margin-top: -95px;
+		margin-bottom: 60px;
+		margin-left: 11px;
+		font-size: 12px;
+		font-style: italic;
+	}
+
+	.textBox {
+		background-color: #fff;
+		padding: 20px;
+		margin: 22px 10px;
+		border-radius: 4px;
+		border-radius: 3px;
+		border: 1px solid rgba(0, 0, 0, .09);
+		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .04);
+	}
+
+	.textBox a {
+		border-bottom: 1px dashed #929292;
+		cursor: pointer;
+	}
+
+	.apisBox {
+		list-style: none;
+		margin-top: 25px;
+		padding: 0;
+	}
+
+	.apisBox li {
+		background-color: #fff;
+		height: 250px;
+		border: 10px solid #f9f9f9;
+		margin-bottom: 10px;
+		float: left;
+		border-radius: 12px;
+		margin: 0;
+	}
+
+	.featureBox span {
+		font-size: 54px;
+		position: relative;
+		top: 41px;
+	}
+
+	.featureBox .desc {
+		margin-top: 47px;
+		font-size: 20px;
+	}
+
+	.featureBox .more {
+		font-size: 18px;
+		color: #7d7d7d;
+	}
+
+	.featureBox a {
+		color: inherit;
+		text-style: inherit;
+	}
+
+	.featureBox a:hover,
+	.featureBox a:focus,
+	.featureBox a:active {
+		text-decoration: inherit;
+	}
+
+	div[hljs] {
+		margin-bottom: 60px;
+	}
+
+	.paddedTtl {
+		padding: 40px !important;
+	}
+
+	p {
+		margin: 0 0 4px;
+	}
+
+	.getDride {
+		background-color: #333;
+		height: 90px;
+		width: 190px;
+		margin: auto;
+		border-radius: 4px;
+		margin-bottom: 41px;
+		padding-top: 13px;
+		color: #fff;
+		margin-top: 11px;
+		.smallTag {
+			font-size: 14px !important;
+		}
+		p {
+			font-size: 25px;
+		}
+	}
+	.pb-40{
+		padding-bottom: 40px;
+	}
+}
+
+
+@media (min-width: 992px) and (max-width: 1300px) {
+	.docs h2{
+		    min-height: 68px;
+	}
+}
+
+@media (max-width: 400px){
+
+	.docs h1{
+		font-size: 20px !important;
+	}
+}

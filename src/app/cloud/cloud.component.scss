@@ -1,0 +1,320 @@
+.greyBg{
+	background-color: #f9f9f9;
+	min-height: 100%;
+}
+.blackBg{
+	background-color: #333 !important;
+}
+.notFull{
+	.bVideosT{
+		padding-top: 29px !important;
+		padding-bottom: 29px !important;
+		margin-top: -62px;
+	}
+}
+.cloudMain {
+
+    .wrapTop{
+        height: 270px;
+        margin-top: -99px;
+    }
+
+	vg-controls{
+		background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, transparent 100%);
+	}
+
+    .top {
+        background-image: url(../../assets/images/popUpHeader.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 1900px;
+        height: 100%;
+        color: #fff;
+        border-bottom: 0!important;
+        div {
+            margin: auto auto;
+            text-align: center;
+            h1{
+                position: relative;
+                top: 100px;
+            }
+
+        }
+        .icon-cloud-full{
+            font-size: 65px;
+        }
+    }
+    .mtop30 {
+        margin-top: 30px;
+    }
+    .icon-toyCar-1 {
+        margin-top: -14px;
+        right: 15%;
+        position: relative;
+        transition: 3s;
+    }
+    .top a {
+        background-color: #72C6CE;
+        text-align: center;
+        margin: auto auto;
+        display: inline-block;
+        margin-top: 121px;
+        padding: 10px 45px;
+        border-radius: 2px;
+        font-weight: 100;
+        font-size: 19px;
+
+    }
+    .bVideosT{
+        text-align: center;
+        font-size: 18px;
+        color: #8c8c8c;
+        text-transform: capitalize;
+        padding-top: 50px;
+        padding-bottom: 29px;
+        letter-spacing: 1px;
+    }
+    .box {
+        background-color: #fff;
+        min-height: 100px;
+        padding: 0;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+    }
+    .hotVids {
+        img {
+            margin-bottom: 30px;
+        }
+    }
+    .whiteBg {
+        background-color: #fff;
+        margin-bottom: 30px;
+        border: 1px solid rgba(0, 0, 0, .09);
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .04);
+        border-radius: 2px;
+    }
+    .videoPlayer {
+        width: 100%;
+        height: 100%;
+    }
+
+    .videogular-container {
+        padding: 15px;
+    }
+    .actionBar {
+        margin: 20px 0px 20px 0px;
+        border-bottom: 1px dashed #666666;
+        height: 29px;
+    }
+    .actions {
+        list-style: none;
+    }
+    .actions li {
+        float: left;
+        margin-right: 20px;
+        font-size: 15.6px;
+        font-weight: 100;
+        cursor: pointer;
+    }
+    .actions li:last-child {
+        margin-right: 0px;
+    }
+    .views {
+        font-weight: 600;
+        font-size: 19px;
+        margin-top: -5px;
+    }
+    .innerPad {
+        margin: 10px 25px 10px 25px;
+    }
+    p {
+        font-weight: 100;
+        font-size: 16px;
+        color: #8E8E8E;
+    }
+    p b {
+        color: #666666;
+    }
+    .dateLabel {
+        font-size: 12px;
+        float: right;
+    }
+    .moreClips {
+        padding: 7px;
+    }
+    .dvdrOfClips {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 14px;
+    }
+    .icon-trash-can{
+        font-size: 29px;
+        position: relative;
+        top: -8px;
+    }
+
+    .postBox{
+        height: 30px;
+        border-top: 1px solid #f9f9f9;
+        clear: both;
+        .wrapReplyBox{
+                min-height: 30px;
+                background-color: #fff;
+                textarea {
+                    box-shadow: initial;
+                    padding: 0;
+                    border: 0;
+                    resize: none;
+                    width: 82%;
+                    float: left;
+					font-family: Comfortaa;
+					font-size: 14px;
+					padding-left: 10px;
+					padding-top: 3px;
+                }
+            }
+
+            .sendBtn {
+                border-radius: 0;
+                margin-right: 0;
+                margin-top: 0;
+				height: 37px;
+				font-size: 15px;
+				font-family: Comfortaa;
+                font-weight: 100;
+                padding: 5px 25px 5px 25px;
+                border-bottom-right-radius: 2px;
+                background-color: #333;
+				color: #fff;
+            }
+    }
+    .cmntsBox{
+        .cmt{
+           transition: all 0.5s ease;
+        }
+        .bubble {
+            margin: auto;
+            border-radius: 2px;
+            padding: 10px;
+            font-weight: 100;
+			text-align: left;
+            .bdy a {
+                color: #337ab7 !important;
+            }
+            .bdy p {
+                font-weight: 300;
+            }
+            .bdy img {
+                max-width: 100%;
+            }
+			.bold{
+				display: inline-block;
+			}
+        }
+         .bubble:hover .ago {
+             color: #999;
+         }
+        .pl {
+            margin-left: -69px;
+            margin-right: 18px;
+        }
+        .auther {
+            height: 48px;
+            margin-top: 45px;
+			clear: both;
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 2px;
+                margin-top: -73px;
+            }
+            label {
+                position: relative;
+                top: -43px;
+                left: 10px;
+                color: #848484;
+                font-weight: 100;
+            }
+        }
+        .ago {
+            float: right !important;
+            position: relative;
+            left: 25px;
+            color: #fff;
+            transition: all 0.5s ease;
+        }
+        .connectorLine {
+            border: 1px dashed #b7b7b7;
+            width: 1px;
+            height: 14px;
+            margin-top: -9px;
+            margin-bottom: -5px;
+            margin-left: -27px;
+        }
+        .moreCmnts{
+            text-align: center;
+            font-size: 14px;
+            color: #afafaf;
+            font-weight: 400;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .firstToCmnt{
+            text-align: center;
+            font-size: 14px;
+            color: #bbbbbb;
+            font-weight: 300;
+            margin-bottom: 17px;
+            margin-top: 17px;
+			width: 100%;
+        }
+
+    }
+
+    .shareIcon{
+        font-size: 33px;
+        position: relative;
+        top: -11px;
+    }
+
+    .listItem.ng-enter {
+        opacity: 0;
+        transition: all .5s ease;
+    }
+    .listItem.ng-enter-active {
+        opacity: 1;
+    }
+
+
+
+}
+
+@media (max-width: 320px) {
+
+	.actions{
+ 		padding-left: 0;
+	}
+	.cmntsBox {
+		.bubble{
+			padding: 0 !important;
+		}
+		.pl{
+			opacity: 0;
+		}
+	}
+}
+@media (min-width: 1404px){
+
+	.halfPageCloud{
+ 		width: 60%;
+	}
+
+}
+
+@media (max-width: 1404px){
+
+	.halfPageCloud{
+ 		width: 80%;
+	}
+
+}

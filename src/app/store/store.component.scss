@@ -1,0 +1,166 @@
+.store{
+    margin-bottom: 40px;
+    .product {
+        background-color: #f9f9f9;
+        .i{
+            background-color: #f9f9f9; 
+            color: #333;
+            padding: 70px 65px 70px 65px;
+        }
+        .pb{
+            background-color: #f9f9f9;
+            img{
+                padding: 15px;
+            }
+        }
+        h2{
+            font-size: 55px;
+        }
+        h3{
+            font-family: Raleway,sans-serif;
+            font-weight: 100;
+            line-height: 32px;
+        }
+        h2, h3{
+            text-transform: initial;
+        }
+        .price{
+            font-size: 24px;
+            font-weight: 100;
+            margin: 21px;
+            margin-left: 0;
+            font-family: 'Comfortaa', cursive;
+        }
+        .btn-buy{
+            background-color: #333;
+            color: #fff !important;
+            padding: 6px 30px;
+            border-radius: 2px;
+        }
+    }
+    .divider{
+        border-bottom: 1px dashed #333;
+        width: 100px;
+        margin: 20px;
+        margin-left: 0;
+    }
+    .promo-frame-right{
+        margin-left: 10px;
+        background-image: url(../../assets/images/product/kit.jpg);
+        background-size: cover;
+        background-position-y: 50%;
+        text-align: left;
+        a{
+            margin-left: 60px;
+        }
+        h2{
+            text-transform: inherit;
+            font-size: 75px;
+            margin-top: 150px;
+            text-align: left;
+            padding-left: 60px;
+            span{
+                font-family: Raleway,sans-serif;
+                font-weight: 100;
+                font-size: 45px;
+                padding-left: 5px;
+            }
+        }
+        h3{
+            font-family: Raleway,sans-serif;
+            font-weight: 100;
+            text-transform: inherit;
+            text-align: left;
+            padding-left: 60px;
+        }
+        .layer{
+            position: absolute;
+            margin-right: 10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            .divider{
+                border-bottom: 1px dashed #fff;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 60px;
+            }
+            .price{
+                font-size: 24px;
+                font-weight: 100;
+                text-align: left;
+                padding-left: 60px;
+                font-family: 'Comfortaa', cursive;
+                margin-top: 25px;
+
+            }
+        }
+    }
+    .promo-frame-left{
+        margin-right: 10px;
+        background-image: url(../../assets/images/product/zero.png);
+        background-size: cover;
+        background-position-y: 50%;
+        h2{
+            text-transform: inherit;
+            font-size: 75px;
+            margin-top: 150px;
+            text-align: left;
+            padding-left: 60px;
+            span{
+                font-family: Raleway,sans-serif;
+                font-weight: 100;
+                font-size: 45px;
+                padding-left: 5px;
+            }
+        }
+        h3{
+            text-align: left;
+            padding-left: 60px;
+            font-family: Raleway,sans-serif;
+            font-weight: 100;
+            text-transform: inherit;
+            line-height: 30px;
+        }
+        .layer{
+            position: absolute;
+            margin-right: 10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            .divider{
+                border-bottom: 1px dashed #fff;
+                margin-left: 60px;
+            }
+            a{
+                padding-left: 60px;
+                text-decoration: underline !important;
+                font-family: Raleway,sans-serif;
+                font-weight: 400;
+            }
+        }
+    }
+    .learnMorePrime{
+        margin-left: 15px;
+    }
+    .btn-buy-white {
+        background-color: #fff;
+        color: #333 !important;
+        padding: 6px 30px;
+        border-radius: 2px;
+    }
+
+    .smallProduct{
+        padding: 10px;
+        background-color: #333;
+        height: 600px;
+        color: #fff;
+        position: relative;
+    }
+    .productsGrid{
+        margin-bottom: 50px;
+    }
+
+}

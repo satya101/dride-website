@@ -1,0 +1,164 @@
+.fleet{
+	.pic_1 {
+	  background-image: url('../../../assets/images/bg4.jpg');
+	  height: 35vh;
+	  background-position: center;
+	  background-attachment: fixed;
+	  background-size: contain;
+	  background-repeat: no-repeat;
+	  background-position-y: 0;
+	  @media (max-width: 400px) {
+		background-attachment: initial !important;
+		background-size: cover;
+		background-position: right;
+	  }
+	}
+
+
+	.slogen {
+	  color: #fff;
+	}
+	.imfx{
+		width: 57% !important;
+		padding-top: 130px !important;
+	}
+	.logo {
+	padding-top: 63px;
+	font-size: 106px;
+	text-transform: inherit;
+	  span {
+		font-size: 46px;
+		position: relative;
+		left: 4px;
+		letter-spacing: 2px;
+		font-family: Raleway;
+		text-transform: lowercase;
+	  }
+
+	  @media (max-width: 400px) {
+		  font-size: 86px;
+		  span{
+			font-size: 19px;
+		  }
+	  }
+	}
+	.x12{
+		padding-top: 84px;
+		height: 100%;
+	}
+	@media (max-width: 765px) {
+		.firBox{
+			margin-top: -110px;
+			margin-bottom: 29px;
+		}
+		.p-6{
+			padding: 4rem 4rem !important;
+		}
+	}
+	
+	.mt2{
+		margin-top: 160px;
+	}
+	.fi{
+		padding: 0;
+		margin: 0;
+		margin-left: -4px !important;
+		position: inherit !important;
+	}
+	.mct{
+		margin-top: 66px;
+		p{
+			padding: 86px;
+			font-size: 27px;
+			color: #444;
+			font-weight: 100;
+		}
+
+
+		@media (max-width: 768px) {
+			p{
+				padding: 36px !important;
+				font-size: 20px !important;
+				padding: 20px !important;
+			}
+		}
+	}
+	.x1{
+		h2, p {max-width: 80%;}
+		@media (max-width: 1300px) {
+			h2, p {max-width: 100%;}
+		}
+	}
+
+	.textBlock{
+		h2{
+			padding: 61px;
+			padding-top: 91px;
+			font-size: 54px;
+			padding-bottom: 0;
+			text-align: left;
+		}
+		p{
+			font-size: 26px;
+			padding: 63px;
+			padding-top: 24px;
+			font-family: Raleway;
+			font-weight: 100;
+			line-height: 39px;
+		}
+
+		@media (max-width: 500px) {
+			h2{
+				font-size: 33px !important;
+			}
+		}
+
+		@media (max-width: 1150px) {
+			h2{
+				padding: 5px;
+				font-size: 43px;
+			}
+			p{
+				font-size: 26px;
+				margin-top: 31px;
+				padding: 5px;
+			}
+		}
+	}
+
+	.picConteiner{
+		position: relative;
+		min-height: 160px;
+		img {  
+			width: auto;
+			height: auto;
+			top: 0;  
+			bottom: 0;  
+			left: 0;  
+			right: 0;  
+			margin: auto;
+
+		}
+	}
+	.mw{
+		max-width: 50%;
+	}
+	.contact{
+		text-align: center;
+		background-color: #333;
+		height: 269px;
+		color: #fff;
+		padding-top: 42px;
+		h3{
+			text-transform: inherit;
+			margin-top: 48px;
+		}
+		h4{
+			color: #f06060;
+			text-transform: inherit;
+			margin-top: 32px;
+			font-size: 34px;
+			font-family: Raleway;
+		}
+	}
+}

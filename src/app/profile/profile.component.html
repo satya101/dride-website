@@ -1,0 +1,168 @@
+<div class="profile">
+    <div class="container-fluid p-0">
+            <div class="headerBg">
+                <div class="gradBg">
+                    <div class="container">
+                        <div class="profilePic">
+                            <img src="{{(opData|async)?.pic}}" />
+                            <p>{{(opData|async)?.name}}
+                               <!-- TROPHYS HERE -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="container-fluid greyBg" *ngIf="!userHaveNoVideos">
+        <div class="col-md-12 no-padding">
+            <div class="clearfix container">
+                <div class="row">
+
+                	<!-- video player -->
+                    <div class="col-md-8">
+                    	<div class="box mainVid">
+
+                        <div class="videogular-container">
+
+                            <vg-player class="player" *ngIf="currentVideo">
+
+							    <video [vgMedia]="media" #media id="current" 
+										preload="auto"
+										crossorigin 
+										class="videoPlayer" 
+										poster="{{currentVideo.thumbs.src}}" 
+										src="{{currentVideo.clips.src}}"
+										>
+							    	<source src="{{currentVideo.clips.src}}" type="video/mp4">
+							    </video>
+
+
+                                <vg-controls>
+                                    <vg-play-pause></vg-play-pause> 
+
+                                    <vg-scrub-bar [vgFor]="current" >
+                                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                    </vg-scrub-bar>
+									 <vg-time-display [vgFor]="current" [vgProperty]="'current'" [vgFormat]="'mm:ss'"></vg-time-display>
+									 <span class="divider">/</span>
+									 <vg-time-display [vgFor]="current" [vgProperty]="'total'" [vgFormat]="'mm:ss'"></vg-time-display>
+
+                                    <vg-fullscreen></vg-fullscreen>
+                                </vg-controls>
+
+                                <vg-overlay-play></vg-overlay-play>
+
+                            </vg-player>
+                        </div>
+
+
+	                    </div>
+	                    <div class="box innerPad" *ngIf="currentVideo">
+
+	                    		<div class="actionBar">
+                                        <ul class="float-right actions">
+                                            <li (click)="fbShare()"><span class="icon-facebookMedium shareIcon"></span></li>
+                                            <li (click)="twShare()"><span class="icon-twitterMedium shareIcon"></span></li>
+                                            <li *ngIf="isOwner()" (click)="removeClip()"><span class="icon-trash-can" alt="remove clip"></span></li>
+                                        </ul>
+                                        <div class="views float-left">
+                                            <label>{{currentVideo.views | number:0}} Views </label>
+                                            &nbsp;&nbsp;&nbsp; 
+                                            <label (click)="commentFoucs()">{{currentVideo.cmntsCount ? currentVideo.cmntsCount : 0}} Comments</label>
+                                        </div>
+	                    				<div class="clear"></div>
+	                    		</div>
+
+
+                                <div class="desc">
+                                    <p><b>License Plate: </b> {{currentVideo.plates}}</p>
+                                    <p><b>Description: </b> {{currentVideo.description}}</p>
+                                    <p *ngIf="currentVideo.timestamp" class="dateLabel">{{currentVideo.timestamp * 1000 | date:'medium'}}</p>
+                                </div>
+
+                                <div class="clear"></div>
+
+
+	                    </div>
+
+						<div class="box" >
+						    <div class="cmntsBox innerPad">
+						        <div *ngFor="let commentId of comments | keys" class="listItem" [@introAnim]>
+						            <div>
+						                <div class="bubble">
+						                    <div class="auther float-left pl">
+						                        <img src="{{comments[commentId].pic}}" alt="{{comments[commentId].auther}}" />
+						                    </div>
+						                    <div class="ago">{{comments[commentId].timestamp | timeAgo}}</div>
+						                    <a class="bold" routerLink="/profile/{{comments[commentId].autherId}}">@{{comments[commentId].auther}}</a>
+						                    <div class="bdy">{{comments[commentId].body}}</div>
+						                </div>
+						                <div class="connectorLine" *ngIf="conversationPreviusIsMine[commentId]"></div>
+						            </div>
+						        </div>
+						        <p *ngIf="currentVideo && !hasComments(comments)" class="firstToCmnt">Be the first to comment</p>
+						        <p *ngIf="hasMoreToLoad()" class="moreCmnts" (click)="loadMoreComments()">Load More Comments</p>
+						    </div>
+						    <div class="postBox">
+						        <div class="wrapReplyBox mt-0">
+						            <textarea id="replyBox" ctrl-enter="sendComment()" class="form-control replyBox mt-0" [(ngModel)]="replyBox" type="text" name="reply" placeholder="What's on your mind?"></textarea>
+						            <button class="btn btn-dride-black sendBtn float-right" (click)="sendComment()">Send</button>
+						        </div>
+						    </div>
+						    <div class="clear"></div>
+						</div>
+
+	                    <div class="box" *ngIf="map.path">
+						 	<agm-map class="pad5" [latitude]="map.center.latitude" [longitude]="map.center.longitude" [zoom]="map.zoom">
+						       
+						       <agm-polyline>
+						           <agm-polyline-point *ngFor="let point of map.path" [latitude]="point.latitude" [longitude]="point.longitude"></agm-polyline-point>
+						       </agm-polyline>
+
+							</agm-map>                  		
+	                    </div>	                    
+                    </div>
+
+
+                    <div class="col-md-4" *ngIf="orderedClips">
+
+                            <div *ngFor="let clipsInDay of orderedClips | keys;" >
+                             	<p *ngIf="clipsInDay" class="dvdrOfClips">{{preatifyDate(clipsInDay)  | date:'MMM d y' }}</p>
+
+                                <div *ngFor="let clip of orderedClips[clipsInDay]| keys;" class="box moreClips">
+
+                                    <a routerLink="/profile/{{uid}}/{{clip}}">
+                                        <img *ngIf="orderedClips[clipsInDay][clip].thumbs" class="img-fluid" src="{{orderedClips[clipsInDay][clip].thumbs.src}}" />
+                                    </a>
+
+                                </div>
+                            </div>
+                           
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid greyBg mh" *ngIf="userHaveNoVideos">
+        <div class="col-md-12 p-0">
+            <div class="clearfix container">
+                <div class="row">
+                    <h3 class="noVideos mx-auto">This user doesn't have any videos yet..</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<div class="clearfix"></div>
+
+

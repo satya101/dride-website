@@ -1,0 +1,147 @@
+.loginBox, .modalUI {
+
+
+    .modal-header {
+        background-image: url('../../../../../assets/images/popUpHeader.svg');
+        background-position-y: -17px;
+        background-repeat: no-repeat;
+        background-size: cover;
+		background-position: center;
+        height: 133px;
+        width: 100.1%;
+        color: #fff;
+        border-bottom: 0 !important;
+    }
+
+    .modal-title {
+        text-align: center;
+        font-size: 28px;
+        color: #F06060;
+        margin-top: 10px !important;
+    }
+
+    .modal-footer {
+        color: #929292;
+        font-size: 12px;
+    }
+
+    .modal-body {
+        background-color: #fff;
+        margin-top: 8px;
+        margin-bottom: 40px;
+    }
+
+    h2{
+        margin-top: 19px;
+    }
+    input:focus,
+    button:focus {
+        border: 0;
+        box-shadow: none;
+        outline: none;
+    }
+    .padWrap {
+        padding: 0 15px;
+    }
+    .hint {
+        font-size: 12px;
+        color: #949494;
+        position: relative;
+        top: -26px;
+    }
+    h2 {
+        text-transform: capitalize;
+    }
+    input {
+        background-color: #eaeaea;
+        border: 0;
+        box-shadow: none;
+        padding: 12px;
+        font-size: 16px;
+        height: initial;
+        font-weight: 100;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .socialButtons {
+        width: 90%;
+        margin: auto auto;
+        margin-top: 16px;
+        margin-bottom: 20px;
+        background-color: #ECECEC;
+        color: #808080;
+        font-weight: 300;
+        height: 45px;
+        cursor: pointer;
+		padding-top: 13px;
+    }
+    .sideIcon {
+		color: #fff;
+		height: 45px;
+		width: 45px;
+		padding-top: 11px;
+		margin-top: -13px;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		font-size: 24px;
+		display: block;
+		float: left;
+		margin-left: -16px;
+    }
+    .socialButtons .icon-facebook {
+        background-color: #3B57A3;
+    }
+    .socialButtons .icon-google {
+        background-color: #387AF2;
+    }
+    .btn {
+        border: 0;
+    }
+    .icon-toyCar-1 {
+        position: relative;
+        top: 11px;
+        left: 13px;
+        color: #f06060;
+    }
+    .animatedCar {
+        transition: 10s;
+        left: 90%;
+    }
+    .f50 {
+		font-size: 27px;
+    }
+    .tc{
+        transition: all 0.5s linear;
+    }
+    .boxme.ng-hide {
+      opacity: 0;
+    }
+    .boxme.ng-hide-remove-active {
+        transition-delay: 0.4s;
+    }
+    .boxme.ng-hide-animate {
+      position:absolute;
+    }
+
+    .modal-footer{
+        justify-content: inherit;
+    }
+    .modal-title{
+        margin: auto auto;
+    }
+    .closeModal{
+        margin-top: -67px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+}
+
+
+@media (max-width: 992px) {
+
+	.f50{
+		font-size: 27px !important;
+	}
+
+}

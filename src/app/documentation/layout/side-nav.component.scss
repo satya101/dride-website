@@ -1,0 +1,91 @@
+/* Sidebar Styles */
+
+.sidebar {
+    background-color: #333;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+	min-width: 158px;
+}
+.sidebar ul {
+    color: #999999;
+    list-style: none;
+}
+.sidebar ul li {
+    padding: 10px;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 22px;
+}
+
+.sidebar-nav:first-child {
+    margin-top: 14px;
+}
+
+.sidebar-nav {
+    padding-left: 0;
+	padding-top: 40px;
+	li{
+		padding-left: 0 !important;
+	}
+}
+.sidebar-nav li a {
+    display: block;
+    color: #fff !important;
+    font-size: 15px;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff !important;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+.sidebar-nav .bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar-nav .bottom a {
+    color: #333;
+    cursor: pointer;
+}
+
+.sidebar-nav .bottom a:hover {
+    color: #333;
+    background-color: #fff;
+}
+
+.activeNav {
+    text-decoration: none;
+    color: #fff !important;
+}

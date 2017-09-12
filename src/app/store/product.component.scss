@@ -1,0 +1,95 @@
+.product {
+    .productHeader {
+        .info {
+            background-color: #E7E7E7;
+            color: #333;
+        }
+        .gallery{
+
+        }
+        .i {
+            height: 400px;
+            padding: 70px 65px 70px 65px;
+        }
+        h2 {
+            font-size: 55px;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-family: Raleway, sans-serif;
+            font-weight: 100;
+            line-height: 32px;
+        }
+        h2,
+        h3 {
+            text-transform: initial;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: 100;
+            margin: 21px;
+            margin-left: 0;
+            font-family: 'Comfortaa', cursive;
+        }
+        .btn-buy {
+            background-color: #333;
+            color: #fff !important;
+            padding: 6px 30px;
+            border-radius: 2px;
+        }
+        .divider {
+            border-bottom: 1px dashed #333;
+            width: 100px;
+            margin: 20px;
+            margin-left: 0;
+        }
+    }
+    .specs{
+        h2, .row{
+            margin: 70px 0;
+            font-size: 16px;
+            font-weight: 100;
+        }
+        h2{
+            font-size: 26px;
+        }
+    }
+    .upper{
+        text-transform: uppercase;
+        padding-left: 0;
+    }
+    .txtFnt{
+        font-family: Raleway, sans-serif;
+        font-weight: 400;
+        color: #5d5d5d;
+        padding-left: 0;
+        ul{
+            margin-left: -25px;
+            line-height: 40px;
+        }
+    }
+    .productMain{
+        max-height: 310px;
+        text-align: center;
+        margin: auto auto;
+        padding-bottom: 40px;
+    }
+    .productInfo{
+        margin: 70px 0 !important;
+    }
+    .productPics{
+        list-style: none;
+        text-align: center;
+        padding: 0;
+        li{ 
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+            img{
+                width: 100px;
+            }
+        }
+    }
+}

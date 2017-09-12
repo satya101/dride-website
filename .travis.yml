@@ -3,37 +3,29 @@ dist: trusty
 
 language: node_js
 node_js:
-  - "4.4"
+  - "6.9.4"
+addons:
+apt:
+  sources:
+    - google-chrome
+  packages:
+    - google-chrome-stable
+    - google-chrome-beta
+
 before_install:
- - export CHROME_BIN=/usr/bin/google-chrome
- - export DISPLAY=:99.0
- - sh -e /etc/init.d/xvfb start
- - sleep 3
-# - nohup bash -c "webdriver-manager start --standalone 2>&1 &"
- - sudo apt-get update
- - sudo apt-get install -y libappindicator1 fonts-liberation
- - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
- - sudo dpkg -i google-chrome*.deb
- - gem update --system
- - gem install compass
- - sleep 5
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 before_script:
-  - 'npm install -g bower karma grunt-cli jshint'
-  - 'npm install -g karma-chrome-launcher --save-dev'
-  - 'npm install --save-dev karma-phantomjs-launcher'
-  - 'npm install --save jpegtran-bin'
-  - 'npm cache clean && npm install grunt-contrib-imagemin'
-  - 'npm install -g firebase-tools'
-  - 'npm install'
-  - 'bower install'
-  - node ./node_modules/protractor/bin/webdriver-manager update
-#  - node ./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update --standalone
-  - 'webdriver-manager start --standalone > /dev/null &'
-#  - node ./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager start > /dev/null &
-  - sleep 5
+- npm install -g @angular/cli
+- npm install -g karma
+- npm install
+- ng build --prod
+
+
 script:
-  - 'grunt serve &'
-  - 'grunt test'
-  - 'grunt build'
+  - ng test --watch false
+  - ng e2e
+
 after_success:
   -  if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then firebase use default --token "${FIREBASE_TOKEN_CI}";firebase deploy --$

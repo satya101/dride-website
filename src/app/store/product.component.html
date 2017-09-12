@@ -1,0 +1,41 @@
+<div class="product">
+
+	<div class="container-fluid greyBg">
+	    <div class="container productHead">
+	        <div class="col-md-12" >
+	            <div class="row productHeader">
+	                <div class="i col-md-6 info animBox" *ngIf="(productData | async)?.title">
+	                    <h2>{{(productData | async)?.key}}</h2>
+	                    <h3>{{(productData | async)?.title}}</h3>
+	                    <p class="price">${{(productData | async)?.price}}</p>
+	                    <div class="divider"></div>
+	                    <a (click)="purchase()" class="btn btn-buy">{{(productData | async)?.actionBtn}}</a>
+	                </div>
+	                <div class="col-md-6 gallery text-center" *ngIf="(productData | async)?.title">
+	                    <img class="productMain img-fluid" src="{{(productData | async)?.images[mainImageIndex].url}}" alt="dride" />
+	                    <ul class="productPics">
+	                    	<li *ngFor="let product of (productData | async)?.images; index as key">
+	                    		<img (click)="updateMainPicture(key)" class="img-responsive" src="{{product.url}}" alt="dride" />                  
+	                    	</li>
+
+
+	                    </ul>
+	                </div>
+	            </div>
+	            <div class="clear"></div>
+	        </div>
+	    </div>
+	</div>
+	<div class="container specs">
+	    <h2>Product Information</h2>
+
+	    <div class="productInfo animBox" *ngFor="let node of (productData | async)?.productInfo">
+		    <div class="row" *ngIf="node">
+		        <div class="col-md-2 upper">{{node.title}}</div>
+		        <div class="col-md-10 txtFnt" [innerHTML]="node.body"></div>
+		    </div>
+	    </div>
+	    <br>
+	</div>
+</div>
+

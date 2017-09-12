@@ -1,0 +1,96 @@
+footer {
+    background: #f9f9f9;
+    .full {
+        width: 100%;
+    }
+    .gap {
+        height: 30px;
+        width: 100%;
+        clear: both;
+        display: block;
+    }
+    .bg-gray {
+        background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+        box-shadow: 0 1px 0 #B4B3B3;
+    }
+    .social {
+        list-style: none;
+		margin-top: 8px;
+    }
+    .social li {
+        background: none repeat scroll 0 0 #e0e0e0;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -o-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%;
+        display: inline-block;
+        height: 36px;
+        line-height: 36px;
+        margin: 0 8px 0 0;
+        padding: 0;
+        text-align: center;
+        width: 36px;
+        transition: all 0.5s ease 0s;
+        -moz-transition: all 0.5s ease 0s;
+        -webkit-transition: all 0.5s ease 0s;
+        -ms-transition: all 0.5s ease 0s;
+        -o-transition: all 0.5s ease 0s;
+    }
+    .social li:hover {
+        transform: scale(1.15) rotate(360deg);
+        -webkit-transform: scale(1.1) rotate(360deg);
+        -moz-transform: scale(1.1) rotate(360deg);
+        -ms-transform: scale(1.1) rotate(360deg);
+        -o-transform: scale(1.1) rotate(360deg);
+    }
+    .social li a {
+        color: #444 !important;
+    }
+    .social li:hover {
+        border: 0;
+        background: #bfbfbf;
+    }
+    .social li a i {
+        font-size: 16px;
+        margin: 0 0 0 5px;
+        color: #EDEFF1 !important;
+    }
+    .footer-bottom {
+        background: #f9f9f9;
+        border-top: 1px solid #DDDDDD;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .footer-bottom p.pull-left {
+        padding-top: 6px;
+    }
+    .payments {
+        font-size: 1.5em;
+    }
+	.cnt{
+		margin-top: 15px;
+		text-align: left;
+		color: #a9a9a9;
+	}
+	.social{
+		float: right;
+    	margin-top: -49px;
+	}
+}
+
+@media (max-width: 1199px) {
+	.footer-bottom {
+		padding-top: 26px !important;
+	}
+	.cnt{
+		text-align: center !important;
+		margin: auto auto;
+	}
+	.social{
+		float: inherit !important;
+		text-align: center;
+		margin-top: 21px !important;
+		padding: 0;
+	}
+}

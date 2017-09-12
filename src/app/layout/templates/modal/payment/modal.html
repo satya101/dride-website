@@ -1,0 +1,63 @@
+<div class="modalUI">
+    <div class="modal-header">
+        <p class="txtHeadline mx-auto">#woohoo</p>
+        <p class="float-right closeModal" (click)="dismissModal()">x</p>
+    </div>
+    <span class="icon-toyCar-1 animatedCar"></span>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row" class="animate-show">
+<!--                 <div class="col-md-12 tc boxme">
+
+                    <div class="col-md-12">
+
+                        <div class="credit-card-box">
+                            <div class="panel-body">
+                                <form role="form" id="payment-form" method="POST">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label for="cardNumber">CARD NUMBER</label>
+                                                <div class="input-group">
+                                                    <input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required autofocus />
+                                                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-7 col-md-7">
+                                            <div class="form-group">
+                                                <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                                <input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5 col-md-5 float-right">
+                                            <div class="form-group">
+                                                <label for="cardCVC">CV CODE</label>
+                                                <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> -->
+                <h3>You're now on the waitlist to buy a Dride. We'll send you an invitation to purchase soon!</h3>
+                <p>Psst... want to skip the line? Get noticed by tweeting about us.</p>
+                <div class="form-group ">
+                    <textarea class="form-control" [(ngModel)]="shareTxt"></textarea>
+                    <br>
+                    <button class="btn btn-dride-black float-right" (click)="tweet()"><span class="icon-twitter"></span> Tweet</button>
+<!--                     <button class="btn btn-dride-black float-right"><span class="icon-facebook"></span> Share</button> -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!--     <div class="modal-footer text-left">
+        <button class="btn btn-dride-black float-right">OK</button>
+    </div> -->
+</div>
