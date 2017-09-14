@@ -35,7 +35,21 @@ nav{
     border-bottom-right-radius: 2px;
     cursor: pointer;
 }
-
+.caret::after{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-left: .3em solid transparent;
+    top: 17px;
+    left: -19px;
+    position: relative;
+    color: #333333;
+}
 .navbar-light .navbar-brand:hover {
     background-color: #333;
 }

@@ -6,7 +6,7 @@
     </button>
     <a class="navbar-brand" routerLink="/">dride</a>
     <div class="collapse navbar-collapse" (collapsed)="setHeight(el, 0);showOverlay = false" (expanded)="setHeight(el, 0);setHeight(el, el.scrollHeight);showOverlay = true"
-         #el [@introAnim]>
+	[collapse]="isCollapsed" #el [@introAnim]>
         <ul class="nav mt-lg-0 mr-lg-auto">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="isCollapsed = true">
                 <a class="nav-link" routerLink="/">Home</a>
@@ -39,9 +39,10 @@
             <button type="button" class="btn buyBtn btn-secondary " routerLink="/store">Buy</button>
 
             <div *ngIf="firebaseUser" class="login">
-                <div dropdown class="d-inline-block" placement="bottom right">
-                    <img dropdownToggle class="profilePicM" src="{{firebaseUser.photoURL}}" alt="{{firebaseUser.displayName}}" id="settings"
-                    />
+                <div dropdown placement="bottom right">
+					<div class="caret">
+						<img dropdownToggle class="profilePicM" src="{{firebaseUser.photoURL}}" alt="{{firebaseUser.displayName}}" id="settings"/>
+					</div>
                     <!--<span class="caret"></span>-->
                     <div *dropdownMenu role="menu" class="dropdown-menu" aria-labelledby="settings">
                         <a routerLink="/settings" class="dropdown-item" (click)="isCollapsed = true">Settings</a>

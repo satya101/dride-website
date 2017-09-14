@@ -2,16 +2,11 @@
 
 .sidebar {
     background-color: #333;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
     border-right: 1px solid #eee;
-	min-width: 158px;
+    min-width: 158px;
+    height: 100%;
 }
 .sidebar ul {
     color: #999999;

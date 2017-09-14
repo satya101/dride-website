@@ -13,12 +13,14 @@
         background-size: cover;
         background-position: center;
 	}
-	.attachmentFixed{
-		background-position: center;
-		background-attachment: fixed;
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position-y: 0;
+	@media (min-width: 1200px) {
+		.attachmentFixed{
+			background-position: center;
+			background-attachment: fixed;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position-y: 0;
+		}
 	}
     .pic_2 {
         background-image: url('../../../assets/images/features/pic2.jpg');

@@ -3,8 +3,6 @@
 	  background-image: url('../../../assets/images/bg4.jpg');
 	  height: 35vh;
 	  background-position: center;
-	  background-attachment: fixed;
-	  background-size: contain;
 	  background-repeat: no-repeat;
 	  background-position-y: 0;
 	  @media (max-width: 400px) {
@@ -13,7 +11,12 @@
 		background-position: right;
 	  }
 	}
-
+	@media (min-width: 1200px) {
+		.pic_1 {
+			background-attachment: fixed;
+			background-size: contain;
+		}
+	}
 
 	.slogen {
 	  color: #fff;
@@ -160,5 +163,11 @@
 			font-size: 34px;
 			font-family: Raleway;
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	.pl-5{
+		display: none;
 	}
 }
