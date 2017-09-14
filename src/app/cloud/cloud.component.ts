@@ -55,10 +55,17 @@ export class CloudComponent implements OnInit {
 
 	}
 
-	onPlayerReady(api: VgAPI, videoId: string) {
+
+	onPlayerReady(api: VgAPI, video) {
 		api.getDefaultMedia().subscriptions.playing.subscribe(
 			() => {
-				this.mixpanel.track('playVideoOnHP', {vid: videoId})
+				// increase views counter
+				this.http.get(environment.functionsURL + '/viewCounter?videoId=' + video.videoId + '&op=' + video.op).subscribe(data => {
+					console.log(data)
+				});
+				console.log('play');
+
+				this.mixpanel.track('playVideoOnHP', {vid: video.videoId})
 			}
 		);
 	}

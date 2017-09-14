@@ -11,7 +11,7 @@ cloud = {
 
             var db = admin.database();
             var refClip = db.ref("clips").child(uid).child(videoId)
-            return refClip.on("value", function(snapshot) {
+            return refClip.once("value", function(snapshot) {
 
                 var clipObj = snapshot.val()
 

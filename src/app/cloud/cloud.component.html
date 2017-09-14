@@ -22,7 +22,7 @@
 
                 <div class="videogular-container" *ngIf="currentVideo">
 
-                  <vg-player class="player" (onPlayerReady)="onPlayerReady($event, currentVideo.key)">
+                  <vg-player class="player" (onPlayerReady)="onPlayerReady($event, currentVideo)">
 
                     <video [vgMedia]="media" #media id="current" preload="none" crossorigin class="videoPlayer" poster="{{currentVideo.thumbs.src}}">
                       <source src="{{currentVideo.clips.src}}" type="video/mp4">

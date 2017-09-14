@@ -10,6 +10,8 @@ import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { NgbdModalPayement } from './payment.modal';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { MixpanelService } from '../helpers/mixpanel.service';
+
 
 
 
@@ -29,7 +31,8 @@ export class ProductComponent implements OnInit {
 		private route: ActivatedRoute,
 		private auth: AuthService,
 		private afAuth: AngularFireAuth,
-		private modalService: BsModalService) {
+		private modalService: BsModalService,
+		public mixpanel: MixpanelService) {
 
 
 
@@ -71,7 +74,7 @@ export class ProductComponent implements OnInit {
 
 
 			this.modalService.show(NgbdModalPayement);
-
+			this.mixpanel.track('purchase', {})
 
 			// payment.makePayment($scope.data.price, $scope.data.key, $scope.data.actionBtn)
 			// TODO: track

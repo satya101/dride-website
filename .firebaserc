@@ -1,10 +1,6 @@
 {
   "projects": {
     "default": "dride-2384f",
-<<<<<<< HEAD
-    "ci": "dride-ci"
-=======
     "prod": "dride-2384f"
->>>>>>> master
   }
 }
