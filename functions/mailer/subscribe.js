@@ -4,9 +4,9 @@ const cors = require('cors')({origin: true});
 
 var Mailchimp = require('mailchimp-api-v3')
 var marked = require('marked');
+var env = require('../environments/environment.prod')
 
-
-var mailchimp = new Mailchimp("83ad28350d99080099a05307da1108fc-us13");
+var mailchimp = new Mailchimp(env.environment.mailchimp);
 
 
 subscriber = {
@@ -17,6 +17,9 @@ subscriber = {
      */
     subscribeUser: function(email, user) {
 
+		if (!user.displayName)
+			user.displayName = ''
+			
 		return mailchimp.post({
 			path : '/lists/a0b1ee944d/members',
 			body : {

@@ -49,3 +49,4 @@ functions/dist-server
 functions/dist
 
 src/environments/environment.ts
+functions/environments/*
