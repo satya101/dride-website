@@ -6,7 +6,7 @@
     </button>
     <a class="navbar-brand" routerLink="/">dride</a>
     <div class="collapse navbar-collapse" (collapsed)="setHeight(el, 0);showOverlay = false" (expanded)="setHeight(el, 0);setHeight(el, el.scrollHeight);showOverlay = true"
-        [collapse]="isCollapsed" #el [@introAnim]>
+         #el [@introAnim]>
         <ul class="nav mt-lg-0 mr-lg-auto">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="isCollapsed = true">
                 <a class="nav-link" routerLink="/">Home</a>

@@ -438,9 +438,14 @@ main{
 	}
 	vg-scrub-bar{
 		margin-top: 25px;
-		height: 19px;
+		height: 18px;
 		border-top: 2px dashed #fff;
 		position: relative;
+	}
+	vg-time-display{
+		font-family: Comfortaa;
+		font-weight: 100;
+		font-size: 14px;
 	}
 	.vg-buffering .loadingSpinner {
 		box-shadow: none;

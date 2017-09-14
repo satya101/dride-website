@@ -58,6 +58,7 @@ cloud = {
         clip.hpInsertTime = (new Date()).getTime() + '';
         
         if (typeof hpRef === 'undefined'){
+			console.log('add hp ref')
             var HpInsertedId = ref.push(clip).key
 
             //add ref to clips/{uid}/{videoId}
@@ -65,6 +66,7 @@ cloud = {
             //add op to the object 
             clipRef.update({'hpRef': HpInsertedId})
         }else{
+			console.log('update views or whatever')
             var clipRef = db.ref("clips_homepage").child(hpRef)
             clipRef.update(clip)
         }
