@@ -247,7 +247,7 @@ body {
 }
 
 .full-height{
-    min-height: 100%;
+    min-height: 100vh;
 }
 .full-height-footer {
     height: calc(100% - 23px) !important;
@@ -407,54 +407,6 @@ main{
     }
 }
 
-.player{
-	font-family: 'icomoon' !important;
-	vg-overlay-play {
-		margin-left: -100%;
-	}
-	.vg-icon-pause:before {
-		content: "\e919";
-	} 
-	.vg-icon-fullscreen:before {
-		content: "\e91a";
-	}
-	vg-overlay-play .vg-icon-play_arrow:before {
-		font-size: 50px;
-		content: "\e91b";
-	}
-	vg-controls{
-		background-color: initial;
-		vg-scrub-bar-current-time .background {
-			border: 1px solid #F06060;
-			background-color: #F06060;
-			margin-top: -7px;
-			margin-left: -3px;
-			border-radius: 0;
-			height: 1px;
-		}
-	}
-	vg-scrub-bar-buffering-time .background {
-		background-color: rgba(255, 0, 0, 0.14);
-	}
-	vg-scrub-bar{
-		margin-top: 25px;
-		height: 18px;
-		border-top: 2px dashed #fff;
-		position: relative;
-	}
-	vg-time-display{
-		font-family: Comfortaa;
-		font-weight: 100;
-		font-size: 14px;
-	}
-	.vg-buffering .loadingSpinner {
-		box-shadow: none;
-	}
-	.divider{
-		color: #fff;
-		margin-top: 12px;
-	}
-}
 
 
 .thread .bubble .bdy img {
@@ -489,12 +441,7 @@ main{
         }
     }
  }
-.player vg-overlay-play .vg-icon-play_arrow:before {
-	font-size: 100px !important;
-}
-.vg-icon-play_arrow:before{
-	content: "\E91B";
-}
+
 .card-columns {
 	@include media-breakpoint-only(xs) {
 		column-count: 1;
@@ -512,7 +459,26 @@ main{
 		column-count: 2;
 	}
 }
-.open .dropdown-menu{
+.hidden-xs .hidden-sm{
+	display: none;
+}
+@media (max-width: 576px) {
+	.hidden-xs-down{
+		display: none;
+	}
+}
+@media (max-width: 960px) {
+	.hidden-lg-down{
+		display: none;
+	}
+}
+@media (max-width: 768px) {
+	.hidden-sm-down{
+		display: none;
+	}
+}
+
+.minH{
+	min-height: calc(100vh);
 	display: block;
-	top: 82px;
 }

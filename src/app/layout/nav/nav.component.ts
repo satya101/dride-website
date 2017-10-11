@@ -2,9 +2,9 @@ import { Component, OnInit, Renderer } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../auth.service';
+import { SsrService } from '../../helpers/ssr/ssr.service'
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { UserService } from '../../user.service';
 import { introAnim } from '../../router.animations';
 
 @Component({
@@ -22,18 +22,20 @@ export class NavComponent implements OnInit {
 	path = '';
 	showOverlay = false;
 
-	constructor(private afAuth: AngularFireAuth, private renderer: Renderer, public location: Location,  router: Router) {
+	constructor(private auth: AuthService, private renderer: Renderer, public location: Location,  router: Router, public ssr: SsrService) {
 
-		router.events.subscribe((val) => {
-			this.path = location.path();
-			if (this.path !== '') {
-				this.isFixed = false;
-			} else {
-				this.isFixed = true
-			}
-		});
+		if (this.ssr.isBrowser()) {
+			router.events.subscribe((val) => {
+				this.path = location.path();
+				if (this.path !== '') {
+					this.isFixed = false;
+				} else {
+					this.isFixed = true
+				}
+			});
+		}
 
-		afAuth.authState.subscribe(user => {
+		auth.getState().subscribe(user => {
 			if (!user) {
 				this.firebaseUser = null;
 				return;
@@ -50,11 +52,19 @@ export class NavComponent implements OnInit {
 	}
 
 	logOut() {
-		this.afAuth.auth.signOut();
+		this.auth.logOut();
 		// TODO: alert
 	}
 	ngOnInit() {
 
+	}
+
+	getProfilePic() {
+		if (this.firebaseUser.fid) {
+			return 'https://graph.facebook.com/' + this.firebaseUser.fid + '/picture';
+		}else {
+			return this.firebaseUser.photoURL;
+		}
 	}
 
 }

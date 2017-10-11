@@ -98,7 +98,11 @@ nav{
       -webkit-transition: height .5s;
       transition: height .5s;
 }
-
+@media (min-width: 992px) and (max-width: 1200px) {
+	.navbar{
+		background-color: #fff;
+	}
+}
 @media (max-width: 992px) {
 
 	nav{
@@ -160,4 +164,10 @@ nav{
 		top: 0;
 		z-index: 1;
 	}
+}
+.open .dropdown-menu{
+	display: block;
+    top: 82px !important;
+    right: 30px !important;
+    left: auto !important;
 }

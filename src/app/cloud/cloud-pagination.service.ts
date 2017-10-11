@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { SsrService } from '../helpers/ssr/ssr.service'
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class CloudPaginationService {
 	end = false;
 	isFull = true;
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, public ssr: SsrService) {
 		this.busy = false;
 	}
 
@@ -27,7 +28,11 @@ export class CloudPaginationService {
 			this.after = '9999999999999'; // highest key possible
 			this.before = '';
 		}
-		this.nextPage();
+
+		// no need to render on server
+		if (this.ssr.isBrowser()) {
+			this.nextPage();
+		}
 
 	}
 

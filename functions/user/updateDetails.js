@@ -19,7 +19,7 @@ anonymizer = {
                             var db = admin.database();
                             var ref = db.ref("userData").child(uid)
                             var newDetailsObj = {
-                                'pic': user.providerData[0].photoURL,
+                                'photoURL': user.providerData[0].photoURL,
                                 'name': user.providerData[0].displayName
                             }
                             ref.update(newDetailsObj)
@@ -41,7 +41,7 @@ anonymizer = {
             var db = admin.database();
             var ref = db.ref("userData").child(uid)
             var newDetailsObj = {
-                'pic': 'https://storage.cloud.google.com/dride-2384f.appspot.com/assets/profilePic/pic' + anonymizer.getRandomArbitrary(1, 5) + '.png',
+                'photoURL': 'https://storage.cloud.google.com/dride-2384f.appspot.com/assets/profilePic/pic' + anonymizer.getRandomArbitrary(1, 5) + '.png',
                 'name': 'Rider' + anonymizer.getRandomArbitrary(1, 500)
             }
             ref.update(newDetailsObj)

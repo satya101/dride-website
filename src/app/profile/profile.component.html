@@ -4,7 +4,7 @@
                 <div class="gradBg">
                     <div class="container">
                         <div class="profilePic">
-                            <img src="{{(opData|async)?.pic}}" />
+                            <img src="{{(opData|async)?.photoURL}}" />
                             <p>{{(opData|async)?.name}}
                                <!-- TROPHYS HERE -->
                             </p>
@@ -23,39 +23,7 @@
                     <div class="col-md-8">
                     	<div class="box mainVid">
 
-                        <div class="videogular-container">
-
-                            <vg-player class="player" *ngIf="currentVideo">
-
-							    <video [vgMedia]="media" #media id="current" 
-										preload="auto"
-										crossorigin 
-										class="videoPlayer" 
-										poster="{{currentVideo.thumbs.src}}" 
-										src="{{currentVideo.clips.src}}"
-										>
-							    	<source src="{{currentVideo.clips.src}}" type="video/mp4">
-							    </video>
-
-
-                                <vg-controls>
-                                    <vg-play-pause></vg-play-pause> 
-
-                                    <vg-scrub-bar [vgFor]="current" >
-                                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                                    </vg-scrub-bar>
-									 <vg-time-display [vgFor]="current" [vgProperty]="'current'" [vgFormat]="'mm:ss'"></vg-time-display>
-									 <span class="divider">/</span>
-									 <vg-time-display [vgFor]="current" [vgProperty]="'total'" [vgFormat]="'mm:ss'"></vg-time-display>
-
-                                    <vg-fullscreen></vg-fullscreen>
-                                </vg-controls>
-
-                                <vg-overlay-play></vg-overlay-play>
-
-                            </vg-player>
-                        </div>
-
+							<app-player	[currentVideo]="currentVideo" [tag]="'Profile'"></app-player>
 
 	                    </div>
 	                    <div class="box innerPad" *ngIf="currentVideo">

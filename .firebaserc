@@ -1,6 +1,7 @@
 {
   "projects": {
     "default": "dride-2384f",
-    "prod": "dride-2384f"
+    "prod": "dride-2384f",
+    "ci": "dride-ci"
   }
 }

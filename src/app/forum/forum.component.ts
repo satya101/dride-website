@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-
-import { AngularFireAuth } from 'angularfire2/auth';
+import 'rxjs/add/operator/map';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
@@ -11,7 +10,6 @@ import { ModalDirective } from 'ngx-bootstrap/modal/modal.component';
 import * as firebase from 'firebase/app';
 
 import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
 import {
 	AngularFireDatabase,
 	FirebaseListObservable
@@ -19,7 +17,7 @@ import {
 
 import { introAnim } from '../router.animations';
 
-import { MixpanelService } from '../helpers/mixpanel.service';
+import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 
 @Component({
 	selector: 'app-forum',
@@ -71,15 +69,27 @@ export class NgbdModalAskInForum {
 	qTitle: any;
 	public isLoaded = false;
 	showDanger = false;
+	public firebaseUser: any;
 
 	constructor(
 		public bsModalRef: BsModalRef,
 		public db: AngularFireDatabase,
 		private auth: AuthService,
-		public user: UserService,
 		private router: Router,
-		private route: ActivatedRoute
-	) { }
+		private route: ActivatedRoute,
+		public mixpanel: MixpanelService
+	) {
+
+		auth.getState().subscribe(OurUser => {
+			if (!OurUser) {
+				this.firebaseUser = null;
+				return;
+			}
+			this.firebaseUser = OurUser;
+
+		});
+
+	}
 
 	onShown() {
 		this.isLoaded = true;
@@ -98,15 +108,13 @@ export class NgbdModalAskInForum {
 			text.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-') + '__' + id
 		);
 	}
-	// TODO: Add animation
-	openThread = function (title) {
+	openThread = (title) => {
 		this.auth.verifyLoggedIn().then(result => {
 			if (!title) {
 				this.showDanger = true;
 				return;
 			}
 
-			this.firebaseUser = this.user.getUser();
 			// add a new thread on Firebase
 			this.db
 				.list('/threads')

@@ -1,0 +1,96 @@
+<div class="textBox" edit-page>
+    <h1>Dride Universal</h1>
+</div>
+<div class="textBox" edit-page>
+    <br>
+    <p>Dride Universal is an universal dashcam viewr that give manufectorers a way to integrate their dash cam with the Dride-cloud and 
+		provide a great user expirence for their customers.<br>
+	This document will explain how to integrate with the Dride-Universal app. </p>
+</div>
+
+
+<div class="textBox" edit-page>
+		<br>
+		<h3 class="regCase">base IP</h3>
+		<p>Altough not mendatrpy we suggest setting the IP of the unit to <b>192.168.42.1</b></p>
+ </div>
+
+ <div class="textBox" edit-page>
+		<br>
+		<h3 class="regCase">Api's</h3>
+		<ul>
+			<li>/isOnline</li>
+			<li>/connectToDevice</li>
+			<li>/sendHeartBit</li>
+
+
+
+			<li>/getClips</li>
+			<li>/deleteClip</li>
+
+			<li>/startRecording</li>
+			<li>/stopRecording</li>
+
+			<li>/startLiveMode</li>
+			<li>/connectToDevice</li>
+
+			<li>/setDeviceTime</li>
+			<li>/setSettings</li>
+			<li>/getSettings</li>
+		</ul>
+ </div>
+
+
+ <div class="textBox" edit-page>
+		<br>
+		<h3 class="regCase">isOnline</h3>
+		<p>This endpoint will help us understand if the dashcam is ready to perform any action.</p>
+
+		<div class="panel panel-default">
+			<div class="panel-heading apiBox">/isOnline <label> | Repsonse</label></div>
+			<div class="panel-body">
+				<hljs [code]="data[0]"></hljs>
+			</div>
+		</div>
+ </div>
+
+
+ <div class="textBox" edit-page>
+		<br>
+		<h3 class="regCase">connectToDevice</h3>
+		<p>Connect to device and make it ready to recieve requests</p>
+
+		<div class="panel panel-default">
+			<div class="panel-heading apiBox">/isOnline <label> | Repsonse</label></div>
+			<div class="panel-body">
+				<hljs [code]="data[1]"></hljs>
+			</div>
+		</div>
+ </div>
+
+
+ <div class="textBox" edit-page>
+		<br>
+		<h3 class="regCase">sendHeartBit</h3>
+		<p>Send a periodic request every 5 seconds to let the device know the app is still connected.</p>
+
+		<div class="panel panel-default">
+			<div class="panel-heading apiBox">/sendHeartBit <label> | Repsonse</label></div>
+			<div class="panel-body">
+				<hljs [code]="data[2]"></hljs>
+			</div>
+		</div>
+ </div>
+
+ <div class="textBox" edit-page>
+		<br>
+		<h3 class="regCase">getClips</h3>
+		<p>Send a list of videoObjects</p>
+
+		<div class="panel panel-default">
+			<div class="panel-heading apiBox">/sendHeartBit <label> | Repsonse</label></div>
+			<div class="panel-body">
+				<hljs [code]="data[2]"></hljs>
+			</div>
+		</div>
+ </div>

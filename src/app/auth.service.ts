@@ -1,17 +1,16 @@
 import { Injectable, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { AngularFireAuth } from 'angularfire2/auth';
+
 import * as firebase from 'firebase/app';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-import { UserService } from './user.service';
-
-import { MixpanelService } from './helpers/mixpanel.service';
+import { MixpanelService } from './helpers/mixpanel/mixpanel.service';
 
 
 @Injectable()
@@ -19,12 +18,14 @@ export class AuthService {
 
 	closeResult: string;
 
-	constructor(private modalService: BsModalService, public afAuth: AngularFireAuth, public mixpanel: MixpanelService) { }
+	constructor(
+		private modalService: BsModalService,
+		public afAuth: AngularFireAuth,
+		public mixpanel: MixpanelService) { }
 
 	openLogin() {
 
 		return this.modalService.show(NgbdModalLogin);
-
 
 	}
 
@@ -50,7 +51,7 @@ export class AuthService {
 				}
 				// log user to mixpanel
 				this.mixpanel.logIn(user.uid)
-
+				console.log(user)
 				resolve(user)
 
 			});
@@ -59,7 +60,9 @@ export class AuthService {
 		});
 	}
 
-
+	getState(): Observable<any> {
+		return this.afAuth.authState;
+	}
 
 
 }
@@ -84,7 +87,6 @@ export class NgbdModalLogin {
 
 	constructor(public activeModal: BsModalRef,
 				public afAuth: AngularFireAuth,
-				user: UserService,
 				public db: AngularFireDatabase,
 				public mixpanel: MixpanelService) {
 		this.user = afAuth.authState;

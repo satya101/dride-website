@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+	  "outDir": "dist/browser",
       "assets": [
         "assets",
         "favicon.ico",
@@ -21,11 +21,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "styles.scss"
       ],
       "scripts": [
-        "../node_modules/marked/lib/marked.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -36,7 +34,7 @@
     {
       "platform": "server",
       "root": "src",
-      "outDir": "functions/dist-server",
+	  "outDir": "dist/server",
       "assets": [
         "assets",
         "favicon.ico"
@@ -44,10 +42,11 @@
       "index": "index.html",
       "main": "main.server.ts",
       "test": "test.ts",
-      "tsconfig": "tsconfig.server.json",
-      "testTsconfig": "tsconfig.spec.json",
+	  "tsconfig": "tsconfig.server.json",
+	  "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+		"../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "styles.scss"
       ],
       "scripts": [],
@@ -64,15 +63,18 @@
     }
   },
   "lint": [
-    {
-      "project": "src/tsconfig.app.json"
-    },
-    {
-      "project": "src/tsconfig.spec.json"
-    },
-    {
-      "project": "e2e/tsconfig.e2e.json"
-    }
+	{
+	  "project": "src/tsconfig.app.json",
+	  "exclude": "**/node_modules/**"
+	},
+	{
+	  "project": "src/tsconfig.spec.json",
+	  "exclude": "**/node_modules/**"
+	},
+	{
+	  "project": "e2e/tsconfig.e2e.json",
+	  "exclude": "**/node_modules/**"
+	}
   ],
   "test": {
     "karma": {

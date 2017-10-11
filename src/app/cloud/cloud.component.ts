@@ -3,39 +3,41 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
 import { CloudPaginationService } from '../cloud/cloud-pagination.service';
 
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 
-import { MixpanelService } from '../helpers/mixpanel.service';
-import { VgAPI } from 'videogular2/core';
+import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
+import { SsrService } from '../helpers/ssr/ssr.service'
+
+import { introAnim } from '../router.animations';
 
 
 @Component({
 	selector: 'app-cloud',
 	templateUrl: './cloud.component.html',
-	styleUrls: ['./cloud.component.scss']
+	styleUrls: ['./cloud.component.scss'],
+	animations: [introAnim]
 })
 
 export class CloudComponent implements OnInit {
-	@Input() isFull = true;
+	@Input() isFull: any = true;
 	hpClips: any;
 	public firebaseUser: any;
 	public replyBox: any = [];
+	public isBrowser = false;
 
 	constructor(private db: AngularFireDatabase,
 		public af: AngularFireDatabase,
 		private dCloud: CloudPaginationService,
 		private auth: AuthService,
-		private afAuth: AngularFireAuth,
 		private http: HttpClient,
-		public mixpanel: MixpanelService) {
+		public mixpanel: MixpanelService,
+		public ssr: SsrService) {
 
-
+		this.isBrowser = ssr.isBrowser()
 		// get Auth state
-		afAuth.authState.subscribe(user => {
+		auth.getState().subscribe(user => {
 			if (!user) {
 				this.firebaseUser = null;
 				return;
@@ -50,45 +52,34 @@ export class CloudComponent implements OnInit {
 	ngOnInit() {
 		// load first batch
 		this.dCloud.init(this.isFull);
-
 		this.hpClips = this.dCloud
-
 	}
 
-
-	onPlayerReady(api: VgAPI, video) {
-		api.getDefaultMedia().subscriptions.playing.subscribe(
-			() => {
-				// increase views counter
-				this.http.get(environment.functionsURL + '/viewCounter?videoId=' + video.videoId + '&op=' + video.op).subscribe(data => {
-					console.log(data)
-				});
-				console.log('play');
-
-				this.mixpanel.track('playVideoOnHP', {vid: video.videoId})
-			}
-		);
-	}
 
 	fbShare = function (uid, videoId) {
-		window.open(
-			'https://www.facebook.com/sharer/sharer.php?u=https://dride.io/profile/' +
-			uid +
-			'/' +
-			videoId,
-			'Facebook',
-			'toolbar=0,status=0,resizable=yes,width=' +
-			500 +
-			',height=' +
-			600 +
-			',top=' +
-			(window.innerHeight - 600) / 2 +
-			',left=' +
-			(window.innerWidth - 500) / 2
-		);
+		if (!this.ssr.isBrowser()) { return }
+
+			window.open(
+				'https://www.facebook.com/sharer/sharer.php?u=https://dride.io/profile/' +
+				uid +
+				'/' +
+				videoId,
+				'Facebook',
+				'toolbar=0,status=0,resizable=yes,width=' +
+				500 +
+				',height=' +
+				600 +
+				',top=' +
+				(window.innerHeight - 600) / 2 +
+				',left=' +
+				(window.innerWidth - 500) / 2
+			);
+
 	};
 
 	twShare = function (uid, videoId) {
+		if (!this.ssr.isBrowser()) { return }
+
 		const url = 'https://dride.io/profile/' + uid + '/' + videoId;
 		const txt = encodeURIComponent('You need to see this! #dride ' + url);
 		window.open(

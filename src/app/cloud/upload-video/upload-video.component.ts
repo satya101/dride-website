@@ -3,9 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../auth.service';
-import { UserService } from '../../user.service';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 // remove this when we will have native storage wrapper
 // https://github.com/angular/angularfire2/issues/241
@@ -30,13 +28,12 @@ export class UploadVideoComponent implements OnInit {
 	constructor(private db: AngularFireDatabase,
 		public af: AngularFireDatabase,
 		private auth: AuthService,
-		private afAuth: AngularFireAuth,
 		private router: Router,
 		public firebaseApp: FirebaseApp) {
 
 
 		// get Auth state
-		afAuth.authState.subscribe(user => {
+		auth.getState().subscribe(user => {
 			if (!user) {
 				this.firebaseUser = null;
 			} else {

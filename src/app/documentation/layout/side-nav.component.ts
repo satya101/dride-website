@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { DocsMainComponent } from '../pages/main.component';
-import { AdasComponent } from '../pages/adas.component';
-import { AssistantComponent } from '../pages/assistant.component';
-import { ConnectivityComponent } from '../pages/connectivity.component';
-import { DrideCloudComponent } from '../pages/dride-cloud.component';
-import { GettingStartedComponent } from '../pages/getting-started.component';
-import { IndicatorsComponent } from '../pages/indicators.component';
-import { ManualSetupComponent } from '../pages/manual-setup.component';
-import { PublishComponent } from '../pages/publish.component';
+import { AdasComponent } from '../pages/adas/adas.component';
+import { AssistantComponent } from '../pages/assistant/assistant.component';
+import { ConnectivityComponent } from '../pages/connectivity/connectivity.component';
+import { DrideCloudComponent } from '../pages/drideCloud/dride-cloud.component';
+import { GettingStartedComponent } from '../pages/gettingStarted/getting-started.component';
+import { IndicatorsComponent } from '../pages/indicators/indicators.component';
+import { ManualSetupComponent } from '../pages/manualSetup/manual-setup.component';
+import { PublishComponent } from '../pages/publish/publish.component';
+import { UniversalComponent } from '../pages/drideUniversal/universal.component';
+import { SsrService } from '../../helpers/ssr/ssr.service'
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SideNavComponent implements OnInit {
 	public docMenu: any[]
 	public currentPage = 'x';
 
-	constructor(private route: ActivatedRoute) {
+	constructor(private route: ActivatedRoute, public ssr: SsrService) {
 
 		this.docMenu = [
 			{
@@ -94,6 +95,13 @@ export class SideNavComponent implements OnInit {
 				'hp': false,
 				'menu': false,
 				'component': ManualSetupComponent
+			},
+			{
+				'url': 'universal',
+				'ttl': 'Dride Universal',
+				'hp': false,
+				'menu': false,
+				'component': UniversalComponent
 			}
 		];
 
@@ -101,6 +109,7 @@ export class SideNavComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		if (!this.ssr.isBrowser()) { return }
 
 		this.route.params.subscribe(params => {
 			this.currentPage = params.slug;
