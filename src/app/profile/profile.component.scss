@@ -38,9 +38,7 @@
         position: relative;
         top: 160px;
     }
-	vg-controls{
-		background: linear-gradient(to top, rgba(0, 0, 0, 0.71) 0%, transparent 100%);
-	}
+
     ui-gmap-google-map{
         display: inherit;
     }
@@ -50,11 +48,7 @@
         min-height: 100px;
         padding: 0;
     }
-    .videoPlayer {
-        padding: 5px 0 5px 0;
-        width: 100%;
-        height: 100%;
-    }
+
 
     .pad5 {
         padding: 7px;
@@ -113,9 +107,6 @@
         text-align: center;
         font-size: 12px;
         margin-top: 14px;
-    }
-    .videogular-container {
-        height: 560px;
     }
     .icon-trash-can{
         font-size: 24px;
@@ -250,9 +241,6 @@
 }
 @media (max-width: 442px) {
     .profile{
-        .videogular-container {
-            height: 253px !important;
-        }
         .views{
             font-size: 13px;
         }

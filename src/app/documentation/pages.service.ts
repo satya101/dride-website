@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { DocsMainComponent } from './pages/main.component';
-import { AdasComponent } from './pages/adas.component';
-import { AssistantComponent } from './pages/assistant.component';
-import { ConnectivityComponent } from './pages/connectivity.component';
+import { DocsMainComponent } from './pages/main/main.component';
+
 import { PageItem } from './page-item';
 import { SideNavComponent } from './layout/side-nav.component';
 

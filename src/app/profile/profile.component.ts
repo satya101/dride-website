@@ -6,11 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
 
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { MixpanelService } from '../helpers/mixpanel.service';
+import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
+import { SsrService } from '../helpers/ssr/ssr.service'
+import { MetaService } from '@ngx-meta/core';
+import { PlayerComponent } from '../layout/components/player.component'
+
 
 import { introAnim } from '../router.animations';
 import 'rxjs/add/operator/take';
@@ -20,7 +22,7 @@ import 'rxjs/add/operator/take';
 	selector: 'app-profile',
 	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.scss'],
-	animations: [ introAnim ]
+	animations: [introAnim]
 })
 export class ProfileComponent implements OnInit {
 
@@ -38,7 +40,6 @@ export class ProfileComponent implements OnInit {
 	conversationPreviusIsMine: any = [];
 	comments: any = {};
 	opData: any;
-	vgConfig: any;
 	public firebaseUser: any;
 
 	constructor(private db: AngularFireDatabase,
@@ -46,11 +47,12 @@ export class ProfileComponent implements OnInit {
 		public http: HttpClient,
 		private router: Router,
 		private auth: AuthService,
-		private afAuth: AngularFireAuth,
-		public mixpanel: MixpanelService) {
+		public mixpanel: MixpanelService,
+		public ssr: SsrService,
+		public meta: MetaService) {
 
 		// get Auth state
-		afAuth.authState.subscribe(user => {
+		auth.getState().subscribe(user => {
 			if (!user) {
 				this.firebaseUser = null;
 				return;
@@ -94,8 +96,6 @@ export class ProfileComponent implements OnInit {
 				this.opData = db.object('userData/' + params['uid']);
 			}
 
-
-
 		});
 
 
@@ -108,11 +108,10 @@ export class ProfileComponent implements OnInit {
 		if (!this.videoId || !this.uid) {
 			return;
 		}
+		this.meta.setTag('og:title', this.videoId);
 
 		this.route.params.subscribe(params => {
 			this.comments = null
-			this.currentVideo = null
-			this.vgConfig = null
 			this.map.center = null;
 			this.map.path = null;
 
@@ -129,12 +128,17 @@ export class ProfileComponent implements OnInit {
 				this.orderedClips = this.orderClipsByDate(snapshot);
 			});
 
+			if (this.ssr.isBrowser()) {
+				window.scrollTo(0, 0);
+			}
 
-			window.scrollTo(0, 0);
-
+			if (!this.ssr.isBrowser()) {
+				this.setMetaTags(this.uid, this.videoId)
+			}
 
 			this.db.object('/clips/' + this.uid + '/' + this.videoId, { preserveSnapshot: true }).take(1).subscribe(currentVideoSanp => {
 				const data = currentVideoSanp.val();
+
 				this.currentVideo = data
 
 				// if video does not exists
@@ -143,9 +147,8 @@ export class ProfileComponent implements OnInit {
 					return;
 				}
 				// increase views counter
-				this.db.object('/clips/' + this.uid + '/' + this.videoId).update({views: this.getNextViewCount(this.currentVideo.views)})
+				this.http.get(environment.functionsURL + '/viewCounter?videoId=' + this.videoId + '&op=' + this.uid).subscribe()
 
-				this.createVideoObj(data.clips.src, data.thumbs.src);
 				// concat old comments with new ones
 				Object.assign(this.comments, data.comments)
 				// load gps location
@@ -179,7 +182,7 @@ export class ProfileComponent implements OnInit {
 	}
 
 	getNextViewCount(views) {
-		return views ? views + 1 : 1;
+		return views ? +views + 1 : 1;
 	}
 
 	sideThreadByAuther = function (comments) {
@@ -210,14 +213,15 @@ export class ProfileComponent implements OnInit {
 	};
 
 	orderClipsByDate = function (clips) {
+
+
 		const clipsBydate = {};
 
-		// angular.forEach(clips, function(value, key) {
 		clips.forEach(value => {
 
 			const key: any = value.key
-
-			const d = new Date((value.val().timestamp ? value.val().timestamp : value.key) * 1000);
+			// TODO: remove fallback to Yi format
+			const d = new Date((value.val().timestamp ? value.val().timestamp : this.yi_getTimeStamp(value.key)) * 1000);
 			const iKey =
 				d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
 
@@ -239,23 +243,7 @@ export class ProfileComponent implements OnInit {
 		const exp = date.split('-');
 		return new Date(exp[2], exp[1], exp[0], 0, 0, 0, 0).getTime();
 	};
-	// create the video object for videogular
-	createVideoObj = function (clipURL, posterURL) {
-		this.vgConfig = {
-			preload: 'none',
-			sources: [{ src: clipURL, type: 'video/mp4' }],
-			theme: {
-				url: 'styles/videoPlayer.css'
-			},
-			plugins: {
-				controls: {
-					autoHide: true,
-					autoHideTime: 5000
-				},
-				poster: posterURL
-			}
-		};
-	};
+
 
 	hasComments = function (comments) {
 		return comments && Object.keys(comments).length ? true : false;
@@ -310,7 +298,6 @@ export class ProfileComponent implements OnInit {
 
 		this.http
 			.get(environment.firebase.databaseURL + '/conversations_video/' + this.uid + '/' + this.videoId + '.json')
-			.map(response => response.json())
 			.subscribe(data => {
 				const items = data;
 				this.comments = items;
@@ -330,6 +317,8 @@ export class ProfileComponent implements OnInit {
 	};
 
 	fbShare = function () {
+		if (!this.ssr.isBrowser()) { return }
+
 		window.open(
 			'https://www.facebook.com/sharer/sharer.php?u=https://dride.io/profile/' +
 			this.uid +
@@ -347,6 +336,8 @@ export class ProfileComponent implements OnInit {
 		);
 	};
 	twShare = function () {
+		if (!this.ssr.isBrowser()) { return }
+
 		const url = 'https://dride.io/profile/' + this.uid + '/' + this.videoId;
 		const txt = encodeURIComponent('You need to see this! #dride ' + url);
 		window.open(
@@ -394,26 +385,55 @@ export class ProfileComponent implements OnInit {
 
 		return videoRoute;
 	};
-}
 
 
-@Pipe({
-	name: 'showClips',
-	pure: false
-})
-export class ShowClips {
-	transform(clips) {
-		return clips;
+	setMetaTags(uid, videoId) {
+		const url = environment.firebase.databaseURL +
+		'/clips/' + uid + '/' + videoId + '.json'
+		this.http
+			.get(url)
+			.subscribe(data => {
+				this.meta.setTag('og:title', data['description']);
+				this.meta.setTag('og:description', data['plates']);
+				this.meta.setTag('og:image:width', '320');
+				this.meta.setTag('og:image:height', '176');
+				this.meta.setTag('og:image', data['thumbs']['src']);
+				this.meta.setTag('og:video', data['clips']['src']);
+				this.meta.setTag('og:video:secure_url', data['clips']['src']);
+				this.meta.setTag('twitter:card', 'player');
+				this.meta.setTag('twitter:site', '@drideHQ');
+				this.meta.setTag('twitter:url', 'https://dride.io/profile/' + uid + '/' + videoId);
+				this.meta.setTag('twitter:title', data['description']);
+				this.meta.setTag('twitter:description', data['plates']);
+				this.meta.setTag('twitter:image', data['thumbs']['src']);
+				this.meta.setTag('twitter:player', data['clips']['src']);
+				this.meta.setTag('twitter:player:width', '1280');
+				this.meta.setTag('twitter:player:height', '720');
+			})
 	}
-}
-@Pipe({
-	name: 'keys',
-	pure: false
-})
-export class KeysPipe implements PipeTransform {
-	transform(value, args: string[]): any {
-		return value ? Object.keys(value) : [];
-	}
-}
+
+	/*
+	*	Will split the time from Yi dash cam and make it a timestamp
+	*/
+	yi_getTimeStamp(videoId) {
+
+				const date = videoId.split('_');
+
+				if (!date[1]) {
+					return videoId;
+				}
+
+				const year = date[0];
+				const month = date[1][0] + date[1][1]
+				const day = date[1][2] + date[1][3]
+				const hour = date[2][0] + date[2][1]
+				const minute = date[2][2] + date[2][3]
+				const sec = date[2][4] + date[2][5]
+
+				return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime() / 1000
+			}
 
 
+
+
+}

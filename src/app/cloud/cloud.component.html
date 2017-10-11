@@ -14,44 +14,10 @@
           </div>
           <div *ngIf="hpClips.items" class="phpt row">
             <div class="whiteBg p-0 animBox mx-auto" *ngFor="let currentVideo of hpClips.items;  index as key"
-				 [ngClass]="{'col-md-offset-2 col-md-8': isFull, 'halfPageCloud': !isFull}">
+				 [ngClass]="{'col-md-offset-2 col-md-8': isFull, 'halfPageCloud': !isFull}" [@introAnim]>
               <span *ngIf="isFull" class="icon-toyCar-1 float-right"></span>
               <div class="box mainVid">
-
-                <!-- <p class="dateLabel float-right">{{currentVideo.videoId | date:'MM-dd-yyyy'}}</p>	 -->
-
-                <div class="videogular-container" *ngIf="currentVideo">
-
-                  <vg-player class="player" (onPlayerReady)="onPlayerReady($event, currentVideo)">
-
-                    <video [vgMedia]="media" #media id="current" preload="none" crossorigin class="videoPlayer" poster="{{currentVideo.thumbs.src}}">
-                      <source src="{{currentVideo.clips.src}}" type="video/mp4">
-                    </video>
-
-
-                    <vg-controls>
-                      <vg-play-pause></vg-play-pause>
-
-                      <vg-scrub-bar [vgFor]="current">
-                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                      </vg-scrub-bar>
-                      <vg-time-display [vgFor]="current" [vgProperty]="'current'" [vgFormat]="'mm:ss'"></vg-time-display>
-                      <span class="divider">/</span>
-                      <vg-time-display [vgFor]="current" [vgProperty]="'total'" [vgFormat]="'mm:ss'"></vg-time-display>
-
-                      <vg-fullscreen></vg-fullscreen>
-                    </vg-controls>
-
-                    <vg-overlay-play></vg-overlay-play>
-
-                  </vg-player>
-
-
-
-
-                </div>
-
-
+				<app-player [currentVideo]="currentVideo" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
               </div>
               <div class="box">
                 <div class="actionBar innerPad">

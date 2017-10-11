@@ -3,12 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { introAnim } from '../router.animations';
 import { HttpClient } from '@angular/common/http';
 
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
-
 import { PageScrollConfig } from 'ng2-page-scroll';
 import { InViewport } from '../helpers/in-viewport.directive';
 import { environment } from '../../environments/environment';
-import { MixpanelService } from '../helpers/mixpanel.service';
+import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
+import { SsrService } from '../helpers/ssr/ssr.service'
 
 
 @Component({
@@ -25,7 +24,7 @@ export class MainComponent implements OnInit {
 	isLoaded = false
 	currentElementInView = 0
 
-	constructor(private http: HttpClient, public mixpanel: MixpanelService) {
+	constructor(private http: HttpClient, public mixpanel: MixpanelService, public ssr: SsrService) {
 
 		PageScrollConfig.defaultDuration = 800;
 		PageScrollConfig.defaultEasingLogic = {
@@ -52,7 +51,6 @@ export class MainComponent implements OnInit {
 	}
 
 	sendDetails = function (email) {
-
 		// subscribe users
 		const url = environment.functionsURL + '/subscriber?email=' + email;
 		this.http.get(url).subscribe(data => {

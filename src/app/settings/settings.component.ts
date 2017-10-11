@@ -4,7 +4,6 @@ import { AuthService } from '../auth.service';
 import { PushNotificationsService } from '../push-notifications.service';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
 	selector: 'app-settings',
@@ -29,11 +28,10 @@ export class SettingsComponent implements OnInit {
 	public userDevicesObservable: FirebaseObjectObservable<any>;
 
 	constructor(private auth: AuthService,
-				private afAuth: AngularFireAuth,
 				public db: AngularFireDatabase,
 				public push: PushNotificationsService) {
 
-		afAuth.authState.subscribe(user => {
+		auth.getState().subscribe(user => {
 			if (!user) {
 				this.firebaseUser = null;
 				return;
