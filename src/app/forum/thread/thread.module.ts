@@ -8,6 +8,7 @@ import { MarkdownToHtmlModule } from 'ng2-markdown-to-html';
 
 import { ThreadComponent } from './thread.component';
 import { SharedModule } from '../../helpers/shared.module';
+import { AutosizeModule } from '../../helpers/autosize.module';
 
 
 import { routing } from './thread.routing';
@@ -20,7 +21,8 @@ import { routing } from './thread.routing';
 		CommonModule,
 		AngularFireDatabaseModule,
 		MarkdownToHtmlModule.forRoot(),
+		AutosizeModule
 	],
-	declarations: [ThreadComponent, Autosize]
+	declarations: [ThreadComponent]
 })
 export class ThreadModule { }

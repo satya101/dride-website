@@ -10,6 +10,7 @@ import { SharedModule } from '../helpers/shared.module';
 import { environment } from '../../environments/environment';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AutosizeModule } from '../helpers/autosize.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 		CommonModule,
 		SharedModule,
 		FormsModule,
-		InfiniteScrollModule
+		InfiniteScrollModule,
+		AutosizeModule
 	],
 	declarations: [CloudComponent],
 	providers: [CloudPaginationService],

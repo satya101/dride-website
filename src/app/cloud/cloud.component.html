@@ -56,7 +56,7 @@
                 </div>
                 <div class="postBox">
                   <div class="wrapReplyBox mt-0">
-                    <textarea id="replyBox{{key}}" ctrl-enter="sendComment(currentVideo.op, currentVideo.videoId, replyBox[key], key)" class="form-control replyBox mt-0"
+                    <textarea autosize id="replyBox{{key}}" ctrl-enter="sendComment(currentVideo.op, currentVideo.videoId, replyBox[key], key)" class="form-control replyBox mt-0"
                       [(ngModel)]="replyBox[key]" type="text" name="reply" placeholder="What's on your mind?"></textarea>
                     <button class="btn btn-dride-black sendBtn float-right" (click)="sendComment(currentVideo.op,currentVideo.videoId, replyBox[key], key)">Send</button>
                   </div>
