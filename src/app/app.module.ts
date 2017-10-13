@@ -55,8 +55,6 @@ export function metaFactory(): MetaLoader {
 		defaults: {
 			title: 'Dride',
 			image: 'https://dride.io/assets/images/logo.svg',
-			'fb:app_id': '1825311747740641',
-			'og:site_name': 'Dride'
 		}
 	});
 }

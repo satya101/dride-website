@@ -400,6 +400,7 @@ export class ProfileComponent implements OnInit {
 				this.meta.setTag('og:image', data['thumbs']['src']);
 				this.meta.setTag('og:video', data['clips']['src']);
 				this.meta.setTag('og:video:secure_url', data['clips']['src']);
+				this.meta.setTag('og:type', 'video.other');
 				this.meta.setTag('twitter:card', 'player');
 				this.meta.setTag('twitter:site', '@drideHQ');
 				this.meta.setTag('twitter:url', 'https://dride.io/profile/' + uid + '/' + videoId);
