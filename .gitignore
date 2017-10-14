@@ -44,7 +44,6 @@ testem.log
 Thumbs.db
 
 ## ignore generated JavaScript files
-functions/**/*.js
 functions/**/*.js.map
 functions/dist-server
 functions/dist
