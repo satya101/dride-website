@@ -29,7 +29,9 @@ export class PlayerComponent implements OnInit {
 		api.getDefaultMedia().subscriptions.playing.subscribe(
 			() => {
 				// increase views counter
-				this.http.get(environment.functionsURL + '/viewCounter?videoId=' + video.videoId + '&op=' + video.op).subscribe()
+				if (video.videoId && video.op) {
+					this.http.get(environment.functionsURL + '/viewCounter?videoId=' + video.videoId + '&op=' + video.op).subscribe()
+				}
 
 				this.mixpanel.track('PlayVideo', {vid: video.videoId, where: tag})
 			}

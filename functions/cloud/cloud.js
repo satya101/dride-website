@@ -70,8 +70,18 @@ cloud = {
             var clipRef = db.ref("clips_homepage").child(hpRef)
             clipRef.update(clip)
         }
-    }
+    },
 
+
+	isProcessed(uid, videoId){
+		return new Promise((resolve, reject) => {
+			var db = admin.database();
+			db.ref('clips').child(uid).child(videoId).once("value", (snapshot) =>{
+				const clip = snapshot.val();
+					resolve(clip.processed);
+			})
+		})
+	}
 
 }
 

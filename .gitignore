@@ -43,6 +43,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
+*.p12
+*.pem
+*.iam.gserviceaccount.com.json
+
 ## ignore generated JavaScript files
 functions/**/*.js.map
 functions/dist-server

@@ -11,7 +11,7 @@ const routes: Routes = [{
 	path: '',
 	canActivateChild: [MetaGuard],
 	children: [
-		{ path: '', loadChildren: './main/main.module#MainModule', data: { meta: { title: 'Home', description: 'Dride is a connected dashcam with safetry alerts and apps.' } } },
+		{ path: '', loadChildren: './main/main.module#MainModule', data: { meta: { title: 'Home', description: 'Dride is making it easy to share dashcam videos. Visit to learn more about Dride.' } } },
 		{ path: 'forum', loadChildren: './forum/forum.module#ForumModule', data: { meta: { title: 'Forum', description: 'A community page for Dride users' } } },
 		{ path: 'thread', redirectTo: 'forum' },
 		{ path: 'thread/:slug', loadChildren: './forum/thread/thread.module#ThreadModule' },

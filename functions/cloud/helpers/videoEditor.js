@@ -16,6 +16,7 @@ module.exports = class VideoEditor {
 
   prepareVideoToCloud() {
     return new Promise((resolve, reject) => {
+	  console.log('prepareVideoToCloud')
       this.resizeVideo().then(
         done => {
 			console.log('resizeVideo')
@@ -48,16 +49,16 @@ module.exports = class VideoEditor {
         var process = new ffmpeg(this.path + this.uid + '_resized_' + this.filename);
         process.then((video) => {
 
-          var watermarkPath = __dirname + '/../icon.png',
+          var watermarkPath = __dirname + '/../stripe.png',
             newFilepath = this.path + this.uid + '_' + this.filename,
             settings = {
               position: "NE" // Position: NE NC NW SE SC SW C CE CW
                 ,
-              margin_nord: 5 // Margin nord
+              margin_nord: null // Margin nord
                 ,
               margin_sud: null // Margin sud
                 ,
-              margin_east: 5 // Margin east
+              margin_east: null // Margin east
                 ,
               margin_west: null // Margin west
             };

@@ -178,105 +178,104 @@ exports.copyToHP = functions.database.ref('/clips/{uid}/{videoId}')
 /*
  *   Call cloud-analyser to push new thumbnail and CV extracted data to DB.
  */
-exports.generateThumbnail = functions.storage.object().onChange((event) => {
-  return new Promise((resolve, reject) => {
-    // Exit if this is triggered on a file that is not an image.
-    console.warn(event)
-    console.log(event.data.metadata.processed)
+exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
+  .onCreate(function (event) {
 
+    let promiseCollector = []
+    return new Promise((resolve, reject) => {
 
-    if (!event.data.contentType.startsWith('video/')) {
-      console.log('This is not an video.');
-      resolve();
-      return;
-    }
-    // Exit if this is a move or deletion event.
-    if (event.data.resourceState === 'not_exists') {
-      console.log('This is a deletion event.');
-      resolve();
-      return;
-    }
+      if (!event.params.uid || !event.params.videoId) {
+        console.error('not enough data');
+        resolve();
+        return;
+	  }
+	  
+	  uid = event.params.uid;
+	  filename = event.params.videoId;
 
-    // Exit if file exists but is not new and is only being triggered
-    // because of a metadata change.
-    if (event.data.resourceState === 'exists' && event.data.metageneration > 1) {
-      console.log('This is a metadata change event.');
-      resolve();
-      return;
-    }
+      let db = admin.database();
 
-    if (event.data.metadata.processed === 'true') {
-      console.log('This video was already processed.');
-      resolve();
-      return;
-    }
+      cloud.isProcessed(uid, filename).then(isProcessed => {
+		console.error(isProcessed);
+		if (isProcessed == 'true') {
+			console.log('Already processed..');
+			resolve();
+			return;
+		}
+		  
+        uid = event.params.uid;
+        filename = event.params.videoId;
 
-    // find uid & timestamp from filename
-    n = event.data.name.split('/');
-    uid = n[1];
-    filename = n[2];
+		promiseCollector.push(
+			db.ref("clips").child(uid).child(filename).update({
+			  'processed': 'true'
+			})
+		)
 
-	console.error('functions started...')
+        getThumb.dridifyVideo(uid, filename).then(_ => {
 
-    getThumb.dridifyVideo(uid, filename).then(_ => {
-
-        //track event
-        mixpanel.track('video_upoload', {
-          distinct_id: uid,
-          filename: filename
-        });
-        //notify user his video is live!
-        var db = admin.database();
-        admin.auth().getUser(uid).then(function (userRecord) {
-          db.ref('clips').child(uid).child(filename.split('.')[0]).once("value", function (snapshot) {
-            var user = userRecord.toJSON();
-            var clip = snapshot.val();
+            //track event
+            mixpanel.track('video_upoload', {
+              distinct_id: uid,
+              filename: filename
+            });
             //notify user his video is live!
-            var sendObj = {
-              "template_name": 'video-is-on',
-              "subject": "Your video is now on Dride Cloud",
-              "to": [{
-                  "email": user.email
-                },
-                {
-                  "email": 'yossi@dride.io'
-                },
-              ],
-              "tags": ['video uploaded!'],
-              "global_merge_vars": [{
-                  "name": "FULL_NAME",
-                  "content": user.displayName.split(' ')[0]
-                },
-                {
-                  "name": "VIDEO_POSTER",
-                  "content": clip.thumbs.src
-                },
-                {
-                  "name": "VIDEO_LINK",
-                  "content": 'https://dride.io/profile/' + uid + '/' + filename.split('.')[0]
-                }
-              ]
-            };
-            mailer.send(sendObj)
-            resolve();
+            admin.auth().getUser(uid).then(function (userRecord) {
+              db.ref('clips').child(uid).child(filename.split('.')[0]).once("value", function (snapshot) {
+                const user = userRecord.toJSON();
+                const clip = snapshot.val();
+                //notify user his video is live!
+                const sendObj = {
+                  "template_name": 'video-is-on',
+                  "subject": "Your video is now on Dride Cloud",
+                  "to": [{
+                      "email": user.email
+                    },
+                    {
+                      "email": 'yossi@dride.io'
+                    },
+                  ],
+                  "tags": ['video uploaded!'],
+                  "global_merge_vars": [{
+                      "name": "FULL_NAME",
+                      "content": user.displayName.split(' ')[0]
+                    },
+                    {
+                      "name": "VIDEO_POSTER",
+                      "content": clip.thumbs.src
+                    },
+                    {
+                      "name": "VIDEO_LINK",
+                      "content": 'https://dride.io/profile/' + uid + '/' + filename.split('.')[0]
+                    }
+                  ]
+                };
+
+                mailer.send(sendObj)
+                var db = admin.database();
+
+                Promise.all(promiseCollector).then(_ => resolve())
 
 
-          }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-            reject(errorObject.code)
-          });
-        }, function (errorObject) {
-          console.log("Error fetching user data: " + errorObject.code);
-          reject(errorObject.code)
-        });
-      },
-      err => {
-        reject(err)
-        console.error(err)
-      }
-    );
-  })
-});
+              }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+                reject(errorObject.code)
+              });
+            }, function (errorObject) {
+              console.log("Error fetching user data: " + errorObject.code);
+              reject(errorObject.code)
+            });
+          },
+          err => {
+            reject(err)
+            console.error(err)
+          }
+        );
+
+      })
+
+    })
+  });
 
 
 

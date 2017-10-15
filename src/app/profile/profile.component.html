@@ -4,7 +4,7 @@
                 <div class="gradBg">
                     <div class="container">
                         <div class="profilePic">
-                            <img src="{{(opData|async)?.photoURL}}" />
+                            <img *ngIf="(opData|async)?.photoURL" src="{{(opData|async)?.photoURL}}" />
                             <p>{{(opData|async)?.name}}
                                <!-- TROPHYS HERE -->
                             </p>

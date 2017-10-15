@@ -76,20 +76,18 @@ export class ProfileComponent implements OnInit {
 				this.http
 					.get(url)
 					.subscribe(data => {
-						if (data) {
-							this.router.navigate(['/profile/' + this.uid + '/' + Object.keys(data)[0]]);
-						} else {
-							this.userHaveNoVideos = true
+						if (data && data[Object.keys(data)[0]].thumb) {
+								this.router.navigate(['/profile/' + this.uid + '/' + Object.keys(data)[0]]);
+							} else {
+								this.userHaveNoVideos = true
+							}
+						},
+						error => {
+							this.userHaveNoVideos = true;
+							// TODO: log this
+							console.error('An error occurred when requesting clips.');
 						}
-					},
-					error => {
-						this.userHaveNoVideos = true;
-						// TODO: log this
-						console.error('An error occurred when requesting clips.');
-					}
-
 					)
-
 			}
 
 			if (params['uid']) {
@@ -103,7 +101,6 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 
 		if (!this.videoId || !this.uid) {
 			return;
@@ -142,7 +139,7 @@ export class ProfileComponent implements OnInit {
 				this.currentVideo = data
 
 				// if video does not exists
-				if (!data) {
+				if (!data || !data.thumb) {
 					this.router.navigate(['/page-not-found']);
 					return;
 				}
@@ -212,11 +209,10 @@ export class ProfileComponent implements OnInit {
 		};
 	};
 
-	orderClipsByDate = function (clips) {
+	orderClipsByDate(clips) {
 
 
 		const clipsBydate = {};
-
 		clips.forEach(value => {
 
 			const key: any = value.key
@@ -229,11 +225,41 @@ export class ProfileComponent implements OnInit {
 				clipsBydate[iKey] = {};
 			}
 
-			clipsBydate[iKey][key] = value.val();
+			if (value.val().thumbs && value.val().thumbs && value.val().thumbs.src) {
+				clipsBydate[iKey][key] = value.val();
+			}
 		});
 
-		return clipsBydate;
+		// reverse
+
+		const clipsBydateReversed = {};
+		this.reverseForIn(clipsBydate, (key) => {
+			clipsBydateReversed[key] = this.reverseObject(clipsBydate[key])
+		});
+
+		return clipsBydateReversed;
 	};
+
+	reverseForIn(obj, f) {
+		const arr = [];
+		for (const key in obj) {
+			if (key) {
+				// add hasOwnPropertyCheck if needed
+				arr.push(key);
+			}
+		}
+		for (let i = arr.length - 1; i >= 0; i--) {
+			f.call(obj, arr[i]);
+		}
+	}
+
+	reverseObject(obj) {
+		const reverse = {};
+		this.reverseForIn(obj, (key) => {
+			reverse[key] = obj[key]
+		});
+		return reverse;
+	}
 
 	preatifyDate = function (date) {
 		if (!date) {
