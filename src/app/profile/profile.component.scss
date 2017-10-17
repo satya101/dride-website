@@ -243,6 +243,12 @@
 }
 @media (max-width: 442px) {
     .profile{
+		.p-xs-0{
+			padding: 0 !important;
+		}
+		.headerBg{
+			height: 90px;
+		}
         .views{
             font-size: 13px;
         }

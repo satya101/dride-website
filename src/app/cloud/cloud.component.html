@@ -47,7 +47,7 @@
                     </div>
                     <!-- <div class="connectorLine" *ngIf="conversationPreviusIsMine[key]"></div> -->
                   </div>
-                  <label *ngIf="currentVideo && currentVideo.comments.length == 0" class="firstToCmnt">Be the first to comment</label>
+                  <label *ngIf="currentVideo && currentVideo.comments.length == 0" class="firstToCmnt m-xs-0">Be the first to comment</label>
                   <p *ngIf="currentVideo.loadMore" class="moreCmnts" (click)="loadMoreComments(currentVideo.op, currentVideo.videoId, key)">
                     Load More Comments
                   </p>

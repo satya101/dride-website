@@ -45,9 +45,7 @@ getThumb = {
         if (err) {
 			reject(err)
 		}
-		
         video.prepareVideoToCloud().then(res => {
-
 			promises.push(
 				video.uploadToBucket(path + uid + '_' + timestamp + '.jpg', 'thumbs/' + uid + '/' + timestamp + '.jpg'),
 				video.uploadToBucket(path + uid + '_' + timestamp + '.mp4', 'clips/' + uid + '/' + timestamp + '.mp4')

@@ -96,7 +96,8 @@ nav{
 }
 .collapse{
       -webkit-transition: height .5s;
-      transition: height .5s;
+	  transition: height .5s;
+	  z-index: 10000;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
 	.navbar{

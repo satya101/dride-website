@@ -284,6 +284,14 @@
 
 }
 
+@media (max-width: 450px) {
+	.whiteBg{
+		margin: 25px !important;
+	}
+	.replyBox{
+		width: 70% !important;
+	}
+}
 @media (max-width: 320px) {
 
 	.actions{

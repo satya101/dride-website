@@ -2,7 +2,7 @@
     <div class="container-fluid p-0">
             <div class="headerBg">
                 <div class="gradBg">
-                    <div class="container">
+                    <div class="container hidden-xs-down">
                         <div class="profilePic">
                             <img *ngIf="(opData|async)?.photoURL" src="{{(opData|async)?.photoURL}}" />
                             <p>{{(opData|async)?.name}}
@@ -14,13 +14,13 @@
             </div>
     </div>
 
-    <div class="container-fluid greyBg" *ngIf="!userHaveNoVideos">
+    <div class="container-fluid greyBg p-xs-0" *ngIf="!userHaveNoVideos">
         <div class="col-md-12 no-padding">
             <div class="clearfix container">
                 <div class="row">
 
                 	<!-- video player -->
-                    <div class="col-md-8">
+                    <div class="col-md-8 p-xs-0">
                     	<div class="box mainVid">
 
 							<app-player	[currentVideo]="currentVideo" [tag]="'Profile'"></app-player>

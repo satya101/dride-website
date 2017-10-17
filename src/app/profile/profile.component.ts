@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
 				this.http
 					.get(url)
 					.subscribe(data => {
-						if (data && data[Object.keys(data)[0]].thumb) {
+						if (data && data[Object.keys(data)[0]].thumbs) {
 								this.router.navigate(['/profile/' + this.uid + '/' + Object.keys(data)[0]]);
 							} else {
 								this.userHaveNoVideos = true
@@ -139,7 +139,7 @@ export class ProfileComponent implements OnInit {
 				this.currentVideo = data
 
 				// if video does not exists
-				if (!data || !data.thumb) {
+				if (!data || !data.thumbs) {
 					this.router.navigate(['/page-not-found']);
 					return;
 				}
@@ -210,7 +210,6 @@ export class ProfileComponent implements OnInit {
 	};
 
 	orderClipsByDate(clips) {
-
 
 		const clipsBydate = {};
 		clips.forEach(value => {

@@ -175,9 +175,7 @@ exports.copyToHP = functions.database.ref('/clips/{uid}/{videoId}')
   });
 
 
-/*
- *   Call cloud-analyser to push new thumbnail and CV extracted data to DB.
- */
+
 exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
   .onCreate(function (event) {
 
