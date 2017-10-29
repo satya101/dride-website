@@ -18,7 +18,7 @@
     "serve:static": "cd functions/dist/browser && http-server",
     "serve:dynamic": "node dist/server",
     "release": "ng build --prod --sourcemaps && node scripts/deploySequence.js && firebase deploy --only hosting,functions:metaService && sentry-cli releases -o dride-inc -p dride-app files 2.0 upload-sourcemaps --url-prefix / dist",
-    "release:ssr": "npm run build:dynamic && npm run serve:dynamic",
+    "release:ssr": "npm run build:dynamic && npm run serve:dynamic && node scripts/deploySequenceSSR.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

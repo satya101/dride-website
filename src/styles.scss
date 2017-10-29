@@ -441,7 +441,9 @@ main{
         }
     }
  }
-
+.modal-dialog {
+    z-index: 1000000;
+}
 .card-columns {
 	@include media-breakpoint-only(xs) {
 		column-count: 1;

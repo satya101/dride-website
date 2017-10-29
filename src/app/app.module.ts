@@ -44,6 +44,7 @@ import { SsrService } from './helpers/ssr/ssr.service'
 
 
 import { NgbdModalPayement } from './store/product/payment.modal';
+import { NgbdModalAskInForum} from './forum/askInForum.modal';
 
 
 export function metaFactory(): MetaLoader {
@@ -76,6 +77,7 @@ export class RavenErrorHandler implements ErrorHandler {
 		PageNotFoundComponent,
 		NgbdModalLogin,
 		NgbdModalPayement,
+		NgbdModalAskInForum,
 		NavComponent,
 		FooterComponent
 	],
@@ -105,7 +107,8 @@ export class RavenErrorHandler implements ErrorHandler {
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [NgbdModalLogin,
-		NgbdModalPayement
+		NgbdModalPayement,
+		NgbdModalAskInForum
 	],
 })
 export class AppModule { }

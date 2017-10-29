@@ -41,6 +41,8 @@
         outline: none;
     }
     .closeModal{
+		padding: 10px;
+		margin-left: -10px;
         cursor: pointer;
     }
     .padWrap {
@@ -143,7 +145,7 @@
     }
 
     .btn-dride-center{
-        top: -14px;
+		margin-top: 14px;
         font-family: Comfortaa;
     }
 }

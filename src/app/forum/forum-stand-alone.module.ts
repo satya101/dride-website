@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 
 import { ForumComponent } from './forum.component';
-import { NgbdModalAskInForum} from './forum.component';
+import { NgbdModalAskInForum} from './askInForum.modal';
 import { SharedModule } from '../helpers/shared.module';
 import { TruncateModule } from 'ng2-truncate';
 
@@ -19,10 +19,7 @@ import { TruncateModule } from 'ng2-truncate';
 		FormsModule,
 		RouterModule
 	],
-	declarations: [ForumComponent, NgbdModalAskInForum],
-	entryComponents: [
-		NgbdModalAskInForum
-	],
+	declarations: [ForumComponent],
 	exports: [ForumComponent]
 })
 export class ForumModuleStandAlone { }

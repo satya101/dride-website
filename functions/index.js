@@ -240,7 +240,7 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
                     },
                     {
                       "name": "VIDEO_POSTER",
-                      "content": clip.thumbs.src
+                      "content": clip.thumbs ? clip.thumbs.src : ''
                     },
                     {
                       "name": "VIDEO_LINK",
@@ -282,7 +282,8 @@ exports.metaService = functions.https.onRequest((req, res) => {
 
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
   var userAgent = req.headers['user-agent'];
-
+  //const botList = 'baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|slackbot|facebot|developers\.google\.com\/\+\/web\/snippet\/'.toLowerCase();
+  //if(userAgent.toLowerCase().search(botList) != -1)  
   if (
     userAgent.indexOf('facebookexternalhit') !== -1 ||
     userAgent.indexOf('WhatsApp') !== -1 ||
@@ -292,7 +293,8 @@ exports.metaService = functions.https.onRequest((req, res) => {
     userAgent.indexOf('msnbot') !== -1 ||
     userAgent.indexOf('YandexBot') !== -1 ||
     userAgent.indexOf('vkShare') !== -1 ||
-    userAgent.indexOf('XML Sitemaps Generator') !== -1
+    userAgent.indexOf('XML Sitemaps Generator') !== -1 ||
+    userAgent.indexOf('DuckDuckBot') !== -1
 
   ) {
     //send SSR content

@@ -431,10 +431,12 @@ export class ProfileComponent implements OnInit {
 				this.meta.setTag('twitter:url', 'https://dride.io/profile/' + uid + '/' + videoId);
 				this.meta.setTag('twitter:title', data['description']);
 				this.meta.setTag('twitter:description', data['plates']);
-				this.meta.setTag('twitter:image', data['thumbs']['src']);
+				this.meta.setTag('twitter:image:src', data['thumbs']['src']);
 				this.meta.setTag('twitter:player', data['clips']['src']);
 				this.meta.setTag('twitter:player:width', '1280');
 				this.meta.setTag('twitter:player:height', '720');
+				this.meta.setTag('twitter:player:stream', data['clips']['src']);
+				this.meta.setTag('twitter:player:stream:content_type', 'video/mp4');
 			})
 	}
 

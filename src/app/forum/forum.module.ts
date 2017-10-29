@@ -6,16 +6,15 @@ import { ForumModuleStandAlone } from '../forum/forum-stand-alone.module'
 
 import { ForumComponent } from './forum.component';
 import { routing } from './forum.routing';
-import { NgbdModalAskInForum} from './forum.component';
 import { SharedModule } from '../helpers/shared.module';
 import { TruncateModule } from 'ng2-truncate';
 
 
 
 @NgModule({
-	imports: [routing,
+	imports: [
+		routing,
 		ForumModuleStandAlone
-	],
-
+	]
 })
 export class ForumModule { }
