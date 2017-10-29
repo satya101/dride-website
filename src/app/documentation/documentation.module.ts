@@ -20,6 +20,7 @@ import { CodeComponent } from '../helpers/code/code.component';
 
 import { DocumentationComponent } from './documentation.component';
 import { routing } from './documentation.routing';
+import { EditMeDirective } from './directive/edit-me.directive';
 
 @NgModule({
 	imports: [routing, FormsModule, CommonModule],
@@ -38,7 +39,8 @@ import { routing } from './documentation.routing';
 					SideNavComponent,
 					DocsPageDirective,
 					ShowOnHomePage,
-					UniversalComponent
+					UniversalComponent,
+					EditMeDirective
 				],
 				entryComponents: [
 					DocsMainComponent,
