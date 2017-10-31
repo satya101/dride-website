@@ -10,6 +10,7 @@ import { IndicatorsComponent } from '../pages/indicators/indicators.component';
 import { ManualSetupComponent } from '../pages/manualSetup/manual-setup.component';
 import { PublishComponent } from '../pages/publish/publish.component';
 import { UniversalComponent } from '../pages/drideUniversal/universal.component';
+import { AssemblyComponent } from '../pages/assembly/assembly.component';
 import { SsrService } from '../../helpers/ssr/ssr.service'
 
 
@@ -95,6 +96,13 @@ export class SideNavComponent implements OnInit {
 				'hp': false,
 				'menu': false,
 				'component': ManualSetupComponent
+			},
+			{
+				'url': 'assembly',
+				'ttl': 'Assembly',
+				'hp': false,
+				'menu': false,
+				'component': AssemblyComponent
 			},
 			{
 				'url': 'universal',

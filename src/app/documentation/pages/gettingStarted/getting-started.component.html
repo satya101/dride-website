@@ -1,74 +1,125 @@
+<div class="textBox">
+  <h1>How to build your own Dride</h1>
+  <h2>A Raspberry Pi-based connected dashcam</h2>
+</div>
 
-    
-		        <div class="textBox">
-					<h1>Automated Setup</h1>
-		        </div>
-		        
-		        <div class="textBox" edit-page>
-	            
-		            <p>In order to set-up your raspberry Pi with your Dride, Follow the instructions below:</p>
-		            <p>Download our pre-installed pre-configured <b><a ng-click="trackDownload()" target="_BLANK" href="https://s3.amazonaws.com/dride/image_2017-07-28-drideOS-lite.zip"><b>drideOS (Raspbian Jessie)</b></a></b> image with all the software needed.
-		           Or use the <a routerLink="/documentation/manual_setup">Manual Installation Guide</a>. </p>
-					<br><br>
-					<h2 class="text-center regCase pb-40">Download drideOS</h2>
-					<div class="row justify-content-center">
+<div class="textBox" edit-page>
 
-					    <div class="col-lg-3 col-xs-12">
-					        <h2 class="text-center regCase">For RaspberryPi 3</h2>
-					        <div class="getDride" >
-					            <a class="text-center" (click)="track('drideOS')" target="_BLANK" href="https://s3.amazonaws.com/dride/image_2017-07-28-drideOS-lite.zip">
-					                <p>drideOS</p>
-					                <p class="smallTag">v0.4 Alpha</p>
-					            </a>
-					        </div>
-					    </div>
-					    <div class="col-lg-3 col-xs-12">
-					        <h2 class="text-center regCase">For RaspberryPi Zero W</h2>
-					        <div class="getDride" >
-					            <a class="text-center" (click)="track('drideOSZ')" target="_BLANK" href="https://s3.amazonaws.com/dride/image_2017-06-21-drideOSZ.zip">
-					                <p>drideOSZ</p>
-					                <p class="smallTag">v0.3.3 Alpha</p>
-					            </a>
-					        </div>
-					    </div>
+  <p>Hello makers, and thank you for taking the time to build a Dride! We’re excited to see what you do with Dride and are looking
+    forward to your feedback! Let's get started.</p>
+</div>
+<div class="textBox" edit-page>
+  <h2>What you will need:</h2>
+  <ul>
+    <li>Raspberry Pi Zero W or Raspberry Pi 3</li>
+    <li>Pi Camera</li>
+    <li>3m micro USB cable</li>
+    <li>Dride-Case & Dride-HAT</li>
+  </ul>
+</div>
+<div class="textBox" edit-page>
+  <h2>Getting started:</h2>
+  <p>First you need to burn your SD card with the latest version of drideOS. The best way to create the SD card is by using
+    <u>Dride Flasher</u>
+  </p>
+  <br>
+  <h2 class="text-center regCase pb-20">Download Dride Flasher</h2>
+  <div class="row justify-content-center">
 
-					</div>
+    <div class="col-lg-3 col-xs-12">
+      <div class="getDride">
+        <a class="text-center" (click)="track('drideDIF')" target="_BLANK" href="https://s3.amazonaws.com/dride/drideFlasher.zip">
+          <p>Dride Flasher</p>
+          <p class="smallTag">v0.4 Alpha</p>
+        </a>
+      </div>
+    </div>
 
-
-					<div class="clear"></div>
-		            <div class="alert alert-warning" role="alert">Learn how to install the operating system image on an SD card for <a href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">Mac OS</a>, <a href="https://www.raspberrypi.org/documentation/installation/installing-images/windows.md">Windows</a> & <a href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">Linux</a></div>
-
-
-					<br>
-					<h2>Testing</h2>
-					<p>Download Dride's app for <a href="https://itunes.apple.com/us/app/dride/id1185398002?ls=1&mt=8">iOS</a> or <a href="https://play.google.com/store/apps/details?id=io.dride">Android</a></p>
-					<p>Go to Settings > Wi-Fi on your phone and select <u>dride</u>, enter the password "<u>ilovedride</u>", then return to the app.</p>
-		        </div>   
-
-		        <br>
-		        <br>
-		        <div class="textBox">
-					<h1>Dride Case</h1>
-		        </div>
-		        
-		        <div class="textBox" edit-page>
-	            	<p>Dride case will go on sale soon, Until then you can <a href="https://github.com/dride/dride-case" target="_BLANK">3D print your own case</a></p>
-		        </div>   
+  </div>
 
 
 
-		        <br>
-		        <br>
-		        <div class="textBox">
-		            <h1>Architecture</h1>
-		        </div>
-		        <div class="textBox" edit-page>
-		            <p>Dride is based on Node.js. It is controlled by an array of native and custom modules.</p>
+  <ul>
+    <li>Download
+      <a ng-click="track('drideDF')" target="_BLANK" href="https://s3.amazonaws.com/dride/drideFlasher.zip">
+        <b>Dride Flasher</b>
+      </a>
+    </li>
+    <li>Connect an SD card reader with the SD card inside.</li>
+    <li>Open
+      <u>Dride Flasher</u> and select the SD card to which you want to write your image as well as the OS type. Review your selections and click
+      'Flash!' to begin writing data to the SD card.
+    </li>
+  </ul>
+  <div class="text-center">
+    <img class="img-fluid" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2Fdf.png?alt=media&token=24d01f8c-448b-4a45-9f02-72648d406cca"
+    />
+  </div>
 
-				<hljs [code]="data[0]"></hljs>
+  <div class="clear"></div>
+  <div class="alert alert-info" role="alert">
+    <strong>Heads up!</strong> We have a
+    <a routerLink="/documentation/manual_setup">Manual Installation Guide</a> as well.</div>
+  <div class="alert alert-warning" role="alert">Learn how to install the operating system image on an SD card for
+    <a href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">Mac OS</a>,
+    <a href="https://www.raspberrypi.org/documentation/installation/installing-images/windows.md">Windows</a> &
+    <a href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">Linux</a>
+  </div>
+
+</div>
+<div class="textBox" edit-page>
+  <h2>Assembly</h2>
+  <p>Check out this
+    <a routerLink="/documentation/assembly">Assembly guide</a>
+  </p>
+</div>
+
+<div class="textBox" edit-page>
+  <h2>Control the device</h2>
+  <p>Download Dride's app for
+    <a href="https://itunes.apple.com/us/app/dride/id1185398002?ls=1&mt=8">iOS</a> or
+    <a href="https://play.google.com/store/apps/details?id=io.dride">Android</a>
+  </p>
+  <p>On iOS go to your phone's wifi settings and connect your phone to the
+    <u>dride</u> wifi network The default password is
+    <u>ilovedride</u>
+  </p>
+  <p>Android users will be connected automatically.</p>
+  <br>
+  <p>Once you’re connected to wifi, open the Dride app. The clips will begin to load on the screen.</p>
+  <div class="text-center">
+	  <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F1.png?alt=media&token=a09915f0-7f82-4942-b0e5-30cbf1db9df8" />
+	  <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F2.png?alt=media&token=6faee810-d536-4a60-a2e4-257116555b3d" />
+	  <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F3.png?alt=media&token=3cbf267f-8f9c-4e59-ad9d-fb093e816d7f" />
+  </div>
+</div>
+
+<br>
+<br>
+<div class="textBox">
+  <h1>Dride Case</h1>
+</div>
+
+<div class="textBox" edit-page>
+  <p>Dride case will go on sale soon, Until then you can
+    <a href="https://github.com/dride/dride-case" target="_BLANK">3D print your own case</a>
+  </p>
+</div>
+
+
+<!--
+<br>
+<br>
+<div class="textBox">
+  <h1>Architecture</h1>
+</div>
+<div class="textBox" edit-page>
+  <p>Dride is based on Node.js. It is controlled by an array of native and custom modules.</p>
+
+  <hljs [code]="data[0]"></hljs>
 
 
 
 
 
-		        </div>   
+</div> -->

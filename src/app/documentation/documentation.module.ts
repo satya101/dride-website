@@ -12,6 +12,7 @@ import { IndicatorsComponent } from '../documentation/pages/indicators/indicator
 import { ManualSetupComponent } from '../documentation/pages/manualSetup/manual-setup.component';
 import { PublishComponent } from '../documentation/pages/publish/publish.component';
 import { UniversalComponent } from '../documentation/pages/drideUniversal/universal.component';
+import { AssemblyComponent } from '../documentation/pages/assembly/assembly.component';
 import { SideNavComponent } from '../documentation/layout/side-nav.component';
 import { PageService } from '../documentation/pages.service';
 import { DocsPageDirective } from '../documentation/pages.directive';
@@ -36,6 +37,7 @@ import { EditMeDirective } from './directive/edit-me.directive';
 					IndicatorsComponent,
 					ManualSetupComponent,
 					PublishComponent,
+					AssemblyComponent,
 					SideNavComponent,
 					DocsPageDirective,
 					ShowOnHomePage,
@@ -52,7 +54,8 @@ import { EditMeDirective } from './directive/edit-me.directive';
 					IndicatorsComponent,
 					ManualSetupComponent,
 					PublishComponent,
-					UniversalComponent
+					UniversalComponent,
+					AssemblyComponent
 				],
 				providers: [
 					SideNavComponent,
