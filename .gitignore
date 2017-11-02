@@ -9,6 +9,7 @@
 # dependencies
 /node_modules
 /functions/node_modules
+/functions/appEngine/node_modules
 
 # IDEs and editors
 /.idea
@@ -54,3 +55,6 @@ functions/dist
 
 src/environments/environment.ts
 functions/environments/*
+
+*firebase-adminsdk*
+appEngine/

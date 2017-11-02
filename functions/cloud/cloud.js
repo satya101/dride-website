@@ -1,6 +1,13 @@
 var admin = require('firebase-admin');
 var gcs = require('@google-cloud/storage')();
 
+// var serviceAccount = require("../appEngine/dride-2384f-firebase-adminsdk-5lgyf-da8f444645.json");
+// admin.initializeApp({
+// 	credential: admin.credential.cert(serviceAccount),
+// 	databaseURL: "https://dride-2384f.firebaseio.com",
+// 	storageBucket: "dride-2384f.appspot.com"
+//   });
+
 cloud = {
     /*
      * delete the video from a user profile, all it's comments and remove from HP.

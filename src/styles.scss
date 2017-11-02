@@ -234,9 +234,9 @@ body {
 .container{
     height: 100%;
 }
-.disabled{
-    opacity: 0.4;
-    cursor: not-allowed;
+.disabled, .disabled a, .disabled p{
+	opacity: 0.4;
+	cursor: not-allowed !important;
 }
 .block {
     display: block;

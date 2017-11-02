@@ -26,11 +26,20 @@
   <h2 class="text-center regCase pb-20">Download Dride Flasher</h2>
   <div class="row justify-content-center">
 
-    <div class="col-lg-3 col-xs-12">
+    <div class="col-lg-3 col-xs-12" (click)="track('drideDIFmac')">
       <div class="getDride">
-        <a class="text-center" (click)="track('drideDIF')" target="_BLANK" href="https://s3.amazonaws.com/dride/drideFlasher.zip">
+        <a class="text-center" href="https://s3.amazonaws.com/dride/DrideImageFlasher/mac/Dride+Image+Flasher.app.zip">
           <p>Dride Flasher</p>
-          <p class="smallTag">v0.4 Alpha</p>
+          <p class="smallTag">macOS</p>
+        </a>
+      </div>
+    </div>
+	<div class="col-lg-3 col-xs-12 disabled" (click)="track('drideDIFwin')">
+      <div class="getDride">
+        <a class="text-center">
+
+          <p>Dride Flasher</p>
+          <p class="smallTag">Windows (Soon)</p>
         </a>
       </div>
     </div>
@@ -41,14 +50,15 @@
 
   <ul>
     <li>Download
-      <a ng-click="track('drideDF')" target="_BLANK" href="https://s3.amazonaws.com/dride/drideFlasher.zip">
+      <a ng-click="track('drideDF')" target="_BLANK" href="https://s3.amazonaws.com/dride/DrideImageFlasher/mac/Dride+Image+Flasher.app.zip">
+
         <b>Dride Flasher</b>
       </a>
     </li>
     <li>Connect an SD card reader with the SD card inside.</li>
     <li>Open
-      <u>Dride Flasher</u> and select the SD card to which you want to write your image as well as the OS type. Review your selections and click
-      'Flash!' to begin writing data to the SD card.
+      <u>Dride Flasher</u> and select the SD card to which you want to write your image as well as the OS type. Review your
+      selections and click 'Flash!' to begin writing data to the SD card.
     </li>
   </ul>
   <div class="text-center">
@@ -57,10 +67,37 @@
   </div>
 
   <div class="clear"></div>
+
+  <br><br>
+  <h2 class="text-center regCase pb-40">Or download drideOS images</h2>
+  <div class="row justify-content-center">
+
+	  <div class="col-lg-3 col-xs-12">
+		  <h2 class="text-center regCase">For RaspberryPi 3</h2>
+		  <div class="getDride" >
+			  <a class="text-center" (click)="track('drideOS')" target="_BLANK" href="https://s3.amazonaws.com/dride/image_2017-07-28-drideOS-lite.zip">
+				  <p>drideOS</p>
+				  <p class="smallTag">v0.4 Alpha</p>
+			  </a>
+		  </div>
+	  </div>
+	  <div class="col-lg-3 col-xs-12">
+		  <h2 class="text-center regCase">For RaspberryPi Zero W</h2>
+		  <div class="getDride" >
+			  <a class="text-center" (click)="track('drideOSZ')" target="_BLANK" href="https://s3.amazonaws.com/dride/image_2017-06-21-drideOSZ.zip">
+				  <p>drideOSZ</p>
+				  <p class="smallTag">v0.3.3 Alpha</p>
+			  </a>
+		  </div>
+	  </div>
+
+  </div>
+
+
   <div class="alert alert-info" role="alert">
     <strong>Heads up!</strong> We have a
-    <a routerLink="/documentation/manual_setup">Manual Installation Guide</a> as well.</div>
-  <div class="alert alert-warning" role="alert">Learn how to install the operating system image on an SD card for
+    <a routerLink="/documentation/manual_setup">manual installation guide</a> as well.</div>
+  <div class="alert alert-warning" role="alert">Learn how to install custom os images on an SD card for
     <a href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">Mac OS</a>,
     <a href="https://www.raspberrypi.org/documentation/installation/installing-images/windows.md">Windows</a> &
     <a href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">Linux</a>
@@ -88,20 +125,18 @@
   <br>
   <p>Once you’re connected to wifi, open the Dride app. The clips will begin to load on the screen.</p>
   <div class="text-center">
-	  <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F1.png?alt=media&token=a09915f0-7f82-4942-b0e5-30cbf1db9df8" />
-	  <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F2.png?alt=media&token=6faee810-d536-4a60-a2e4-257116555b3d" />
-	  <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F3.png?alt=media&token=3cbf267f-8f9c-4e59-ad9d-fb093e816d7f" />
+    <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F1.png?alt=media&token=a09915f0-7f82-4942-b0e5-30cbf1db9df8"
+    />
+    <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F2.png?alt=media&token=6faee810-d536-4a60-a2e4-257116555b3d"
+    />
+    <img class="appDemo" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fdocs%2F3.png?alt=media&token=3cbf267f-8f9c-4e59-ad9d-fb093e816d7f"
+    />
   </div>
 </div>
 
-<br>
-<br>
-<div class="textBox">
-  <h1>Dride Case</h1>
-</div>
-
 <div class="textBox" edit-page>
-  <p>Dride case will go on sale soon, Until then you can
+  <h2>Dride Case</h2>
+  <p>Dride case will be available for sale soon, Until then you can
     <a href="https://github.com/dride/dride-case" target="_BLANK">3D print your own case</a>
   </p>
 </div>
@@ -123,3 +158,11 @@
 
 
 </div> -->
+
+<br><br><br><br><br>
+<div class="textBox" edit-page>
+	<h2>Need help setting up your Dride?</h2>
+	<p>Ask for help from our amazing community!
+		<a routerLink="/forum">Ask a question</a>
+	</p>
+  </div>

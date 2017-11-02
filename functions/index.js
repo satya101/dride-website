@@ -265,12 +265,16 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
             });
           },
           err => {
+			console.error(err)
             reject(err)
-            console.error(err)
           }
         );
 
-      })
+      },
+	  err => {
+		console.error(err)
+		reject(err)
+	  })
 
     })
   });

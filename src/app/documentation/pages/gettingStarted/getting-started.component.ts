@@ -36,8 +36,8 @@ export class GettingStartedComponent implements OnInit {
 
 	}
 
-	track(what) {
-		this.mixpanel.track('download ' + what, {});
+	track(what, parms = {}) {
+		this.mixpanel.track('download ' + what, parms);
 	}
 
 }

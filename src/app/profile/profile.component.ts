@@ -76,17 +76,17 @@ export class ProfileComponent implements OnInit {
 				this.http
 					.get(url)
 					.subscribe(data => {
-						if (data && data[Object.keys(data)[0]].thumbs) {
-								this.router.navigate(['/profile/' + this.uid + '/' + Object.keys(data)[0]]);
-							} else {
-								this.userHaveNoVideos = true
-							}
-						},
-						error => {
-							this.userHaveNoVideos = true;
-							// TODO: log this
-							console.error('An error occurred when requesting clips.');
+						if (data) {
+							this.router.navigate(['/profile/' + this.uid + '/' + Object.keys(data)[0]]);
+						} else {
+							this.userHaveNoVideos = true
 						}
+					},
+					error => {
+						this.userHaveNoVideos = true;
+						// TODO: log this
+						console.error('An error occurred when requesting clips.');
+					}
 					)
 			}
 
@@ -139,6 +139,14 @@ export class ProfileComponent implements OnInit {
 				this.currentVideo = data
 
 				// if video does not exists
+				if (!data.thumbs) {
+					data.thumbs = {
+						src: 'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2F'
+						+ this.uid + '%2F'
+						+ this.videoId
+						+ '.jpg?alt=media'
+					}
+				}
 				if (!data || !data.thumbs) {
 					this.router.navigate(['/page-not-found']);
 					return;
@@ -414,7 +422,7 @@ export class ProfileComponent implements OnInit {
 
 	setMetaTags(uid, videoId) {
 		const url = environment.firebase.databaseURL +
-		'/clips/' + uid + '/' + videoId + '.json'
+			'/clips/' + uid + '/' + videoId + '.json'
 		this.http
 			.get(url)
 			.subscribe(data => {
@@ -445,21 +453,21 @@ export class ProfileComponent implements OnInit {
 	*/
 	yi_getTimeStamp(videoId) {
 
-				const date = videoId.split('_');
+		const date = videoId.split('_');
 
-				if (!date[1]) {
-					return videoId;
-				}
+		if (!date[1]) {
+			return videoId;
+		}
 
-				const year = date[0];
-				const month = date[1][0] + date[1][1]
-				const day = date[1][2] + date[1][3]
-				const hour = date[2][0] + date[2][1]
-				const minute = date[2][2] + date[2][3]
-				const sec = date[2][4] + date[2][5]
+		const year = date[0];
+		const month = date[1][0] + date[1][1]
+		const day = date[1][2] + date[1][3]
+		const hour = date[2][0] + date[2][1]
+		const minute = date[2][2] + date[2][3]
+		const sec = date[2][4] + date[2][5]
 
-				return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime() / 1000
-			}
+		return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime() / 1000
+	}
 
 
 

@@ -10,17 +10,20 @@ module.exports = class VideoEditor {
   constructor(uid, filename, path) {
     this.uid = uid;
     this.filename = filename;
-	this.path = path;
-	
+    this.path = path;
+
   }
 
   prepareVideoToCloud() {
     return new Promise((resolve, reject) => {
       this.resizeVideo().then(
         done => {
+          console.log('resizeVideo')
           this.addWaterMark().then(done => {
+            console.log('addWaterMark')
             this.saveThumbNail().then(
               done => {
+                console.log('saveThumbNail')
                 resolve();
               }, fail => {
                 reject(fail)
@@ -42,57 +45,58 @@ module.exports = class VideoEditor {
   addWaterMark() {
     return new Promise((resolve, reject) => {
 
-        var process = new ffmpeg(this.path + this.uid + '_resized_' + this.filename);
-        process.then((video) => {
-          var watermarkPath = __dirname + '/../stripe.png',
-            newFilepath = this.path + this.uid + '_' + this.filename,
-            settings = {
-              position: "NE" // Position: NE NC NW SE SC SW C CE CW
-                ,
-              margin_nord: null // Margin nord
-                ,
-              margin_sud: null // Margin sud
-                ,
-              margin_east: null // Margin east
-                ,
-              margin_west: null // Margin west
-            };
-          var callback = (error, files) => {
-            if (error) {
-              reject(error)
-            } else {
-              resolve(files);
-            }
+      var process = new ffmpeg(this.path + this.uid + '_resized_' + this.filename);
+      process.then((video) => {
+        var watermarkPath = __dirname + '/../stripe.png',
+          newFilepath = this.path + this.uid + '_' + this.filename,
+          settings = {
+            position: "NE" // Position: NE NC NW SE SC SW C CE CW
+              ,
+            margin_nord: null // Margin nord
+              ,
+            margin_sud: null // Margin sud
+              ,
+            margin_east: null // Margin east
+              ,
+            margin_west: null // Margin west
+          };
+        var callback = (error, files) => {
+          if (error) {
+            reject(error)
+          } else {
+            resolve(files);
           }
-          //add watermark
-          video
-            .fnAddWatermark(watermarkPath, newFilepath, settings, callback)
+        }
+        //add watermark
+        video
+          .fnAddWatermark(watermarkPath, newFilepath, settings, callback)
 
 
-        }, (err) => {
-          reject(err)
-        });
+      }, (err) => {
+        reject(err)
+      });
 
     })
   }
   //resize video
   resizeVideo() {
+    console.log('resizinggggVideo')
     return new Promise((resolve, reject) => {
-	  var process = new ffmpeg(this.path + this.uid + '__' + this.filename);
+      var process = new ffmpeg(this.path + this.uid + '__' + this.filename);
       process.then((video) => {
-		//add watermark
+        //add watermark
         video
-          .setVideoSize('1080x?', true, true, '#333333')
-		  //.setAudioCodec('mpeg4')
+          .setVideoSize('1080x608', true, true, '#333333')
+          //.setAudioCodec('mpeg4')
           .save(this.path + this.uid + '_resized_' + this.filename, (error, file) => {
             if (!error) {
               resolve()
             } else {
               reject(error)
             }
-		  })
+          })
 
-		  
+
 
 
       }, (err) => {
@@ -114,15 +118,13 @@ module.exports = class VideoEditor {
             frame_rate: 1,
             start_time: 0,
             number: 1,
+            size: '1080x608',
+            keep_aspect_ratio: false,
             file_name: this.path + this.uid + '_' + fileNameWithoutExtension
           }, (error, file) => {
 
             if (!error) {
-
-              this.renameThumb().then(
-                done => resolve(),
-                err => reject(err)
-              )
+              resolve()
             } else {
               reject(error)
             }
@@ -138,41 +140,24 @@ module.exports = class VideoEditor {
   }
 
 
-  renameThumb() {
-    return new Promise((resolve, reject) => {
-      const fileNameWithoutExtension = this.filename.split('.')[0]
-
-      const oldPath = this.path + this.uid + '_' + fileNameWithoutExtension + '/' + this.uid + '_' + fileNameWithoutExtension + '_1.jpg'
-      const newPath = this.path + this.uid + '_' + fileNameWithoutExtension + '.jpg'
-      fs.rename(oldPath, newPath, (err) => {
-        if (err) {
-          reject()
-        }
-        resolve()
-      });
-    });
-  }
-
-
   //upload files
   uploadToBucket(file, destination) {
 
-	const bucket = admin.storage().bucket();
-
+    const bucket = admin.storage().bucket();
+    console.log(destination + '>>')
+    console.log(file + '>>')
     return new Promise((resolve, reject) => {
       bucket.upload(file, {
-		destination: destination,
-		metadata: {
-			metadata: {
-				processed: 'true'
-			}
-		}
+        destination: destination
       }).then(
-		  data => {
-				resolve()
-      }, err => {
-		reject(err);
-	  })
+        data => {
+          console.log(destination + '<<')
+          resolve()
+        }, err => {
+          console.error('uploadToBucket')
+          console.error(err)
+          reject(err);
+        })
     })
   }
 
