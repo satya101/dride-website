@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MetaService } from '../../../helpers/meta/meta.service'
 
 @Component({
 	selector: 'docs-adas',
@@ -7,12 +8,17 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 	encapsulation: ViewEncapsulation.None
 })
 export class AdasComponent implements OnInit {
-
-	constructor() { }
 	data: any = [];
+
+	constructor(private meta: MetaService) {
+	}
+
 	ngOnInit() {
 
-
+		this.meta.set(
+			'ADAS',
+			'ADAS integration for the Dride dashcam'
+		)
 
 		this.data = [
 			`var core = require('dride-core')`,

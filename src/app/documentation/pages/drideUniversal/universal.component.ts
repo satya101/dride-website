@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MetaService } from '../../../helpers/meta/meta.service'
 
 @Component({
 	selector: 'docs-universal',
@@ -8,10 +9,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class UniversalComponent implements OnInit {
 	public data = [];
-	constructor() { }
+
+	constructor(private meta: MetaService) {
+	}
 
 	ngOnInit() {
-
+		this.meta.set(
+			'Dride-Universal',
+			'Integrating 3rd party dashcams with Dride-universal'
+		)
 		this.data = [
 			`{ "status": "1"}`,
 			`{ "status": "1"}`,

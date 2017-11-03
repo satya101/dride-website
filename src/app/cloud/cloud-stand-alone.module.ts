@@ -10,7 +10,7 @@ import { SharedModule } from '../helpers/shared.module';
 import { environment } from '../../environments/environment';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { AutosizeModule } from '../helpers/autosize.module';
+import { AutosizeModule } from '../helpers/autosize/autosize.module';
 
 
 @NgModule({

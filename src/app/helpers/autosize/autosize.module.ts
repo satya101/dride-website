@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Autosize } from 'ng-autosize';
+import {Autosize} from './autosize.directive';
 
 
 @NgModule({

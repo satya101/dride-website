@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { TimeAgoPipe } from 'time-ago-pipe';
+import { TimeAgoPipe } from './timeAgoPipe/timeAgo.pipe';
 import { KeysPipe } from './keys.pipe';
 
 

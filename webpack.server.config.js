@@ -16,13 +16,11 @@ module.exports = {
   // Dont include modules with ES6 module import
   externals: [nodeExternals({
 	whitelist: [
-	  /^ng2-markdown-to-html/,
+	  /^ngx-markdown/,
 	  /^ngx-bootstrap/,
-	  /^@ngx-meta/,
-	  /^ng2-page-scroll/,
+	  /^ngx-page-scroll/,
 	  /^ng2-truncate/,
 	  /^@agm/,
-	  /^time-ago-pipe/,
 	  /^firebase/,
 	  /^angularfire2/,
 	  /^videogular2/,

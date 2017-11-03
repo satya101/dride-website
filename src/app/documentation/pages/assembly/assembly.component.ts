@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MetaService } from '../../../helpers/meta/meta.service'
 
 @Component({
 	selector: 'app-assembly',
@@ -9,10 +10,14 @@ export class AssemblyComponent implements OnInit {
 
 	data: any = [];
 
-	constructor() { }
+	constructor(private meta: MetaService) {
+	}
 
 	ngOnInit() {
-
+		this.meta.set(
+			'Assembly',
+			'How to assemble Dride'
+		)
 		this.data = [
 			`$ dride publish`
 		]

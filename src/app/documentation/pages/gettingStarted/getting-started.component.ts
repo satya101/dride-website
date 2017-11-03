@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MixpanelService } from '../../../helpers/mixpanel/mixpanel.service';
+import { MetaService } from '../../../helpers/meta/meta.service'
 
 @Component({
 	selector: 'app-getting-started',
@@ -8,10 +9,17 @@ import { MixpanelService } from '../../../helpers/mixpanel/mixpanel.service';
 })
 export class GettingStartedComponent implements OnInit {
 
-	constructor(public mixpanel: MixpanelService) { }
 	data: any = [];
-	ngOnInit() {
 
+	constructor(public mixpanel: MixpanelService, private meta: MetaService) {
+	}
+
+
+	ngOnInit() {
+		this.meta.set(
+			'Getting Started',
+			'Getting started guide about how to build a connected dashcam with Dride & RaspberryPi'
+		)
 		this.data = [
 			`dride/
 ├── package.json

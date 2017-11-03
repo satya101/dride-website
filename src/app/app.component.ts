@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs/Rx';
 
 import { MixpanelService } from './helpers/mixpanel/mixpanel.service';
 
-import { MetaService } from '@ngx-meta/core';
 import { SsrService } from './helpers/ssr/ssr.service'
+import { MetaService } from './helpers/meta/meta.service'
 
 
 
@@ -19,8 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	routerSubscription: Subscription;
 
 
-	constructor(private router: Router, public mixpanel: MixpanelService, public ssr: SsrService) {
-
+	constructor(private router: Router, public mixpanel: MixpanelService, public ssr: SsrService, private meta: MetaService) {
 	}
 
 	ngOnInit() {

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,14 +20,14 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import 'firebase/storage';
 import 'firebase/messaging';
 
-import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
-import { UiSwitchModule } from 'ngx-ui-switch/src'
+import { UiSwitchModule } from 'ngx-ui-switch'
 
 import { AppComponent } from './app.component';
 
 import { AuthService, NgbdModalLogin } from './auth.service';
 
 import { PushNotificationsService } from './push-notifications.service';
+import { MetaService } from './helpers/meta/meta.service';
 
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -47,18 +47,6 @@ import { NgbdModalPayement } from './store/product/payment.modal';
 import { NgbdModalAskInForum} from './forum/askInForum.modal';
 
 
-export function metaFactory(): MetaLoader {
-	return new MetaStaticLoader({
-		pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
-		pageTitleSeparator: ' | ',
-		applicationName: 'Dride',
-		applicationUrl: 'https://dride.io/',
-		defaults: {
-			title: 'Dride',
-			image: 'https://dride.io/assets/images/logo.svg',
-		}
-	});
-}
 
 Raven
 .config('https://937047e5361c41349ef8dc829947575d@sentry.io/215964')
@@ -94,16 +82,13 @@ export class RavenErrorHandler implements ErrorHandler {
 		AngularFireAuthModule,
 		FormsModule,
 		UiSwitchModule,
-		SharedModule,
-		MetaModule.forRoot({
-			provide: MetaLoader,
-			useFactory: (metaFactory)
-		})
+		SharedModule
 	],
 	providers: [AuthService,
 		PushNotificationsService,
 		MixpanelService,
-		SsrService
+		SsrService,
+		MetaService
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [NgbdModalLogin,

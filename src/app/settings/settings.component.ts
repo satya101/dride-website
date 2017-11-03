@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { PushNotificationsService } from '../push-notifications.service';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { MetaService } from '../helpers/meta/meta.service'
 
 @Component({
 	selector: 'app-settings',
@@ -29,7 +30,8 @@ export class SettingsComponent implements OnInit {
 
 	constructor(private auth: AuthService,
 				public db: AngularFireDatabase,
-				public push: PushNotificationsService) {
+				public push: PushNotificationsService,
+				private meta: MetaService) {
 
 		auth.getState().subscribe(user => {
 			if (!user) {
@@ -45,6 +47,11 @@ export class SettingsComponent implements OnInit {
 
 
 	ngOnInit() {
+
+		this.meta.set(
+			'Settings',
+			'Manage your Dride account.'
+		)
 
 		this.auth.verifyLoggedIn().then(res => {
 			this.email = this.firebaseUser.email;

@@ -216,7 +216,10 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
             mixpanel.track('video_upoload', {
               distinct_id: uid,
               filename: filename
-            });
+			});
+			
+			
+
             //notify user his video is live!
             admin.auth().getUser(uid).then(function (userRecord) {
               db.ref('clips').child(uid).child(filename.split('.')[0]).once("value", function (snapshot) {
