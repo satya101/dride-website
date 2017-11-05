@@ -84,6 +84,7 @@
   "defaults": {
     "styleExt": "scss",
     "component": {
-    }
+		"inlineStyle": true
+	  }
   }
 }

@@ -6,6 +6,9 @@ var http = require('http');
 var cors = require('cors')({
   origin: true
 });
+var mobile = require('is-mobile');
+
+
 admin.initializeApp(functions.config().firebase);
 // grab the Mixpanel factory
 var Mixpanel = require('mixpanel');
@@ -292,6 +295,7 @@ exports.metaService = functions.https.onRequest((req, res) => {
   //const botList = 'baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|slackbot|facebot|developers\.google\.com\/\+\/web\/snippet\/'.toLowerCase();
   //if(userAgent.toLowerCase().search(botList) != -1)  
   if (
+	mobile(req) ||
     userAgent.indexOf('facebookexternalhit') !== -1 ||
     userAgent.indexOf('WhatsApp') !== -1 ||
     userAgent.indexOf('Facebot') !== -1 ||

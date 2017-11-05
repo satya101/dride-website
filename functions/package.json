@@ -36,6 +36,7 @@
     "fs": "0.0.1-security",
     "get-urls": "^7.0.0",
     "import-export": "^1.0.1",
+    "is-mobile": "^0.2.2",
     "mailchimp-api-v3": "^1.7.0",
     "mandrill-api": "^1.0.45",
     "marked": "^0.3.6",
