@@ -117,13 +117,12 @@ sudo dpkg -i node_latest_armhf.deb
 
 echo "========== Install Dride-core [Cardigan]  ============"
 cd /home
-# https://github.com/dride/Cardigan/archive/0.3.zip
-sudo wget -c -O "cardigan-0.3.zip" "https://github.com/dride/Cardigan/releases/download/0.3/Cardigan.zip"
+
+sudo wget -c -O "drideOS-latest.zip" "https://s3.amazonaws.com/dride/releases/cardigan/latest.zip"
 sudo mkdir Cardigan
-sudo unzip "cardigan-0.3.zip" -d Cardigan
+sudo unzip "drideOS-latest" -d Cardigan
 
 sudo rm -R __MACOSX
-
 
 # make the video dir writable
 sudo chmod 777 -R modules/video/
@@ -209,7 +208,11 @@ sudo update-rc.d isc-dhcp-server enable
 
 # dride-ws
 cd /home/Cardigan/dride-ws
-sudo npm i
+sudo npm i --production
+
+# bluetooth daemon
+cd /home/Cardigan/daemons/bluetooth
+sudo npm i --production
 
 
 sudo wget https://dride.io/code/startup/dride-ws

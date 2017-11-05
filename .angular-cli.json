@@ -8,6 +8,7 @@
       "root": "src",
 	  "outDir": "dist/browser",
       "assets": [
+		"code",
         "assets",
         "favicon.ico",
         "manifest.json",
@@ -36,6 +37,7 @@
       "root": "src",
 	  "outDir": "dist/server",
       "assets": [
+        "code",
         "assets",
         "favicon.ico"
       ],
