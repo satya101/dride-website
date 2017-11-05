@@ -1,6 +1,7 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
+	  "skipLibCheck": true,
 	  "outDir": "./dist/out-tsc",
 	  "baseUrl": "src",
 	  "sourceMap": true,
@@ -16,6 +17,9 @@
 		"es2016",
 		"dom"
 	  ]
+	},
+	"angularCompilerOptions": {
+		"preserveWhitespaces": false
 	},
 	"exclude": [
 		"node_modules"

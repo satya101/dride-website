@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { introAnim } from '../../router.animations';
+import { MetaService } from '../../helpers/meta/meta.service'
 
 
 
@@ -11,9 +12,11 @@ import { introAnim } from '../../router.animations';
 })
 export class AboutComponent implements OnInit {
 
-	constructor() { }
+	constructor(private meta: MetaService) {
+	}
 
 	ngOnInit() {
+		this.meta.set('About', 'About Dride,Inc.', 'article')
 	}
 
 }

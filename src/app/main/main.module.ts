@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CloudPaginationService } from '../cloud/cloud-pagination.service';
 import { TruncateModule } from 'ng2-truncate';
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { InViewport } from '../helpers/in-viewport.directive';
 
 
@@ -29,7 +29,7 @@ import { InViewport } from '../helpers/in-viewport.directive';
 		TruncateModule,
 		ForumModuleStandAlone,
 		CloudModuleStandAlone,
-		Ng2PageScrollModule
+		NgxPageScrollModule
 	],
 	declarations: [MainComponent, InViewport],
 	providers: [CloudPaginationService]

@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { MarkdownToHtmlModule } from 'ng2-markdown-to-html';
-
+import { MarkdownModule } from 'ngx-markdown';
 import { ThreadComponent } from './thread.component';
 import { SharedModule } from '../../helpers/shared.module';
-import { AutosizeModule } from '../../helpers/autosize.module';
+import { AutosizeModule } from '../../helpers/autosize/autosize.module';
 
 
 import { routing } from './thread.routing';
@@ -20,7 +19,7 @@ import { routing } from './thread.routing';
 		FormsModule,
 		CommonModule,
 		AngularFireDatabaseModule,
-		MarkdownToHtmlModule.forRoot(),
+		MarkdownModule.forRoot(),
 		AutosizeModule
 	],
 	declarations: [ThreadComponent]

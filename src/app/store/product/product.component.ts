@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
 
 import { AuthService } from '../../auth.service';
 import { NgbdModalPayement } from './payment.modal';
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
+import { MetaService } from '../../helpers/meta/meta.service'
 
 
 
@@ -29,8 +29,8 @@ export class ProductComponent implements OnInit {
 		private route: ActivatedRoute,
 		private auth: AuthService,
 		private modalService: BsModalService,
-		public mixpanel: MixpanelService) {
-
+		public mixpanel: MixpanelService,
+		private meta: MetaService) {
 
 
 		auth.getState().subscribe(user => {
@@ -46,7 +46,15 @@ export class ProductComponent implements OnInit {
 		this.route.params.subscribe(params => {
 
 			if (params['productSlug']) {
-				this.productData = db.object('content/' + params['productSlug']);
+				this.productData = db.object('content/' + params['productSlug'])
+				this.productData.subscribe(
+					(data: any) => {
+						this.meta.set(
+							data.title,
+							data.productInfo[0].body
+						)
+					}
+				)
 			}
 
 		});

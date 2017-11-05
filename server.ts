@@ -21,8 +21,8 @@ global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const app = express();
 app.use(compression())
 
-var PORT = 4000;
-var DIST_FOLDER = '/home/server/dist';
+let PORT = 4000;
+let DIST_FOLDER = '/home/server/dist';
 
 // Our index.html we'll use as our template
 const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toString();

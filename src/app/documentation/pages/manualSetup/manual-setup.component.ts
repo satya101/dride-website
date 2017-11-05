@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MetaService } from '../../../helpers/meta/meta.service'
 
 @Component({
 	selector: 'app-manual-setup',
@@ -7,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManualSetupComponent implements OnInit {
 	data: any = [];
-	constructor() { }
+
+	constructor(private meta: MetaService) {
+	}
 
 	ngOnInit() {
-
+		this.meta.set(
+			'Manual Setup',
+			'Install drideOS on your own linux'
+		)
 		this.data = [
 			`#-------------------------------------------------------
 # Script to check if all is good before install script runs

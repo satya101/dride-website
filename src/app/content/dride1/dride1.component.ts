@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
-
+import { MetaService } from '../../helpers/meta/meta.service'
 
 @Component({
 	selector: 'app-dride1',
@@ -12,10 +12,14 @@ export class Dride1Component implements OnInit {
 
 	preSubmit = true
 
-	constructor() {
+	constructor(private meta: MetaService) {
 	}
 
 	ngOnInit() {
+		this.meta.set(
+			'Features',
+			'Dride is the worlds first connected dashcam with safety alerts and apps.'
+		)
 	}
 
 	sendDetails = function (email) {

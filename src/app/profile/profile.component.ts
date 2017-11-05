@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service'
-import { MetaService } from '@ngx-meta/core';
+import { MetaService } from '../helpers/meta/meta.service'
 import { PlayerComponent } from '../layout/components/player.component'
 
 
@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
 		private auth: AuthService,
 		public mixpanel: MixpanelService,
 		public ssr: SsrService,
-		public meta: MetaService) {
+		private meta: MetaService) {
 
 		// get Auth state
 		auth.getState().subscribe(user => {
@@ -105,7 +105,6 @@ export class ProfileComponent implements OnInit {
 		if (!this.videoId || !this.uid) {
 			return;
 		}
-		this.meta.setTag('og:title', this.videoId);
 
 		this.route.params.subscribe(params => {
 			this.comments = null
@@ -137,6 +136,10 @@ export class ProfileComponent implements OnInit {
 				const data = currentVideoSanp.val();
 
 				this.currentVideo = data
+				this.meta.set(
+					this.currentVideo['description'],
+					this.currentVideo['plates']
+				)
 
 				// if video does not exists
 				if (!data.thumbs) {
@@ -426,25 +429,25 @@ export class ProfileComponent implements OnInit {
 		this.http
 			.get(url)
 			.subscribe(data => {
-				this.meta.setTag('og:title', data['description']);
-				this.meta.setTag('og:description', data['plates']);
-				this.meta.setTag('og:image:width', '320');
-				this.meta.setTag('og:image:height', '176');
-				this.meta.setTag('og:image', data['thumbs']['src']);
-				this.meta.setTag('og:video', data['clips']['src']);
-				this.meta.setTag('og:video:secure_url', data['clips']['src']);
-				this.meta.setTag('og:type', 'video.other');
-				this.meta.setTag('twitter:card', 'player');
-				this.meta.setTag('twitter:site', '@drideHQ');
-				this.meta.setTag('twitter:url', 'https://dride.io/profile/' + uid + '/' + videoId);
-				this.meta.setTag('twitter:title', data['description']);
-				this.meta.setTag('twitter:description', data['plates']);
-				this.meta.setTag('twitter:image:src', data['thumbs']['src']);
-				this.meta.setTag('twitter:player', data['clips']['src']);
-				this.meta.setTag('twitter:player:width', '1280');
-				this.meta.setTag('twitter:player:height', '720');
-				this.meta.setTag('twitter:player:stream', data['clips']['src']);
-				this.meta.setTag('twitter:player:stream:content_type', 'video/mp4');
+				this.meta.addTag({property: 'og:title', content: data['description'] ? data['description'] : 'Event on Dride Cloud'});
+				this.meta.addTag({property: 'og:description', content: data['plates'] ? data['plates'] : 'This video doesn\'t have a description yet.'});
+				this.meta.addTag({property: 'og:image:width', content: '320'});
+				this.meta.addTag({property: 'og:image:height', content: '176'});
+				this.meta.addTag({property: 'og:image', content: data['thumbs']['src']});
+				this.meta.addTag({property: 'og:video', content: data['clips']['src']});
+				this.meta.addTag({property: 'og:video:secure_url', content: data['clips']['src']});
+				this.meta.addTag({property: 'og:type', content: 'video.other'});
+				this.meta.addTag({property: 'twitter:card', content: 'player'});
+				this.meta.addTag({property: 'twitter:site', content: '@drideHQ'});
+				this.meta.addTag({property: 'twitter:url', content: 'https://dride.io/profile/' + uid + '/' + videoId});
+				this.meta.addTag({property: 'twitter:title', content: data['description']});
+				this.meta.addTag({property: 'twitter:description', content: data['plates']});
+				this.meta.addTag({property: 'twitter:image:src', content: data['thumbs']['src']});
+				this.meta.addTag({property: 'twitter:player', content: data['clips']['src']});
+				this.meta.addTag({property: 'twitter:player:width', content: '1280'});
+				this.meta.addTag({property: 'twitter:player:height', content: '720'});
+				this.meta.addTag({property: 'twitter:player:stream', content: data['clips']['src']});
+				this.meta.addTag({property: 'twitter:player:stream:content_type', content: 'video/mp4'});
 			})
 	}
 

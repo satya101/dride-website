@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 import { ProfileComponent } from './profile.component';
 import { routing } from './profile.routing';
 import { AgmCoreModule, AgmPolygon } from '@agm/core';
-import { AutosizeModule } from '../helpers/autosize.module';
+import { AutosizeModule } from '../helpers/autosize/autosize.module';
 
 
 

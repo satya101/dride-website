@@ -8,6 +8,7 @@ import { PageItem } from './page-item';
 import { SideNavComponent } from './layout/side-nav.component';
 import { introAnim } from '../router.animations';
 
+import { MetaService } from '../helpers/meta/meta.service'
 
 @Component({
 	selector: 'app-documentation',
@@ -28,11 +29,17 @@ export class DocumentationComponent implements OnInit {
 	constructor(sideNav: SideNavComponent,
 		private _componentFactoryResolver: ComponentFactoryResolver,
 		private pageService: PageService,
-		private route: ActivatedRoute) {
+		private route: ActivatedRoute,
+		private meta: MetaService) {
 		this.docMenu = sideNav.docMenu;
 	}
 
 	ngOnInit() {
+		this.meta.set(
+			'Documentation',
+			'How to build a dashcam with a RaspberryPi and how to build Dride apps'
+		)
+
 		this.pages = this.pageService.getPages();
 		this.route.params.subscribe(params => {
 			if (params.slug) {

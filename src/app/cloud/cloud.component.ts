@@ -11,6 +11,7 @@ import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service'
 
 import { introAnim } from '../router.animations';
+import { MetaService } from '../helpers/meta/meta.service'
 
 
 @Component({
@@ -33,7 +34,9 @@ export class CloudComponent implements OnInit {
 		private auth: AuthService,
 		private http: HttpClient,
 		public mixpanel: MixpanelService,
-		public ssr: SsrService) {
+		public ssr: SsrService,
+		private meta: MetaService) {
+
 
 		this.isBrowser = ssr.isBrowser()
 		// get Auth state
@@ -50,6 +53,13 @@ export class CloudComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		if (this.isFull) {
+			this.meta.set(
+				'Dride Cloud',
+				'Best dashcam videos every day.'
+			)
+		}
 		// load first batch
 		this.dCloud.init(this.isFull);
 		this.hpClips = this.dCloud

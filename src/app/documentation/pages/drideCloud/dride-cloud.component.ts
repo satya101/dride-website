@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MetaService } from '../../../helpers/meta/meta.service'
 
 @Component({
 	selector: 'app-dride-cloud',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrideCloudComponent implements OnInit {
 
-	constructor() { }
+	constructor(private meta: MetaService) {
+	}
 
 	ngOnInit() {
+		this.meta.set(
+			'Dride-Cloud',
+			'Access Dride-Cloud programmatically'
+		)
 	}
 
 }

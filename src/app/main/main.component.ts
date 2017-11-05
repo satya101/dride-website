@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { introAnim } from '../router.animations';
 import { HttpClient } from '@angular/common/http';
 
-import { PageScrollConfig } from 'ng2-page-scroll';
+import { PageScrollConfig } from 'ngx-page-scroll';
 import { InViewport } from '../helpers/in-viewport.directive';
 import { environment } from '../../environments/environment';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service'
+import { MetaService } from '../helpers/meta/meta.service'
 
 
 @Component({
@@ -24,7 +25,11 @@ export class MainComponent implements OnInit {
 	isLoaded = false
 	currentElementInView = 0
 
-	constructor(private http: HttpClient, public mixpanel: MixpanelService, public ssr: SsrService) {
+	constructor(private http: HttpClient,
+		public mixpanel: MixpanelService,
+		public ssr: SsrService,
+		private meta: MetaService
+	) {
 
 		PageScrollConfig.defaultDuration = 800;
 		PageScrollConfig.defaultEasingLogic = {
@@ -38,6 +43,14 @@ export class MainComponent implements OnInit {
 		};
 	}
 
+	ngOnInit() {
+		this.meta.set(
+			'Home',
+			'Dride is making it easy to share dashcam videos. Visit to learn more about Dride.'
+		)
+		this.isLoaded = true;
+	}
+
 	action(event, pos) {
 		if (event) {
 			this.currentElementInView = pos - 1
@@ -46,16 +59,14 @@ export class MainComponent implements OnInit {
 		}
 	}
 
-	ngOnInit() {
-		this.isLoaded = true;
-	}
+
 
 	sendDetails = function (email) {
 		// subscribe users
 		const url = environment.functionsURL + '/subscriber?email=' + email;
 		this.http.get(url).subscribe(data => {
 			this.preSubmit = false;
-			this.mixpanel.track('subscribed', {location: 'HP', email: email});
+			this.mixpanel.track('subscribed', { location: 'HP', email: email });
 		});
 
 	}

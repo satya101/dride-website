@@ -10,7 +10,7 @@ import { introAnim } from '../../router.animations';
 
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 
-import { MetaService } from '@ngx-meta/core';
+import { MetaService } from '../../helpers/meta/meta.service'
 
 
 @Component({
@@ -36,7 +36,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private auth: AuthService,
 		public mixpanel: MixpanelService,
-		private readonly meta: MetaService) {
+		private meta: MetaService) {
 
 		auth.getState().subscribe(user => {
 			if (!user) {
@@ -50,6 +50,8 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// set meta tags
+		this.meta.set('Thread on Dride Forum', '', 'article');
 
 		this.sub = this.route.params.subscribe(params => {
 			this.threadId = params['slug'].split('__').pop();
@@ -59,7 +61,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 					this.router.navigate(['/page-not-found'])
 				}else {
 					// set meta tags
-					this.meta.setTitle(snapshot.val().title);
+					this.meta.set(snapshot.val().title, snapshot.val().description, 'article');
 				}
 			});
 
