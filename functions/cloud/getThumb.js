@@ -73,7 +73,6 @@ getThumb = {
 				error => console.error(error + '2')
 			)
           )
-		  console.log('ddff')
           Promise.all(promises).then(values => {
 			console.log('uploaded!')
             resolve();

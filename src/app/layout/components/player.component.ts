@@ -17,14 +17,20 @@ export class PlayerComponent implements OnInit {
 
 	@Input() currentVideo: any;
 	@Input() tag: any;
+	@Input() currentTime = 0;
 
 	constructor(public ssr: SsrService, private http: HttpClient, public mixpanel: MixpanelService) { }
 
-	ngOnInit() {
-	}
+	ngOnInit() {}
 
 	onPlayerReady(api: VgAPI, video, tag: string = 'Unknown') {
 		if (!this.ssr.isBrowser()) { return }
+
+		api.getDefaultMedia().subscriptions.loadStart.subscribe(
+			() => {
+				api.getDefaultMedia().currentTime = this.currentTime;
+			}
+		)
 
 		api.getDefaultMedia().subscriptions.playing.subscribe(
 			() => {

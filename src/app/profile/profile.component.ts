@@ -1,5 +1,5 @@
 import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
 	comments: any = {};
 	opData: any;
 	public firebaseUser: any;
+	public currentTime: number;
 
 	constructor(private db: AngularFireDatabase,
 		private route: ActivatedRoute,
@@ -49,7 +50,9 @@ export class ProfileComponent implements OnInit {
 		private auth: AuthService,
 		public mixpanel: MixpanelService,
 		public ssr: SsrService,
-		private meta: MetaService) {
+		private meta: MetaService,
+		private activatedRoute: ActivatedRoute
+	) {
 
 		// get Auth state
 		auth.getState().subscribe(user => {
@@ -61,6 +64,7 @@ export class ProfileComponent implements OnInit {
 
 		});
 
+		this.currentTime = this.route.snapshot.queryParams['s'];
 		this.route.params.subscribe(params => {
 
 			this.userHaveNoVideos = false;
@@ -106,7 +110,9 @@ export class ProfileComponent implements OnInit {
 			return;
 		}
 
+		// subscribe to router event
 		this.route.params.subscribe(params => {
+
 			this.comments = null
 			this.map.center = null;
 			this.map.path = null;
@@ -137,8 +143,8 @@ export class ProfileComponent implements OnInit {
 
 				this.currentVideo = data
 				this.meta.set(
-					this.currentVideo['description'],
-					this.currentVideo['plates']
+					this.currentVideo ? this.currentVideo['description'] : '',
+					this.currentVideo ? this.currentVideo['plates'] : ''
 				)
 
 				// if video does not exists
