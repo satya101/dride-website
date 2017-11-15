@@ -54,9 +54,14 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		this.meta.set('Thread on Dride Forum', '', 'article');
 
 		this.sub = this.route.params.subscribe(params => {
-			this.threadId = params['slug'].split('__').pop();
+			this.threadId = params['slug'].split('____').pop();
 
+			// migrate to ___ in url
+			if (this.threadId === params['slug']) {
+				this.threadId = params['slug'].split('__').pop();
+			}
 			this.db.object('/threads/' + this.threadId, { preserveSnapshot: true }).subscribe(snapshot => {
+
 				if (!snapshot.val()) {
 					this.router.navigate(['/page-not-found'])
 				}else {

@@ -62,7 +62,7 @@ export class NgbdModalAskInForum {
 
 	slugify(text, id) {
 		return (
-			text.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-') + '__' + id
+			text.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-') + '____' + id
 		);
 	}
 	openThread = (title) => {
