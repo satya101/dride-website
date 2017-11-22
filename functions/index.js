@@ -286,7 +286,39 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
   });
 
 
+exports.logGPS = functions.https.onRequest((req, res) => {
+    console.log('Headers:\n', req.headers);
+    console.log('Body:\n', req.body);
+	console.log('------------------------------');
+	const sendObj = {
+		"template_name": 'video-is-on',
+		"subject": JSON.stringify(req.body),
+		"to": [
+		  {
+			"email": 'yossi@dride.io'
+		  },
+		],
+		"tags": ['video uploaded!'],
+		"global_merge_vars": [{
+			"name": "FULL_NAME",
+			"content": ''
+		  },
+		  {
+			"name": "VIDEO_POSTER",
+			"content": ''
+		  },
+		  {
+			"name": "VIDEO_LINK",
+			"content": 'https://dride.io/profile/'
+		  }
+		]
+	  };
 
+	 // mailer.send(sendObj)
+
+
+    res.sendStatus(200);
+})
 
 exports.metaService = functions.https.onRequest((req, res) => {
 
@@ -295,7 +327,6 @@ exports.metaService = functions.https.onRequest((req, res) => {
   //const botList = 'baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|slackbot|facebot|developers\.google\.com\/\+\/web\/snippet\/'.toLowerCase();
   //if(userAgent.toLowerCase().search(botList) != -1)  
   if (
-	mobile(req) ||
     userAgent.indexOf('facebookexternalhit') !== -1 ||
     userAgent.indexOf('WhatsApp') !== -1 ||
     userAgent.indexOf('Facebot') !== -1 ||

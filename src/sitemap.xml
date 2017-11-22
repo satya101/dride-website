@@ -48,4 +48,13 @@
 <url>
   <loc>https://dride.io/settings</loc>
 </url>
+<url>
+  <loc>https://dride.io/store</loc>
+</url>
+<url>
+  <loc>https://dride.io/product/dride</loc>
+</url>
+<url>
+  <loc>https://dride.io/product/dride-kit</loc>
+</url>
 </urlset>

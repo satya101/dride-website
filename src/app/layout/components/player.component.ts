@@ -21,7 +21,11 @@ export class PlayerComponent implements OnInit {
 
 	constructor(public ssr: SsrService, private http: HttpClient, public mixpanel: MixpanelService) { }
 
-	ngOnInit() {}
+	ngOnInit() {
+		if (!this.currentTime) {
+			this.currentTime = 0
+		}
+	}
 
 	onPlayerReady(api: VgAPI, video, tag: string = 'Unknown') {
 		if (!this.ssr.isBrowser()) { return }

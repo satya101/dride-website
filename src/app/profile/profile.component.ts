@@ -141,6 +141,11 @@ export class ProfileComponent implements OnInit {
 			this.db.object('/clips/' + this.uid + '/' + this.videoId, { preserveSnapshot: true }).take(1).subscribe(currentVideoSanp => {
 				const data = currentVideoSanp.val();
 
+				if (!data || !data.thumbs) {
+					this.router.navigate(['/profile/' + this.uid]);
+					return;
+				}
+
 				this.currentVideo = data
 				this.meta.set(
 					this.currentVideo ? this.currentVideo['description'] : '',
@@ -156,10 +161,7 @@ export class ProfileComponent implements OnInit {
 						+ '.jpg?alt=media'
 					}
 				}
-				if (!data || !data.thumbs) {
-					this.router.navigate(['/page-not-found']);
-					return;
-				}
+
 				// increase views counter
 				this.http.get(environment.functionsURL + '/viewCounter?videoId=' + this.videoId + '&op=' + this.uid).subscribe()
 
