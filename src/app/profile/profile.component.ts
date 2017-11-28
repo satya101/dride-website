@@ -11,7 +11,7 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable }
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service'
 import { MetaService } from '../helpers/meta/meta.service'
-import { PlayerComponent } from '../layout/components/player.component'
+import { PlayerComponent } from '../layout/components/player/player.component'
 
 
 import { introAnim } from '../router.animations';
@@ -178,6 +178,7 @@ export class ProfileComponent implements OnInit {
 						const s = this.prepGeoJsonToGoogleMaps(
 							data
 						);
+						console.log(s)
 						const middleRoad = Math.ceil(s.length / 2)
 						this.map['center'] = { latitude: s[middleRoad].latitude, longitude: s[middleRoad].longitude };
 						this.map['path'] = s;
@@ -417,7 +418,7 @@ export class ProfileComponent implements OnInit {
 
 		const videoRoute = [];
 		Object.keys(geoJson).forEach(function (key) {
-			geoJson[key] = JSON.parse(geoJson[key]);
+			geoJson[key] = geoJson[key];
 
 			videoRoute.push({
 				latitude: parseFloat(geoJson[key].latitude),

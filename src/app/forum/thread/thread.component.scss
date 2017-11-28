@@ -15,9 +15,11 @@
         margin-top: 15px;
         padding: 10px;
         .bdy{
-            padding-left: 9px;
+			padding-left: 9px;
+			overflow-wrap: break-word;
         }
-    }
+	}
+
     .replyBox {
         margin-top: 5px;
         padding: 10px;
@@ -57,7 +59,8 @@
         }
         .bdy p {
             font-weight: 400;
-            font-size: 16px;
+			font-size: 16px;
+			overflow-wrap: break-word;
             img{
                 margin: auto auto;
                 display: block;

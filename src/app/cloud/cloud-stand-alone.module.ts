@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CloudComponent } from './cloud.component';
 import { CloudPaginationService } from './cloud-pagination.service';
 
-import { PlayerModule } from '../layout/components/player.module'
+import { PlayerModule } from '../layout/components/player/player.module'
 import { SharedModule } from '../helpers/shared.module';
 import { environment } from '../../environments/environment';
 

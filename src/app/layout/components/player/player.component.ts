@@ -1,17 +1,17 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SsrService } from '../../helpers/ssr/ssr.service'
-import { environment } from '../../../environments/environment';
+import { SsrService } from '../../../helpers/ssr/ssr.service'
+import { environment } from '../../../../environments/environment';
 
 import { VgAPI } from 'videogular2/core';
-import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
+import { MixpanelService } from '../../../helpers/mixpanel/mixpanel.service';
 
 
 @Component({
 	selector: 'app-player',
 	templateUrl: './player.component.html',
 	styleUrls: ['./player.component.scss'],
-	encapsulation : ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None
 })
 export class PlayerComponent implements OnInit {
 
@@ -32,7 +32,9 @@ export class PlayerComponent implements OnInit {
 
 		api.getDefaultMedia().subscriptions.loadStart.subscribe(
 			() => {
-				api.getDefaultMedia().currentTime = this.currentTime;
+				if (this.currentTime) {
+					api.getDefaultMedia().currentTime = this.currentTime;
+				}
 			}
 		)
 
@@ -43,7 +45,7 @@ export class PlayerComponent implements OnInit {
 					this.http.get(environment.functionsURL + '/viewCounter?videoId=' + video.videoId + '&op=' + video.op).subscribe()
 				}
 
-				this.mixpanel.track('PlayVideo', {vid: video.videoId, where: tag})
+				this.mixpanel.track('PlayVideo', { vid: video.videoId, where: tag })
 			}
 		);
 	}

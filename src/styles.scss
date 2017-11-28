@@ -487,3 +487,10 @@ main{
 	min-height: calc(100vh);
 	display: block;
 }
+
+.simple-notification.success {
+	background: #333 !important;
+	.sn-progress-loader span{
+		background: #444 !important;
+	}
+}

@@ -22,9 +22,13 @@ import { CodeComponent } from '../helpers/code/code.component';
 import { DocumentationComponent } from './documentation.component';
 import { routing } from './documentation.routing';
 import { EditMeDirective } from './directive/edit-me.directive';
+import { SubscribeBoxComponent } from '../layout/components/subscribe-box/subscribe-box.component';
+import { CookieService } from 'ngx-cookie-service';
+
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
-	imports: [routing, FormsModule, CommonModule],
+	imports: [routing, FormsModule, CommonModule, SimpleNotificationsModule],
 	declarations: [
 					DocumentationComponent,
 					CodeComponent,
@@ -42,7 +46,8 @@ import { EditMeDirective } from './directive/edit-me.directive';
 					DocsPageDirective,
 					ShowOnHomePage,
 					UniversalComponent,
-					EditMeDirective
+					EditMeDirective,
+					SubscribeBoxComponent
 				],
 				entryComponents: [
 					DocsMainComponent,
@@ -55,11 +60,13 @@ import { EditMeDirective } from './directive/edit-me.directive';
 					ManualSetupComponent,
 					PublishComponent,
 					UniversalComponent,
-					AssemblyComponent
+					AssemblyComponent,
+					SubscribeBoxComponent
 				],
 				providers: [
 					SideNavComponent,
-					PageService
+					PageService,
+					CookieService
 				]
 })
 export class DocumentationModule { }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { PlayerModule } from '../layout/components/player.module'
+import { PlayerModule } from '../layout/components/player/player.module'
 import { SharedModule } from '../helpers/shared.module';
 import { environment } from '../../environments/environment';
 

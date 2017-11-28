@@ -1,0 +1,20 @@
+<div class="container-fluid subscribe" when-visible="animateElementIn" *ngIf="show">
+  <h3>We're looking for beta testers, Apply now!</h3>
+  <div class="row">
+
+    <div class="mx-auto col-md-offset-3 col-md-6 col-xs-12">
+      <div class="input-group">
+
+        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email" #emailField="ngModel" required email>
+        <span class="input-group-btn">
+          <button class="btn btn-default cFont" type="button" (click)="sendDetails(email)" [disabled]="emailField.hasError('email')">Request access</button>
+        </span>
+      </div>
+      <!-- /input-group -->
+    </div>
+    <!-- /.col-lg-6 -->
+  </div>
+  <!-- /.row -->
+</div>
+
+<simple-notifications ></simple-notifications>

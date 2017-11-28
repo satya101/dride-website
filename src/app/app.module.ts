@@ -46,6 +46,8 @@ import { SsrService } from './helpers/ssr/ssr.service'
 import { NgbdModalPayement } from './store/product/payment.modal';
 import { NgbdModalAskInForum} from './forum/askInForum.modal';
 
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 
 
 Raven
@@ -82,7 +84,8 @@ export class RavenErrorHandler implements ErrorHandler {
 		AngularFireAuthModule,
 		FormsModule,
 		UiSwitchModule,
-		SharedModule
+		SharedModule,
+		SimpleNotificationsModule.forRoot()
 	],
 	providers: [AuthService,
 		PushNotificationsService,
