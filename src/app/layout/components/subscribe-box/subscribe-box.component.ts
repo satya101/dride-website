@@ -8,7 +8,9 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
 	selector: 'app-subscribe-box',
 	templateUrl: './subscribe-box.component.html',
-	styles: ['h3{ text-align: center; color: #7d7d7d; text-transform: none; }', '.subscribe{padding-bottom: 100px;padding-top: 100px;}']
+	styles: ['h3{ text-align: center; color: #7d7d7d; text-transform: none; }',
+		'.subscribe{padding-bottom: 50px; padding-top: 50px; border: 1px solid rgba(0,0,0,.09); box-shadow: 0 1px 4px 0 rgba(0,0,0,.04); width: 99%; background-color: #f5f5f5;}',
+		'.row{margin-top: 31px;}']
 })
 export class SubscribeBoxComponent implements OnInit {
 

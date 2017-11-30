@@ -5,7 +5,7 @@
     <div class="mx-auto col-md-offset-3 col-md-6 col-xs-12">
       <div class="input-group">
 
-        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email" #emailField="ngModel" required email>
+        <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="email" #emailField="ngModel" required email>
         <span class="input-group-btn">
           <button class="btn btn-default cFont" type="button" (click)="sendDetails(email)" [disabled]="emailField.hasError('email')">Request access</button>
         </span>
