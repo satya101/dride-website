@@ -20,7 +20,7 @@ export class NgbdModalPayement {
 	productId: string;
 	qTitle: any;
 	isLoaded = true;
-	shareTxt = 'I just joined the waitlist for #dride. You should too! 🚗';
+	shareTxt = 'I just joined the waitlist for #dride. You should too!';
 	constructor(public bsModalRef: BsModalRef,
 		private router: Router,
 		private route: ActivatedRoute,

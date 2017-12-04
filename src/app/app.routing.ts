@@ -16,6 +16,7 @@ const routes: Routes = [{
 		{ path: 'fleet', loadChildren: './content/fleet/fleet.module#FleetModule'},
 		{ path: '3rd-party-manufacturers', loadChildren: './content/3rd-party/3rd-party.module#TPartyModule'},
 		{ path: 'features', loadChildren: './content/dride1/dride1.module#Dride1Module'},
+		{ path: 'dride-zero', loadChildren: './content/zero/zero.module#ZeroModule'},
 		{ path: 'documentation', loadChildren: './documentation/documentation.module#DocumentationModule' },
 		{ path: 'documentation/:slug', loadChildren: './documentation/documentation.module#DocumentationModule'},
 		{ path: 'c/:slug', redirectTo: '/documentation/:slug', pathMatch: 'full' },

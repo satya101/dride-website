@@ -1,17 +1,25 @@
 .modalUI{
     .txtHeadline{
         font-size: 25px;
-        margin-top: 10px ;
+		margin-top: 10px ;
+		text-align: center !important;
     }
-    h3, p{
+    h3{
         text-align: center;
-        text-transform: inherit;
-    }
+		text-transform: inherit;
+		padding: 30px 0 30px 0;
+	}
+	.c1{
+		text-align: left;
+		padding: 0 30px 0 30px;
+		margin-bottom: -1px;
+	}
     .form-group{
         margin: 30px;
     }
     textarea{
-        padding: 30px !important;
+		padding: 30px !important;
+		height: 47px !important;
     }
     input, textarea {
         background-color: #eaeaea !important;

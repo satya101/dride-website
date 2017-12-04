@@ -168,11 +168,15 @@ $color: #333333,
 .section1 {
   height: 100vh;
   background-image: url('https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fhp.87d5694943347cd61b28.png?alt=media&token=f7b3f608-0ff4-45ab-aab5-eb6b66c01917');
+  //background-image: url('../../assets/images/hp.jpg');
   background-size: cover;
   background-position: center;
   img {
     margin-top: -18px;
   }
+//   h1, h2{
+// 	  color: #fff;
+//   }
   .logo {
     padding-top: 75vh;
     font-size: 69px;
