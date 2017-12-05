@@ -27,6 +27,7 @@ const routes: Routes = [{
 		{ path: 'cloud', loadChildren: './cloud/cloud.module#CloudModule'},
 		{ path: 'cloud/uploadVideo', loadChildren: './cloud/upload-video/upload-video.module#UploadVideoModule'},
 		{ path: 'settings', loadChildren: './settings/settings.module#SettingsModule'},
+		{ path: 'invoice', loadChildren: './invoice/invoice.module#InvoiceModule'},
 
 
 		{ path: 'page-not-found', component: PageNotFoundComponent },

@@ -1,0 +1,63 @@
+<div class="buy2">
+		<div class="col-md-12 wrapTopMenu">
+			<!-- header -->
+			<div ng-include="'views/sharedTemplates/header.html'"></div>
+		</div>
+		<div class="container-fluid">
+				<div class="zroBg"></div>
+		</div>
+	
+
+		<div class="container buy">
+			<!-- <div class="col-md-6">
+				<div class="upperText preOrderTop">
+					<div class="text-center preOrderBlock">
+						<img class="img-responisve full-width mtop0" src="images/productFront.png" alt="dride" />
+					</div>
+				</div>
+			</div> -->
+			<div class="col-md-6 checkOutBox mx-auto">
+				<div class="upperText preOrderTop">
+					<div class="text-center preOrderBlock">
+	
+						<h2>Dride Zero</h2>
+						<p>Evalutation unit</p>
+	
+						<div class="alert alert-warning" role="alert">
+							*You're purchasing a prototype, Some features may still be in development
+							<br>
+							*Paint pigment and texture might be different from the final product.
+						</div>
+	
+	
+	
+						Quantity
+						<div class="input-group">
+	
+						  <span class="input-group-btn">
+							  <button type="button" class="btn btn-default btn-number" data-type="minus" (click)="quantity > 1 ? quantity = quantity - 1 : 1">
+								  <span >-</span>
+							  </button>
+						  </span>
+						  <input type="number" [(ngModel)]="quantity" id="quantity" class="form-control input-number text-center" value="1" min="1" max="10">
+						  <span class="input-group-btn">
+							  <button type="button" class="btn btn-default btn-number" data-type="plus" (click)="quantity = quantity + 1">
+								  <span >+</span>
+							  </button>
+						  </span>
+						</div>
+						<br>
+						<button class="btn btn-default btn-block full-width btn-dride-black" type="button" id="customButton">Buy Now</button>
+	
+						<br><br><br><br>
+	
+	
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+	
+	
+	</div>
