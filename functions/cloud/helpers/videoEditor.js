@@ -1,4 +1,3 @@
-var Thumbler = require('thumbler');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 var ffmpeg = require('ffmpeg');
 
