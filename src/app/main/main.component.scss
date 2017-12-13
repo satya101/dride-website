@@ -156,39 +156,71 @@ $color: #333333,
   }
 }
 
-.productSubTtl {
-  font-size: 18px;
-  font-weight: 100;
-  color: #404040;
-  text-transform: capitalize;
-  margin-top: 6px;
-  letter-spacing: 1px;
-}
 
 .section1 {
   height: 100vh;
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fhp.87d5694943347cd61b28.png?alt=media&token=f7b3f608-0ff4-45ab-aab5-eb6b66c01917');
-  //background-image: url('../../assets/images/hp.jpg');
+  background-image: url('../../assets/images/hp.jpg');
   background-size: cover;
   background-position: center;
   img {
     margin-top: -18px;
   }
-//   h1, h2{
-// 	  color: #fff;
-//   }
+  h1, h2{
+	  color: #fff;
+  }
   .logo {
-    padding-top: 75vh;
-    font-size: 69px;
-    letter-spacing: 6px;
+	padding-top: 66vh;
+    font-size: 96px;
+	letter-spacing: 6px;
+	letter-spacing: initial;
+	span{
+		font-size: 40px;
+		margin-left: -10px;
+		letter-spacing: initial;
+	}
+	@media (max-width: 1285px) {
+		font-size: 76px;
+		span{
+			font-size: 30px;
+			margin-left: -19px;
+		}
+	}
+  }
+  .productSubTtl {
+	font-size: 25px;
+	font-weight: 100;
+	color: #666666 !important;
+	text-transform: capitalize;
+	margin-top: 6px;
+	letter-spacing: 1px;
+	font-family: 'Raleway';
+	@media (max-width: 1285px) {
+		font-size: 20px;
+	}
   }
   .preOrderBtn {
     margin-bottom: 40px;
     border: 0;
     background-color: #fff;
+	width: 145px;
+	border-radius: 2px;
+	margin-top: 65px;
+	@media (max-width: 1285px) {
+		margin-top: 60px;
+	  }
+  }
+  .learnMoreBtn {
+    margin-bottom: 40px;
+    border: 0;
+    background-color: inherit;
     margin-top: 16px;
-    width: 169px;
-    border-radius: 2px
+	width: 145px;
+	border-radius: 2px;
+	color: #fff !important;
+	margin-top: 65px;
+	@media (max-width: 1285px) {
+		margin-top: 60px;
+	  }
   }
 }
 
@@ -285,7 +317,7 @@ $color: #333333,
   background-color: #f9f9f9;
   .h {
     height: 68px;
-    background-color: #333;
+    background-color: #0c0c0c;
   }
   .logo {
     padding-top: 32px;
@@ -321,7 +353,7 @@ $color: #333333,
   }
   .roundedBottom {
     height: 304px;
-    background-color: #333;
+    background-color: #0c0c0c;
     margin-top: -172px;
     border-radius: 190%;
     width: 171%;
@@ -340,6 +372,14 @@ $color: #333333,
   .getDrideApp {
     margin-top: 0;
     word-spacing: 10px;
+  }
+  .productSubTtl {
+	font-size: 18px;
+	font-weight: 100;
+	color: #fff !important;
+	text-transform: capitalize;
+	margin-top: 6px;
+	letter-spacing: 1px;
   }
   .logo {
     padding-top: 47px;

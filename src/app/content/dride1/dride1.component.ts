@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { environment } from '../../../environments/environment';
 import { MetaService } from '../../helpers/meta/meta.service'
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-dride1',
@@ -12,7 +13,7 @@ export class Dride1Component implements OnInit {
 
 	preSubmit = true
 
-	constructor(private meta: MetaService) {
+	constructor(private meta: MetaService, private http: HttpClient) {
 	}
 
 	ngOnInit() {

@@ -1,4 +1,4 @@
-<div class="modalUI">
+<div class="modalUI" >
     <div class="modal-header">
         <p class="txtHeadline mx-auto">#woohoo</p>
         <p class="float-right closeModal" (click)="dismissModal()">x</p>
@@ -7,7 +7,7 @@
     <div class="modal-body">
         <div class="container-fluid">
             <div class="row" class="animate-show">
-<!--                 <div class="col-md-12 tc boxme">
+                <div class="col-md-12 tc boxme" *ngIf="canBuy">
 
                     <div class="col-md-12">
 
@@ -44,16 +44,18 @@
                         </div>
 
                     </div>
-                </div> -->
-				<h3>You're now on the waitlist<br> to buy a Dride.</h3>
-				<p class="c1">We'll send you an invitation to purchase soon!</p>
-                <p class="c1">Psst... want to skip the line? Get noticed by tweeting about us.</p>
-                <div class="form-group ">
-                    <textarea class="form-control" [(ngModel)]="shareTxt"></textarea>
-                    <br>
-                    <button class="btn btn-dride-black float-right" (click)="tweet()"><span class="icon-twitter"></span> Tweet</button>
-<!--                     <button class="btn btn-dride-black float-right"><span class="icon-facebook"></span> Share</button> -->
-                </div>
+				</div>
+				<div *ngIf="!canBuy">
+					<h3>You're now on the waitlist<br> to buy a Dride.</h3>
+					<p class="c1">We'll send you an invitation to purchase soon!</p>
+					<p class="c1">Psst... want to skip the line? Get noticed by tweeting about us.</p>
+					<div class="form-group ">
+						<textarea class="form-control" [(ngModel)]="shareTxt"></textarea>
+						<br>
+						<button class="btn btn-dride-black float-right" (click)="tweet()"><span class="icon-twitter"></span> Tweet</button>
+	<!--                     <button class="btn btn-dride-black float-right"><span class="icon-facebook"></span> Share</button> -->
+					</div>
+				</div>
 
             </div>
         </div>

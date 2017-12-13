@@ -2,19 +2,34 @@
     .productHeader {
         .info {
             background-color: #E7E7E7;
-            color: #333;
+			color: #333;
+			
         }
         .gallery{
-
+			@media (max-width: 1200px){
+				margin: 0px;
+				padding: 0px;
+				margin-top: 10px;
+			}	
+			
         }
         .i {
-            height: 400px;
-            padding: 70px 65px 70px 65px;
+			height: 407px;
+			padding: 70px 65px 70px 65px;
+			@media (max-width: 576px){
+				height: 470px;
+			}
         }
         h2 {
             font-size: 55px;
             margin-top: -10px;
-            margin-bottom: 20px;
+			margin-bottom: 20px;
+			span{
+				font-size: 32px;
+				padding-left: 5px;
+				letter-spacing: initial;
+				font-family: 'Raleway';
+			}
         }
         h3 {
             font-family: Raleway, sans-serif;
@@ -24,13 +39,24 @@
         h2,
         h3 {
             text-transform: initial;
-        }
+		}
+		.fullPic{
+			max-height: 100%;
+			padding-top: inherit;
+			text-align: center;
+			margin: auto auto;
+			padding-bottom: inherit;
+		}
         .price {
             font-size: 24px;
             font-weight: 100;
             margin: 21px;
             margin-left: 0;
-            font-family: 'Comfortaa', cursive;
+			font-family: 'Comfortaa', cursive;
+			label{
+				font-size: 13px;
+				color: #797979;
+			}
         }
         .btn-buy {
             background-color: #333;
@@ -44,7 +70,16 @@
             margin: 20px;
             margin-left: 0;
         }
-    }
+	}
+	.warning{
+		list-style: lower-roman;
+		font-size: 11px;
+		margin-top: 44px;
+		position: relative;
+		left: -88px;
+		color: #797979;
+		width: 133%;
+	}
     .specs{
         h2, .row{
             margin: 70px 0;
@@ -70,10 +105,11 @@
         }
     }
     .productMain{
-        max-height: 310px;
-        text-align: center;
-        margin: auto auto;
-        padding-bottom: 40px;
+		max-height: 292px;
+		padding-top: 31px;
+		text-align: center;
+		margin: auto auto;
+		padding-bottom: 40px;
     }
     .productInfo{
         margin: 70px 0 !important;

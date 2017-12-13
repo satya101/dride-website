@@ -117,8 +117,10 @@ exports.saveNewUserData = functions.auth.user().onCreate(function (event) {
     'name': user.displayName,
     'photoURL': user.photoURL ? user.photoURL : 'https://storage.cloud.google.com/dride-2384f.appspot.com/assets/profilePic/pic' + anonymizer.getRandomArbitrary(1, 5) + '.png'
   };
-  if (user.providerData[0].providerId == 'facebook.com') {
+  if (user.providerData && user.providerData[0] && user.providerData[0].providerId == 'facebook.com') {
     resObj['fid'] = user.providerData[0].uid;
+    resObj['photoURL_orig'] = resObj['photoURL'];
+    resObj['photoURL'] = 'https://graph.facebook.com/'+resObj['fid']+'/picture?type=large&w‌​';
   }
   return usersRef.set(resObj).then(function () {
     // create a user in Mixpanel Engage

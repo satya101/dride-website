@@ -1,6 +1,6 @@
 // var admin = require("firebase-admin");
 
-// var serviceAccount = require("./dride-2384f-firebase-adminsdk-m1piu-12d72e0fc3.json");
+// var serviceAccount = require("./appEngine/dride-2384f-firebase-adminsdk-5lgyf-da8f444645.json");
 
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount),
@@ -15,18 +15,18 @@
 
 
 // function listAllUsers(nextPageToken) {
+// 	var fbPhoto = '';
 // 	// List batch of users, 1000 at a time.
 // 	admin.auth().listUsers(10, nextPageToken)
 // 	  .then(function(listUsersResult) {
 // 		listUsersResult.users.forEach(function(userRecord) {
 // 		  tUser = userRecord.toJSON()
 // 		  if (tUser.providerData[0].providerId == 'facebook.com'){
-// 			  console.log("user", tUser.uid, tUser.providerData[0].uid);
-// 			  r[tUser.uid] = {'fid': tUser.providerData[0].uid, name: tUser.providerData[0].displayName, photoURL: tUser.providerData[0].photoURL}
+// 			  fbPhoto = 'https://graph.facebook.com/'+tUser.providerData[0].uid+'/picture?type=large&w‌​idth=400&height=400';
+// 			  r[tUser.uid] = {'fid': tUser.providerData[0].uid, name: tUser.providerData[0].displayName, photoURL: fbPhoto, photoURL2: tUser.providerData[0].photoURL}
 // 		  }else{
 // 			  r[tUser.uid] = {name: tUser.displayName, photoURL: tUser.photoURL}
 // 		  }
-
 // 		});
 
 // 		ref.set(r).then(_ => {

@@ -4,16 +4,21 @@
 	    <div class="container productHead">
 	        <div class="col-md-12" >
 	            <div class="row productHeader">
-	                <div class="i col-md-6 info animBox" *ngIf="(productData | async)?.title">
-	                    <h2>{{(productData | async)?.key}}</h2>
+	                <div class="i col-12 col-xl-6 info animBox" *ngIf="(productData | async)?.title">
+	                    <h2>{{(productData | async)?.mainTitle}}<span>{{(productData | async)?.subTitle}}</span></h2>
 	                    <h3>{{(productData | async)?.title}}</h3>
-	                    <p class="price">${{(productData | async)?.price}}</p>
+	                    <p class="price">${{(productData | async)?.price}}
+							<label *ngIf="(productData | async)?.warning">Free Shipping</label>
+						</p>
 	                    <div class="divider"></div>
-	                    <a (click)="purchase()" class="btn btn-buy">{{(productData | async)?.actionBtn}}</a>
+						<a (click)="purchase()" class="btn btn-buy">{{(productData | async)?.actionBtn}}</a>
+						<ul class="warning" *ngIf="(productData | async)?.warning">
+							<li *ngFor="let warn of (productData | async)?.warning">{{warn}}</li>
+						</ul>
 	                </div>
-	                <div class="col-md-6 gallery text-center" *ngIf="(productData | async)?.title">
-	                    <img class="productMain img-fluid" src="{{(productData | async)?.images[mainImageIndex].url}}" alt="dride" />
-	                    <ul class="productPics">
+	                <div class="col-12 col-xl-6 gallery text-center" *ngIf="(productData | async)?.title">
+	                    <img [ngClass]="{'fullPic': !(productData | async)?.images[1] }" class="productMain img-fluid" src="{{(productData | async)?.images[mainImageIndex].url}}" alt="dride" />
+	                    <ul class="productPics" *ngIf="(productData | async)?.images[1]">
 	                    	<li *ngFor="let product of (productData | async)?.images; index as key">
 	                    		<img (click)="updateMainPicture(key)" class="img-responsive" src="{{product.url}}" alt="dride" />                  
 	                    	</li>

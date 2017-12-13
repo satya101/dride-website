@@ -52,7 +52,7 @@ export class ForumComponent implements OnInit {
 		}
 
 		if (!this.isFull) {
-			r.query['limitToLast'] = 4
+			r.query['limitToLast'] = 6
 		}
 
 		this.threads = this.db

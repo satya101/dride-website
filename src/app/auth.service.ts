@@ -35,7 +35,6 @@ export class AuthService {
 
 		this.afAuth.auth.signOut().then(function () {
 			// Sign-out successful.
-			alert('ok!')
 		}, function (error) {
 			// An error happened.
 		});

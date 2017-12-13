@@ -1,10 +1,9 @@
 <div class="videogular-container"  *ngIf="currentVideo">
   <!-- <p class="dateLabel float-right">{{currentVideo.videoId | date:'MM-dd-yyyy'}}</p>	 -->
-
    
   <vg-player class="player" (onPlayerReady)="onPlayerReady($event, currentVideo, tag)">
 
-    <video [vgMedia]="media" #media id="current" preload="none" crossorigin class="videoPlayer" poster="{{currentVideo.thumbs.src}}"
+    <video [vgMedia]="media" #media id="current" preload="metadata" crossorigin class="videoPlayer" poster="{{currentVideo.thumbs.src}}"
       src="{{currentVideo.clips.src}}">
       <source src="{{currentVideo.clips.src}}" type="video/mp4">
     </video>

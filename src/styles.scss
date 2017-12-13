@@ -37,147 +37,194 @@ router-outlet { display:block; }
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 .icon-trash-can:before {
-  content: "\e925";
-}
-.icon-medal:before {
-  content: "\e91f";
-}
-.icon-zero:before {
-  content: "\e92b";
-}
-.icon-forum:before {
-  content: "\e928";
-}
-.icon-fleet:before {
-  content: "\e929";
-}
-.icon-dride:before {
-  content: "\e92a";
-}
-.icon-share-outline:before {
-  content: "\e926";
-}
-.icon-twitterMedium:before {
-  content: "\e923";
-}
-.icon-facebookMedium:before {
-  content: "\e924";
-}
-.icon-upload .path1:before {
-  content: "\e921";
-  color: rgb(51, 51, 51);
-}
-.icon-upload .path2:before {
-  content: "\e922";
-  margin-left: -1.220703125em;
-  color: rgb(255, 255, 255);
-}
-.icon-moreArrow:before {
-  content: "\e920";
-}
-.icon-docs:before {
-  content: "\e908";
-}
-.icon-app-full:before {
-  content: "\e901";
-}
-.icon-app:before {
-  content: "\e902";
-}
-.icon-camera-full:before {
-  content: "\e903";
-}
-.icon-camera:before {
-  content: "\e904";
-}
-.icon-cloud-full:before {
-  content: "\e905";
-}
-.icon-cloud:before {
-  content: "\e906";
-}
-.icon-docs-full:before {
-  content: "\e907";
-}
-.icon-indicator:before {
-  content: "\e909";
-}
-.icon-indicator.svg-full:before {
-  content: "\e90a";
-}
-.icon-mic-full:before {
-  content: "\e90b";
-}
-.icon-mic:before {
-  content: "\e90c";
-}
-.icon-wifi-full:before {
-  content: "\e914";
-}
-.icon-wifi:before {
-  content: "\e91c";
-}
-.icon-media-pause:before {
-  content: "\e919";
-}
-.icon-full-screen:before {
-  content: "\e91a";
-}
-.icon-play:before {
-  content: "\e91b";
-}
-.icon-password:before {
-  content: "\e916";
-}
-.icon-google:before {
-  content: "\e915";
-}
-.icon-userName:before {
-  content: "\e917";
-}
-.icon-facebook:before {
-  content: "\e918";
-}
-.icon-toyCar-1:before {
-  content: "\e913";
-}
-.icon-like:before {
-  content: "\e910";
-  color: #666;
-}
-.icon-edit:before {
-  content: "\e911";
-  color: #666;
-}
-.icon-share:before {
-  content: "\e912";
-  color: #666;
-}
-.icon-twitter:before {
-  content: "\e90e";
-}
-.icon-github:before {
-  content: "\e90f";
-}
-.icon-mouse:before {
-  content: "\e90d";
-}
-.icon-bigD:before {
-  content: "\e900";
-}
-.icon-menu:before {
-  content: "\e927";
-}
-.icon-chevron-thin-right:before {
-  content: "\e91d";
-}
-.icon-controller-play:before {
-  content: "\e91e";
-}
-.icon-trophy:before {
-  content: "\e99e";
-}
+	content: "\e925";
+  }
+  .icon-medal:before {
+	content: "\e91f";
+  }
+  .icon-f_cloud:before {
+	content: "\e92f";
+  }
+  .icon-f_upload:before {
+	content: "\e930";
+  }
+  .icon-f_settings:before {
+	content: "\e931";
+  }
+  .icon-f_share:before {
+	content: "\e932";
+  }
+  .icon-f_angle:before {
+	content: "\e933";
+  }
+  .icon-f_1080:before {
+	content: "\e934";
+  }
+  .icon-f_720:before {
+	content: "\e935";
+  }
+  .icon-f_cyclic:before {
+	content: "\e936";
+  }
+  .icon-f_cloud2:before {
+	content: "\e937";
+  }
+  .icon-f_app:before {
+	content: "\e938";
+  }
+  .icon-f_wifi:before {
+	content: "\e939";
+  }
+  .icon-f_crash:before {
+	content: "\e93a";
+  }
+  .icon-arrow1:before {
+	content: "\e92d";
+  }
+  .icon-roadNum:before {
+	content: "\e92e";
+  }
+  .icon-envelope:before {
+	content: "\e92c";
+  }
+  .icon-zero:before {
+	content: "\e92b";
+  }
+  .icon-forum:before {
+	content: "\e928";
+  }
+  .icon-fleet:before {
+	content: "\e929";
+  }
+  .icon-dride:before {
+	content: "\e92a";
+  }
+  .icon-share-outline:before {
+	content: "\e926";
+  }
+  .icon-twitterMedium:before {
+	content: "\e923";
+  }
+  .icon-facebookMedium:before {
+	content: "\e924";
+  }
+  .icon-upload .path1:before {
+	content: "\e921";
+	color: rgb(51, 51, 51);
+  }
+  .icon-upload .path2:before {
+	content: "\e922";
+	margin-left: -1.220703125em;
+	color: rgb(255, 255, 255);
+  }
+  .icon-moreArrow:before {
+	content: "\e920";
+  }
+  .icon-docs:before {
+	content: "\e908";
+  }
+  .icon-app-full:before {
+	content: "\e901";
+  }
+  .icon-app:before {
+	content: "\e902";
+  }
+  .icon-camera-full:before {
+	content: "\e903";
+  }
+  .icon-camera:before {
+	content: "\e904";
+  }
+  .icon-cloud-full:before {
+	content: "\e905";
+  }
+  .icon-cloud:before {
+	content: "\e906";
+  }
+  .icon-docs-full:before {
+	content: "\e907";
+  }
+  .icon-indicator:before {
+	content: "\e909";
+  }
+  .icon-indicator.svg-full:before {
+	content: "\e90a";
+  }
+  .icon-mic-full:before {
+	content: "\e90b";
+  }
+  .icon-mic:before {
+	content: "\e90c";
+  }
+  .icon-wifi-full:before {
+	content: "\e914";
+  }
+  .icon-wifi:before {
+	content: "\e91c";
+  }
+  .icon-media-pause:before {
+	content: "\e919";
+  }
+  .icon-full-screen:before {
+	content: "\e91a";
+  }
+  .icon-play:before {
+	content: "\e91b";
+  }
+  .icon-password:before {
+	content: "\e916";
+  }
+  .icon-google:before {
+	content: "\e915";
+  }
+  .icon-userName:before {
+	content: "\e917";
+  }
+  .icon-facebook:before {
+	content: "\e918";
+  }
+  .icon-toyCar-1:before {
+	content: "\e913";
+  }
+  .icon-like:before {
+	content: "\e910";
+	color: #666;
+  }
+  .icon-edit:before {
+	content: "\e911";
+	color: #666;
+  }
+  .icon-share:before {
+	content: "\e912";
+	color: #666;
+  }
+  .icon-twitter:before {
+	content: "\e90e";
+  }
+  .icon-github:before {
+	content: "\e90f";
+  }
+  .icon-mouse:before {
+	content: "\e90d";
+  }
+  .icon-bigD:before {
+	content: "\e900";
+  }
+  .icon-menu:before {
+	content: "\e927";
+  }
+  .icon-chevron-thin-right:before {
+	content: "\e91d";
+  }
+  .icon-controller-play:before {
+	content: "\e91e";
+  }
+  .icon-trophy:before {
+	content: "\e99e";
+  }
+  
 
 
 
@@ -493,4 +540,29 @@ main{
 	.sn-progress-loader span{
 		background: #444 !important;
 	}
+}
+
+.videoBubble .videogular-container{
+    width: 450px;
+    position: relative;
+    top: 0;
+    left: 161px;
+    border: 3px solid #fff;
+	border-radius: 4px;
+	@media (max-width: 1285px) {
+		top: -50px;
+	}
+	@media (max-width: 576px) {
+		top: -66px !important;
+		left: calc(50% - 155px) !important;
+	}
+	@media (max-width: 768px) {
+		top: -52px;
+		left: 61px;
+		width: 300px;
+	}
+}
+
+.modal-dialog{
+	margin-top: 100px;
 }

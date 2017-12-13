@@ -1,4 +1,4 @@
-<div class="container-fluid forum" [ngClass]="{'greyBg vh': isFull}">
+<div class="container-fluid forum" [ngClass]="isFull ? 'greyBg vh': 'half'">
     <div class="container">
         <div class="clear spacer25"></div>
         <div class="col-xs-12" *ngIf="isFull">
@@ -14,8 +14,11 @@
         <div class="clear spacer25"></div>
         <div class="col-md-12 p-0">
             <div class="posts">
-                <a class="post animBox row mx-auto" *ngFor="let post of threads | async" routerLink="/forum/{{post.slug}}" [@introAnim]>
-                    <div class="col-md-2 hidden-sm-down usr pad10 partRow1">
+				<a class="post animBox row mx-auto" *ngFor="let post of threads | async" routerLink="/forum/{{post.slug}}" [@introAnim]>
+					<div *ngIf="post.promo"> 
+						<img class="img-fluid" [src]="post.promo" />
+					</div>
+					<div class="col-md-2 hidden-sm-down usr pad10 partRow1">
                         <span class="cmntCount">{{post.cmntsCount}}</span>
                         <span>Comments</span>
                     </div>

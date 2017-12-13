@@ -6,6 +6,7 @@ import { AuthService } from '../../auth.service';
 import { SsrService } from '../../helpers/ssr/ssr.service'
 
 import { introAnim } from '../../router.animations';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
 	selector: 'app-nav',
@@ -22,7 +23,12 @@ export class NavComponent implements OnInit {
 	path = '';
 	showOverlay = false;
 
-	constructor(private auth: AuthService, private renderer: Renderer, public location: Location,  router: Router, public ssr: SsrService) {
+	constructor(private auth: AuthService,
+		private renderer: Renderer,
+		public location: Location,
+		public router: Router,
+		public ssr: SsrService,
+		private notificationsService: NotificationsService) {
 
 		if (this.ssr.isBrowser()) {
 			router.events.subscribe((val) => {
@@ -53,7 +59,12 @@ export class NavComponent implements OnInit {
 
 	logOut() {
 		this.auth.logOut();
-		// TODO: alert
+		this.notificationsService.success('Success', 'You\'ve been logged out successfully', {
+			timeOut: 3000,
+			showProgressBar: true,
+			pauseOnHover: true,
+			clickToClose: true
+		});
 	}
 	ngOnInit() {
 

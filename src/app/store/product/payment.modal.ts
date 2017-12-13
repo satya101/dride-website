@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { Observable } from 'rxjs/Observable';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -20,6 +21,7 @@ export class NgbdModalPayement {
 	productId: string;
 	qTitle: any;
 	isLoaded = true;
+	canBuy = false;
 	shareTxt = 'I just joined the waitlist for #dride. You should too!';
 	constructor(public bsModalRef: BsModalRef,
 		private router: Router,
@@ -32,9 +34,15 @@ export class NgbdModalPayement {
 		this.auth.verifyLoggedIn().then(res => {
 			firebase.database().ref('queue/' + res['uid'] + '/email').set(res['email'])
 			firebase.database().ref('queue/' + res['uid'] + '/date').push({dte: (new Date).getTime()})
+			this.onShow()
 		})
 
 
+	}
+
+	onShow() {
+		this.canBuy = this.bsModalRef.content.title === 'dride-kit' ? true : false;
+		console.log(this.bsModalRef.content.title)
 	}
 
 	setProductId(productId) {

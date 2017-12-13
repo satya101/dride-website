@@ -1,6 +1,7 @@
 .vh{
 	min-height: 100vh;
 }
+
 .forum {
     padding-top: 1px;
     padding-bottom: 70px;
@@ -24,6 +25,9 @@
             margin-left: 3px;
             margin-bottom: 10px;
 			line-height: 21px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
         }
 		.partRow2{
 			text-align: left;
@@ -111,9 +115,10 @@
         border-right: 1px dashed #b3b3b3;
         margin-top: 14px;
         font-size: 14px;
-		height: 80px;
-		
-    }
+		height: auto;
+		margin-bottom: 14px;
+	}
+
     .partRow3 {
         border-left: 1px dashed #b3b3b3;
 		margin: 20px 0 20px 0;
