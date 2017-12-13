@@ -57,7 +57,15 @@ export class ForumComponent implements OnInit {
 
 		this.threads = this.db
 			.list('/threads', r)
-			.map(arr => arr.reverse());
+			.map(arr => {
+				const res = [];
+				arr.forEach(element => {
+					if (!element.hidden) {
+						res.unshift(element)
+					}
+				});
+				return res;
+			});
 	}
 
 	ask() {
