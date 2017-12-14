@@ -51,7 +51,6 @@ export class AuthService {
 				}
 				// log user to mixpanel
 				this.mixpanel.logIn(user.uid)
-				console.log(user)
 				resolve(user)
 
 			});

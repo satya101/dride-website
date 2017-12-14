@@ -18,6 +18,7 @@
 			padding: 70px 65px 70px 65px;
 			@media (max-width: 576px){
 				height: 470px;
+				padding: 40px 50px 50px 40px;
 			}
         }
         h2 {
@@ -79,6 +80,9 @@
 		left: -88px;
 		color: #797979;
 		width: 133%;
+		@media (max-width: 576px){
+			left: -48px;
+		}
 	}
     .specs{
         h2, .row{

@@ -3,6 +3,8 @@
    
   <vg-player class="player" (onPlayerReady)="onPlayerReady($event, currentVideo, tag)">
 
+	<vg-buffering [vgFor]="current"></vg-buffering>
+
     <video [vgMedia]="media" #media id="current" preload="metadata" crossorigin class="videoPlayer" poster="{{currentVideo.thumbs.src}}"
       src="{{currentVideo.clips.src}}">
       <source src="{{currentVideo.clips.src}}" type="video/mp4">

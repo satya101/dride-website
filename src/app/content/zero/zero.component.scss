@@ -366,7 +366,8 @@
       background-size: cover;
       background-position: center;
       @media (max-width: 768px) {
-        min-height: 370px;
+		min-height: 370px;
+		background-attachment: inherit !important;
       }
     }
     .btn-red {
