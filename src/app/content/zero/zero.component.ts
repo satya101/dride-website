@@ -26,7 +26,7 @@ export class ZeroComponent implements OnInit {
 		{ icon: 'icon-f_cloud2', title: 'Cloud' },
 		{ icon: 'icon-f_app', title: 'App' },
 		{ icon: 'icon-f_wifi', title: 'Connectivity' },
-		{ icon: 'icon-f_crash', title: 'Emergeny Record' },
+		{ icon: 'icon-f_crash', title: 'Emergency Record' },
 
 	]
 

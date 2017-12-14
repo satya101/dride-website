@@ -22,6 +22,7 @@ case "$1" in
     sudo node /home/Cardigan/modules/video/index.js &
 
     # run button / bluetooth daemon
+	sudo python /home/Cardigan/daemons/bluetooth/initPin.py &
     sudo BLENO_DEVICE_NAME="dride" node /home/Cardigan/daemons/bluetooth/main.js &
     ;;
   stop)
