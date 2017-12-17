@@ -138,10 +138,10 @@ export class ProfileComponent implements OnInit {
 				this.setMetaTags(this.uid, this.videoId)
 			}
 
-			this.db.object('/clips/' + this.uid + '/' + this.videoId, { preserveSnapshot: true }).take(1).subscribe(currentVideoSanp => {
+			this.db.object('/clips/' + this.uid + '/' + this.videoId, { preserveSnapshot: true }).subscribe(currentVideoSanp => {
 				const data = currentVideoSanp.val();
 
-				if (!data || !data.thumbs) {
+				if (!data || !data.dateUploaded) {
 					this.router.navigate(['/profile/' + this.uid]);
 					return;
 				}
@@ -151,19 +151,6 @@ export class ProfileComponent implements OnInit {
 					this.currentVideo ? this.currentVideo['description'] : '',
 					this.currentVideo ? this.currentVideo['plates'] : ''
 				)
-
-				// if video does not exists
-				if (!data.thumbs) {
-					data.thumbs = {
-						src: 'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2F'
-						+ this.uid + '%2F'
-						+ this.videoId
-						+ '.jpg?alt=media'
-					}
-				}
-
-				// increase views counter
-				this.http.get(environment.functionsURL + '/viewCounter?videoId=' + this.videoId + '&op=' + this.uid).subscribe()
 
 				// concat old comments with new ones
 				Object.assign(this.comments, data.comments)
@@ -178,16 +165,17 @@ export class ProfileComponent implements OnInit {
 						const s = this.prepGeoJsonToGoogleMaps(
 							data
 						);
-						console.log(s)
 						const middleRoad = Math.ceil(s.length / 2)
-						this.map['center'] = { latitude: s[middleRoad].latitude, longitude: s[middleRoad].longitude };
-						this.map['path'] = s;
+						if (s[middleRoad]) {
+							this.map['center'] = { latitude: s[middleRoad].latitude, longitude: s[middleRoad].longitude };
+							this.map['path'] = s;
+						}
 
 					},
 					error => {
 						this.userHaveNoVideos = true;
 						// TODO: log this
-						console.log('An error occurred when requesting clips.');
+						console.log('An error occurred when requesting clips.', error);
 					}
 
 					)

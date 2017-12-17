@@ -1,11 +1,18 @@
-<div class="videogular-container"  *ngIf="currentVideo">
+<div class="videogular-container" *ngIf="currentVideo">
   <!-- <p class="dateLabel float-right">{{currentVideo.videoId | date:'MM-dd-yyyy'}}</p>	 -->
-   
-  <vg-player class="player" (onPlayerReady)="onPlayerReady($event, currentVideo, tag)">
 
-	<vg-buffering [vgFor]="current"></vg-buffering>
+  <div class="loader" *ngIf="!currentVideo.thumbs">
+	  <img src="./assets/images/loader.gif" alt="processing"/>
+	  <p>
+			Proccessing, This can take a a minute.. 
+	 </p>
+  </div>
+  <vg-player *ngIf="currentVideo.thumbs" class="player" (onPlayerReady)="onPlayerReady($event, currentVideo, tag)">
 
-    <video [vgMedia]="media" #media id="current" preload="metadata" crossorigin class="videoPlayer" poster="{{currentVideo.thumbs.src}}"
+    <vg-buffering [vgFor]="current"></vg-buffering>
+
+	<video [vgMedia]="media" #media id="current" preload="metadata" crossorigin class="videoPlayer" 
+	  [poster]="currentVideo.thumbs ? currentVideo.thumbs.src : null"
       src="{{currentVideo.clips.src}}">
       <source src="{{currentVideo.clips.src}}" type="video/mp4">
     </video>
