@@ -196,93 +196,16 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
 	  uid = event.params.uid;
 	  filename = event.params.videoId;
 
-      let db = admin.database();
-
-      cloud.isProcessed(uid, filename).then(isProcessed => {
-		console.error(isProcessed);
-		if (isProcessed == 'true') {
-			console.log('Already processed..');
-			resolve();
-			return;
-		}
-		  
-        uid = event.params.uid;
-        filename = event.params.videoId;
-
-		promiseCollector.push(
-			db.ref("clips").child(uid).child(filename).update({
-			  'processed': 'true'
-			})
-		)
-
-        getThumb.dridifyVideo(uid, filename).then(_ => {
-
-            //track event
-            mixpanel.track('video_upoload', {
-              distinct_id: uid,
-              filename: filename
-			});
-			
-			
-
-            //notify user his video is live!
-            admin.auth().getUser(uid).then(function (userRecord) {
-              db.ref('clips').child(uid).child(filename.split('.')[0]).once("value", function (snapshot) {
-                const user = userRecord.toJSON();
-                const clip = snapshot.val();
-                //notify user his video is live!
-                const sendObj = {
-                  "template_name": 'video-is-on',
-                  "subject": "Your video is now on Dride Cloud",
-                  "to": [{
-                      "email": user.email
-                    },
-                    {
-                      "email": 'yossi@dride.io'
-                    },
-                  ],
-                  "tags": ['video uploaded!'],
-                  "global_merge_vars": [{
-                      "name": "FULL_NAME",
-                      "content": user.displayName.split(' ')[0]
-                    },
-                    {
-                      "name": "VIDEO_POSTER",
-                      "content": clip.thumbs ? clip.thumbs.src : ''
-                    },
-                    {
-                      "name": "VIDEO_LINK",
-                      "content": 'https://dride.io/profile/' + uid + '/' + filename.split('.')[0]
-                    }
-                  ]
-                };
-
-                mailer.send(sendObj)
-                var db = admin.database();
-
-                Promise.all(promiseCollector).then(_ => resolve())
-
-
-              }, function (errorObject) {
-                console.log("The read failed: " + errorObject.code);
-                reject(errorObject.code)
-              });
-            }, function (errorObject) {
-              console.log("Error fetching user data: " + errorObject.code);
-              reject(errorObject.code)
-            });
-          },
-          err => {
-			console.error(err)
-            reject(err)
-          }
-        );
-
-      },
-	  err => {
-		console.error(err)
-		reject(err)
-	  })
+	  request('http://54.229.176.173:8080/processVideo/'+uid+'/'+filename, function (error, response, body) {
+		console.log('error:', error); // Print the error if one occurred
+		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+		console.log('body:', body); // Print the HTML for the Google homepage.
+		resolve();
+	  });
+ 
+	  setTimeout(() => {
+		resolve();
+	  }, 2000);
 
     })
   });

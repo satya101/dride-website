@@ -85,7 +85,7 @@ module.exports = class VideoEditor {
       process.then((video) => {
         //add watermark
         video
-          .setVideoSize('1080x608', true, true, '#333333')
+          .setVideoSize('1280x720', true, true, '#333333')
           //.setAudioCodec('mpeg4')
           .save(this.path + this.uid + '_resized_' + this.filename, (error, file) => {
             if (!error) {
