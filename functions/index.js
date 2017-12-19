@@ -115,8 +115,9 @@ exports.saveNewUserData = functions.auth.user().onCreate(function (event) {
     user.displayName = 'Rider' + anonymizer.getRandomArbitrary(1, 500);
   var resObj = {
     'name': user.displayName,
-    'photoURL': user.photoURL ? user.photoURL : 'https://storage.cloud.google.com/dride-2384f.appspot.com/assets/profilePic/pic' + anonymizer.getRandomArbitrary(1, 5) + '.png'
+    'photoURL': user.photoURL ? user.photoURL : 'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets/profilePic/' + anonymizer.getRandomArbitrary(1, 5) + '.png?alt=media&token=2652f002-7ce3-4403-8b29-9e971d17c6c5'
   };
+
   if (user.providerData && user.providerData[0] && user.providerData[0].providerId == 'facebook.com') {
     resObj['fid'] = user.providerData[0].uid;
     resObj['photoURL_orig'] = resObj['photoURL'];

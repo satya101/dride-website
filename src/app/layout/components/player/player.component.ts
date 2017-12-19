@@ -18,7 +18,7 @@ export class PlayerComponent implements OnInit {
 	@Input() currentVideo: any;
 	@Input() tag: any;
 	@Input() currentTime = 0;
-
+	public played = false;
 	constructor(public ssr: SsrService, private http: HttpClient, public mixpanel: MixpanelService) { }
 
 	ngOnInit() {
@@ -41,10 +41,10 @@ export class PlayerComponent implements OnInit {
 		api.getDefaultMedia().subscriptions.playing.subscribe(
 			() => {
 				// increase views counter
-				if (video.videoId && video.op) {
+				if (!this.played && video.videoId && video.op) {
+					this.played = true;
 					this.http.get(environment.functionsURL + '/viewCounter?videoId=' + video.videoId + '&op=' + video.op).subscribe()
 				}
-
 				this.mixpanel.track('PlayVideo', { vid: video.videoId, where: tag })
 			}
 		);

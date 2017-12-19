@@ -93,8 +93,8 @@ export class SettingsComponent implements OnInit {
 	saveOption(field, value) {
 
 		this.userDataObservable.update({ [field]: value })
-
 	}
+
 	updateEmail() {
 
 		// update email

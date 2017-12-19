@@ -147,6 +147,9 @@ export class ProfileComponent implements OnInit {
 				}
 
 				this.currentVideo = data
+				this.currentVideo['op'] = this.uid
+				this.currentVideo['videoId'] = this.videoId
+
 				this.meta.set(
 					this.currentVideo ? this.currentVideo['description'] : '',
 					this.currentVideo ? this.currentVideo['plates'] : ''
@@ -162,6 +165,10 @@ export class ProfileComponent implements OnInit {
 				this.http
 					.get(data.gps.src)
 					.subscribe(data => {
+						if (!data) {
+							return;
+						}
+
 						const s = this.prepGeoJsonToGoogleMaps(
 							data
 						);
