@@ -16,7 +16,7 @@
 			                <img src="{{getProfilePic(node)}}" alt="{{node.auther}}" />
 			            </div>
 			            <a class="bold" routerLink="/profile/{{node.autherId}}">@{{node.auther}}</a>
-			            <div class="bdy" markdown [data]="node.body" ></div>
+			            <div class="bdy" markdown [data]="node.body | wrapIframe" ></div>
 			            <div class="ago">{{node.timestamp | timeAgo}}</div>
 			        </div>
 			        <div class="connectorLine" *ngIf="conversationPreviusIsMine[key]"></div>

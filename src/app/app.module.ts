@@ -49,7 +49,6 @@ import { NgbdModalAskInForum} from './forum/askInForum.modal';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
-
 Raven
 .config('https://937047e5361c41349ef8dc829947575d@sentry.io/215964')
 .install();

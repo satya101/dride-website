@@ -8,6 +8,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ThreadComponent } from './thread.component';
 import { SharedModule } from '../../helpers/shared.module';
 import { AutosizeModule } from '../../helpers/autosize/autosize.module';
+import { WrapIframePipe } from '../../helpers/wrapIframePipe/wrap-iframe.pipe';
 
 
 import { routing } from './thread.routing';
@@ -22,6 +23,6 @@ import { routing } from './thread.routing';
 		MarkdownModule.forRoot(),
 		AutosizeModule
 	],
-	declarations: [ThreadComponent]
+	declarations: [ThreadComponent, WrapIframePipe]
 })
 export class ThreadModule { }
