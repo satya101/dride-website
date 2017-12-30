@@ -7,6 +7,9 @@ import { SsrService } from '../../helpers/ssr/ssr.service'
 
 import { introAnim } from '../../router.animations';
 import { NotificationsService } from 'angular2-notifications';
+import { NgbdModalAskToSubscribe } from './askToSubscribe.modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
 	selector: 'app-nav',
@@ -27,7 +30,9 @@ export class NavComponent implements OnInit {
 		private renderer: Renderer,
 		public location: Location,
 		public router: Router,
+		private modalService: BsModalService,
 		public ssr: SsrService,
+		private cookieService: CookieService,
 		private notificationsService: NotificationsService) {
 
 		if (this.ssr.isBrowser()) {
@@ -68,6 +73,12 @@ export class NavComponent implements OnInit {
 	}
 	ngOnInit() {
 
+	}
+
+	askToSubscribe() {
+		if (!this.cookieService.get('subscribed')) {
+			this.modalService.show(NgbdModalAskToSubscribe);
+		}
 	}
 
 	getProfilePic() {

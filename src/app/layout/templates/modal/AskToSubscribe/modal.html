@@ -1,0 +1,40 @@
+<div class="loginBox askModal" bsModal (onShown)="onShown()">
+
+    <div class="modal-header">
+        <h3 class="modal-title" >Subscribe</h3>
+        <p class="float-right closeModal" (click)="closeModal()">x</p>
+    </div>
+    <span class="icon-toyCar-1" [ngClass]="{'animatedCar': isLoaded}"></span>
+    <div class="modal-body px-0">
+        <div class="container-fluid">
+            <div class="row" class="animate-show">
+                <div class="col-md-12 tc px-0" >
+                    <div class="loginBox">
+                        <div class="padWrap form-group" [ngClass]="{'has-danger': showDanger}">
+
+                            <h2 class="text-center">Sign up to get the latest news from Dride</h2>
+
+                            <input name="email" autocomplete="email" class="form-control replyBox form-control-danger" type="text" [(ngModel)]="email" placeholder="mad@driver.com"/>
+                            <span class="hint">We promise we will never SPAM you with unwanted emails.</span>
+                            <br>
+                            <div class="text-center">
+                                <button class="btn btn-dride-black float-right mt-3" (click)="sendDetails(email)">Subscribe</button>
+                                <a class="float-right mt-4 pr-3" (click)="closeModal()">Skip</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer text-left">
+    
+     
+    </div>
+
+</div>

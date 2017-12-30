@@ -562,6 +562,12 @@ main{
 	.m-xs-0{
 		margin: 0 !important;
 	}
+	.modal-dialog{
+		margin: 0 !important;
+	}
+	.simple-notification-wrapper{
+		z-index: 1000000000 !important;
+	}
 }
 @media (max-width: 960px) {
 	.hidden-lg-down{

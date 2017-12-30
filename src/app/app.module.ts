@@ -45,8 +45,10 @@ import { SsrService } from './helpers/ssr/ssr.service'
 
 import { NgbdModalPayement } from './store/product/payment.modal';
 import { NgbdModalAskInForum} from './forum/askInForum.modal';
+import { NgbdModalAskToSubscribe} from './layout/nav/askToSubscribe.modal';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { CookieService } from 'ngx-cookie-service';
 
 
 Raven
@@ -67,6 +69,7 @@ export class RavenErrorHandler implements ErrorHandler {
 		NgbdModalLogin,
 		NgbdModalPayement,
 		NgbdModalAskInForum,
+		NgbdModalAskToSubscribe,
 		NavComponent,
 		FooterComponent
 	],
@@ -90,12 +93,14 @@ export class RavenErrorHandler implements ErrorHandler {
 		PushNotificationsService,
 		MixpanelService,
 		SsrService,
-		MetaService
+		MetaService,
+		CookieService
 	],
 	bootstrap: [AppComponent],
 	entryComponents: [NgbdModalLogin,
 		NgbdModalPayement,
-		NgbdModalAskInForum
+		NgbdModalAskInForum,
+		NgbdModalAskToSubscribe
 	],
 })
 export class AppModule { }

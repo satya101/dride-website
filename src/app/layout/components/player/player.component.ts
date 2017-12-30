@@ -32,7 +32,7 @@ export class PlayerComponent implements OnInit {
 
 		api.getDefaultMedia().subscriptions.loadStart.subscribe(
 			() => {
-				if (this.currentTime) {
+				if (api.getDefaultMedia() && this.currentTime) {
 					api.getDefaultMedia().currentTime = this.currentTime;
 				}
 			}

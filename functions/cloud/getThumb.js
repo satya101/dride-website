@@ -52,7 +52,7 @@ getThumb = {
 		  console.log('uploading..')
           video.uploadToBucket(path + uid + '_' + timestamp + '.jpg', 'thumbs/' + uid + '/' + timestamp + '.jpg').then(
             done => {
-			  console.log('dont uploading thunmb..')
+			  console.log('done uploading thunmb..')
               promises.push(
                 db.ref("clips").child(uid).child(timestamp).update({
                   'thumbs': {

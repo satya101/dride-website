@@ -14,7 +14,10 @@
         <div class="clear spacer25"></div>
         <div class="col-md-12 p-0">
             <div class="posts">
-				<a class="post animBox row mx-auto" *ngFor="let post of threads | async" routerLink="/forum/{{post.slug}}" [@introAnim]>
+				<a class="post animBox row mx-auto" *ngFor="let post of threads | async" routerLink="/forum/{{post.slug}}"
+				 [@introAnim]
+				 [hidden]="!post.description"
+				 >
 					<div *ngIf="post.promo"> 
 						<img class="img-fluid" [src]="post.promo" />
 					</div>

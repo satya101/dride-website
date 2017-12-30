@@ -1,66 +1,104 @@
 <div class="loginBox" [ngClass]="{'regBox': onWelcome}">
 
-    <div class="modal-header">
-        <h3 class="modal-title"><span class="f50 icon-cloud"></span></h3>
-        <p class="float-right closeModal" (click)="dismissModal()">x</p>
-    </div>
-    <span class="icon-toyCar-1" [class]="isLoaded ? 'animatedCar' : ''" *ngIf="!onWelcome"></span>
-    <div class="modal-body px-0">
-        <div class="container-fluid">
-            <div class="row" class="animate-show">
-                <div class="col-md-12 tc boxme" *ngIf="!onWelcome">
-
-                    <p *ngIf="loginError" class="alert alert-warning">{{loginError}}</p>
-                    <div class="loginBoxInner">
-
-                        <h2 class="text-center">Social Login</h2>
-
-                        <button class="btn btn-info btn-block socialButtons" (click)="connectWithFacebook()">
-                             <span class="sideIcon icon-facebook"></span>
-                             Login with Facebook
-                         </button>
-                        <button class="btn btn-info btn-block socialButtons" (click)="connectWithGoogle()">
-                             <span class="sideIcon icon-google"></span>
-                             Login with Google
-                         </button>
-                    </div>
+  <div class="modal-header">
+    <h3 class="modal-title">
+      <span class="f50 icon-cloud"></span>
+    </h3>
+    <p class="float-right closeModal" (click)="dismissModal()">x</p>
+  </div>
+  <span class="icon-toyCar-1" [class]="isLoaded ? 'animatedCar' : ''" *ngIf="!onWelcome"></span>
+  <div class="modal-body px-0">
+    <div class="container-fluid">
+      <div class="row" class="animate-show">
 
 
-                </div>
+        <div class="col-md-12 tc boxme" *ngIf="!onWelcome">
 
+          <div class="face front">
+            <p *ngIf="loginError" class="alert alert-warning">{{loginError}}</p>
+            <div class="loginBoxInner" [ngClass]="{'flipped':isFlipped}">
 
-                <div class="col-md-12 tc boxme" *ngIf="onWelcome">
+              <h2 class="text-center">Social Login</h2>
 
-                       
-                    <div class="loginBoxInner text-center welcomeBox">
+              <button class="btn btn-info btn-block socialButtons" (click)="connectWithFacebook()">
+                <span class="sideIcon icon-facebook"></span>
+                Login with Facebook
+              </button>
+              <button class="btn btn-info btn-block socialButtons" (click)="connectWithGoogle()">
+                <span class="sideIcon icon-google"></span>
+                Login with Google
+              </button>
+            </div>
+            <div class="loginBoxInner reg" [ngClass]="{'flipped':isFlipped}">
 
-                        <img src="images/welcome.svg" alt="welcome to dride" />
-                        <h2 class="text-center">Welcome to the community!</h2>
-                        <p>We're thrilled to have you on board. Before we continue,<br> we'll have to check your privacy settings.</p>
+              <h2 class="text-center mt40">{{isFlipped ? 'Register' : 'Login'}}</h2>
 
-                        <div class="privacy">
-                            <div class="col-md-9 lbl1">Keep your activity anonymous</div>
-                            <div class="col-md-3"> 
-                                  <ui-switch id="anonymous" name="anonymous" [(ngModel)]="anonymous" class="green"></ui-switch> 
-                            </div>
-                        </div>
+              <div class="iconInput">
+                <input type="text" placeholder="Email" [(ngModel)]="r.email" />
+                <span class="sideIcon icon-envelope"></span>
+                <div class="clear"></div>
+              </div>
 
+              <div class="iconInput" *ngIf="isFlipped">
+                <input type="text" placeholder="Name" [(ngModel)]="r.name" />
+                <span class="sideIcon icon-userName"></span>
+                <div class="clear"></div>
+              </div>
 
+              <div class="iconInput">
+                <input type="password" placeholder="Password" [(ngModel)]="r.password" />
+                <span class="sideIcon icon-password"></span>
+                <div class="clear"></div>
+              </div>
 
-                    </div>
-
-                    <div class="text-center">
-                        <button class="btn btn-dride-black btn-dride-center" ng-click="closeAfterWelcome()">Continue</button>
-                    </div>
-                </div>
-
-
+			  <button class="btn btn-block loginBtn" (click)="isFlipped ? signUpWithEmail() : signInWithEmail()">
+				{{isFlipped ? 'Register' : 'Login'}}
+			  </button>
 
             </div>
+          </div>
+
+          <div class="spacer"></div>
         </div>
+
+        <div class="col-md-12 tc boxme" *ngIf="onWelcome">
+
+
+          <div class="loginBoxInner text-center welcomeBox">
+
+            <img src="images/welcome.svg" alt="welcome to dride" />
+            <h2 class="text-center">Welcome to the community!</h2>
+            <p>We're thrilled to have you on board. Before we continue,
+              <br> we'll have to check your privacy settings.</p>
+
+            <div class="privacy">
+              <div class="col-md-9 lbl1">Keep your activity anonymous</div>
+              <div class="col-md-3">
+                <ui-switch id="anonymous" name="anonymous" [(ngModel)]="anonymous" class="green"></ui-switch>
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-dride-black btn-dride-center" ng-click="closeAfterWelcome()">Continue</button>
+          </div>
+        </div>
+
+
+
+      </div>
     </div>
-    <div class="modal-footer text-left" *ngIf="!onWelcome">
-     * We will never post anything on your behalf.
-    </div>
+  </div>
+  <div class="registerBox" (click)="isFlipped=!isFlipped">
+    {{!isFlipped ? 'NEW USER ?' : 'EXISTING USER ?'}}
+  </div>
+
+
+  <div class="modal-footer text-left" *ngIf="!onWelcome">
+    * We will never post anything on your behalf.
+  </div>
 
 </div>

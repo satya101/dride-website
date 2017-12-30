@@ -17,7 +17,7 @@
 				 [ngClass]="{'col-md-offset-2 col-md-8': isFull, 'halfPageCloud': !isFull}" [@introAnim]>
               <span *ngIf="isFull" class="icon-toyCar-1 float-right"></span>
               <div class="box mainVid">
-				<app-player [currentVideo]="currentVideo" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
+				<app-player [currentVideo]="currentVideo" [currentTime]="currentVideo.s" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
               </div>
               <div class="box">
                 <div class="actionBar innerPad">

@@ -1,0 +1,159 @@
+.loginBox, .modalUI {
+
+    .modal-header {
+        background-image: url('../../../../../assets/images/popUpHeader.svg');
+        background-position-y: -17px;
+        background-repeat: no-repeat;
+        background-size: cover;
+		background-position: center;
+        height: 133px;
+        width: 100.1%;
+        color: #fff;
+        border-bottom: 0 !important;
+    }
+
+    .modal-title {
+        text-align: center;
+        font-size: 28px;
+        color: #fff;
+        margin-top: 10px !important;
+    }
+
+    .modal-footer {
+        color: #929292;
+        font-size: 12px;
+    }
+
+    .modal-body {
+        background-color: #fff;
+        margin-top: -14px;
+        margin-bottom: 40px;
+        height: 228px;
+    }
+    h2{
+        margin-top: 20px;
+    }
+
+    input:focus,
+    button:focus {
+        border: 0;
+        box-shadow: none;
+        outline: none;
+    }
+    .closeModal{
+		padding: 10px;
+		margin-left: -10px;
+        cursor: pointer;
+    }
+    .padWrap {
+        padding: 0 15px;
+    }
+    .hint {
+        font-size: 12px;
+        color: #949494;
+        position: relative;
+        top: -26px;
+    }
+    h2 {
+        text-transform: capitalize;
+    }
+    input {
+        background-color: #eaeaea;
+        border: 0;
+        box-shadow: none;
+        padding: 12px;
+        font-size: 16px;
+        height: initial;
+        font-weight: 100;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-family: Comfortaa;
+    }
+    .has-danger input{
+        background-color: #fff1f1;
+    }
+    .sideIcon {
+        float: left;
+    }
+    .socialButtons {
+        width: 90%;
+        margin: auto auto;
+        margin-top: 16px;
+        margin-bottom: 20px;
+        background-color: #ECECEC;
+        color: #808080;
+        font-weight: 300;
+        height: 45px;
+        cursor: pointer;
+    }
+    .sideIcon {
+        color: #fff;
+        height: 45px;
+        width: 45px;
+        position: absolute;
+        padding-top: 11px;
+        left: 43px;
+        margin-top: -13px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        font-size: 24px;
+    }
+    .socialButtons .icon-facebook {
+        background-color: #3B57A3;
+    }
+    .socialButtons .icon-google {
+        background-color: #387AF2;
+    }
+    .btn {
+        border: 0;
+    }
+    .icon-toyCar-1 {
+        position: relative;
+        top: -9px;
+        left: 13px;
+        color: #f06060;
+    }
+    .animatedCar {
+        transition: 10s;
+        left: 90%;
+    }
+    .f50 {
+        font-size: 50px;
+    }
+    .tc{
+        transition: all 0.5s linear;
+    }
+    .boxme.ng-hide {
+      opacity: 0;
+    }
+    .boxme.ng-hide-remove-active {
+        transition-delay: 0.4s;
+    }
+    .boxme.ng-hide-animate {
+      position:absolute;
+    }
+
+    .modal-footer{
+        justify-content: inherit;
+    }
+    .modal-title{
+        margin: auto auto;
+    }
+    .closeModal{
+        margin-top: -59px;
+        color: #bfbfbf;
+    }
+
+    .btn-dride-center{
+		margin-top: 14px;
+        font-family: Comfortaa;
+    }
+}
+
+@media (max-width: 992px) {
+
+	.modal-title {
+    	font-size: 18px !important;
+	}
+
+}

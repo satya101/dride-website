@@ -41,7 +41,7 @@ anonymizer = {
             var db = admin.database();
             var ref = db.ref("userData").child(uid)
             var newDetailsObj = {
-                'pic': 'https://storage.cloud.google.com/dride-2384f.appspot.com/assets/profilePic/pic' + anonymizer.getRandomArbitrary(1, 5) + '.png',
+                'pic': 'https://storage.googleapis.com/dride-2384f.appspot.com/assets/profilePic/pic' + anonymizer.getRandomArbitrary(1, 5) + '.png',
                 'name': 'Rider' + anonymizer.getRandomArbitrary(1, 500)
             }
             ref.update(newDetailsObj)
