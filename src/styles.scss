@@ -567,7 +567,10 @@ main{
 	}
 	.simple-notification-wrapper{
 		z-index: 1000000000 !important;
-	}
+  }
+  .modal-body{
+    height: 278px !important;
+  }
 }
 @media (max-width: 960px) {
 	.hidden-lg-down{

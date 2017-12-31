@@ -3,4 +3,6 @@
  */
 var fs = require('fs');
 
-fs.createReadStream(__dirname + '/../dist/browser/index.html').pipe(fs.createWriteStream(__dirname + '/../functions/dist/index.html'));
+fs.createReadStream(__dirname + '/../dist/browser/index.html').pipe(
+    fs.createWriteStream(__dirname + '/../functions/dist/index.html')
+);
