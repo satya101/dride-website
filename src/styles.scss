@@ -38,11 +38,30 @@ router-outlet { display:block; }
 }
 
 
+
 .icon-trash-can:before {
 	content: "\e925";
   }
   .icon-medal:before {
 	content: "\e91f";
+  }
+  .icon-smallD:before {
+	content: "\e940";
+  }
+  .icon-menu_cloud:before {
+	content: "\e93b";
+  }
+  .icon-menu_dashcam:before {
+	content: "\e93c";
+  }
+  .icon-menu_devices:before {
+	content: "\e93d";
+  }
+  .icon-menu_map:before {
+	content: "\e93e";
+  }
+  .icon-menu_settings:before {
+	content: "\e93f";
   }
   .icon-f_cloud:before {
 	content: "\e92f";
@@ -568,8 +587,11 @@ main{
 	.simple-notification-wrapper{
 		z-index: 1000000000 !important;
   }
-  .modal-body{
-    height: 278px !important;
+  .a448{
+    height: 448px !important;
+  }
+  .a508{
+	height: 508px !important;
   }
 }
 @media (max-width: 960px) {

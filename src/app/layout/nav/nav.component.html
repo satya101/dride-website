@@ -37,7 +37,7 @@
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
         </form>
         <div class="bottomNav">
-            <button type="button" class="btn buyBtn btn-secondary " routerLink="/store" (click)="askToSubscribe()">Buy</button>
+            <button type="button" class="btn buyBtn btn-secondary " routerLink="/store" (click)="isCollapsed = true;askToSubscribe()">Buy</button>
 
             <div *ngIf="firebaseUser" class="login">
                 <div dropdown placement="bottom right">

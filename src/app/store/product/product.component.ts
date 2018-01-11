@@ -139,7 +139,6 @@ export class ProductComponent implements OnInit {
 	}
 
 	payWithStripe() {
-
 			// Open Checkout with further options:
 			this.handler.open({
 				name: 'Dride, Inc.',
@@ -147,7 +146,8 @@ export class ProductComponent implements OnInit {
 				amount: 149 * this.quantity * 100,
 				billingAddress: true,
 				shippingAddress: true,
-				allowRememberMe: false
+				allowRememberMe: false,
+				receipt_email: this.firebaseUser.email
 			});
 
 		// Close Checkout on page navigation:

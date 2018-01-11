@@ -7,7 +7,7 @@
     <p class="float-right closeModal" (click)="dismissModal()">x</p>
   </div>
   <span class="icon-toyCar-1" [class]="isLoaded ? 'animatedCar' : ''" *ngIf="!onWelcome"></span>
-  <div class="modal-body px-0">
+  <div class="modal-body px-0 {{isFlipped ? 'a508' : 'a448'}}">
     <div class="container-fluid">
       <div class="row" class="animate-show">
 

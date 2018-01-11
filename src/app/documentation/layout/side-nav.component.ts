@@ -5,6 +5,8 @@ import { AdasComponent } from '../pages/adas/adas.component';
 import { AssistantComponent } from '../pages/assistant/assistant.component';
 import { ConnectivityComponent } from '../pages/connectivity/connectivity.component';
 import { DrideCloudComponent } from '../pages/drideCloud/dride-cloud.component';
+import { ApiComponent } from '../pages/api/api.component';
+import { DrideOSComponent } from '../pages/drideOS/dride-os.component';
 import { GettingStartedComponent } from '../pages/gettingStarted/getting-started.component';
 import { IndicatorsComponent } from '../pages/indicators/indicators.component';
 import { ManualSetupComponent } from '../pages/manualSetup/manual-setup.component';
@@ -12,6 +14,7 @@ import { PublishComponent } from '../pages/publish/publish.component';
 import { UniversalComponent } from '../pages/drideUniversal/universal.component';
 import { AssemblyComponent } from '../pages/assembly/assembly.component';
 import { SsrService } from '../../helpers/ssr/ssr.service'
+import { HackingComponent } from 'app/documentation/pages/hacking/hacking.component';
 
 
 @Component({
@@ -31,10 +34,37 @@ export class SideNavComponent implements OnInit {
 				'url': 'getting_started',
 				'ttl': 'Getting Started',
 				'icon': 'icon-toyCar-1',
-				'more': '',
+				'more': 'Learn how to build your own Dride',
 				'hp': true,
 				'menu': true,
 				'component': GettingStartedComponent
+			},
+			{
+				'url': 'drideOS',
+				'ttl': 'drideOS',
+				'icon': 'icon-smallD',
+				'more': 'Open source dashcam OS',
+				'hp': true,
+				'menu': true,
+				'component': DrideOSComponent
+			},
+			{
+				'url': 'api',
+				'ttl': 'API',
+				'icon': 'icon-f_settings',
+				'more': 'Access Dride programmatically',
+				'hp': true,
+				'menu': true,
+				'component': ApiComponent
+			},
+			{
+				'url': 'hacking',
+				'ttl': 'Advanced',
+				'icon': 'icon-docs-full',
+				'more': 'Learn how to SSH into the device',
+				'hp': true,
+				'menu': true,
+				'component': HackingComponent
 			},
 			{
 				'url': 'dride_cloud',
@@ -63,15 +93,15 @@ export class SideNavComponent implements OnInit {
 				'menu': true,
 				'component': AssistantComponent
 			},
-			{
-				'url': 'connectivity',
-				'ttl': 'Connectivity',
-				'icon': 'icon-wifi',
-				'more': 'GPS, Bluetooth & Wifi',
-				'hp': true,
-				'menu': true,
-				'component': ConnectivityComponent
-			},
+			// {
+			// 	'url': 'connectivity',
+			// 	'ttl': 'Connectivity',
+			// 	'icon': 'icon-wifi',
+			// 	'more': 'GPS, Bluetooth & Wifi',
+			// 	'hp': true,
+			// 	'menu': true,
+			// 	'component': ConnectivityComponent
+			// },
 			{
 				'url': 'indicators',
 				'ttl': 'Indicators',

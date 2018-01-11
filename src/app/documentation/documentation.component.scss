@@ -1,4 +1,8 @@
 .docs{
+	.regCase{
+		text-transform: inherit;
+	}
+
 	.mptpToFx {
 		margin-top: 74px !important;
 	}
@@ -184,7 +188,18 @@
 	p {
 		margin: 0 0 4px;
 	}
-
+	.gh{
+		float: right;
+		margin-top: -29px;
+		position: relative;
+		left: 31px;
+		span{
+			font-size: 30px;
+		}
+		a{
+			border-bottom: 0;
+		}
+	}
 	.getDride {
 		background-color: #333;
 		height: 90px;
@@ -205,6 +220,35 @@
 	.pb-40{
 		padding-bottom: 40px;
 	}
+	.markdown{
+		h1{
+			padding-bottom: 0.3em;
+			font-size: 2em;
+			border-bottom: 1px solid #eaecef;
+			margin-bottom: 16px;
+			line-height: 1.25;
+			text-transform: inherit;
+			margin-top: 49px;
+		}
+		h2{
+			text-transform: inherit;
+			margin-top: 21px;
+			margin-bottom: 21px;
+		}
+		pre{
+			padding: 16px;
+			overflow: auto;
+			font-size: 85%;
+			line-height: 1.45;
+			background-color: #f6f8fa;
+			border-radius: 3px;
+    		margin-top: 23px;
+		}
+
+
+	}
+
+
 }
 .z1{
 	z-index: 1000;
