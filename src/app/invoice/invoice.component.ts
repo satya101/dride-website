@@ -9,14 +9,17 @@ declare var StripeCheckout: any;
 	selector: 'app-invoice',
 	templateUrl: './invoice.component.html',
 	styles: [
-		".zroBg {background-image: url(./assets/images/zero/main.jpg); height: 630px; background-repeat: no-repeat; background-position-y: 20%; width: 100%;}"
+		'.zroBg {background-image: url(./assets/images/zero/main.jpg); height: 630px; background-repeat: no-repeat; background-position-y: 20%; width: 100%;}'
 	]
 })
 export class InvoiceComponent implements OnInit {
 	public quantity = 2;
+	private currentUser: any;
+
 	constructor(public http: HttpClient, public mixpanel: MixpanelService) { }
 
 	ngOnInit() {
+
 		let token_triggered = false;
 		const handler = StripeCheckout.configure({
 			key: 'pk_live_iEgZDQdwTYeH66NG5BiN8IrP',
@@ -55,6 +58,7 @@ export class InvoiceComponent implements OnInit {
 
 
 		document.getElementById('customButton').addEventListener('click', (e) => {
+
 			// Open Checkout with further options:
 			handler.open({
 				name: 'Dride, Inc.',

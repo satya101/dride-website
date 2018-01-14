@@ -23,6 +23,10 @@ export class EditMeDirective {
 		return s.replace(/(\_\w)/g, function(m){return m[1].toUpperCase(); });
 	}
 	underToSanke(s) {
+		if (s === 'drideOS') {
+			return 'dride-os';
+		}
+
 		return s.replace('_', '-');
 	}
 }

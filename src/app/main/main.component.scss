@@ -333,12 +333,13 @@ $color: #333333,
   }
   .logo {
     padding-top: 32px;
-    font-size: 63px;
+	font-size: 63px;
+	text-transform: inherit;
     span {
       color: #F06060;
-      font-size: 39px;
-      position: relative;
-      left: 4px;
+	  font-size: 30px;
+	  position: relative;
+	  left: 11px;
       letter-spacing: 2px;
     }
   }
@@ -720,15 +721,6 @@ app-cloud .icon-toyCar-1 {
     }
     .roundWrap {
       margin-top: -50px;
-    }
-  }
-  .section4 {
-    .logo {
-      padding-top: 36px;
-      font-size: 53px;
-    }
-    .roundWrap {
-      margin-top: -68px;
     }
   }
 
