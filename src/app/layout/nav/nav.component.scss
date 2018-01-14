@@ -22,7 +22,13 @@ nav{
     position: relative;
     top: 6px;
 }
-
+.logInLink{
+	position: relative;
+    top: -6px;
+    padding: 4px;
+    color: #fff !important;
+    font-size: 14px;
+}
 .navbar-brand {
     color: #fff !important;
     height: 70px;
@@ -139,7 +145,8 @@ nav{
 			padding-bottom: 34px;
 			margin-top: 0;
 		}
-    }
+	}
+
 	.nav:first-child{
 		 padding-top: 90px;
 	}

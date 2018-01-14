@@ -52,6 +52,9 @@
                         <a class="dropdown-item" (click)="logOut();isCollapsed = true">Logout</a>
                     </div>
                 </div>
+			</div>
+            <div *ngIf="!firebaseUser" class="login">
+				<a routerLink="/settings" class="logInLink">Login</a>
             </div>
         </div>
     </div>
