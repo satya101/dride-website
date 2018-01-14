@@ -9,6 +9,7 @@ import { MetaService } from '../../../helpers/meta/meta.service'
 export class IndicatorsComponent implements OnInit {
 
 	public body = `
+
 # INDICATORS
 
 LED Indicators explained
@@ -26,12 +27,12 @@ LED Indicators explained
 | **Clear all**                       | done          | White | Clears any LED activity
 
 
-You may test/run the LED by executing at command line
+You may test/run the LED by executing at command line [How to SSH into Dride?](/documentation/hacking)
 
 	sudo python /home/Cardigan/modules/indicators/python/states/standalone.py <cmd>
 
 `
-	
+
 	constructor(private meta: MetaService) {
 	}
 
