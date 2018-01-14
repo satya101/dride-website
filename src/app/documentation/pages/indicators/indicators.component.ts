@@ -36,4 +36,10 @@ You may test/run the LED by executing at command line [How to SSH into Dride?](/
 	constructor(private meta: MetaService) {
 	}
 
+	ngOnInit() {
+		this.meta.set(
+			'Indicators',
+			'Control Dride\'s LED'
+		)
+	}
 }
