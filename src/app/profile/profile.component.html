@@ -4,7 +4,7 @@
                 <div class="gradBg">
                     <div class="container hidden-xs-down">
                         <div class="profilePic">
-                            <img *ngIf="(opData|async)?.photoURL" src="{{(opData|async)?.photoURL}}" />
+                            <img [src]="(opData|async)?.photoURL" />
                             <p>{{(opData|async)?.name}}
                                <!-- TROPHYS HERE -->
                             </p>
@@ -91,7 +91,6 @@
 							</agm-map>                  		
 	                    </div>	                    
                     </div>
-
 
                     <div class="col-md-4" *ngIf="orderedClips">
 

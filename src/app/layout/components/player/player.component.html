@@ -4,7 +4,7 @@
   <div class="loader" *ngIf="!currentVideo.thumbs">
 	  <img src="./assets/images/loader.gif" alt="processing"/>
 	  <p>
-			Proccessing, This can take a a minute.. 
+			Proccessing, This can take a minute.. 
 	 </p>
   </div>
   <vg-player *ngIf="currentVideo.thumbs" class="player" (onPlayerReady)="onPlayerReady($event, currentVideo, tag)">

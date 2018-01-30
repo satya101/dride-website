@@ -77,6 +77,7 @@ export class ProfileComponent implements OnInit {
 					environment.firebase.databaseURL + '/clips/' +
 					this.uid +
 					'.json?limitToLast=1&orderBy="$key"';
+
 				this.http
 					.get(url)
 					.subscribe(data => {
@@ -95,7 +96,7 @@ export class ProfileComponent implements OnInit {
 			}
 
 			if (params['uid']) {
-				this.opData = db.object('userData/' + params['uid']);
+				this.opData = db.object('userData/' + params['uid']).valueChanges();
 			}
 
 		});
@@ -124,9 +125,11 @@ export class ProfileComponent implements OnInit {
 
 			this.comments = {};
 
-			this.clips = this.db.list('/clips/' + this.uid).valueChanges();
+			this.clips = this.db.list('/clips/' + this.uid).snapshotChanges()
 
-			this.clips.subscribe(snapshot => {
+			this.clips.map(clips => {
+				return clips.map(clip => ({ key: clip.key, ...clip.payload.val() }));
+			}).subscribe(snapshot => {
 				this.orderedClips = this.orderClipsByDate(snapshot);
 			});
 
@@ -141,10 +144,10 @@ export class ProfileComponent implements OnInit {
 			this.db.object<any>('/clips/' + this.uid + '/' + this.videoId).valueChanges().subscribe(currentVideoSanp => {
 				const data = currentVideoSanp;
 
-				if (!data || !data.dateUploaded) {
-					this.router.navigate(['/profile/' + this.uid]);
-					return;
-				}
+				// if (!data || !data.dateUploaded) {
+				// 	this.router.navigate(['/profile/' + this.uid]);
+				// 	return;
+				// }
 
 				this.currentVideo = data
 				this.currentVideo['op'] = this.uid
@@ -227,23 +230,24 @@ export class ProfileComponent implements OnInit {
 	orderClipsByDate(clips) {
 
 		const clipsBydate = {};
-		clips.forEach(value => {
-
+		let value;
+		for (let i = 0; i < clips.length; i++) {
+			value = clips[i];
 			const key: any = value.key
 			// TODO: remove fallback to Yi format
-			const d = new Date((value.val().timestamp ? value.val().timestamp : this.yi_getTimeStamp(value.key)) * 1000);
+			const d = new Date(this.normalizeTimeStamp(value.timestamp, value.key));
+
 			const iKey =
 				d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
 
-			if (!clipsBydate[iKey]) {
-				clipsBydate[iKey] = {};
-			}
 
-			if (value.val().thumbs && value.val().thumbs && value.val().thumbs.src) {
-				clipsBydate[iKey][key] = value.val();
+			if (value && value.thumbs && value.thumbs && value.thumbs.src) {
+				if (!clipsBydate[iKey]) {
+					clipsBydate[iKey] = {};
+				}
+				clipsBydate[iKey][key] = value;
 			}
-		});
-
+		};
 		// reverse
 
 		const clipsBydateReversed = {};
@@ -433,28 +437,41 @@ export class ProfileComponent implements OnInit {
 		this.http
 			.get(url)
 			.subscribe(data => {
-				this.meta.addTag({property: 'og:title', content: data['description'] ? data['description'] : 'Event on Dride Cloud'});
-				this.meta.addTag({property: 'og:description', content: data['plates'] ? data['plates'] : 'This video doesn\'t have a description yet.'});
-				this.meta.addTag({property: 'og:image:width', content: '320'});
-				this.meta.addTag({property: 'og:image:height', content: '176'});
-				this.meta.addTag({property: 'og:image', content: data['thumbs']['src']});
-				this.meta.addTag({property: 'og:video', content: data['clips']['src']});
-				this.meta.addTag({property: 'og:video:secure_url', content: data['clips']['src']});
-				this.meta.addTag({property: 'og:type', content: 'video.other'});
-				this.meta.addTag({property: 'twitter:card', content: 'player'});
-				this.meta.addTag({property: 'twitter:site', content: '@drideHQ'});
-				this.meta.addTag({property: 'twitter:url', content: 'https://dride.io/profile/' + uid + '/' + videoId});
-				this.meta.addTag({property: 'twitter:title', content: data['description']});
-				this.meta.addTag({property: 'twitter:description', content: data['plates']});
-				this.meta.addTag({property: 'twitter:image:src', content: data['thumbs']['src']});
-				this.meta.addTag({property: 'twitter:player', content: data['clips']['src']});
-				this.meta.addTag({property: 'twitter:player:width', content: '1280'});
-				this.meta.addTag({property: 'twitter:player:height', content: '720'});
-				this.meta.addTag({property: 'twitter:player:stream', content: data['clips']['src']});
-				this.meta.addTag({property: 'twitter:player:stream:content_type', content: 'video/mp4'});
+				this.meta.addTag({ property: 'og:title', content: data['description'] ? data['description'] : 'Event on Dride Cloud' });
+				this.meta.addTag({ property: 'og:description', content: data['plates'] ? data['plates'] : 'This video doesn\'t have a description yet.' });
+				this.meta.addTag({ property: 'og:image:width', content: '320' });
+				this.meta.addTag({ property: 'og:image:height', content: '176' });
+				this.meta.addTag({ property: 'og:image', content: data['thumbs']['src'] });
+				this.meta.addTag({ property: 'og:video', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'og:video:secure_url', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'og:type', content: 'video.other' });
+				this.meta.addTag({ property: 'twitter:card', content: 'player' });
+				this.meta.addTag({ property: 'twitter:site', content: '@drideHQ' });
+				this.meta.addTag({ property: 'twitter:url', content: 'https://dride.io/profile/' + uid + '/' + videoId });
+				this.meta.addTag({ property: 'twitter:title', content: data['description'] });
+				this.meta.addTag({ property: 'twitter:description', content: data['plates'] });
+				this.meta.addTag({ property: 'twitter:image:src', content: data['thumbs']['src'] });
+				this.meta.addTag({ property: 'twitter:player', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'twitter:player:width', content: '1280' });
+				this.meta.addTag({ property: 'twitter:player:height', content: '720' });
+				this.meta.addTag({ property: 'twitter:player:stream', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'twitter:player:stream:content_type', content: 'video/mp4' });
 			})
 	}
 
+	normalizeTimeStamp(timestamp, key) {
+		if (timestamp && timestamp.length === 10) {
+			timestamp = timestamp + '000';
+		}
+		timestamp = parseInt(timestamp, 10)
+		if (new Date(timestamp).getTime() > 0) {
+			return timestamp
+		}else {
+			return this.yi_getTimeStamp(key);
+		}
+
+
+	}
 	/*
 	*	Will split the time from Yi dash cam and make it a timestamp
 	*/
