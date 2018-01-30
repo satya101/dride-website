@@ -10,10 +10,7 @@ import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import * as firebase from 'firebase/app'; // for typings
 import { SsrService } from '../helpers/ssr/ssr.service'
 
-import {
-	AngularFireDatabase,
-	FirebaseListObservable
-} from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @Component({

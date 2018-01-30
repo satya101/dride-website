@@ -11,10 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NotificationsService } from 'angular2-notifications';
 
 
-import {
-	AngularFireDatabase,
-	FirebaseListObservable
-} from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @Component({

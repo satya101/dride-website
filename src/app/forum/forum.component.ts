@@ -8,10 +8,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import * as firebase from 'firebase/app';
 
 import { AuthService } from '../auth.service';
-import {
-	AngularFireDatabase,
-	FirebaseListObservable
-} from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { introAnim } from '../router.animations';
 
@@ -35,37 +32,25 @@ export class ForumComponent implements OnInit {
 		private modalService: BsModalService,
 		public mixpanel: MixpanelService,
 		private meta: MetaService
-	) {}
+	) { }
 
 	ngOnInit() {
 
 		if (this.isFull) {
 			this.meta.set('Forum', 'A community page for Dride users\'s')
 		}
+		const limitToLast = this.isFull ? 100 : 6
 
-		const r = {
-			query:
-			{
-				orderByChild: 'lastUpdate',
-				orderByKey: true
-			}
-		}
-
-		if (!this.isFull) {
-			r.query['limitToLast'] = 6
-		}
-
-		this.threads = this.db
-			.list('/threads', r)
-			.map(arr => {
-				const res = [];
-				arr.forEach(element => {
-					if (!element.hidden) {
-						res.unshift(element)
-					}
-				});
-				return res;
+		this.db.list('/threads', ref => ref.orderByChild('lastUpdate').limitToLast(limitToLast)).valueChanges()
+		.subscribe((arr: any) => {
+			const res = [];
+			arr.forEach(element => {
+				if (!element.hidden) {
+					res.unshift(element)
+				}
 			});
+			this.threads = res;
+		});
 	}
 
 	ask() {

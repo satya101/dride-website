@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
@@ -11,6 +11,7 @@ import { NgbdModalPayement } from './payment.modal';
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 import { MetaService } from '../../helpers/meta/meta.service'
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 declare var StripeCheckout: any;
 
@@ -22,7 +23,7 @@ declare var StripeCheckout: any;
 })
 export class ProductComponent implements OnInit {
 
-	productData: FirebaseObjectObservable<any[]>;
+	productData: any;
 	mainImageIndex = '0'
 	public firebaseUser: any;
 	public handler: any;
@@ -53,9 +54,10 @@ export class ProductComponent implements OnInit {
 		this.route.params.subscribe(params => {
 
 			if (params['productSlug']) {
-				this.productData = db.object('content/' + params['productSlug'])
-				this.productData.subscribe(
+				db.object('content/' + params['productSlug']).valueChanges()
+				.subscribe(
 					(data: any) => {
+						this.productData = data
 						this.key = data.key
 						this.meta.set(
 							data.title,

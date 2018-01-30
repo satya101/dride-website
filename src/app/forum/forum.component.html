@@ -14,7 +14,7 @@
         <div class="clear spacer25"></div>
         <div class="col-md-12 p-0">
             <div class="posts">
-				<a class="post animBox row mx-auto" *ngFor="let post of threads | async" routerLink="/forum/{{post.slug}}"
+				<a class="post animBox row mx-auto" *ngFor="let post of threads" routerLink="/forum/{{post.slug}}"
 				 [@introAnim]
 				 [hidden]="!post.description"
 				 >
@@ -39,7 +39,7 @@
                         <span class="readMore">Read More</span>
                     </div>
                 </a>
-                <div *ngIf="!(threads | async)?.length" class="loadersLines mx-auto" >
+                <div *ngIf="!threads || !threads.length" class="loadersLines mx-auto" >
 					<div *ngFor="let i of [1,2,3,4]">
 						<div class="timeline-wrapper">
 							<div class="timeline-item">

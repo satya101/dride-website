@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../auth.service';
 
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service'
 import { MetaService } from '../helpers/meta/meta.service'
@@ -32,10 +32,10 @@ export class ProfileComponent implements OnInit {
 	uid: string;
 	videoId: string;
 	public replyBox: string;
-	clips: FirebaseListObservable<any>;
+	clips: Observable<any[]>;
 	orderedClips: any;
-	currentVideoRef: FirebaseObjectObservable<any>;
-	currentVideoRefLive: FirebaseObjectObservable<any>;
+	currentVideoRef: Observable<any[]>;
+	currentVideoRefLive: Observable<any[]>;
 	currentVideo: any;
 	conversationPreviusIsMine: any = [];
 	comments: any = {};
@@ -124,7 +124,7 @@ export class ProfileComponent implements OnInit {
 
 			this.comments = {};
 
-			this.clips = this.db.list('/clips/' + this.uid, { preserveSnapshot: true });
+			this.clips = this.db.list('/clips/' + this.uid).valueChanges();
 
 			this.clips.subscribe(snapshot => {
 				this.orderedClips = this.orderClipsByDate(snapshot);
@@ -138,8 +138,8 @@ export class ProfileComponent implements OnInit {
 				this.setMetaTags(this.uid, this.videoId)
 			}
 
-			this.db.object('/clips/' + this.uid + '/' + this.videoId, { preserveSnapshot: true }).subscribe(currentVideoSanp => {
-				const data = currentVideoSanp.val();
+			this.db.object<any>('/clips/' + this.uid + '/' + this.videoId).valueChanges().subscribe(currentVideoSanp => {
+				const data = currentVideoSanp;
 
 				if (!data || !data.dateUploaded) {
 					this.router.navigate(['/profile/' + this.uid]);

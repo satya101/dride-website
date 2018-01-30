@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../auth.service';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 // remove this when we will have native storage wrapper
 // https://github.com/angular/angularfire2/issues/241

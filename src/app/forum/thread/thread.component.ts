@@ -4,13 +4,14 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 
 import { AuthService } from '../../auth.service';
 
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { introAnim } from '../../router.animations';
 
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 
 import { MetaService } from '../../helpers/meta/meta.service'
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -21,8 +22,8 @@ import { MetaService } from '../../helpers/meta/meta.service'
 })
 export class ThreadComponent implements OnInit, OnDestroy {
 
-	currentThread: FirebaseObjectObservable<any[]>;
-	conversation: FirebaseListObservable<any[]>;
+	currentThread: Observable<any[]>;
+	conversation: Observable<any[]>;
 	public threadId: string;
 	public conversationPreviusIsMine: Array<boolean> = [];
 	private sub: any;
@@ -60,18 +61,18 @@ export class ThreadComponent implements OnInit, OnDestroy {
 			if (this.threadId === params['slug']) {
 				this.threadId = params['slug'].split('__').pop();
 			}
-			this.db.object('/threads/' + this.threadId, { preserveSnapshot: true }).subscribe(snapshot => {
+			this.db.object<any>('/threads/' + this.threadId).valueChanges().subscribe(snapshot => {
 
-				if (!snapshot.val()) {
+				if (!snapshot) {
 					this.router.navigate(['/page-not-found'])
 				}else {
 					// set meta tags
-					this.meta.set(snapshot.val().title, snapshot.val().description, 'article');
+					this.meta.set(snapshot.title, snapshot.description, 'article');
 				}
 			});
 
-			this.currentThread = this.db.object('/threads/' + this.threadId);
-			this.conversation = this.db.list('/conversations/' + this.threadId);
+			this.currentThread = this.db.object<any>('/threads/' + this.threadId).valueChanges();
+			this.conversation = this.db.list('/conversations/' + this.threadId).valueChanges();
 
 			this.conversation.subscribe(snapshot => {
 				this.sideThreadByAuther(snapshot, this.conversationPreviusIsMine)

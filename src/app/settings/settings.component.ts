@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { PushNotificationsService } from '../push-notifications.service';
 
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { MetaService } from '../helpers/meta/meta.service'
+import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'app-settings',
@@ -25,8 +26,8 @@ export class SettingsComponent implements OnInit {
 			'subscribe': false
 		}
 	};
-	public userDataObservable: FirebaseObjectObservable<any>;
-	public userDevicesObservable: FirebaseObjectObservable<any>;
+	public userDataObservable: Observable<any[]>;
+	public userDevicesObservable: Observable<any[]>;
 
 	constructor(private auth: AuthService,
 				public db: AngularFireDatabase,
@@ -56,14 +57,12 @@ export class SettingsComponent implements OnInit {
 		this.auth.verifyLoggedIn().then(res => {
 			this.email = this.firebaseUser.email;
 
-			this.userDataObservable = this.db.object('/userData/' + this.firebaseUser.uid, { preserveSnapshot: true })
-			this.userDataObservable.subscribe(snapshot => {
-				this.userData = Object.assign(this.userData, snapshot.val())
+			this.db.object('/userData/' + this.firebaseUser.uid).valueChanges().subscribe(snapshot => {
+				this.userData = Object.assign(this.userData, snapshot)
 			});
 
-			this.userDevicesObservable = this.db.object('/devices/' + this.firebaseUser.uid, { preserveSnapshot: true })
-			this.userDevicesObservable.subscribe(snapshot => {
-				this.userDevices = snapshot.val()
+			this.db.object('/devices/' + this.firebaseUser.uid).valueChanges().subscribe(snapshot => {
+				this.userDevices = snapshot
 			});
 
 			// TODO: add Push calss
@@ -92,7 +91,7 @@ export class SettingsComponent implements OnInit {
 	}
 	saveOption(field, value) {
 
-		this.userDataObservable.update({ [field]: value })
+		this.db.object('/devices/' + this.firebaseUser.uid).update({ [field]: value })
 	}
 
 	updateEmail() {

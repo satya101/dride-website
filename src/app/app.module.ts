@@ -17,7 +17,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import 'firebase/storage';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import 'firebase/messaging';
 
 import { UiSwitchModule } from 'ngx-ui-switch'
@@ -82,6 +82,7 @@ export class RavenErrorHandler implements ErrorHandler {
 		CollapseModule.forRoot(),
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFireDatabaseModule,
+		AngularFireStorageModule,
 		HttpClientModule,
 		AngularFireAuthModule,
 		FormsModule,

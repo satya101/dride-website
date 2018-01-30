@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { AuthService } from '../auth.service';
 import { CloudPaginationService } from '../cloud/cloud-pagination.service';
 
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service'

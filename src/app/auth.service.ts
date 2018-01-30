@@ -9,7 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { MixpanelService } from './helpers/mixpanel/mixpanel.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -87,7 +87,7 @@ export class NgbdModalLogin {
 	public l: {email: string, password: string};
 
 
-	userData: FirebaseListObservable<any[]>;
+	userData: Observable<any[]>;
 	user: Observable<firebase.User>;
 
 	constructor(public activeModal: BsModalRef,

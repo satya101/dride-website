@@ -31,7 +31,7 @@ export class Autosize implements AfterViewInit {
 	}
 
 	@HostListener('window:resize', ['$event.target'])
-	onResize(textArea: any): void {
+	onResize(textArea: HTMLTextAreaElement): void {
 		// Only apply adjustment if element width had changed.
 		if (this.el.clientWidth === this._clientWidth) {
 			return
@@ -41,7 +41,7 @@ export class Autosize implements AfterViewInit {
 	}
 
 	@HostListener('input', ['$event.target'])
-	onInput(textArea: any): void {
+	onInput(textArea: HTMLTextAreaElement): void {
 		this.adjust();
 	}
 
@@ -69,7 +69,7 @@ export class Autosize implements AfterViewInit {
 		}
 		this.el.style.overflow = 'hidden';
 		this.el.style.height = 'auto';
-		this.el.style.height = this.el.scrollHeight + 'px';
+		this.el.style.height = (this.el.scrollHeight - 8) + 'px';
 	}
 
 	updateMinHeight(): void {
