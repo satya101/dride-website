@@ -127,10 +127,14 @@ export class ProfileComponent implements OnInit {
 
 			this.clips = this.db.list('/clips/' + this.uid).snapshotChanges()
 
+			let wasSorted = false
 			this.clips.map(clips => {
 				return clips.map(clip => ({ key: clip.key, ...clip.payload.val() }));
 			}).subscribe(snapshot => {
-				this.orderedClips = this.orderClipsByDate(snapshot);
+				if (!wasSorted) {
+					this.orderedClips = this.orderClipsByDate(snapshot);
+					wasSorted = true;
+				}
 			});
 
 			if (this.ssr.isBrowser()) {
@@ -233,6 +237,11 @@ export class ProfileComponent implements OnInit {
 		let value;
 		for (let i = 0; i < clips.length; i++) {
 			value = clips[i];
+
+			if (clips[i].key.indexOf('_s') !== -1) {
+				clips[i].key = clips[i].key.replace('_s', '');
+			}
+
 			const key: any = value.key
 			// TODO: remove fallback to Yi format
 			const d = new Date(this.normalizeTimeStamp(value.timestamp, value.key));
@@ -460,11 +469,14 @@ export class ProfileComponent implements OnInit {
 	}
 
 	normalizeTimeStamp(timestamp, key) {
-		if (timestamp && timestamp.length === 10) {
-			timestamp = timestamp + '000';
+
+		if (timestamp) {
+			if (timestamp.length === 10) {
+				timestamp = timestamp + '000';
+			}
+			timestamp = parseInt(timestamp, 10)
 		}
-		timestamp = parseInt(timestamp, 10)
-		if (new Date(timestamp).getTime() > 0) {
+		if (!isNaN(timestamp) && new Date(timestamp).getTime() > 0) {
 			return timestamp
 		}else {
 			return this.yi_getTimeStamp(key);
@@ -483,14 +495,26 @@ export class ProfileComponent implements OnInit {
 			return videoId;
 		}
 
-		const year = date[0];
-		const month = date[1][0] + date[1][1]
-		const day = date[1][2] + date[1][3]
-		const hour = date[2][0] + date[2][1]
-		const minute = date[2][2] + date[2][3]
-		const sec = date[2][4] + date[2][5]
+		let year = date[0];
+		let month = date[1][0] + date[1][1]
+		let day = date[1][2] + date[1][3]
+		let hour = date[2][0] + date[2][1]
+		let minute = date[2][2] + date[2][3]
+		let sec = date[2][4] + date[2][5]
 
-		return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime() / 1000
+		// Yi have a new format: YYYY_mm_dd_hhmmss if we dont have a vaild date try again
+		if (!new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime()) {
+			year = date[0];
+			month = date[1][0] + date[1][1]
+			day = date[2][0] + date[2][1]
+			hour = date[3][0] + date[3][1]
+			minute = date[3][2] + date[3][3]
+			sec = date[3][4] + date[3][5]
+			return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime()
+		}else {
+			return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime()
+		}
+
 	}
 
 

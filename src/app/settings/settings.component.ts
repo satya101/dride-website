@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { PushNotificationsService } from '../push-notifications.service';
@@ -32,6 +33,7 @@ export class SettingsComponent implements OnInit {
 	constructor(private auth: AuthService,
 				public db: AngularFireDatabase,
 				public push: PushNotificationsService,
+				private route: ActivatedRoute,
 				private meta: MetaService) {
 
 		auth.getState().subscribe(user => {
@@ -47,7 +49,17 @@ export class SettingsComponent implements OnInit {
 
 
 
-	ngOnInit() {
+	async ngOnInit() {
+
+
+		// if coming from unsubscribe
+		await this.route.queryParams.subscribe(params => {
+			if (params.unsubscribe) {
+				alert('You have been successfully unsubscribed from email communications. If you did this in error, login and update your preferences.')
+			}
+		})
+
+
 
 		this.meta.set(
 			'Settings',

@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
 	selector: 'app-thread',
 	templateUrl: './thread.component.html',
 	styleUrls: ['./thread.component.scss'],
-	animations: [ introAnim ]
+	animations: [introAnim]
 })
 export class ThreadComponent implements OnInit, OnDestroy {
 
@@ -65,7 +65,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 
 				if (!snapshot) {
 					this.router.navigate(['/page-not-found'])
-				}else {
+				} else {
 					// set meta tags
 					this.meta.set(snapshot.title, snapshot.description, 'article');
 				}
@@ -112,18 +112,22 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	send() {
 
 		this.auth.verifyLoggedIn().then(res => {
-			this.db.list('conversations/' + this.threadId).push({
-				'autherId': this.firebaseUser.uid,
-				'auther': this.firebaseUser.displayName,
-				'pic': this.firebaseUser.photoURL,
-				'body': this.replyBox,
-				'timestamp': (new Date).getTime(),
-				'fid': this.getFid()
-			});
+			this.getUserData(this.firebaseUser.uid).subscribe(
+				(userData: any) => {
+					console.log(userData)
+					this.db.list('conversations/' + this.threadId).push({
+						'autherId': this.firebaseUser.uid,
+						'auther': this.firebaseUser.displayName,
+						'pic': userData.photoURL,
+						'body': this.replyBox,
+						'timestamp': (new Date).getTime(),
+						'fid': this.getFid()
+					});
 
-			this.replyBox = '';
-			this.mixpanel.track('posted a comment', {});
+					this.replyBox = '';
+					this.mixpanel.track('posted a comment', {});
 
+				})
 		})
 
 
@@ -134,10 +138,11 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	getFid() {
 		if (this.firebaseUser.providerData[0].providerId === 'facebook.com') {
 			return this.firebaseUser.providerData[0].uid;
-		}else {
+		} else {
 			return null
 		}
 	}
+
 
 	openLogin() {
 		this.auth.openLogin();
@@ -148,11 +153,17 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		this.sub.unsubscribe();
 	}
 
+	// facebook profile pic expires after a period of time, We can save the pic as un-expired only for FB,
+	// This should be refactored evantually..
 	getProfilePic(node) {
 		if (node.fid) {
 			return 'https://graph.facebook.com/' + node.fid + '/picture';
-		}else {
+		} else {
 			return node.pic;
 		}
 	}
+	getUserData(uid) {
+		return this.db.object<any>('/userData/' + uid).valueChanges();
+	}
+
 }

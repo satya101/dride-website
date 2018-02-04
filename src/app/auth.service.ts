@@ -142,7 +142,7 @@ export class NgbdModalLogin {
 			// ensure push token
 			// TODO: //pushNotification.getPushToken(res.uid)
 
-			this.db.object('/userData/' + user.uid).subscribe(data => {
+			this.db.object('/userData/' + user.uid).valueChanges().subscribe(data => {
 				if (data.showedAnonymous === true) {
 					this.closeModal();
 				} else {

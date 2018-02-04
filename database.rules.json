@@ -20,7 +20,7 @@
         "threads": {
             ".read": true,
             ".write": "auth != null",
-            ".indexOn": ["id", "created"]
+            ".indexOn": ["id", "created", "lastUpdate"]
         },
         "conversations": {
           "$threadId": {

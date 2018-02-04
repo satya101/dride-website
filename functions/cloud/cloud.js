@@ -85,7 +85,7 @@ cloud = {
 			var db = admin.database();
 			db.ref('clips').child(uid).child(videoId).once("value", (snapshot) =>{
 				const clip = snapshot.val();
-					resolve(clip.processed);
+				(clip && clip.processed) ? resolve(clip.processed) : resolve(false);
 			})
 		})
 	}

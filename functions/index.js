@@ -3,6 +3,9 @@ var admin = require('firebase-admin');
 var request = require('request');
 var path = require('path');
 var http = require('http');
+var fs = require('fs');
+var htmlToText = require('html-to-text');
+
 var cors = require('cors')({
   origin: true
 });
@@ -121,7 +124,7 @@ exports.saveNewUserData = functions.auth.user().onCreate(function (event) {
   if (user.providerData && user.providerData[0] && user.providerData[0].providerId == 'facebook.com') {
     resObj['fid'] = user.providerData[0].uid;
     resObj['photoURL_orig'] = resObj['photoURL'];
-    resObj['photoURL'] = 'https://graph.facebook.com/'+resObj['fid']+'/picture?type=large&w‌​';
+    resObj['photoURL'] = 'https://graph.facebook.com/' + resObj['fid'] + '/picture?type=large&w‌​';
   }
   return usersRef.set(resObj).then(function () {
     // create a user in Mixpanel Engage
@@ -192,58 +195,145 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips')
         console.error('not enough data');
         resolve();
         return;
-	  }
-	  
-	  uid = event.params.uid;
-	  filename = event.params.videoId;
+      }
 
-	  request('http://54.229.176.173:8080/processVideo/'+uid+'/'+filename, function (error, response, body) {
-		console.log('error:', error); // Print the error if one occurred
-		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-		console.log('body:', body); // Print the HTML for the Google homepage.
-		resolve();
-	  });
- 
-	  setTimeout(() => {
-		resolve();
-	  }, 2000);
+      uid = event.params.uid;
+      filename = event.params.videoId;
+
+      request('http://54.229.176.173:8080/processVideo/' + uid + '/' + filename, function (error, response, body) {
+        console.log('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('body:', body); // Print the HTML for the Google homepage.
+        resolve();
+      });
+
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+
+    })
+  });
+
+exports.notifyVideoUploaded = functions.database.ref('/clips/{uid}/{videoId}/processed')
+  .onWrite(function (event) {
+
+
+    return new Promise((resolve, reject) => {
+      let promiseCollector = []
+
+      if (!event.params.uid || !event.params.videoId) {
+        reject('{"err": "not enough data"}');
+        return;
+      }
+
+      const uid = event.params.uid;
+      const filename = event.params.videoId;
+      cloud.isProcessed(uid, filename).then(isProcessed => {
+
+          if (isProcessed != 'true' && isProcessed !== true) {
+            resolve('{"err": "Already processed.."}');
+            return;
+          }
+
+
+          //track event
+          mixpanel.track('video_upoload', {
+            distinct_id: uid,
+            filename: filename
+          });
+          //notify user his video is live!
+          admin.auth().getUser(uid).then(function (userRecord) {
+            admin.database().ref('clips').child(uid).child(filename.split('.')[0]).once("value", function (snapshot) {
+              const user = userRecord.toJSON();
+              const clip = snapshot.val();
+              //notify user his video is live!
+              var template = fs.readFileSync('./mailer/templates/videoIsOn.mail', "utf8");
+              params = {
+                "FULL_NAME": user.displayName.split(' ')[0],
+                "VIDEO_POSTER": 'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2F' + uid + '%2F'+ filename.split('.')[0] + '.jpg?alt=media',
+				"VIDEO_LINK": 'https://dride.io/profile/' + uid + '/' + filename.split('.')[0],
+                "to": [],
+              }
+              template = this.mailer.replaceParams(params, template)
+
+              const sendObj = {
+                to: user.email,
+                from: 'hello@dride.io',
+                subject: 'Your video is now on Dride Cloud',
+                text: htmlToText.fromString(template),
+                html: template,
+              };
+
+              promiseCollector.push(
+                this.mailer.send(sendObj)
+			  );
+
+			  sendObj.to = "yossi@dride.io"
+              promiseCollector.push(
+				this.mailer.send(sendObj)
+              );
+
+              Promise.all(promiseCollector).then(_ => {
+                resolve('{"status": "completed"}');
+                return;
+              })
+
+
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+              reject('{"status": "' + errorObject.code + '"}');
+              return;
+            });
+          }, function (errorObject) {
+            console.log("Error fetching user data: " + errorObject.code);
+            reject('{"status": "' + errorObject.code + '"}');
+            return;
+          });
+
+        },
+        err => {
+          reject('{"status": "' + err + '"}');
+          return;
+        })
+
+
+
 
     })
   });
 
 
+
 exports.logGPS = functions.https.onRequest((req, res) => {
-    console.log('Headers:\n', req.headers);
-    console.log('Body:\n', req.body);
-	console.log('------------------------------');
-	const sendObj = {
-		"template_name": 'video-is-on',
-		"subject": JSON.stringify(req.body),
-		"to": [
-		  {
-			"email": 'yossi@dride.io'
-		  },
-		],
-		"tags": ['video uploaded!'],
-		"global_merge_vars": [{
-			"name": "FULL_NAME",
-			"content": ''
-		  },
-		  {
-			"name": "VIDEO_POSTER",
-			"content": ''
-		  },
-		  {
-			"name": "VIDEO_LINK",
-			"content": 'https://dride.io/profile/'
-		  }
-		]
-	  };
+  console.log('Headers:\n', req.headers);
+  console.log('Body:\n', req.body);
+  console.log('------------------------------');
+  const sendObj = {
+    "template_name": 'video-is-on',
+    "subject": JSON.stringify(req.body),
+    "to": [{
+      "email": 'yossi@dride.io'
+    }, ],
+    "tags": ['video uploaded!'],
+    "global_merge_vars": [{
+        "name": "FULL_NAME",
+        "content": ''
+      },
+      {
+        "name": "VIDEO_POSTER",
+        "content": ''
+      },
+      {
+        "name": "VIDEO_LINK",
+        "content": 'https://dride.io/profile/'
+      }
+    ]
+  };
 
-	 // mailer.send(sendObj)
+  // mailer.send(sendObj)
 
 
-    res.sendStatus(200);
+  res.sendStatus(200);
 })
 
 exports.metaService = functions.https.onRequest((req, res) => {
