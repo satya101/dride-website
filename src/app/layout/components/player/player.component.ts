@@ -41,7 +41,7 @@ export class PlayerComponent implements OnInit {
 		api.getDefaultMedia().subscriptions.playing.subscribe(
 			() => {
 				// increase views counter
-				if (!this.played && video.videoId && video.op) {
+				if (!this.played && video.videoId && (video && video.op)) {
 					this.played = true;
 					this.http.get(environment.functionsURL + '/viewCounter?videoId=' + video.videoId + '&op=' + video.op).subscribe()
 				}

@@ -471,7 +471,7 @@ export class ProfileComponent implements OnInit {
 	normalizeTimeStamp(timestamp, key) {
 
 		if (timestamp) {
-			if (timestamp.length === 10) {
+			if (timestamp.toString().length === 10) {
 				timestamp = timestamp + '000';
 			}
 			timestamp = parseInt(timestamp, 10)

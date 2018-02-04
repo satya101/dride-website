@@ -19,11 +19,11 @@
               <div class="box mainVid">
 				<app-player [currentVideo]="currentVideo" [currentTime]="currentVideo.s" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
               </div>
-              <div class="box">
+              <div class="box" *ngIf="currentVideo">
                 <div class="actionBar innerPad">
                   <div class="views float-left">
                     <label>{{currentVideo.views | number:0}} Views </label> &nbsp;&nbsp;&nbsp;
-                    <label class="hidden-xs-down" (click)="commentFoucs('replyBox'+key)">{{currentVideo.cmntsCount | number:0}} Comments</label>
+                    <label *ngIf="currentVideo.cmntsCount" class="hidden-xs-down" (click)="commentFoucs('replyBox'+key)">{{currentVideo.cmntsCount | number:0}} Comments</label>
                   </div>
                   <ul class="float-right actions">
                     <li (click)="fbShare(currentVideo.op, currentVideo.videoId)"><span class="icon-facebookMedium shareIcon"></span></li>
