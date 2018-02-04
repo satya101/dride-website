@@ -135,7 +135,7 @@ exports.saveNewUserData = functions.auth.user().onCreate(function (event) {
       email: user.email,
       distinct_id: event.data.uid
     });
-    //subscribe to mailchimp
+    //subscribe to list
     subscriber.subscribeUser(user.email, user);
   });
 });
