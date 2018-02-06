@@ -102,8 +102,11 @@ export class SettingsComponent implements OnInit {
 
 	}
 	saveOption(field, value) {
-
 		this.db.object('/devices/' + this.firebaseUser.uid).update({ [field]: value })
+	}
+
+	updateAnonymus(field, value) {
+		this.db.object('/userData/' + this.firebaseUser.uid).update({ [field]: value })
 	}
 
 	updateEmail() {

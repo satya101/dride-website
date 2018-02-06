@@ -115,7 +115,7 @@ exports.saveNewUserData = functions.auth.user().onCreate(function (event) {
   var user = event.data; // The Firebase user.
   var usersRef = admin.database().ref("userData").child(event.data.uid);
   if (!user.displayName)
-    user.displayName = 'Rider' + anonymizer.getRandomArbitrary(1, 500);
+    user.displayName = anonymizer.getRandomName();
   var resObj = {
     'name': user.displayName,
     'photoURL': user.photoURL ? user.photoURL : 'https://storage.googleapis.com/dride-2384f.appspot.com/assets/profilePic/pic' + anonymizer.getRandomArbitrary(1, 5) + '.png'
@@ -340,9 +340,9 @@ exports.metaService = functions.https.onRequest((req, res) => {
 
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
   var userAgent = req.headers['user-agent'];
-  //const botList = 'baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|slackbot|facebot|developers\.google\.com\/\+\/web\/snippet\/'.toLowerCase();
-  //if(userAgent.toLowerCase().search(botList) != -1)  
+  const botList = 'baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|slackbot|facebot|developers\.google\.com\/\+\/web\/snippet\/'.toLowerCase();
   if (
+	userAgent.toLowerCase().search(botList) != -1 ||
     userAgent.indexOf('facebookexternalhit') !== -1 ||
     userAgent.indexOf('WhatsApp') !== -1 ||
     userAgent.indexOf('Facebot') !== -1 ||
