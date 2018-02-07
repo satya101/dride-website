@@ -50,7 +50,7 @@
                                 <div class="desc">
                                     <p><b>License Plate: </b> {{currentVideo.plates}}</p>
                                     <p><b>Description: </b> {{currentVideo.description}}</p>
-                                    <p *ngIf="currentVideo.timestamp" class="dateLabel">{{currentVideo.timestamp | date:'medium'}}</p>
+                                    <p *ngIf="currentVideo.timestamp" class="dateLabel">{{normalizeTimeStamp(currentVideo.timestamp) | date:'medium'}}</p>
                                 </div>
 
                                 <div class="clear"></div>
