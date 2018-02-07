@@ -19,8 +19,12 @@
             <div class="clearfix container">
                 <div class="row">
 
-                	<!-- video player -->
-                    <div class="col-md-8 p-xs-0">
+					<!-- video player -->
+					<div class="col-md-8 p-xs-0 p404" *ngIf="video404">
+							<img src="assets/images/problem.gif" alt="problem" />
+							<h3>This video is unavailable.</h3>
+					</div>
+                    <div class="col-md-8 p-xs-0" *ngIf="!video404">
                     	<div class="box mainVid">
 
 							<app-player	[currentVideo]="currentVideo" [tag]="'Profile'" [currentTime]="currentTime"></app-player>

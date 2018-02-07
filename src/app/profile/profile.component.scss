@@ -34,7 +34,12 @@
         font-size: 16px;
         font-weight: 100;
     }
-
+	.p404 {
+		text-align: center;
+		h3{
+			padding-top: 80px;
+		}
+	}
 	@media (min-width: 600px) {
 		.gradBg {
 			background: linear-gradient(to top, #2b2b2b 0%, transparent 100%);

@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
 	opData: any;
 	public firebaseUser: any;
 	public currentTime: number;
+	public video404 = false;
 
 	constructor(private db: AngularFireDatabase,
 		private route: ActivatedRoute,
@@ -148,10 +149,10 @@ export class ProfileComponent implements OnInit {
 			this.db.object<any>('/clips/' + this.uid + '/' + this.videoId).valueChanges().subscribe(currentVideoSanp => {
 				const data = currentVideoSanp;
 
-				// if (!data || !data.dateUploaded) {
-				// 	this.router.navigate(['/profile/' + this.uid]);
-				// 	return;
-				// }
+				if (!data || !data.dateUploaded) {
+					this.video404 = true;
+					return;
+				}
 
 				this.currentVideo = data
 				this.currentVideo['op'] = this.uid
