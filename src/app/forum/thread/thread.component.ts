@@ -12,6 +12,7 @@ import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 
 import { MetaService } from '../../helpers/meta/meta.service'
 import { Observable } from 'rxjs/Observable';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private auth: AuthService,
 		public mixpanel: MixpanelService,
+		private notificationsService: NotificationsService,
 		private meta: MetaService) {
 
 		auth.getState().subscribe(user => {
@@ -114,7 +116,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		this.auth.verifyLoggedIn().then(res => {
 			this.getUserData(this.firebaseUser.uid).subscribe(
 				(userData: any) => {
-					console.log(userData)
+					if (this.replyBox) {
 					this.db.list('conversations/' + this.threadId).push({
 						'autherId': this.firebaseUser.uid,
 						'auther': this.firebaseUser.displayName,
@@ -126,6 +128,14 @@ export class ThreadComponent implements OnInit, OnDestroy {
 
 					this.replyBox = '';
 					this.mixpanel.track('posted a comment', {});
+				}else {
+					this.notificationsService.success('Oops..', 'Please write something to post..', {
+						timeOut: 3000,
+						showProgressBar: true,
+						pauseOnHover: true,
+						clickToClose: true
+					});
+				}
 
 				})
 		})
