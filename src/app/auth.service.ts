@@ -143,15 +143,15 @@ export class NgbdModalLogin {
 			// TODO: //pushNotification.getPushToken(res.uid)
 
 			this.db.object('/userData/' + user.uid).valueChanges().subscribe(data => {
-				if (data.showedAnonymous === true) {
+				if (data && data.showedAnonymous === true) {
 					this.closeModal();
 				} else {
 
-					// first time logged in
-					this.mixpanel.createMixpanelProfile(user)
-
 					this.onWelcome = true;
 					firebase.database().ref('userData').child(user.uid).update({ showedAnonymous: true });
+
+					// first time logged in
+					this.mixpanel.createMixpanelProfile(user)
 				}
 
 			});
