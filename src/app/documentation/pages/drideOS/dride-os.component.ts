@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MetaService } from '../../../helpers/meta/meta.service'
+import { MetaService } from '../../../helpers/meta/meta.service';
 
 @Component({
 	selector: 'app-dride-os',
 	templateUrl: './dride-os.component.html',
-	styleUrls: ['../../documentation.component.scss'],
+	styleUrls: ['../../documentation.component.scss']
 })
 export class DrideOSComponent implements OnInit {
-public body = `
+	public body = `
 
 drideOS
 =======
@@ -55,11 +55,15 @@ Daemons
 Cron Jobs
 ====
 
+	$> sudo crontab -l
+
 Clean up diskspace removing oldest videos (Every minute):
 
-	$> sudo crontab -l
 	* * * * * node /home/Cardigan/modules/video/helpers/cleaner.js
 
+Encode un-encoded videos, will pause when app is connected (Every minute):
+
+	* * * * * node /home/Cardigan/modules/video/helpers/ensureAllClipsAreDecoded.js
 
 
 Startup Sequence
@@ -72,9 +76,8 @@ dride-core
 ----------
 
 1. Welcome LED
-2. Decode clips that weren't decoded yet
-3. Start recording
-4. Start BLE daemon
+2. Start recording
+3. Start BLE daemon
 
 dride-ws
 ----------
@@ -85,7 +88,7 @@ dride-ws
 Monitoring/Performance
 ======================
 
-$> htop
+    $> htop
 
 <br>
 <br>
@@ -97,14 +100,9 @@ $> htop
 *Watchdogs are a future enhancement*
 `;
 
-	constructor(private meta: MetaService) {
-	}
+	constructor(private meta: MetaService) {}
 
 	ngOnInit() {
-		this.meta.set(
-			'drideOS',
-			'Open source dashcam OS'
-		)
+		this.meta.set('drideOS', 'Open source dashcam OS');
 	}
-
 }

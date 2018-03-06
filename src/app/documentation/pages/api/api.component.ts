@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 	styles: []
 })
 export class ApiComponent implements OnInit {
-
 	public body = `
 API
 ===
@@ -69,10 +68,8 @@ And output:
 
 	{"serial":"00000000445acdb3"}
 
-`
-	constructor() { }
+`;
+	constructor() {}
 
-	ngOnInit() {
-	}
-
+	ngOnInit() {}
 }
