@@ -25,7 +25,7 @@ Routes
 |---------------------------|------|------|---------------------------|
 | **/api/getClips**         |  | GET  | A list of all video clips |
 | **/api/getSettings**      |  | GET  | A list of device settings |
-| **/api/setSettings**      | CategoryName, fieldName, fieldValue | GET  | Update device setting |
+| **/api/setSettings**      | fieldName, fieldValue | GET  | Update device setting [Info](#settings) |
 | **/api/deleteClip**       | videoId  | GET  | Delete a video by videoId |
 | **/api/deleteAllClips**   |  | GET  | Delete all video clips on deivce |
 | **/api/updateFirmware**   |  | GET  | Update device firmawre to the latest version |
@@ -34,6 +34,21 @@ Routes
 | **/api/indicator**        | action: ["isWaiting", "isDownloading", "isPaired", "needToPair", "needToLogin", "uploadSuccessfully", "done"]  | GET  | Control LED indicator on device |
 
 
+Settings
+======
+| Param                    | Type    | Description   |
+|--------------------------|---------|---------------|
+| videoRecord              | Boolean | Turn video recording on/off |
+| flipVideo                | Boolean | Rotate video 180-degree |
+| gps                      | Boolean | Turn GPS on/off|
+| speaker                  | Boolean | Turn speaker on/off|
+| mic                      | Boolean | Turn mic on/off |
+| indicator                | Boolean | Turn indicator LED on/off |
+| resolution               | '1080p' or '720p'  | Set device resolution |
+| clipLength              | int | Set cycle length in minutes |
+| gSensorSensitivity       | 'off' or 'low' or 'medium' or 'high' | Set GSensor Sensitivity|
+| netwrokSSID              | String | Wifi netrowrk SSID |
+| netwrokPassword          | String | Wifi netrowrk password |
 
 
 Static Routes

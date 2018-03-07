@@ -19,7 +19,6 @@
 			overflow-wrap: break-word;
         }
 	}
-
     .replyBox {
         margin-top: 5px;
         padding: 10px;
@@ -55,6 +54,7 @@
         padding: 23px;
         font-weight: 100;
 		.bdy{
+			font-family: 'Raleway', sans-serif;
 			a {
 				color: #337ab7 !important;
 			}
@@ -112,7 +112,9 @@
             width: 50px;
             height: 50px;
             border-radius: 2px;
-            margin-top: -73px;
+			margin-top: -73px;
+			border: 1px solid rgba(0,0,0,.09);
+			box-shadow: 0 1px 4px 0 rgba(0,0,0,.04);
         }
         label {
             position: relative;

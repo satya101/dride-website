@@ -56,4 +56,18 @@ export class ForumComponent implements OnInit {
 	ask() {
 		this.modalService.show(NgbdModalAskInForum);
 	}
+
+	getColor(type: string) {
+		if (type.toLocaleLowerCase() === 'garmin') {
+			return 'badge-info';
+		}
+		if (type.toLocaleLowerCase() === 'yi') {
+			return 'badge-danger';
+		}
+		if (type.toLocaleLowerCase() === 'drideos') {
+			return 'badge-dark';
+		}
+
+		return 'badge-secondary'
+	}
 }

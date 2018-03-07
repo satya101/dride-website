@@ -38,7 +38,6 @@ mailer = {
 
     threadRef.once("value", function (threadSnap) {
       var thread = threadSnap.val()
-		console.log('xx', conv)
       var template = fs.readFileSync('./mailer/templates/updateUser.mail', "utf8");
       params = {
         "TOPIC_URL": "https://dride.io/thread/" + topicId,
@@ -56,11 +55,12 @@ mailer = {
       template = mailer.replaceParams(params, template)
 
       const sendObj = {
-        to: ["saoron@gmail.com"],
+        to: [],
         from: 'hello@dride.io',
         subject: thread.title,
         text: htmlToText.fromString(template),
         html: template,
+        sendMultiple: true
       };
 
 
@@ -78,12 +78,13 @@ mailer = {
         var res = [];
         for (var opUID in t_SendTo) {
           //exclude self
-          if (opUID != conv.autherId)
-            sendObj.to.push(t_SendTo[opUID].email)
-        }
+          if (opUID != conv.autherId) {
+            if (sendObj.subject) {
+              sendObj.to = (t_SendTo[opUID].email)
+              mailer.send(sendObj);
+            }
+          }
 
-        if (sendObj.subject) {
-          mailer.send(sendObj);
         }
 
       }, function (errorObject) {
@@ -99,16 +100,16 @@ mailer = {
   send: function (sendObj) {
 
     sgMail.send(sendObj).then(
-		done => console.log('done'),
-		err => console.log('err', err)
-	);
+      done => console.log('done'),
+      err => console.log('err', err)
+    );
 
   },
   replaceParams: function (params, template) {
 
-	Object.keys(params).forEach(function(key) {
-		template = template.replace(new RegExp('\\*\\|'+key+'\\|\\*', 'g'), params[key])
-	});
+    Object.keys(params).forEach(function (key) {
+      template = template.replace(new RegExp('\\*\\|' + key + '\\|\\*', 'g'), params[key])
+    });
 
     return template;
 

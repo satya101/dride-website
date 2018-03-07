@@ -25,18 +25,17 @@
                         <span class="cmntCount">{{post.cmntsCount}}</span>
                         <span>Comments</span>
                     </div>
-                    <div class="col-md-8 col-sm-12 padS40 partRow2">
+                    <div class="col-md-10 col-sm-12 padS40 partRow2">
                         <h2>
-							{{post.title}}
+							{{post.title | truncate : 60 : "…"}}
+							<span *ngFor="let label of post.labels" class="badge" [ngClass]="getColor(label)">
+								{{label}}
+							</span>
 							<span class="ago hidden-xs-down">{{post.lastUpdate | timeAgo}}</span>
 						</h2>
                         <p class="promoDesc" >
                             {{post.description | truncate : 150 : "…" }}
                         </p>
-                    </div>
-                    <div class="col-md-2 hidden-sm-down readMore partRow3" >
-                        <span class="icon-moreArrow"></span>
-                        <span class="readMore">Read More</span>
                     </div>
                 </a>
                 <div *ngIf="!threads || !threads.length" class="loadersLines mx-auto" >

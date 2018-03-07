@@ -166,6 +166,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	// facebook profile pic expires after a period of time, We can save the pic as un-expired only for FB,
 	// This should be refactored evantually..
 	getProfilePic(node) {
+		console.log(node)
 		if (node.fid) {
 			return 'https://graph.facebook.com/' + node.fid + '/picture';
 		} else {

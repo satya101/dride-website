@@ -13,7 +13,7 @@
 			    <div *ngFor="let node of conversation | async; index as key"  class="animBox" >
 			        <div class="bubble">
 			            <div class="auther float-left pl">
-			                <img src="{{getProfilePic(node)}}" alt="{{node.auther}}" />
+			                <img src="{{getProfilePic(node)}}" alt="{{node.auther}}" onError=""/>
 			            </div>
 			            <a class="bold" routerLink="/profile/{{node.autherId}}">@{{node.auther}}</a>
 			            <div class="bdy" markdown [data]="node.body | wrapIframe" ></div>

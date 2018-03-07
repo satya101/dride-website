@@ -469,7 +469,7 @@ export class ProfileComponent implements OnInit {
 			})
 	}
 
-	normalizeTimeStamp(timestamp, key) {
+	normalizeTimeStamp(timestamp, key = null) {
 
 		if (timestamp) {
 			if (timestamp.toString().length === 10) {
@@ -480,7 +480,7 @@ export class ProfileComponent implements OnInit {
 		if (!isNaN(timestamp) && new Date(timestamp).getTime() > 0) {
 			return timestamp
 		}else {
-			return this.yi_getTimeStamp(key);
+			return key ? this.yi_getTimeStamp(key) : timestamp;
 		}
 
 
