@@ -6,28 +6,28 @@
       <div class="menu circle-container icon-bigD dpAnim" [ngClass]="'dbg' + currentElementInView">
 
         <span pageScroll href="#view7" class="iW dot6" on-mouseover="show[7] = true" on-mouseleave="show[7] = false">
-            <span class="icon-docs node pull-right"></span>
-        	<label class="labelNear" [hidden]="displayCard!=7 && !show[7]">SDK</label>
+          <span class="icon-docs node pull-right"></span>
+          <label class="labelNear" [hidden]="displayCard!=7 && !show[7]">SDK</label>
         </span>
         <span pageScroll href="#view6" class="iW dot4" on-mouseover="show[6] = true" on-mouseleave="show[6] = false">
-            <span class="icon-fleet node pull-right"></span>
-        	<label class="labelNear" [hidden]="displayCard!=6 && !show[6]">Fleet</label>
+          <span class="icon-fleet node pull-right"></span>
+          <label class="labelNear" [hidden]="displayCard!=6 && !show[6]">Fleet</label>
         </span>
         <span pageScroll href="#view5" class="iW dot3" on-mouseover="show[5] = true" on-mouseleave="show[5] = false">
-            <span class="icon-forum node pull-right"></span>
-        	<label class="labelNear" [hidden]="displayCard!=5 && !show[5]">Forum</label>
+          <span class="icon-forum node pull-right"></span>
+          <label class="labelNear" [hidden]="displayCard!=5 && !show[5]">Forum</label>
         </span>
-		<span pageScroll href="#view9" class="iW dot5" on-mouseover="show[4] = true" on-mouseleave="show[4] = false">
-            <span class="icon-app node pull-right " ></span>
-        	<label class="labelNear" [hidden]="displayCard!=4 && !show[4]">App</label>
+        <span pageScroll href="#view9" class="iW dot5" on-mouseover="show[4] = true" on-mouseleave="show[4] = false">
+          <span class="icon-app node pull-right "></span>
+          <label class="labelNear" [hidden]="displayCard!=4 && !show[4]">App</label>
         </span>
         <span pageScroll href="#view4" class="iW dot1" on-mouseover="show[3] = true" on-mouseleave="show[3] = false">
-            <span class="icon-cloud node pull-right"></span>
-        	<label class="labelNear" [hidden]="displayCard!=2 && !show[3]">Cloud</label>
+          <span class="icon-cloud node pull-right"></span>
+          <label class="labelNear" [hidden]="displayCard!=2 && !show[3]">Cloud</label>
         </span>
         <span pageScroll href="#view1" class="iW dot1" on-mouseover="show[1] = true" on-mouseleave="show[1] = false">
-            <span class="node pull-right icon-dride" ></span>
-        	<label class="labelNear" [hidden]="displayCard!=2 && !show[1]">Dride</label>
+          <span class="node pull-right icon-dride"></span>
+          <label class="labelNear" [hidden]="displayCard!=2 && !show[1]">Dride</label>
         </span>
         <div class="innerLogo" pageScroll href="#view1">dride</div>
       </div>
@@ -41,11 +41,11 @@
     <div id="view1" in-viewport (inViewport)="action($event.value, 1)" class="section1">
       <div class="container-fluid text-center">
         <div class="col-xs-12 content text-center" [@introAnim]>
-		  <div class="logo">
-			  <h1>Dride</h1>
-			  <span>zero</span>
-		  </div>
-          <h2 class="productSubTtl">World's Smallest Connected dashcam.</h2>
+          <div class="logo">
+            <h1>Dride</h1>
+            <span>zero</span>
+          </div>
+          <h2 class="productSubTtl">The Dashcam with a Share Button</h2>
 
           <a class="btn btn-dride btn-dride-white preOrderBtn mx-auto" routerLink="/store">Buy Now</a>
           <a class="btn btn-dride btn-dride-white learnMoreBtn mx-auto" routerLink="/features">Learn More</a>
@@ -82,10 +82,12 @@
 
     <!--<div class="spacerImg"></div>-->
 
-    <div id="view4"  class="container-fluid text-center section4 p-0">
+    <div id="view4" class="container-fluid text-center section4 p-0">
 
       <div class="col-xs-12 content text-center h">
-        <h1 class="logo" in-viewport (inViewport)="action($event.value, 3)">dride<span>Cloud</span></h1>
+        <h1 class="logo" in-viewport (inViewport)="action($event.value, 3)">dride
+          <span>Cloud</span>
+        </h1>
       </div>
       <div class="roundWrap">
         <div class="roundedBottom"></div>
@@ -103,7 +105,9 @@
     <div id="view9" class="container-fluid text-center section9">
 
       <div class="appHead text-center">
-        <h1 class="logo">dride<span>App</span></h1>
+        <h1 class="logo">dride
+          <span>App</span>
+        </h1>
         <h2 class="productSubTtl">Control your Dride with an app.</h2>
       </div>
 
@@ -111,11 +115,11 @@
 
       <div class="getDrideApp text-center" in-viewport (inViewport)="action($event.value, 4)">
         <a href="https://itunes.apple.com/us/app/dride/id1185398002?ls=1&mt=8" target="_BLANK">
-					<img src="../../assets/images/ios.png" alt="app store" />
-				</a>
+          <img src="../../assets/images/ios.png" alt="app store" />
+        </a>
         <a href="https://play.google.com/store/apps/details?id=io.dride" target="_BLANK">
-					<img src="../../assets/images/android.png" alt="google play" />
-				</a>
+          <img src="../../assets/images/android.png" alt="google play" />
+        </a>
       </div>
 
 
@@ -123,7 +127,7 @@
     </div>
 
 
-    <div id="view5"class="container-fluid text-center section5 p-0">
+    <div id="view5" class="container-fluid text-center section5 p-0">
 
       <div class="col-xs-12 content text-center">
         <h1 class="logo">Join The Discussion</h1>
@@ -132,7 +136,7 @@
       <div class="roundWrap">
         <div class="roundedBottom"></div>
       </div>
-	  <div class="spacer" ></div>
+      <div class="spacer"></div>
       <app-forum [isFull]="false"></app-forum>
 
       <button in-viewport (inViewport)="action($event.value, 5)" routerLink="/forum" type="button" class="btn btn-orange mt-3 mb-5 pl-0 pr-0">Go to Forum</button>
@@ -146,7 +150,9 @@
     <div id="view6" class="container-fluid text-center section6 p-0">
 
       <div class="col-xs-12 content text-center">
-        <h2 class="logo">dride<span>Fleet</span></h2>
+        <h2 class="logo">dride
+          <span>Fleet</span>
+        </h2>
         <h3 class="slogen mx-auto">Dont guess how people drive your cars.</h3>
         <div class="spcaer"></div>
         <div class="actions">
@@ -171,11 +177,15 @@
 
       <div class="row whiteBg m-0 pt-5 pb-5" in-viewport (inViewport)="action($event.value, 7)">
         <a routerLink="/documentation/getting_started" class="r col-md-6 col-xs-12 gettingStarted text-left">
-          <h3 class="">Getting started <span class="float-right icon-toyCar-1"></span></h3>
+          <h3 class="">Getting started
+            <span class="float-right icon-toyCar-1"></span>
+          </h3>
           <p class="pt-3">Learn more about how to build a Dride today. We'll cover the basics and get you started from the ground up.</p>
         </a>
         <a routerLink="/documentation" class="r col-md-6 col-xs-12 text-left">
-          <h3 class="">Explore the docs <span class="float-right icon-toyCar-1"></span> </h3>
+          <h3 class="">Explore the docs
+            <span class="float-right icon-toyCar-1"></span>
+          </h3>
           <p class="pt-3">Build your own Dride apps! the documentation covers all you need to know to get an app up and running.</p>
         </a>
       </div>
@@ -198,8 +208,8 @@
               <div class="input-group">
                 <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email">
                 <span class="input-group-btn">
-                        <button class="btn btn-default cFont" type="button" (click)="sendDetails(email)">Send</button>
-                      </span>
+                  <button class="btn btn-default cFont" type="button" (click)="sendDetails(email)">Send</button>
+                </span>
               </div>
               <!-- /input-group -->
             </div>

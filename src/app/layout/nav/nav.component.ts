@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../auth.service';
-import { SsrService } from '../../helpers/ssr/ssr.service'
+import { SsrService } from '../../helpers/ssr/ssr.service';
 
 import { introAnim } from '../../router.animations';
 import { NotificationsService } from 'angular2-notifications';
@@ -15,33 +15,33 @@ import { CookieService } from 'ngx-cookie-service';
 	selector: 'app-nav',
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.scss'],
-	animations: [ introAnim ]
-
+	animations: [introAnim]
 })
 export class NavComponent implements OnInit {
-
 	firebaseUser: any;
 	isCollapsed = true;
 	isFixed = false;
 	path = '';
 	showOverlay = false;
+	public forumBadge = 0;
 
-	constructor(private auth: AuthService,
+	constructor(
+		private auth: AuthService,
 		private renderer: Renderer,
 		public location: Location,
 		public router: Router,
 		private modalService: BsModalService,
 		public ssr: SsrService,
 		private cookieService: CookieService,
-		private notificationsService: NotificationsService) {
-
+		private notificationsService: NotificationsService
+	) {
 		if (this.ssr.isBrowser()) {
-			router.events.subscribe((val) => {
+			router.events.subscribe(val => {
 				this.path = location.path();
 				if (this.path !== '') {
 					this.isFixed = false;
 				} else {
-					this.isFixed = true
+					this.isFixed = true;
 				}
 			});
 		}
@@ -52,7 +52,6 @@ export class NavComponent implements OnInit {
 				return;
 			}
 			this.firebaseUser = user;
-
 		});
 	}
 
@@ -71,9 +70,7 @@ export class NavComponent implements OnInit {
 			clickToClose: true
 		});
 	}
-	ngOnInit() {
-
-	}
+	ngOnInit() {}
 
 	askToSubscribe() {
 		if (!this.cookieService.get('subscribed')) {
@@ -84,9 +81,8 @@ export class NavComponent implements OnInit {
 	getProfilePic() {
 		if (this.firebaseUser.fid) {
 			return 'https://graph.facebook.com/' + this.firebaseUser.fid + '/picture';
-		}else {
+		} else {
 			return this.firebaseUser.photoURL;
 		}
 	}
-
 }

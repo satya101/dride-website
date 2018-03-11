@@ -13,11 +13,11 @@
             <h2 class="bVideosT">Best Videos Today</h2>
           </div>
           <div *ngIf="hpClips.items" class="phpt row">
-            <div class="whiteBg p-0 animBox mx-auto" *ngFor="let currentVideo of hpClips.items;  index as key"
-				 [ngClass]="{'col-md-offset-2 col-md-8': isFull, 'halfPageCloud': !isFull}" [@introAnim]>
+            <div class="whiteBg p-0 animBox mx-auto" *ngFor="let currentVideo of hpClips.items;  index as key" [ngClass]="{'col-md-offset-2 col-md-8': isFull, 'halfPageCloud': !isFull}"
+              [@introAnim]>
               <span *ngIf="isFull" class="icon-toyCar-1 float-right"></span>
               <div class="box mainVid">
-				<app-player [currentVideo]="currentVideo" [currentTime]="currentVideo.s" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
+                <app-player [currentVideo]="currentVideo" [currentTime]="currentVideo.s" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
               </div>
               <div class="box" *ngIf="currentVideo">
                 <div class="actionBar innerPad">
@@ -26,9 +26,15 @@
                     <label *ngIf="currentVideo.cmntsCount" class="hidden-xs-down" (click)="commentFoucs('replyBox'+key)">{{currentVideo.cmntsCount | number:0}} Comments</label>
                   </div>
                   <ul class="float-right actions">
-                    <li (click)="fbShare(currentVideo.op, currentVideo.videoId)"><span class="icon-facebookMedium shareIcon"></span></li>
-                    <li (click)="twShare(currentVideo.op, currentVideo.videoId)"><span class="icon-twitterMedium shareIcon"></span></li>
-                    <li *ngIf="isOwner(currentVideo.op)" (click)="removeClip(currentVideo.op, currentVideo.videoId, key)"><span class="icon-trash-can"></span></li>
+                    <li (click)="fbShare(currentVideo.op, currentVideo.videoId)">
+                      <span class="icon-facebookMedium shareIcon"></span>
+                    </li>
+                    <li (click)="twShare(currentVideo.op, currentVideo.videoId)">
+                      <span class="icon-twitterMedium shareIcon"></span>
+                    </li>
+                    <li *ngIf="isOwner(currentVideo.op)" (click)="removeClip(currentVideo.op, currentVideo.videoId, key)">
+                      <span class="icon-trash-can"></span>
+                    </li>
                   </ul>
                   <div class="clear"></div>
                 </div>
@@ -56,8 +62,8 @@
                 </div>
                 <div class="postBox">
                   <div class="wrapReplyBox mt-0">
-                    <textarea autosize id="replyBox{{key}}" ctrl-enter="sendComment(currentVideo.op, currentVideo.videoId, replyBox[key], key)" class="form-control replyBox mt-0"
-                      [(ngModel)]="replyBox[key]" type="text" name="reply" placeholder="What's on your mind?"></textarea>
+                    <textarea autosize [fixPadding]="8" id="replyBox{{key}}" ctrl-enter="sendComment(currentVideo.op, currentVideo.videoId, replyBox[key], key)"
+                      class="form-control replyBox mt-0" [(ngModel)]="replyBox[key]" type="text" name="reply" placeholder="What's on your mind?"></textarea>
                     <button class="btn btn-dride-black sendBtn float-right" (click)="sendComment(currentVideo.op,currentVideo.videoId, replyBox[key], key)">Send</button>
                   </div>
                 </div>

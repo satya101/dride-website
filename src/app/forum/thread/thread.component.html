@@ -1,42 +1,50 @@
 <div class="container-fluid thread">
-	<div class="container">
-		
-
-		<div class="clear spacer25"></div>
-
-		<div class="col-md-12">
-			
-			<h1 class="text-center">{{(currentThread | async)?.title}}</h1>
-
-			<div class="chatBox" *ngIf="(currentThread | async)" [@introAnim]>
-
-			    <div *ngFor="let node of conversation | async; index as key"  class="animBox" >
-			        <div class="bubble">
-			            <div class="auther float-left pl">
-			                <img src="{{getProfilePic(node)}}" alt="{{node.auther}}" onError=""/>
-			            </div>
-			            <a class="bold" routerLink="/profile/{{node.autherId}}">@{{node.auther}}</a>
-			            <div class="bdy" markdown [data]="node.body | wrapIframe" ></div>
-			            <div class="ago">{{node.timestamp | timeAgo}}</div>
-			        </div>
-			        <div class="connectorLine" *ngIf="conversationPreviusIsMine[key]"></div>
-			    </div>
-
-			</div>
-
-			<div class="wrapReplyBox" *ngIf="(currentThread | async)"[@introAnim] >
-				<span class="bold">@{{firebaseUser ? firebaseUser.displayName : ''}}</span>
-				<textarea autosize (keydown.control.Enter)="send()" class="form-control replyBox" [(ngModel)]="replyBox" type="text" name="reply" placeholder="What's on your mind?"></textarea>
-				<button class="btn btn-dride-black sendBtn float-right" (click)="send()">Send</button>
-				<label class="hint">Use ctrl+Enter to post | markdown enabled</label>
-			</div>
+  <div class="container">
 
 
-		</div>
+    <div class="clear spacer25"></div>
+
+    <div class="col-md-12">
+
+      <h1 class="text-center">{{(currentThread | async)?.title}}</h1>
+
+      <div class="chatBox" *ngIf="(currentThread | async)" [@introAnim]>
+
+        <div *ngFor="let node of conversation | async; index as key" class="animBox">
+          <div class="bubble">
+            <div class="auther float-left pl">
+              <img src="{{node | profilePicConvertor}}" alt="{{node.auther}}" onError="" />
+            </div>
+            <a class="bold" routerLink="/profile/{{node.autherId}}">@{{node.auther}}</a>
+            <div class="bdy" markdown [data]="node.body | wrapIframe"></div>
+            <div class="ago">{{node.timestamp | timeAgo}}</div>
+          </div>
+          <div class="connectorLine" *ngIf="conversationPreviusIsMine[key]"></div>
+        </div>
+
+      </div>
+
+      <div *ngIf="uploadPercent" [style.width.%]="uploadPercent" class="uploadProgress"></div>
+      <div class="wrapReplyBox" *ngIf="(currentThread | async)" [@introAnim]>
+        <label for="picUpload" class="icon-camera-full">
+          <input id="picUpload" (change)="uploadFile($event)" type='file' accept="image/*" />
+        </label>
+        <span class="bold">@{{firebaseUser ? firebaseUser.displayName : ''}}</span>
+        <textarea autosize [fixPadding]="0" (keydown.control.Enter)="send()" class="form-control replyBox" [(ngModel)]="replyBox"
+          type="text" name="reply" placeholder="What's on your mind?"></textarea>
+        <button class="btn btn-dride-black sendBtn float-right" (click)="send()">Send</button>
+        <label class="hint">Use ctrl+Enter to post | markdown enabled</label>
 
 
 
-	</div>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
 
 
 </div>

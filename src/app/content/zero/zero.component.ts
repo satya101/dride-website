@@ -53,7 +53,7 @@ export class ZeroComponent implements OnInit {
 	ngOnInit() {
 		this.meta.set(
 			'Features',
-			'Dride is the worlds smallest connected dashcam.'
+			'Dride is the worlds smallest connected dashcam with a Share Button.'
 		)
 	}
 

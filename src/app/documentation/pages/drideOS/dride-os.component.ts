@@ -34,7 +34,7 @@ drideOS Architecture
 
 Raspbian has been customized for specific use and named **drideOS**.
 The system architecture involves specific kernel modules, daemons,
-RESTful API' and watchdogs*' to ensure an always available system with
+RESTful API' and watchdogs' to ensure an always available system with
 access from a remote device.
 
 
@@ -91,13 +91,7 @@ Monitoring/Performance
     $> htop
 
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-*Watchdogs are a future enhancement*
+
 `;
 
 	constructor(private meta: MetaService) {}

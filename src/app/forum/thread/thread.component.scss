@@ -1,59 +1,59 @@
 .thread {
-    background-color: #f9f9f9;
-    padding-top: 16px;
+	background-color: #f9f9f9;
+	padding-top: 16px;
 	min-height: 100vh;
 	padding-bottom: 110px;
-	h1{
-        font-size: 36px;
-        padding-top: 5px;
-    }
-    .container{
-        min-height: 100vh;
-        height: 100%;
-    }
-    .chatBox {
-        margin-top: 15px;
-        padding: 10px;
-        .bdy{
+	h1 {
+		font-size: 36px;
+		padding-top: 5px;
+	}
+	.container {
+		min-height: 100vh;
+		height: 100%;
+	}
+	.chatBox {
+		margin-top: 15px;
+		padding: 10px;
+		.bdy {
 			padding-left: 9px;
 			overflow-wrap: break-word;
-        }
+		}
 	}
-    .replyBox {
-        margin-top: 5px;
-        padding: 10px;
-        background: #fff;
-        border-radius: 3px;
-        border: 1px solid rgba(0, 0, 0, .09);
-        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .04);
-        font-size: 14px;
-        font-family: Comfortaa;
-    }
-    .ago {
-        float: right;
-        margin-top: 27px;
-        position: relative;
-        left: -25px;
-        color: #d4d4d4;
-        transition: all 0.5s ease;
-    }
-    h1{
-        text-transform: inherit;
-    }
-    .bubble:hover .ago {
-        color: #999;
-    }
-    .bubble {
-        border: 1px solid rgba(0, 0, 0, .09);
-        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .04);
-        background-color: #fff;
-        margin: auto;
-        margin-bottom: 50px;
-        margin-top: 25px;
-        border-radius: 2px;
-        padding: 23px;
-        font-weight: 100;
-		.bdy{
+	.replyBox {
+		margin-top: 5px;
+		padding: 10px;
+		background: #fff;
+		border-radius: 3px;
+		border: 1px solid rgba(0, 0, 0, 0.09);
+		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+		font-size: 14px;
+		font-family: Comfortaa;
+	}
+	.ago {
+		float: right;
+		margin-top: 27px;
+		position: relative;
+		left: -25px;
+		color: #d4d4d4;
+		transition: all 0.5s ease;
+	}
+	h1 {
+		text-transform: inherit;
+	}
+	.bubble:hover .ago {
+		color: #999;
+	}
+	.bubble {
+		border: 1px solid rgba(0, 0, 0, 0.09);
+		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+		background-color: #fff;
+		margin: auto;
+		margin-bottom: 50px;
+		margin-top: 25px;
+		border-radius: 2px;
+		padding: 23px;
+		font-weight: 100;
+		.bdy {
 			font-family: 'Raleway', sans-serif;
 			a {
 				color: #337ab7 !important;
@@ -62,17 +62,17 @@
 				font-weight: 400;
 				font-size: 16px;
 				overflow-wrap: break-word;
-				img{
+				img {
 					margin: auto auto;
 					display: block;
 					padding: 30px;
 					max-width: 50%;
 				}
-				a{
+				a {
 					word-wrap: break-word;
 				}
 			}
-			code{
+			code {
 				background-color: #fbfbfb;
 				padding: 5px;
 				border-radius: 2px;
@@ -80,7 +80,7 @@
 				display: block;
 			}
 
-			iframe::before{
+			iframe::before {
 				content: ' ';
 				float: none;
 				clear: both;
@@ -90,7 +90,7 @@
 				padding-top: 25px;
 				height: 0;
 			}
-			iframe{
+			iframe {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -98,90 +98,105 @@
 				height: 100%;
 			}
 		}
-    }
+	}
 
-
-    .pl {
-        margin-left: -59px;
-        margin-right: 18px;
-    }
-    .auther {
-        height: 48px;
-        margin-top: 45px;
-        img {
-            width: 50px;
-            height: 50px;
-            border-radius: 2px;
+	.pl {
+		margin-left: -59px;
+		margin-right: 18px;
+	}
+	.auther {
+		height: 48px;
+		margin-top: 45px;
+		img {
+			width: 50px;
+			height: 50px;
+			border-radius: 2px;
 			margin-top: -73px;
-			border: 1px solid rgba(0,0,0,.09);
-			box-shadow: 0 1px 4px 0 rgba(0,0,0,.04);
-        }
-        label {
-            position: relative;
-            top: -43px;
-            left: 10px;
-            color: #848484;
-            font-weight: 100;
-        }
-    }
-    .replyInput {
-        input {
-            height: 40px;
-        }
-    }
-    .connectorLine {
-        border: 1px dashed #b7b7b7;
-        width: 1px;
-        height: 33px;
-        margin-top: -49px;
-        margin-bottom: -26px;
-        margin-left: 51px;
-    }
-    .wrapReplyBox {
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 2px;
-        textarea {
-            box-shadow: initial;
-            padding: 0;
-            border: 0;
-            resize: none;
-        }
-    }
-    .sendBtn {
-        border-radius: 0;
+			border: 1px solid rgba(0, 0, 0, 0.09);
+			box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+		}
+		label {
+			position: relative;
+			top: -43px;
+			left: 10px;
+			color: #848484;
+			font-weight: 100;
+		}
+	}
+	.replyInput {
+		input {
+			height: 40px;
+		}
+	}
+	.connectorLine {
+		border: 1px dashed #b7b7b7;
+		width: 1px;
+		height: 33px;
+		margin-top: -49px;
+		margin-bottom: -26px;
+		margin-left: 51px;
+	}
+	.uploadProgress {
+		height: 2px;
+		background-color: #333;
+		transition: width 1s ease-in-out;
+	}
+	.wrapReplyBox {
+		background-color: #fff;
+		padding: 10px;
+		border-radius: 2px;
+		textarea {
+			box-shadow: initial;
+			padding: 0;
+			border: 0;
+			resize: none;
+		}
+		.icon-camera-full {
+			float: right;
+			font-size: 29px;
+			margin-top: -12px;
+			margin-right: -9px;
+			cursor: pointer;
+			color: #444;
+			input {
+				display: none;
+			}
+		}
+	}
+	.sendBtn {
+		border-radius: 0;
 		margin-right: -10px;
 		margin-top: 2px;
-        font-size: 19px;
-        font-weight: 100;
-        padding: 5px 25px 5px 25px;
-        border-bottom-right-radius: 2px;
-        background-color: #333;
+		font-size: 19px;
+		font-weight: 100;
+		padding: 5px 25px 5px 25px;
+		border-bottom-right-radius: 2px;
+		background-color: #333;
 		color: #fff;
-    }
-    .hint {
-        color: #a5a5a5;
-        font-weight: 100;
-        position: relative;
-        top: 43px;
-        left: -9px;
-        font-size: 14px;
-    }
-    .auther {
-        height: 48px;
-        margin-top: 45px;
-        img {
-            width: 50px;
-            height: 50px;
-            border-radius: 2px;
-            margin-top: -73px;
-        }
-        label {
-            position: relative;
-            top: -43px;
-            left: 10px;
-            color: #848484;
-            font-weight: 100;
-        }
-    }
+	}
+	.hint {
+		color: #a5a5a5;
+		font-weight: 100;
+		position: relative;
+		top: 43px;
+		left: -9px;
+		font-size: 14px;
+	}
+	.auther {
+		height: 48px;
+		margin-top: 45px;
+		img {
+			width: 50px;
+			height: 50px;
+			border-radius: 2px;
+			margin-top: -73px;
+		}
+		label {
+			position: relative;
+			top: -43px;
+			left: 10px;
+			color: #848484;
+			font-weight: 100;
+		}
+	}
 }

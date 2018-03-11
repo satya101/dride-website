@@ -1,62 +1,71 @@
 <div class="darkOverlay" *ngIf="showOverlay"></div>
-<nav class="navbar navbar-expand-lg navbar-light pt-0" [ngClass]="{'fixed-top fl': isFixed}" >
-	<a class="navbar-brand" routerLink="/">dride</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-light pt-0" [ngClass]="{'fixed-top fl': isFixed}">
+  <a class="navbar-brand" routerLink="/">dride</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" (collapsed)="setHeight(el, 0);showOverlay = false" (expanded)="setHeight(el, 0);setHeight(el, el.scrollHeight);showOverlay = true"
-	[collapse]="isCollapsed" #el [@introAnim]>
-        <ul class="nav mt-lg-0 mr-lg-auto">
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="isCollapsed = true">
-                <a class="nav-link" routerLink="/">Home</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
-                <a class="nav-link" routerLink="/features">Features</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
-                <a class="nav-link" routerLink="/documentation">Docs</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
-                <a class="nav-link" routerLink="/forum">Forum</a>
-            </li>
-            <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
-                <a class="nav-link" routerLink="/about">About</a>
-            </li>
-            <li class="nav-item" (click)="isCollapsed = true">
-                <a class="nav-link" target="_BLANK" href="https://twitter.com/drideHQ"><span class="icon-twitter"></span></a>
-            </li>
-            <li class="nav-item" (click)="isCollapsed = true">
-                <a class="nav-link" target="_BLANK" href="https://github.com/dride"><span class="icon-github"></span></a>
-            </li>
-        </ul>
+  <div class="collapse navbar-collapse" (collapsed)="setHeight(el, 0);showOverlay = false" (expanded)="setHeight(el, 0);setHeight(el, el.scrollHeight);showOverlay = true"
+    [collapse]="isCollapsed" #el [@introAnim]>
+    <ul class="nav mt-lg-0 mr-lg-auto">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="isCollapsed = true">
+        <a class="nav-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
+        <a class="nav-link" routerLink="/features">Features</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
+        <a class="nav-link" routerLink="/documentation">Docs</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
+        <a class="nav-link" routerLink="/forum">Forum
+          <span *ngIf="forumBadge" class="badge badge-pill badge-dark">{{forumBadge}}</span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
+        <a class="nav-link" routerLink="/cloud">Cloud</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" (click)="isCollapsed = true">
+        <a class="nav-link" routerLink="/about">About</a>
+      </li>
+      <li class="nav-item" (click)="isCollapsed = true">
+        <a class="nav-link" target="_BLANK" href="https://twitter.com/drideHQ">
+          <span class="icon-twitter"></span>
+        </a>
+      </li>
+      <li class="nav-item" (click)="isCollapsed = true">
+        <a class="nav-link" target="_BLANK" href="https://github.com/dride">
+          <span class="icon-github"></span>
+        </a>
+      </li>
+    </ul>
 
 
-        <form class="form-inline my-2 my-lg-0" *ngIf="false">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        </form>
-        <div class="bottomNav">
-            <button type="button" class="btn buyBtn btn-secondary " routerLink="/store" (click)="isCollapsed = true;askToSubscribe()">Buy</button>
+    <form class="form-inline my-2 my-lg-0" *ngIf="false">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    </form>
+    <div class="bottomNav">
+      <button type="button" class="btn buyBtn btn-secondary " routerLink="/store" (click)="isCollapsed = true;askToSubscribe()">Buy</button>
 
-            <div *ngIf="firebaseUser" class="login">
-                <div dropdown placement="bottom right">
-					<div class="caret">
-						<img dropdownToggle class="profilePicM" src="{{getProfilePic()}}" alt="{{firebaseUser.displayName}}" id="settings"/>
-					</div>
-                    <!--<span class="caret"></span>-->
-                    <div *dropdownMenu role="menu" class="dropdown-menu" aria-labelledby="settings">
-                        <a routerLink="/settings" class="dropdown-item" (click)="isCollapsed = true">Settings</a>
-                        <a routerLink="/profile/{{firebaseUser.uid}}" class="dropdown-item" (click)="isCollapsed = true">Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" (click)="logOut();isCollapsed = true">Logout</a>
-                    </div>
-                </div>
-			</div>
-            <div *ngIf="!firebaseUser" class="login">
-				<a routerLink="/settings" class="logInLink">Login</a>
-            </div>
+      <div *ngIf="firebaseUser" class="login">
+        <div dropdown placement="bottom right">
+          <div class="caret">
+            <img dropdownToggle class="profilePicM" src="{{getProfilePic()}}" alt="{{firebaseUser.displayName}}" id="settings" />
+          </div>
+          <!--<span class="caret"></span>-->
+          <div *dropdownMenu role="menu" class="dropdown-menu" aria-labelledby="settings">
+            <a routerLink="/settings" class="dropdown-item" (click)="isCollapsed = true">Settings</a>
+            <a routerLink="/profile/{{firebaseUser.uid}}" class="dropdown-item" (click)="isCollapsed = true">Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logOut();isCollapsed = true">Logout</a>
+          </div>
         </div>
+      </div>
+      <div *ngIf="!firebaseUser" class="login">
+        <a routerLink="/settings" class="logInLink">Login</a>
+      </div>
     </div>
+  </div>
 </nav>
 <simple-notifications></simple-notifications>

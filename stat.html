@@ -1,39 +1,46 @@
 <html>
-	<head>
-		<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
-		<script
-		src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-		<script>
-		  // Initialize Firebase
-		  var config = {
-			apiKey: "AIzaSyDi0egNqUM-dZDjIiipjW-aSRYuXlFc3Ds",
-			authDomain: "dride-2384f.firebaseapp.com",
-			databaseURL: "https://dride-2384f.firebaseio.com",
-			projectId: "dride-2384f",
-			storageBucket: "dride-2384f.appspot.com",
-			messagingSenderId: "802741428178"
-		  };
-		  firebase.initializeApp(config);
-		  var db = firebase.firestore();
 
-				db.collection("devices").get().then((querySnapshot) => {
-					querySnapshot.forEach((doc) => {
-						$('#data').append(doc.data())
-						console.log(doc.data().data.os);
+<head>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
 
-					});
-				});
-		</script>
-		<script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDi0egNqUM-dZDjIiipjW-aSRYuXlFc3Ds",
+      authDomain: "dride-2384f.firebaseapp.com",
+      databaseURL: "https://dride-2384f.firebaseio.com",
+      projectId: "dride-2384f",
+      storageBucket: "dride-2384f.appspot.com",
+      messagingSenderId: "802741428178"
+    };
+    firebase.initializeApp(config);
+    var db = firebase.firestore();
 
-		</script>
-	</head>
-	<body>
-		
+    db.collection("devices").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        $('#data').append(doc.data())
+        console.log(doc.data().data.os);
 
-		<div id="data"></div>
-	</body>
+      });
+    });
+
+  </script>
+  <script>
+
+
+  </script>
+</head>
+
+<body>
+
+
+  <div id="data"></div>
+</body>
+
 </html>
