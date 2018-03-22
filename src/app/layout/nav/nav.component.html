@@ -63,7 +63,7 @@
         </div>
       </div>
       <div *ngIf="!firebaseUser" class="login">
-        <a routerLink="/settings" class="logInLink">Login</a>
+        <a (click)="login()" class="logInLink">Login</a>
       </div>
     </div>
   </div>

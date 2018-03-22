@@ -52,6 +52,7 @@ Thumbs.db
 functions/**/*.js.map
 functions/dist-server
 functions/dist
+functions/config/keys.json
 
 src/environments/environment.ts
 functions/environments/*

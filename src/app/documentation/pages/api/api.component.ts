@@ -25,7 +25,7 @@ Routes
 |---------------------------|------|------|---------------------------|
 | **/api/getClips**         |  | GET  | A list of all video clips |
 | **/api/getSettings**      |  | GET  | A list of device settings |
-| **/api/setSettings**      | fieldName, fieldValue | GET  | Update device setting |
+| **/api/setSetting**      | fieldName, fieldValue | GET  | Update device setting |
 | **/api/deleteClip**       | videoId  | GET  | Delete a video by videoId |
 | **/api/deleteAllClips**   |  | GET  | Delete all video clips on deivce |
 | **/api/updateFirmware**   |  | GET  | Update device firmawre to the latest version |
@@ -45,11 +45,14 @@ Settings Parameters
 | mic                      | Boolean | Turn mic on/off |
 | indicator                | Boolean | Turn indicator LED on/off |
 | resolution               | '1080' or '720'  | Set device resolution |
-| clipLength              | int | Set cycle length in minutes |
 | gSensorSensitivity       | 'off' or 'low' or 'medium' or 'high' | Set GSensor Sensitivity|
 | netwrokSSID              | String | Set Wifi netrowrk SSID |
 | netwrokPassword          | String | Set Wifi netrowrk password |
 
+<br>
+Example:
+
+	http://192.168.42.1:9000/api/setSetting?fieldName=videoRecord&fieldValue=false
 
 Static Routes
 =============
@@ -59,8 +62,8 @@ clip.
 
 Examples:
 
-* /modules/video/thumb/1515036499325.jpg
-* /modules/video/clip/1514850857979.mp4
+* /thumb/1515036499325.jpg
+* /clip/1514850857979.mp4
 
 
 Accessing the API

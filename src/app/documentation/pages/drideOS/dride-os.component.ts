@@ -59,11 +59,11 @@ Cron Jobs
 
 Clean up diskspace removing oldest videos (Every minute):
 
-	* * * * * node /home/Cardigan/modules/video/helpers/cleaner.js
+	* * * * * node /home/core/modules/video/helpers/cleaner.js
 
 Encode un-encoded videos, will pause when app is connected (Every minute):
 
-	* * * * * node /home/Cardigan/modules/video/helpers/ensureAllClipsAreDecoded.js
+	* * * * * node /home/core/modules/video/helpers/ensureAllClipsAreDecoded.js
 
 
 Startup Sequence

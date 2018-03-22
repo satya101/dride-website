@@ -15,11 +15,19 @@ import { NotificationsService } from 'angular2-notifications';
 @Injectable()
 export class AuthService {
 	closeResult: string;
+	private _modal: BsModalRef;
 
 	constructor(private modalService: BsModalService, public afAuth: AngularFireAuth, public mixpanel: MixpanelService) {}
 
 	openLogin() {
-		return this.modalService.show(NgbdModalLogin);
+		this.modalService.onHide.subscribe((reason: string) => {
+			console.log(reason);
+			if (reason === 'backdrop-click') {
+				console.log(this.modalService);
+			}
+		});
+
+		this._modal = this.modalService.show(NgbdModalLogin);
 	}
 
 	logOut() {
@@ -63,6 +71,7 @@ export class NgbdModalLogin {
 	onWelcome = false;
 	anonymous = false;
 	isFlipped = false;
+	closeReason = '';
 	public loginError: string;
 	public r: { email: string; name: string; password: string };
 	public l: { email: string; password: string };
@@ -82,12 +91,14 @@ export class NgbdModalLogin {
 		this.l = { email: '', password: '' };
 	}
 
-	closeModal = function() {
+	closeModal = function(reason = '') {
+		this.closeReason = reason;
 		this.activeModal.hide();
 	};
 
-	dismissModal = function() {
-		this.activeModal.hide();
+	dismissModal = function(reason = '') {
+		this.closeReason = reason;
+		this.activeModal.hide('ok');
 	};
 
 	connectWithFacebook = function() {

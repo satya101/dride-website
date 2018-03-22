@@ -1,78 +1,82 @@
 {
-    "rules": {
-        "clips": {
-            ".read": true,
-            ".indexOn": ["views", "hp"],
-            "$uid": {
-                ".indexOn": ["dateUploaded"],
-                ".read": true,
-                ".write": "auth!=null",
-                "$clipId": {
-                    ".indexOn": ["views", "hp"]
-                }
-            }
-        },
-        "clips_homepage": {
-            ".read": true,
-            ".write": false,
-            ".indexOn": ["hpInsertTime", "cmntsCount", "views"]
-        },
-        "threads": {
-            ".read": true,
-            ".write": "auth != null",
-            ".indexOn": ["id", "created", "lastUpdate"]
-        },
-        "conversations": {
-          "$threadId": {
-            ".read": true,
-            "$conversationId": {
-                ".read": true,
-                ".write": "auth != null && newData.child('body').isString() && newData.child('body').val().length > 1",
-                ".indexOn": ["autherId"]
-           }
-         }
-        },
-        "conversations_video": {
-            ".read": true,
-            ".write": "auth != null"
-        },
-        "latestVersion": {
-            ".read": true,
-            ".write": false
-        },
-        "devicesAll": {
-            "$uuid": {
-                ".read": false,
-                ".write": "newData.child('lastSeen').isNumber() && newData.child('lastSeen').val() >= 0"
-            }
-        },
-        "content": {
-            ".read": true,
-            ".write": false
-        },
-        "devices": {
-            "$uid": {
-                ".read": "auth != null && auth.uid == $uid",
-                ".write": "auth != null && auth.uid == $uid"
-            }
-        },
-        "queue": {
-            "$uid": {
-                ".read": false,
-                ".write": "auth != null && auth.uid == $uid"
-            }
-        },
-        "userData": {
-          "$uid": {
-            ".read": true,
-            ".write": "auth != null && auth.uid == $uid"
-          }
-        },
-        "pushTokens": {
-            "$uid": {
-                ".read": "auth != null && auth.uid == $uid",
-                ".write": "auth != null && auth.uid == $uid"
-            }
-        }
-    }
+	"rules": {
+		"clips": {
+			".read": true,
+			".indexOn": ["views", "hp"],
+			"$uid": {
+				".indexOn": ["dateUploaded"],
+				".read": true,
+				".write": "auth!=null",
+				"$clipId": {
+					".indexOn": ["views", "hp"]
+				}
+			}
+		},
+		"clips_homepage": {
+			".read": true,
+			".write": false,
+			".indexOn": ["hpInsertTime", "cmntsCount", "views"]
+		},
+		"threads": {
+			".read": true,
+			".write": "auth != null",
+			".indexOn": ["id", "created", "lastUpdate"]
+		},
+		"conversations": {
+			"$threadId": {
+				".read": true,
+				"$conversationId": {
+					".read": true,
+					".write": "auth != null && newData.child('body').isString() && newData.child('body').val().length > 1",
+					".indexOn": ["autherId"]
+				}
+			}
+		},
+		"conversations_video": {
+			".read": true,
+			".write": "auth != null"
+		},
+		"latestVersion": {
+			".read": true,
+			".write": false
+		},
+		"devicesAll": {
+			"$uuid": {
+				".read": false,
+				".write": "newData.child('lastSeen').isNumber() && newData.child('lastSeen').val() >= 0"
+			}
+		},
+		"content": {
+			".read": true,
+			".write": false
+		},
+		"devices": {
+			"$uid": {
+				".read": "auth != null && auth.uid == $uid",
+				".write": "auth != null && auth.uid == $uid"
+			}
+		},
+		"queue": {
+			"$uid": {
+				".read": false,
+				".write": "auth != null && auth.uid == $uid"
+			}
+		},
+		"userData": {
+			"$uid": {
+				".read": true,
+				".write": "auth != null && auth.uid == $uid"
+			}
+		},
+		"pushTokens": {
+			"$uid": {
+				".read": "auth != null && auth.uid == $uid",
+				".write": "auth != null && auth.uid == $uid"
+			}
+		},
+		"config": {
+			".read": true,
+			".write": false
+		}
+	}
 }

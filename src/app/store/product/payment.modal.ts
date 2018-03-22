@@ -8,8 +8,7 @@ import { AuthService } from '../../auth.service';
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 
 import * as firebase from 'firebase/app'; // for typings
-import { SsrService } from '../../helpers/ssr/ssr.service'
-
+import { SsrService } from '../../helpers/ssr/ssr.service';
 
 @Component({
 	selector: 'ngbd-modal-content',
@@ -23,45 +22,49 @@ export class NgbdModalPayement {
 	isLoaded = true;
 	canBuy = false;
 	shareTxt = 'I just joined the waitlist for #dride. You should too!';
-	constructor(public bsModalRef: BsModalRef,
+	constructor(
+		public bsModalRef: BsModalRef,
 		private router: Router,
 		private route: ActivatedRoute,
 		public mixpanel: MixpanelService,
 		private auth: AuthService,
-		public ssr: SsrService) {
-
+		public ssr: SsrService
+	) {
 		mixpanel.track('opened buy for ' + this.productId, {});
 		this.auth.verifyLoggedIn().then(res => {
-			firebase.database().ref('queue/' + res['uid'] + '/email').set(res['email'])
-			firebase.database().ref('queue/' + res['uid'] + '/date').push({dte: (new Date).getTime()})
-			this.onShow()
-		})
-
-
+			firebase
+				.database()
+				.ref('queue/' + res['uid'] + '/email')
+				.set(res['email']);
+			firebase
+				.database()
+				.ref('queue/' + res['uid'] + '/date')
+				.push({ dte: new Date().getTime() });
+			this.onShow();
+		});
 	}
 
 	onShow() {
-		this.canBuy = this.bsModalRef.content.title === 'dride-kit' ? true : false;
-		console.log(this.bsModalRef.content.title)
+		this.canBuy =
+			this.bsModalRef.content.title === 'dride-kit' || this.bsModalRef.content.title === 'dride-hat' ? true : false;
 	}
 
 	setProductId(productId) {
-		this.productId = productId
+		this.productId = productId;
 	}
 
 	closeModal() {
 		this.bsModalRef.hide();
-	};
-
+	}
 
 	dismissModal() {
 		this.bsModalRef.hide();
-	};
-
-
+	}
 
 	tweet() {
-		if (!this.ssr.isBrowser()) { return }
+		if (!this.ssr.isBrowser()) {
+			return;
+		}
 
 		let urlString = 'https://www.twitter.com/intent/tweet?';
 		urlString += 'text=' + encodeURIComponent(this.shareTxt);
@@ -72,11 +75,12 @@ export class NgbdModalPayement {
 
 		window.open(
 			urlString,
-			'Twitter', 'toolbar=0,status=0,resizable=yes,width=500,height=600,top='
-			+ (window.innerHeight - 600) / 2 + ',left=' + (window.innerWidth - 500) / 2);
+			'Twitter',
+			'toolbar=0,status=0,resizable=yes,width=500,height=600,top=' +
+				(window.innerHeight - 600) / 2 +
+				',left=' +
+				(window.innerWidth - 500) / 2
+		);
 		this.mixpanel.track('twitted from store', {});
-
 	}
-
-
 }

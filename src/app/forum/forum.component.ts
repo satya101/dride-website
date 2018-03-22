@@ -15,7 +15,7 @@ import { introAnim } from '../router.animations';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 
 import { NgbdModalAskInForum } from './askInForum.modal';
-import { MetaService } from '../helpers/meta/meta.service'
+import { MetaService } from '../helpers/meta/meta.service';
 
 @Component({
 	selector: 'app-forum',
@@ -32,25 +32,26 @@ export class ForumComponent implements OnInit {
 		private modalService: BsModalService,
 		public mixpanel: MixpanelService,
 		private meta: MetaService
-	) { }
+	) {}
 
 	ngOnInit() {
-
 		if (this.isFull) {
-			this.meta.set('Forum', 'A community page for Dride users\'s')
+			this.meta.set('Forum', "A community page for Dride users's");
 		}
-		const limitToLast = this.isFull ? 100 : 6
+		const limitToLast = this.isFull ? 100 : 6;
 
-		this.db.list('/threads', ref => ref.orderByChild('lastUpdate').limitToLast(limitToLast)).valueChanges()
-		.subscribe((arr: any) => {
-			const res = [];
-			arr.forEach(element => {
-				if (!element.hidden) {
-					res.unshift(element)
-				}
+		this.db
+			.list('/threads', ref => ref.orderByChild('lastUpdate').limitToLast(limitToLast))
+			.valueChanges()
+			.subscribe((arr: any) => {
+				const res = [];
+				arr.forEach(element => {
+					if (!element.hidden) {
+						res.unshift(element);
+					}
+				});
+				this.threads = res;
 			});
-			this.threads = res;
-		});
 	}
 
 	ask() {
@@ -67,7 +68,10 @@ export class ForumComponent implements OnInit {
 		if (type.toLocaleLowerCase() === 'drideos') {
 			return 'badge-dark';
 		}
+		if (type.toLocaleLowerCase() === 'new-feature') {
+			return 'badge-warning';
+		}
 
-		return 'badge-secondary'
+		return 'badge-secondary';
 	}
 }

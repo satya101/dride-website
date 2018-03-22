@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MetaService } from '../../../helpers/meta/meta.service'
+import { MetaService } from '../../../helpers/meta/meta.service';
 
 @Component({
 	selector: 'app-indicators',
 	templateUrl: './indicators.component.html',
-	styleUrls: ['../../documentation.component.scss'],
+	styleUrls: ['../../documentation.component.scss']
 })
 export class IndicatorsComponent implements OnInit {
-
 	public body = `
 
 # INDICATORS
@@ -29,17 +28,13 @@ LED Indicators explained
 
 You may test/run the LED by executing at command line [How to SSH into Dride?](/documentation/hacking)
 
-	sudo python /home/Cardigan/modules/indicators/python/states/standalone.py <cmd>
+	sudo python /home/core/modules/indicators/python/states/standalone.py <cmd>
 
-`
+`;
 
-	constructor(private meta: MetaService) {
-	}
+	constructor(private meta: MetaService) {}
 
 	ngOnInit() {
-		this.meta.set(
-			'Indicators',
-			'Control Dride\'s LED'
-		)
+		this.meta.set('Indicators', "Control Dride's LED");
 	}
 }

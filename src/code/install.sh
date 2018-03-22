@@ -115,7 +115,7 @@ sudo dpkg -i node_latest_armhf.deb
 
 # TODO: Add a test if openCV was installed correctly
 
-echo "========== Install Dride-core [Cardigan]  ============"
+echo "========== Install Dride-core ============"
 cd /home
 
 sudo wget -c -O "drideOS-latest.zip" "https://s3.amazonaws.com/dride/releases/cardigan/latest.zip"
