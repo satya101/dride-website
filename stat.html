@@ -22,10 +22,10 @@
     firebase.initializeApp(config);
     var db = firebase.firestore();
 
-    db.collection("devices").get().then((querySnapshot) => {
+    db.collection("devices").where("data", "==", 'drideOS').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        $('#data').append(doc.data())
-        console.log(doc.data().data.os);
+        //$('#data').append(doc.data())
+        console.log(doc);
 
       });
     });

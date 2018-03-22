@@ -23,6 +23,7 @@ var anonymizer = require(__dirname + '/user/anonymizer.js');
 var cloud = require(__dirname + '/cloud/cloud.js');
 var viewCounter = require(__dirname + '/cloud/viewCount.js');
 var getThumb = require(__dirname + '/cloud/getThumb.js');
+var purchase = require(__dirname + '/purchase/purchase.js');
 
 /*
  *	HTTP endpoint to subscribe a user to mailing list
@@ -374,6 +375,27 @@ exports.logGPS = functions.https.onRequest((req, res) => {
 	// mailer.send(sendObj)
 
 	res.sendStatus(200);
+});
+
+exports.issuePurcahse = functions.https.onRequest((req, res) => {
+	console.log('issuePurcahse');
+	purchase.issuePurcahse(req.query).then(
+		() => {
+			cors(req, res, () => {
+				res.status(200).send({
+					status: 1
+				});
+			});
+		},
+		err => {
+			cors(req, res, () => {
+				res.status(200).send({
+					status: -1,
+					error: err
+				});
+			});
+		}
+	);
 });
 
 exports.metaService = functions.https.onRequest((req, res) => {

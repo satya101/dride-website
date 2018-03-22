@@ -6,6 +6,8 @@ import { AuthService } from '../../auth.service';
 import { SsrService } from '../../helpers/ssr/ssr.service';
 
 import { introAnim } from '../../router.animations';
+
+import { NgbdModalLogin } from '../../auth.service';
 import { NotificationsService } from 'angular2-notifications';
 import { NgbdModalAskToSubscribe } from './askToSubscribe.modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -53,6 +55,10 @@ export class NavComponent implements OnInit {
 			}
 			this.firebaseUser = user;
 		});
+	}
+
+	login() {
+		this.modalService.show(NgbdModalLogin);
 	}
 
 	setHeight(el, height) {
