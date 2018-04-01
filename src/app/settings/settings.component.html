@@ -20,9 +20,9 @@
               <input type="text" class="form-control" placeholder="you@example.com" [(ngModel)]="email">
             </div>
             <div class="privacy">
-              <a class="col-md-8 forgetPass" ng-click="resetPassword()">Forget password</a>
+              <a class="col-md-8 forgetPass" (click)="resetPassword()">Forget password</a>
             </div>
-            <button type="button" class="btn btn-dride-black btn-block svp" ng-click="updateEmail()">Save</button>
+            <button type="button" class="btn btn-dride-black btn-block svp" (click)="updateEmail()">Save</button>
 
 
           </div>

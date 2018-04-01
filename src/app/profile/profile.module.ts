@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { PlayerModule } from '../layout/components/player/player.module'
+import { PlayerModule } from '../layout/components/player/player.module';
 import { SharedModule } from '../helpers/shared.module';
 import { environment } from '../../environments/environment';
 
@@ -10,12 +10,11 @@ import { ProfileComponent } from './profile.component';
 import { routing } from './profile.routing';
 import { AgmCoreModule, AgmPolygon } from '@agm/core';
 import { AutosizeModule } from '../helpers/autosize/autosize.module';
-
-
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
-	imports: [routing,
+	imports: [
+		routing,
 		CommonModule,
 		SharedModule,
 		FormsModule,
@@ -23,8 +22,9 @@ import { AutosizeModule } from '../helpers/autosize/autosize.module';
 			apiKey: environment.googleMapsApi
 		}),
 		PlayerModule,
-		AutosizeModule
+		AutosizeModule,
+		BsDropdownModule.forRoot()
 	],
 	declarations: [ProfileComponent]
 })
-export class ProfileModule { }
+export class ProfileModule {}

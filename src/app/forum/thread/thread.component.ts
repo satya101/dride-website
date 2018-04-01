@@ -15,6 +15,7 @@ import { MetaService } from '../../helpers/meta/meta.service';
 import { Observable } from 'rxjs/Observable';
 import { NotificationsService } from 'angular2-notifications';
 import { Md5 } from 'ts-md5/dist/md5';
+import { SsrService } from '../../helpers/ssr/ssr.service';
 
 @Component({
 	selector: 'app-thread',
@@ -43,7 +44,8 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		public mixpanel: MixpanelService,
 		private notificationsService: NotificationsService,
 		private meta: MetaService,
-		private storage: AngularFireStorage
+		private storage: AngularFireStorage,
+		public ssr: SsrService
 	) {
 		auth.getState().subscribe(user => {
 			if (!user) {
@@ -147,7 +149,9 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.sub.unsubscribe();
+		if (this.ssr.isBrowser()) {
+			this.sub.unsubscribe();
+		}
 	}
 
 	getUserData(uid) {

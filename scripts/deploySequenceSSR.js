@@ -1,5 +1,9 @@
 /**
  * This script is used after ng build step
+ *
+ * !!!! Put this into the dist dir on the server !!!!
+ *
+ *
  */
 var fs = require('fs');
 
@@ -12,4 +16,3 @@ var fs = require('fs');
 //zip everything to server.zip
 
 // upload and unzip on server?
-

@@ -40,9 +40,24 @@
                   <li (click)="twShare()">
                     <span class="icon-twitterMedium shareIcon"></span>
                   </li>
-                  <li *ngIf="isOwner()" (click)="removeClip()">
-                    <span class="icon-trash-can" alt="remove clip"></span>
+                  <li class="btn-group" *ngIf="isOwner()" dropdown>
+                    <span class="icon-dots-three-horizontal" dropdownToggle></span>
+                    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li role="menuitem">
+                        <a class="dropdown-item" routerLink="/studio/{{videoId}}">
+                          Edit Details</a>
+                      </li>
+                      <li class="divider dropdown-divider"></li>
+                      <li role="menuitem">
+                        <a class="dropdown-item delete" (click)="removeClip()">
+                          Delete</a>
+                      </li>
+
+
+                    </ul>
+
                   </li>
+
                 </ul>
                 <div class="views float-left">
                   <label>{{currentVideo.views | number:0}} Views </label>
@@ -57,7 +72,8 @@
                 <p *ngIf="currentVideo.plates">
                   <b>License Plate: </b> {{currentVideo.plates}}</p>
                 <p>
-                  <b>Description: </b> {{currentVideo.description}}</p>
+                  <b>
+                    Description: </b> {{currentVideo.description}}</p>
                 <p *ngIf="currentVideo.timestamp" class="dateLabel">{{normalizeTimeStamp(currentVideo.timestamp) | date:'medium'}}</p>
               </div>
 

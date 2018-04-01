@@ -1,22 +1,24 @@
 <div class="textBox paddedTtl">
-    <p class="gh">
-		<a href="https://github.com/dride"><span class="icon-github"></span></a>
-	</p>
-    <h1 ng-click="showDevMenu()">Developer Center</h1>
-    <br>
-    <p>Find out how you can integrate, test and publish apps build for Dride Or Dride Zero.</p>
+  <p class="gh">
+    <a href="https://github.com/dride">
+      <span class="icon-github"></span>
+    </a>
+  </p>
+  <h1>Developer Center</h1>
+  <br>
+  <p>Find out how you can integrate, test and publish apps build for Dride Or Dride Zero.</p>
 
 </div>
 <ul class="apisBox">
-    <li class="col-lg-4 col-xs-12 p-2 text-center featureBox" *ngFor="let node of docMenu | showOnHomePage" >
-        <a routerLink="/documentation/{{node.url}}">
-            <span class="{{node.icon}}"></span>
-            <div class="desc" ng-class="node.url=='getting_started' ? 'mptpToFx' : ''">
-                <p>
-                    <b class="docsTtl">{{node.ttl}}</b>
-                </p>
-                <p class="more">{{node.more ? node.more : '&nbsp;'}}</p>
-            </div>
-        </a>
-    </li>
+  <li class="col-lg-4 col-xs-12 p-2 text-center featureBox" *ngFor="let node of docMenu | showOnHomePage">
+    <a routerLink="/documentation/{{node.url}}">
+      <span class="{{node.icon}}"></span>
+      <div class="desc" ng-class="node.url=='getting_started' ? 'mptpToFx' : ''">
+        <p>
+          <b class="docsTtl">{{node.ttl}}</b>
+        </p>
+        <p class="more">{{node.more ? node.more : '&nbsp;'}}</p>
+      </div>
+    </a>
+  </li>
 </ul>

@@ -152,7 +152,7 @@ exports.saveNewUserData = functions.auth.user().onCreate(function(event) {
 
 		var resObj = {
 			name: user.displayName, //anonymizer.getRandomName()
-			photoURL: user.photoUR
+			photoURL: user.photoURL
 		};
 		resObj = JSON.parse(JSON.stringify(resObj));
 
@@ -232,7 +232,7 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips').on
 		uid = event.params.uid;
 		filename = event.params.videoId;
 
-		request('http://54.229.176.173:8080/processVideo/' + uid + '/' + filename, function(error, response, body) {
+		request('http://34.249.141.56:8080/processVideo/' + uid + '/' + filename, function(error, response, body) {
 			console.log('error:', error); // Print the error if one occurred
 			console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 			console.log('body:', body); // Print the HTML for the Google homepage.
@@ -416,7 +416,7 @@ exports.metaService = functions.https.onRequest((req, res) => {
 		userAgent.indexOf('DuckDuckBot') !== -1
 	) {
 		//send SSR content
-		request('http://54.229.224.116:4000/' + req.originalUrl, function(error, response, body) {
+		request('http://34.249.141.56:4000/' + req.originalUrl, function(error, response, body) {
 			res.status(200).send(body);
 		});
 	} else {
