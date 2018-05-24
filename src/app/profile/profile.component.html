@@ -47,6 +47,10 @@
                         <a class="dropdown-item" routerLink="/studio/{{videoId}}">
                           Edit Details</a>
                       </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" target="_BLANK" href="{{currentVideo.clips.src}}" download>
+                          Download</a>
+                      </li>
                       <li class="divider dropdown-divider"></li>
                       <li role="menuitem">
                         <a class="dropdown-item delete" (click)="removeClip()">

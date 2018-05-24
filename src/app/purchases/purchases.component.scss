@@ -1,0 +1,66 @@
+.purchases {
+	color: #666666;
+	min-height: 100vh;
+	background-color: #f9f9f9;
+
+	.box {
+		padding-top: 100px;
+	}
+	h1 {
+		text-align: center;
+		margin-bottom: -39px;
+		padding-top: 60px;
+	}
+	h3,
+	h1 {
+		text-transform: inherit;
+		font-family: raleway;
+		text-transform: capitalize;
+	}
+	.loader {
+		text-align: center;
+		margin-top: 10%;
+		img {
+			width: 150px;
+			padding-bottom: 25px;
+		}
+	}
+	.noOrders {
+		text-align: center;
+		margin-top: 20%;
+		color: #868686;
+		font-family: raleway;
+	}
+	.detailsBox {
+		background: #fff;
+		border-radius: 3px;
+		border: 1px solid rgba(0, 0, 0, 0.09);
+		-webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+		-webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+		margin-bottom: 25px;
+		background-color: #fff;
+		cursor: pointer;
+		width: 100%;
+		padding: 15px;
+		a {
+			text-decoration: underline !important;
+		}
+		.badge {
+			margin-top: -50px;
+		}
+		.dte {
+			clear: both;
+		}
+		.mtp9 {
+			margin-top: -9px;
+		}
+		.quantity {
+			color: #bbb;
+			margin-left: -9px;
+			font-size: 17px;
+			text-transform: lowercase;
+		}
+	}
+}

@@ -1,0 +1,35 @@
+<div class="purchases">
+
+  <div class="container">
+    <div class="col-md-12 no-padding">
+      <h1>Order History</h1>
+      <div class="row justify-content-center" *ngIf="status == 'loaded'">
+        <div class="box col-6" *ngFor="let order of orders">
+          <div class="detailsBox">
+            <h3>{{order.productId}}
+              <label class="quantity">x{{order.quantity}}</label>
+
+              <label>{{order.sum / 100}}$</label>
+            </h3>
+            <span class="badge float-right" [ngClass]="{'badge-success': order.tracking, 'badge-warning': !order.tracking }">{{order.tracking ? 'Shipped' : 'Assembly'}}</span>
+            <p class="float-right dte mb-0" [ngClass]="{'mtp9' : !order.tracking}">Order Date: {{order.token.created * 1000 | date}}</p>
+            <p *ngIf="order.tracking" class="mb-0">Tracking Number:
+              <a href="https://t.17track.net/en#nums={{order.tracking}}" target="_BLANK">{{order.tracking}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="status=='none'" class="noOrders">
+        <h4>You Dont Have Any Ordes Yet..</h4>
+      </div>
+      <div *ngIf="status=='loading'" class="loader">
+        <img src="./assets/images/loader.gif" alt="processing" />
+        <p>Loading..</p>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>

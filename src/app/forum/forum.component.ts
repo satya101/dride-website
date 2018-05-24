@@ -38,7 +38,7 @@ export class ForumComponent implements OnInit {
 		if (this.isFull) {
 			this.meta.set('Forum', "A community page for Dride users's");
 		}
-		const limitToLast = this.isFull ? 100 : 6;
+		const limitToLast = this.isFull ? 200 : 6;
 
 		this.db
 			.list('/threads', ref => ref.orderByChild('lastUpdate').limitToLast(limitToLast))

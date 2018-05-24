@@ -32,6 +32,7 @@ Routes
 | **/api/isOnline**         |  | GET  | Check if device is online |
 | **/api/getSerialNumber**  |  | GET  | Return device serial number |
 | **/api/indicator**        | action: ["isWaiting", "isDownloading", "isPaired", "needToPair", "needToLogin", "uploadSuccessfully", "done"]  | GET  | Control LED indicator on device |
+| **/api/setLiveMode**        | mode: [0: disabled, 1: enabled]  | GET  | Toggle live mode |
 
 
 Settings Parameters
@@ -85,6 +86,17 @@ A **curl** example:
 And output:
 
 	{"serial":"00000000445acdb3"}
+
+
+Live stream
+=================
+Use the Dride App to see a live stream view from your Dride.
+
+Live stream URL:
+
+	tcp/h264://192.168.42.1:3333
+
+> You can open your VLC or mplayer or FFMPEG to view the live stream on your PC
 
 `;
 	constructor() {}

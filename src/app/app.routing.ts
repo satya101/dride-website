@@ -34,6 +34,7 @@ const routes: Routes = [
 			{ path: 'settings', loadChildren: './settings/settings.module#SettingsModule' },
 			{ path: 'invoice', loadChildren: './invoice/invoice.module#InvoiceModule' },
 			{ path: 'studio/:vid', loadChildren: './studio/studio.module#StudioModule' },
+			{ path: 'purchases', loadChildren: './purchases/purchases.module#PurchasesModule' },
 
 			{ path: 'page-not-found', component: PageNotFoundComponent },
 			{ path: '**', component: PageNotFoundComponent }

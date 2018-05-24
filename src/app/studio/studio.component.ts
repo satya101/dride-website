@@ -44,7 +44,7 @@ export class StudioComponent implements OnInit {
 					.valueChanges()
 					.subscribe((snapshot: any) => {
 						this.video = snapshot;
-						this.description = snapshot.description;
+						this.description = snapshot ? snapshot.description : '';
 					});
 			});
 		});

@@ -57,6 +57,7 @@
           <div *dropdownMenu role="menu" class="dropdown-menu" aria-labelledby="settings">
             <a routerLink="/settings" class="dropdown-item" (click)="isCollapsed = true">Settings</a>
             <a routerLink="/profile/{{firebaseUser.uid}}" class="dropdown-item" (click)="isCollapsed = true">Profile</a>
+            <a routerLink="/purchases" class="dropdown-item" (click)="isCollapsed = true">Purchases</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logOut();isCollapsed = true">Logout</a>
           </div>

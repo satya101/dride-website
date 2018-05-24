@@ -42,14 +42,9 @@ access from a remote device.
 Services
 ================
 
-* **/etc/init.d/dride-core** - Used for the recording mechanisem
-* **/etc/init.d/dride-ws**  -  Providing the web services outlined here: [API](/documentation/api)
-
-Daemons
-================
-
-* **/etc/daemons/bluetooth/main.js** - Listner for the BLE powered 'Impluse Button'
-
+* **systemctl (start|stop) record** - Control DVR functionality
+* **systemctl (start|stop) ws**  -  Providing the web services outlined here: [API](/documentation/api)
+* **systemctl (start|stop) ble**  -  Control Bluetooth daemon
 
 
 Cron Jobs

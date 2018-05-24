@@ -6,8 +6,7 @@
 <div class="textBox" edit-page>
   <h2>Connect The PiCamera to the Raspberry Pi</h2>
 
-  <p>Connect the Pi Camera to your Raspberry Pi, making sure the blue strip is facing towards the audio jack on the Raspberry
-    Pi 3 and upwards on the Raspberry Pi Zero.</p>
+  <p>Connect the Pi Camera to your Raspberry Pi, making sure the blue/white strip is facing upwards on the Raspberry Pi Zero.</p>
 
   <div class="text-center">
     <img class="img-fluid" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2FpiZeroPiCamera.png?alt=media&token=1bb61a22-68b5-4475-a803-e2f89801ce38"
@@ -15,36 +14,88 @@
   </div>
 
 </div>
-<div class="textBox" edit-page>
-  <h2>Dride-Case & Dride-HAT</h2>
-  <p>Coming soon..</p>
+<div class="">
+  <app-subscribe-box></app-subscribe-box>
 </div>
 
+<div class="textBox" edit-page>
+  <h2>Dride-HAT</h2>
+  <p>This PCB have all electronics needed to build a dashcam based on the Raspberry Pi Zero W. This HAT is natively supported
+    by drideOS. </p>
+  <p>Dont have a Dride HAT yet?
+    <a href="https://dride.io/product/dride-hat">Buy one now</a>
+  </p>
+  <br>
+  <h5>Step 1 | Get all components</h5>
+  <p>In order to solider the HAT onto your PI you will need the following components: </p>
+  <ul>
+    <li>1 Raspberry Pi Zero W</li>
+    <li>Thin duck tape (Preferbly double sided)</li>
+    <li>Thin metal wire</li>
+    <li>Soldering iron</li>
+  </ul>
+
+  <br>
+  <h5>Step 2 | Soldering</h5>
+  <p>> Isolate the Pi from the HAT by adding the duck tape on the Pi.</p>
+  <p>> Attach the HAT on top of the Raspberry Pi Zero and soldier the pieces together.</p>
+  <div class="text-center">
+    <img class="img-fluid" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fstatic%2F2-100.jpg?alt=media&token=aff78266-3f86-4032-86bf-dd514b623675"
+      alt="pi zero connector" />
+  </div>
+  <br>
+  <br>
+  <a href="https://dride.io/forum">Need help? Try the forum!</a>
+</div>
+
+
+<div class="textBox" edit-page>
+  <h2>Dride-Case</h2>
+  <p>You can either
+    <a href="https://dride.io/product/dride-kit">buy</a> or
+    <a href="https://github.com/dride/dride-case">3D print</a> the Dride Case </p>
+  <div class="text-center">
+    <img class="img-fluid" src="https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/assets%2Fstatic%2Fkit.png?alt=media&token=6b4670c4-fe4b-4fc8-b190-647de8ad1942"
+      alt="pi zero connector" />
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="textBox list" edit-page>
-	<h2>Pinout</h2>
-	<br>
-	<h4>Button</h4>
-	<ul>
-		<li>Pin #16 (BCM 23)</li>
-		<li>Pin #6 Ground</li>
-	</ul>
+  <h2>Pinout</h2>
+  <br>
+  <h4>Button</h4>
+  <ul>
+    <li>Pin #16 (BCM 23)</li>
+    <li>Pin #6 Ground</li>
+  </ul>
 
-	<h4>LED</h4>
-	<ul>
-		<li>Pin #19 (BCM10) (MOSI)</li>
-		<li>Pin #1 - 3v</li>
-		<li>Pin #6 Ground</li>
-	</ul>
+  <h4>LED</h4>
+  <ul>
+    <li>Pin #19 (BCM10) (MOSI)</li>
+    <li>Pin #1 - 3v</li>
+    <li>Pin #6 Ground</li>
+  </ul>
 
-	<h4>RTC</h4>
-	<ul>
-		<li>Pin #3 SDA</li>
-		<li>Pin #5 SCL</li>
-		<li>Pin #6 Ground</li>
-		<li>Pin #2 5v</li>
-	</ul>
+  <h4>RTC</h4>
+  <ul>
+    <li>Pin #3 SDA</li>
+    <li>Pin #5 SCL</li>
+    <li>Pin #6 Ground</li>
+    <li>Pin #2 5v</li>
+  </ul>
 
-	<!-- <h4>I2S Amplifier</h4>
+  <!-- <h4>I2S Amplifier</h4>
 	<ul>
 		<li>Pin #2 5v - Amp Vin</li>
 		<li>Pin #5 Ground - Amp GND</li>
@@ -53,7 +104,7 @@
 		<li>Pin #19 - Amp LRCLK</li>
 	</ul> -->
 
-	<!-- <h4>GPS</h4>
+  <!-- <h4>GPS</h4>
 	<ul>
 		<li>Pin #1 3v - GPS Vin</li>
 		<li>Pin #5 Ground - GPS GND</li>
@@ -62,7 +113,7 @@
 		<li>Pin #19 - Amp LRCLK</li>
 	</ul> -->
 
-  </div>
+</div>
 
 <div class="textBox" edit-page>
   <p>Great job! Now you’ve got a fully functioning connected dashcam based on the Raspberry Pi! </p>
