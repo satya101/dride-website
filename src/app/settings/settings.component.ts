@@ -6,7 +6,7 @@ import { PushNotificationsService } from '../push-notifications.service';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MetaService } from '../helpers/meta/meta.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-settings',

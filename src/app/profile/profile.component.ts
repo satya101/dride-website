@@ -3,8 +3,8 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -14,7 +14,6 @@ import { MetaService } from '../helpers/meta/meta.service';
 import { PlayerComponent } from '../layout/components/player/player.component';
 
 import { introAnim } from '../router.animations';
-import 'rxjs/add/operator/take';
 
 @Component({
 	selector: 'app-profile',
@@ -115,9 +114,11 @@ export class ProfileComponent implements OnInit {
 
 			let wasSorted = false;
 			this.clips
-				.map(clips => {
-					return clips.map(clip => ({ key: clip.key, ...clip.payload.val() }));
-				})
+				.pipe(
+					map(clips => {
+						return clips.map(clip => ({ key: clip.key, ...clip.payload.val() }));
+					})
+				)
 				.subscribe(snapshot => {
 					if (!wasSorted) {
 						this.orderedClips = this.orderClipsByDate(snapshot);
@@ -407,7 +408,7 @@ export class ProfileComponent implements OnInit {
 			});
 			this.meta.addTag({
 				property: 'og:description',
-				content: data['plates'] ? data['plates'] : "This video doesn't have a description yet."
+				content: data['plates'] ? data['plates'] : 'This video doesn\'t have a description yet.'
 			});
 			this.meta.addTag({ property: 'og:image:width', content: '320' });
 			this.meta.addTag({ property: 'og:image:height', content: '176' });

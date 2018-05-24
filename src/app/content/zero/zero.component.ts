@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import 'rxjs/add/operator/map';
+
 import { environment } from '../../../environments/environment';
 import { MetaService } from '../../helpers/meta/meta.service';
 import { HttpClient } from '@angular/common/http';

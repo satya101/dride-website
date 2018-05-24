@@ -10,7 +10,7 @@ import { NgbdModalPayement } from './payment.modal';
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 import { MetaService } from '../../helpers/meta/meta.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 declare var StripeCheckout: any;
 

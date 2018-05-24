@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { finalize } from 'rxjs/operators';
 
 import { AuthService } from '../../auth.service';
 
@@ -12,7 +13,7 @@ import { introAnim } from '../../router.animations';
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 
 import { MetaService } from '../../helpers/meta/meta.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { NotificationsService } from 'angular2-notifications';
 import { Md5 } from 'ts-md5/dist/md5';
 import { SsrService } from '../../helpers/ssr/ssr.service';
@@ -162,6 +163,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		const file = event.target.files[0];
 		const fileType = file.name.split('.').pop();
 		const filePath = 'forum/' + this.firebaseUser.uid + '/' + Md5.hashStr(file.name) + '.' + fileType;
+		const fileRef = this.storage.ref(filePath);
 		const task = this.storage.upload(filePath, file);
 
 		// observe percentage changes
@@ -174,12 +176,18 @@ export class ThreadComponent implements OnInit, OnDestroy {
 			}
 		});
 		// get notified when the download URL is available
-		task.downloadURL().subscribe(url => {
-			console.log(url + '');
-			if (!this.replyBox) {
-				this.replyBox = '';
-			}
-			this.replyBox = this.replyBox.concat('\n![image](', url.toString(), ')');
-		});
+		task
+			.snapshotChanges()
+			.pipe(
+				finalize(() => {
+					const url = fileRef.getDownloadURL();
+					console.log(url + '');
+					if (!this.replyBox) {
+						this.replyBox = '';
+					}
+					this.replyBox = this.replyBox.concat('\n![image](', url.toString(), ')');
+				})
+			)
+			.subscribe();
 	}
 }
