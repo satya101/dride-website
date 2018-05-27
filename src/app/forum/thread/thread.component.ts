@@ -180,12 +180,12 @@ export class ThreadComponent implements OnInit, OnDestroy {
 			.snapshotChanges()
 			.pipe(
 				finalize(() => {
-					const url = fileRef.getDownloadURL();
-					console.log(url + '');
-					if (!this.replyBox) {
-						this.replyBox = '';
-					}
-					this.replyBox = this.replyBox.concat('\n![image](', url.toString(), ')');
+					fileRef.getDownloadURL().subscribe(url => {
+						if (!this.replyBox) {
+							this.replyBox = '';
+						}
+						this.replyBox = this.replyBox.concat('\n![image](', url.toString(), ')');
+					});
 				})
 			)
 			.subscribe();
