@@ -11,7 +11,7 @@ var cors = require('cors')({
 });
 var mobile = require('is-mobile');
 
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp();
 // grab the Mixpanel factory
 var Mixpanel = require('mixpanel');
 // create an instance of the mixpanel client
@@ -64,91 +64,114 @@ exports.viewCounter = functions.https.onRequest((req, res) => {
 /*
  * Add updated cmntsCount to threads & update the description for the thread with the latest post
  */
-exports.cmntsCount = functions.database.ref('/conversations/{threadId}/{conversationId}').onWrite(function(event) {
-	if (!event.params.threadId) {
-		console.log('not enough data');
-		return null;
-	}
-	// Only process data when it is first created.
-	if (event.data.previous.exists()) {
-		return;
-	}
-	return event.data.adminRef.root
-		.child('threads')
-		.child(event.params.threadId)
-		.child('slug')
-		.once('value')
-		.then(function(slug) {
-			var conv = event.data.val();
-			event.data.adminRef.root
-				.child('pushTokens')
-				.child(conv.autherId)
-				.child('value')
-				.once('value')
-				.then(function(pushToken) {
-					FCM.subscribeUserToTopic(pushToken.val(), slug.val());
-					mailer.subscribeUserToTopic(conv.autherId, event.params.threadId);
-					return event.data.adminRef.root
-						.child('conversations')
-						.child(event.params.threadId)
-						.once('value')
-						.then(function(conversation) {
-							//dispatch email
-							mailer.sendToTopic(event.params.threadId, event.params.threadId, conv);
-							var resObj = {
-								cmntsCount: conversation.numChildren(),
-								description: conv.body
-							};
-							//dispatch notifications
-							FCM.sendToTopic(slug.val(), pushToken.val());
+exports.cmntsCount = functions.database.ref('/conversations/{threadId}/{conversationId}').onWrite((change, context) => {
+	return new Promise((resolve, reject) => {
+		var promises = [];
+		if (!context.params.threadId) {
+			console.log('not enough data');
+			return null;
+		}
+		// Only process data when it is first created.
+		if (change.before.val()) {
+			return;
+		}
+		return change.after.ref.root
+			.child('threads')
+			.child(context.params.threadId)
+			.child('slug')
+			.once('value')
+			.then(function(slug) {
+				var conv = change.after.val();
+				change.after.ref.root
+					.child('pushTokens')
+					.child(conv.autherId)
+					.child('value')
+					.once('value')
+					.then(pushToken => {
+						// try {
+						// 	promises.push(FCM.subscribeUserToTopic(pushToken.val(), slug.val()));
+						// } catch (e) {
+						// 	console.error('fcm', e);
+						// }
+						try {
+							promises.push(mailer.subscribeUserToTopic(conv.autherId, context.params.threadId));
+						} catch (e) {
+							console.error('mailer', e);
+						}
 
-							if (conversation.numChildren() > 1) delete resObj['description'];
-							return event.data.adminRef.root
-								.child('threads')
-								.child(event.params.threadId)
-								.update(resObj);
-						});
-				});
-		});
+						Promise.all(promises).then(
+							res => {
+								console.log('subsribed all');
+								change.after.ref.root
+									.child('conversations')
+									.child(context.params.threadId)
+									.once('value')
+									.then(conversation => {
+										//dispatch email
+										mailer.sendToTopic(context.params.threadId, context.params.threadId, conv);
+										var resObj = {
+											cmntsCount: conversation.numChildren(),
+											description: conv.body
+										};
+										//dispatch notifications
+										//FCM.sendToTopic(slug.val(), pushToken.val());
+
+										if (conversation.numChildren() > 1) {
+											delete resObj['description'];
+										}
+										change.after.ref.root
+											.child('threads')
+											.child(context.params.threadId)
+											.update(resObj)
+											.then(res => resolve(res), err => reject(err));
+									});
+							},
+							err => reject(err)
+						);
+					});
+			});
+	});
 });
 /*
  * Add updated cmntsCount to clips
  */
 exports.cmntsCountVideo = functions.database
 	.ref('/conversations_video/{uid}/{videId}/{conversationId}')
-	.onWrite(function(event) {
-		if (!event.params.videId || !event.params.uid || !event.params.conversationId) {
+	.onWrite((change, context) => {
+		if (!context.params.videId || !context.params.uid || !context.params.conversationId) {
 			console.log('not enough data');
 			return null;
 		}
-		event.data.adminRef.root
-			.child('conversations_video/' + event.params.uid + '/' + event.params.videId)
+		change.after.ref.root
+			.child('conversations_video/' + context.params.uid + '/' + context.params.videId)
 			.once('value')
-			.then(function(conversationVideo) {
-				event.data.adminRef.root
-					.child('clips/' + event.params.uid + '/' + event.params.videId + '/cmntsCount')
+			.then(conversationVideo => {
+				change.after.ref.root
+					.child('clips/' + context.params.uid + '/' + context.params.videId + '/cmntsCount')
 					.set(conversationVideo.numChildren());
+
 				var r = {};
-				r[event.params.conversationId] = event.data.val();
-				event.data.adminRef.root.child('clips/' + event.params.uid + '/' + event.params.videId + '/comments').set(r);
+				r[context.params.conversationId] = change.after.val();
+				change.after.ref.root.child('clips/' + context.params.uid + '/' + context.params.videId + '/comments').set(r);
 			});
-		return event.data.adminRef.root
+
+		return change.after.ref.root
 			.child('clips')
-			.child(event.params.uid)
-			.child(event.params.videId)
+			.child(context.params.uid)
+			.child(context.params.videId)
 			.child('lastUpdate')
 			.set(new Date().getTime());
 	});
 /*
  *   Save users data upon register
  */
-exports.saveNewUserData = functions.auth.user().onCreate(function(event) {
+exports.saveNewUserData = functions.auth.user().onCreate((snap, context) => {
 	return new Promise((resolve, reject) => {
-		var user = event.data; // The Firebase user.
+		var user = snap.val(); // The Firebase user.
 		var usersRef = admin
 			.database()
 			.ref('userData')
-			.child(event.data.uid);
+			.child(user.uid);
 
 		var resObj = {
 			name: user.displayName, //anonymizer.getRandomName()
@@ -171,7 +194,7 @@ exports.saveNewUserData = functions.auth.user().onCreate(function(event) {
 				$last_name: flName.length > 0 ? flName[1] : '',
 				$created: new Date().toISOString(),
 				email: user.email,
-				distinct_id: event.data.uid
+				distinct_id: user.uid
 			});
 		});
 
@@ -184,53 +207,58 @@ exports.saveNewUserData = functions.auth.user().onCreate(function(event) {
 /*
  * Anonymise a user upon request
  */
-exports.anonymizer = functions.database.ref('/userData/{uid}/anonymous').onWrite(function(event) {
-	if (!event.params.uid) {
+exports.anonymizer = functions.database.ref('/userData/{uid}/anonymous').onWrite((change, context) => {
+	if (!context.params.uid) {
 		console.log('not enough data');
 		return null;
 	}
-	var anonymStatus = event.data.val();
-	return anonymizer.start(anonymStatus, event.params.uid);
+	var anonymStatus = change.after.val();
+	return anonymizer.start(anonymStatus, context.params.uid);
 });
 /*
  * remove clips on event
  */
-exports.deleteVideo = functions.database.ref('/clips/{uid}/{videoId}/deleted').onWrite(function(event) {
-	if (!event.params.uid || !event.params.videoId) {
+exports.deleteVideo = functions.database.ref('/clips/{uid}/{videoId}/deleted').onWrite((change, context) => {
+	if (!context.params.uid || !context.params.videoId) {
 		console.log('not enough data');
 		return null;
 	}
-	var clipDeleteStatus = event.data.val();
-	if (clipDeleteStatus) return cloud.remvoeClip(event.params.videoId, event.params.uid);
+	var clipDeleteStatus = change.after.val();
+	if (clipDeleteStatus) return cloud.remvoeClip(context.params.videoId, context.params.uid);
 });
 /*
  * move clip to the homePage
  */
-exports.copyToHP = functions.database.ref('/clips/{uid}/{videoId}').onWrite(function(event) {
+exports.copyToHP = functions.database.ref('/clips/{uid}/{videoId}').onWrite((change, context) => {
 	// Exit when the data is deleted.
-	if (!event.data.exists()) {
+	if (!change.before.val()) {
 		return;
 	}
-	if (!event.params.uid || !event.params.videoId) {
+
+	if (!context.params.uid || !context.params.videoId) {
 		console.log('not enough data');
-		return null;
+		return;
 	}
-	console.log('copy ' + event.params.videoId);
-	var clip = event.data.val();
-	if (clip.homepage) return cloud.copyToHP(event.params.videoId, event.params.uid, clip, clip.hpRef);
+	console.log('copy ' + context.params.videoId);
+	var clip = change.after.val();
+	if (clip && clip.homepage) {
+		return cloud.copyToHP(context.params.videoId, context.params.uid, clip, clip.hpRef);
+	} else {
+		return;
+	}
 });
 
-exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips').onCreate(function(event) {
+exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips').onCreate((snap, context) => {
 	let promiseCollector = [];
 	return new Promise((resolve, reject) => {
-		if (!event.params.uid || !event.params.videoId) {
+		if (!snap.params.uid || !snap.params.videoId) {
 			console.error('not enough data');
 			resolve();
 			return;
 		}
 
-		uid = event.params.uid;
-		filename = event.params.videoId;
+		uid = snap.params.uid;
+		filename = snap.params.videoId;
 
 		request('http://34.249.141.56:8080/processVideo/' + uid + '/' + filename, function(error, response, body) {
 			console.log('error:', error); // Print the error if one occurred
@@ -245,17 +273,17 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips').on
 	});
 });
 
-exports.notifyVideoUploaded = functions.database.ref('/clips/{uid}/{videoId}/processed').onWrite(function(event) {
+exports.notifyVideoUploaded = functions.database.ref('/clips/{uid}/{videoId}/processed').onWrite((change, context) => {
 	return new Promise((resolve, reject) => {
 		let promiseCollector = [];
 
-		if (!event.params.uid || !event.params.videoId) {
+		if (!context.params.uid || !context.params.videoId) {
 			reject('{"err": "not enough data"}');
 			return;
 		}
 
-		const uid = event.params.uid;
-		const filename = event.params.videoId;
+		const uid = context.params.uid;
+		const filename = context.params.videoId;
 		cloud.isProcessed(uid, filename).then(
 			isProcessed => {
 				if (isProcessed != 'true' && isProcessed !== true) {
