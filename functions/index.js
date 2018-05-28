@@ -165,9 +165,8 @@ exports.cmntsCountVideo = functions.database
 /*
  *   Save users data upon register
  */
-exports.saveNewUserData = functions.auth.user().onCreate((snap, context) => {
+exports.saveNewUserData = functions.auth.user().onCreate((user, context) => {
 	return new Promise((resolve, reject) => {
-		var user = snap.val(); // The Firebase user.
 		var usersRef = admin
 			.database()
 			.ref('userData')
@@ -251,14 +250,14 @@ exports.copyToHP = functions.database.ref('/clips/{uid}/{videoId}').onWrite((cha
 exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips').onCreate((snap, context) => {
 	let promiseCollector = [];
 	return new Promise((resolve, reject) => {
-		if (!snap.params.uid || !snap.params.videoId) {
+		if (!context.params.uid || !context.params.videoId) {
 			console.error('not enough data');
 			resolve();
 			return;
 		}
 
-		uid = snap.params.uid;
-		filename = snap.params.videoId;
+		uid = context.params.uid;
+		filename = context.params.videoId;
 
 		request('http://34.249.141.56:8080/processVideo/' + uid + '/' + filename, function(error, response, body) {
 			console.log('error:', error); // Print the error if one occurred
