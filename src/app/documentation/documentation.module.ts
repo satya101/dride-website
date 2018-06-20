@@ -15,10 +15,10 @@ import { PublishComponent } from './pages/publish/publish.component';
 import { UniversalComponent } from './pages/drideUniversal/universal.component';
 import { AssemblyComponent } from './pages/assembly/assembly.component';
 import { SideNavComponent } from './layout/side-nav.component';
-import { PageService } from './pages.service';
 import { DocsPageDirective } from './pages.directive';
 import { ApiComponent } from './pages/api/api.component';
 import { HackingComponent } from './pages/hacking/hacking.component';
+import { PageService } from './pages.service';
 
 import { CodeComponent } from '../helpers/code/code.component';
 
@@ -32,56 +32,48 @@ import { MarkdownModule } from 'ngx-markdown';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
-	imports: [routing,
-		FormsModule,
-		CommonModule,
-		SimpleNotificationsModule,
-		MarkdownModule.forRoot()],
+	imports: [routing, FormsModule, CommonModule, SimpleNotificationsModule, MarkdownModule.forRoot()],
 	declarations: [
-					DocumentationComponent,
-					CodeComponent,
-					DocsMainComponent,
-					AdasComponent,
-					AssistantComponent,
-					ConnectivityComponent,
-					DrideCloudComponent,
-					DrideOSComponent,
-					GettingStartedComponent,
-					IndicatorsComponent,
-					ManualSetupComponent,
-					PublishComponent,
-					AssemblyComponent,
-					SideNavComponent,
-					DocsPageDirective,
-					ShowOnHomePage,
-					UniversalComponent,
-					EditMeDirective,
-					SubscribeBoxComponent,
-					ApiComponent,
-					HackingComponent
-				],
-				entryComponents: [
-					DocsMainComponent,
-					AdasComponent,
-					AssistantComponent,
-					ConnectivityComponent,
-					DrideCloudComponent,
-					DrideOSComponent,
-					GettingStartedComponent,
-					IndicatorsComponent,
-					ManualSetupComponent,
-					PublishComponent,
-					UniversalComponent,
-					AssemblyComponent,
-					SubscribeBoxComponent,
-					ApiComponent,
-					CodeComponent,
-					HackingComponent
-				],
-				providers: [
-					SideNavComponent,
-					PageService,
-					CookieService
-				]
+		DocumentationComponent,
+		CodeComponent,
+		DocsMainComponent,
+		AdasComponent,
+		AssistantComponent,
+		ConnectivityComponent,
+		DrideCloudComponent,
+		DrideOSComponent,
+		GettingStartedComponent,
+		IndicatorsComponent,
+		ManualSetupComponent,
+		PublishComponent,
+		AssemblyComponent,
+		SideNavComponent,
+		DocsPageDirective,
+		ShowOnHomePage,
+		UniversalComponent,
+		EditMeDirective,
+		SubscribeBoxComponent,
+		ApiComponent,
+		HackingComponent
+	],
+	entryComponents: [
+		DocsMainComponent,
+		AdasComponent,
+		AssistantComponent,
+		ConnectivityComponent,
+		DrideCloudComponent,
+		DrideOSComponent,
+		GettingStartedComponent,
+		IndicatorsComponent,
+		ManualSetupComponent,
+		PublishComponent,
+		UniversalComponent,
+		AssemblyComponent,
+		SubscribeBoxComponent,
+		ApiComponent,
+		CodeComponent,
+		HackingComponent
+	],
+	providers: [PageService, SideNavComponent, CookieService]
 })
-export class DocumentationModule { }
+export class DocumentationModule {}

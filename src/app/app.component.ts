@@ -1,7 +1,6 @@
 import { filter } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { MixpanelService } from './helpers/mixpanel/mixpanel.service';

@@ -1,91 +1,91 @@
 <div class="cloudMain greyBg" [ngClass]="{'notFull': !isFull}">
-  <div class="container-fluid p-0">
+	<div class="container-fluid p-0">
 
 
-    <div class="row">
-      <div class="col-md-12 p-0">
+		<div class="row">
+			<div class="col-md-12 p-0">
 
 
-        <div class="container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" [scrollWindow]="true" (scrolled)="hpClips.nextPage()"
-          [infiniteScrollDisabled]="!isFull" [immediateCheck]="true">
+				<div class="container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" [scrollWindow]="true" (scrolled)="hpClips.nextPage()"
+				 [infiniteScrollDisabled]="!isFull" [immediateCheck]="true">
 
-          <div class="col-md-offset-2 col-md-8 mx-auto">
-            <h2 class="bVideosT">Best Videos Today</h2>
-          </div>
-          <div *ngIf="hpClips.items" class="phpt row">
-            <div class="whiteBg p-0 animBox mx-auto" *ngFor="let currentVideo of hpClips.items;  index as key" [ngClass]="{'col-md-offset-2 col-md-8': isFull, 'halfPageCloud': !isFull}"
-              [@introAnim]>
-              <span *ngIf="isFull" class="icon-toyCar-1 float-right"></span>
-              <div class="box mainVid">
-                <app-player [currentVideo]="currentVideo" [currentTime]="currentVideo.s" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
-              </div>
-              <div class="box" *ngIf="currentVideo">
-                <div class="actionBar innerPad">
-                  <div class="views float-left">
-                    <label>{{currentVideo.views | number:0}} Views </label> &nbsp;&nbsp;&nbsp;
-                    <label *ngIf="currentVideo.cmntsCount" class="hidden-xs-down" (click)="commentFoucs('replyBox'+key)">{{currentVideo.cmntsCount | number:0}} Comments</label>
-                  </div>
-                  <ul class="float-right actions">
-                    <li (click)="fbShare(currentVideo.op, currentVideo.videoId)">
-                      <span class="icon-facebookMedium shareIcon"></span>
-                    </li>
-                    <li (click)="twShare(currentVideo.op, currentVideo.videoId)">
-                      <span class="icon-twitterMedium shareIcon"></span>
-                    </li>
-                    <li *ngIf="isOwner(currentVideo.op)" (click)="removeClip(currentVideo.op, currentVideo.videoId, key)">
-                      <span class="icon-trash-can"></span>
-                    </li>
-                  </ul>
-                  <div class="clear"></div>
-                </div>
-
-
-                <div class="cmntsBox innerPad">
-                  <div *ngFor="let node of currentVideo.comments | keys;" class="listItem">
-                    <div class="bubble">
-                      <div class="auther float-left pl">
-                        <img src="{{currentVideo.comments[node].pic}}" alt="{{currentVideo.comments[node].auther}}" />
-                      </div>
-                      <div class="ago">{{node.timestamp | timeAgo}}</div>
-                      <a class="bold" href="profile/{{currentVideo.comments[node].autherId}}">@{{currentVideo.comments[node].auther}}</a>
-                      <div class="bdy" ng-bind-html2="currentVideo.comments[node].body | markdown">{{currentVideo.comments[node].body}}</div>
-
-                    </div>
-                    <!-- <div class="connectorLine" *ngIf="conversationPreviusIsMine[key]"></div> -->
-                  </div>
-                  <label *ngIf="currentVideo && currentVideo.comments.length == 0" class="firstToCmnt m-xs-0">Be the first to comment</label>
-                  <p *ngIf="currentVideo.loadMore" class="moreCmnts" (click)="loadMoreComments(currentVideo.op, currentVideo.videoId, key)">
-                    Load More Comments
-                  </p>
+					<div class="col-md-offset-2 col-md-8 mx-auto">
+						<h2 class="bVideosT">Best Videos Today</h2>
+					</div>
+					<div *ngIf="hpClips.items" class="phpt row">
+						<div class="whiteBg p-0 animBox mx-auto" *ngFor="let currentVideo of hpClips.items;  index as key" [ngClass]="{'col-md-offset-2 col-md-8': isFull, 'halfPageCloud': !isFull}"
+						 [@introAnim]>
+							<span *ngIf="isFull" class="icon-toyCar-1 float-right"></span>
+							<div class="box mainVid">
+								<app-player [currentVideo]="currentVideo" [currentTime]="currentVideo.s" [tag]="!isFull ? 'HP': 'Cloud'"></app-player>
+							</div>
+							<div class="box" *ngIf="currentVideo">
+								<div class="actionBar innerPad">
+									<div class="views float-left">
+										<label>{{currentVideo.views | number:0}} Views </label> &nbsp;&nbsp;&nbsp;
+										<label *ngIf="currentVideo.cmntsCount" class="hidden-xs-down" (click)="commentFoucs('replyBox'+key)">{{currentVideo.cmntsCount | number:0}} Comments</label>
+									</div>
+									<ul class="float-right actions">
+										<li (click)="fbShare(currentVideo.op, currentVideo.videoId)">
+											<span class="icon-facebookMedium shareIcon"></span>
+										</li>
+										<li (click)="twShare(currentVideo.op, currentVideo.videoId)">
+											<span class="icon-twitterMedium shareIcon"></span>
+										</li>
+										<li *ngIf="isOwner(currentVideo.op)" (click)="removeClip(currentVideo.op, currentVideo.videoId, key)">
+											<span class="icon-trash-can"></span>
+										</li>
+									</ul>
+									<div class="clear"></div>
+								</div>
 
 
-                </div>
-                <div class="postBox">
-                  <div class="wrapReplyBox mt-0">
-                    <textarea autosize [fixPadding]="8" id="replyBox{{key}}" ctrl-enter="sendComment(currentVideo.op, currentVideo.videoId, replyBox[key], key)"
-                      class="form-control replyBox mt-0" [(ngModel)]="replyBox[key]" type="text" name="reply" placeholder="What's on your mind?"></textarea>
-                    <button class="btn btn-dride-black sendBtn float-right" (click)="sendComment(currentVideo.op,currentVideo.videoId, replyBox[key], key)">Send</button>
-                  </div>
-                </div>
+								<div class="cmntsBox innerPad">
+									<div *ngFor="let node of currentVideo.comments | keys;" class="listItem">
+										<div class="bubble">
+											<div class="auther float-left pl">
+												<img src="{{currentVideo.comments[node].pic}}" alt="{{currentVideo.comments[node].auther}}" />
+											</div>
+											<div class="ago">{{node.timestamp | timeAgo}}</div>
+											<a class="bold" href="profile/{{currentVideo.comments[node].autherId}}">@{{currentVideo.comments[node].auther}}</a>
+											<div class="bdy" ng-bind-html2="currentVideo.comments[node].body | markdown">{{currentVideo.comments[node].body}}</div>
+
+										</div>
+										<!-- <div class="connectorLine" *ngIf="conversationPreviusIsMine[key]"></div> -->
+									</div>
+									<label *ngIf="currentVideo && currentVideo.comments.length == 0" class="firstToCmnt m-xs-0">Be the first to comment</label>
+									<p *ngIf="currentVideo.loadMore" class="moreCmnts" (click)="loadMoreComments(currentVideo.op, currentVideo.videoId, key)">
+										Load More Comments
+									</p>
 
 
-                <div class="clear"></div>
+								</div>
+								<div class="postBox">
+									<div class="wrapReplyBox mt-0">
+										<textarea autosize [fixPadding]="8" id="replyBox{{key}}" ctrl-enter="sendComment(currentVideo.op, currentVideo.videoId, replyBox[key], key)"
+										 class="form-control replyBox mt-0" [(ngModel)]="replyBox[key]" type="text" name="reply" placeholder="What's on your mind?"></textarea>
+										<button class="btn btn-dride-black sendBtn float-right" (click)="sendComment(currentVideo.op,currentVideo.videoId, replyBox[key], key)">Send</button>
+									</div>
+								</div>
 
 
-              </div>
+								<div class="clear"></div>
 
 
-            </div>
-          </div>
+							</div>
 
 
-        </div>
+						</div>
+					</div>
 
 
-        <div class="text-center" *ngIf="hpClips.busy">Loading data...</div>
+				</div>
 
-      </div>
-    </div>
-  </div>
+
+				<div class="text-center" *ngIf="hpClips.busy">Loading data...</div>
+
+			</div>
+		</div>
+	</div>
 
 </div>

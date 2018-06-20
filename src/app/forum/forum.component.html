@@ -1,44 +1,64 @@
 <div class="container-fluid forum" [ngClass]="isFull ? 'greyBg vh': 'half'">
-    <div class="container">
-        <div class="clear spacer25"></div>
-        <div class="col-xs-12" *ngIf="isFull">
-            <ul class="sorter">
+	<div class="container">
+		<div class="clear spacer25"></div>
+		<div class="searchRow" *ngIf="isFull">
+			<!-- <ul class="sorter">
                 <li class="selected">New</li>
                 <li class="disabled">Trending</li>
                 <li class="disabled">Most Viewed</li>
-            </ul>
-        </div>
-        <div class="float-right" *ngIf="isFull">
-            <button class="btn btn-dride-black ask" (click)="ask()">Ask A Question</button>
-        </div>
-        <div class="clear spacer25"></div>
-        <div class="col-md-12 p-0">
-            <div class="posts">
-				<a class="post animBox row mx-auto" *ngFor="let post of threads" routerLink="/forum/{{post.slug}}"
-				 [@introAnim]
-				 [hidden]="!post.description"
-				 >
-					<div *ngIf="post.promo"> 
+			</ul> -->
+
+			<form>
+				<div class="form-row align-items-center">
+					<div class="col-12 pt0">
+						<label class="sr-only" for="inlineFormInputGroupUsername">Search</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text srchBtn">
+									<span class="icon-search2"></span>
+								</div>
+							</div>
+							<input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Search">
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<!-- <ais-instantsearch>
+				<ais-search-box></ais-search-box>
+				<ais-hits></ais-hits>
+			</ais-instantsearch> -->
+
+		</div>
+		<div class="float-right" *ngIf="isFull">
+			<button class="btn btn-dride-black ask" (click)="ask()">Ask A Question</button>
+		</div>
+		<div class="clear spacer25"></div>
+		<div class="col-md-12 p-0">
+			<div class="posts" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [infiniteScrollDisabled]="!isFull"
+			 (scrolled)="onScroll()">
+				<a class="post animBox row mx-auto" *ngFor="let post of threads" routerLink="/forum/{{post.slug}}" [@introAnim] [hidden]="!post.description">
+					<div *ngIf="post.promo">
 						<img class="img-fluid" [src]="post.promo" />
 					</div>
 					<div class="col-md-2 hidden-sm-down usr pad10 partRow1">
-                        <span class="cmntCount">{{post.cmntsCount}}</span>
-                        <span>Comments</span>
-                    </div>
-                    <div class="col-md-10 col-sm-12 padS40 partRow2">
-                        <h2>
+						<span class="cmntCount">{{post.cmntsCount}}</span>
+						<span>Comments</span>
+					</div>
+					<div class="col-md-10 col-sm-12 padS40 partRow2">
+						<h2>
 							{{post.title | truncate : 60 : "…"}}
 							<span *ngFor="let label of post.labels" class="badge" [ngClass]="getColor(label)">
 								{{label}}
 							</span>
 							<span class="ago hidden-xs-down">{{post.lastUpdate | timeAgo}}</span>
 						</h2>
-                        <p class="promoDesc" >
-                            {{post.description | truncate : 150 : "…" }}
-                        </p>
-                    </div>
-                </a>
-                <div *ngIf="!threads || !threads.length" class="loadersLines mx-auto" >
+						<p class="promoDesc">
+							{{post.description | truncate : 150 : "…" }}
+						</p>
+					</div>
+				</a>
+				<div *ngIf="!(threads) " class="loadersLines mx-auto">
 					<div *ngFor="let i of [1,2,3,4]">
 						<div class="timeline-wrapper">
 							<div class="timeline-item">
@@ -52,9 +72,8 @@
 							</div>
 						</div>
 					</div>
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-

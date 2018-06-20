@@ -8,7 +8,33 @@
 	.spacer25 {
 		margin-bottom: 25px;
 	}
-
+	.searchRow {
+		float: left;
+		width: 78%;
+		input {
+			height: 34px;
+			background-color: #f9f9f9;
+			border: 0;
+			border-bottom: 1px solid #dcdcdc;
+			border-radius: 0;
+			outline: none;
+			outline-style: none;
+			box-shadow: none;
+		}
+		.srchBtn {
+			background-color: #f9f9f9;
+			border: 0;
+			border-bottom: 1px solid #dcdcdc;
+			border-radius: 0;
+			color: #dcdcdc;
+		}
+		input::placeholder {
+			color: #dcdcdc;
+		}
+	}
+	.pt0 {
+		margin-top: 0 !important;
+	}
 	.post {
 		background: #fff;
 		border-radius: 3px;

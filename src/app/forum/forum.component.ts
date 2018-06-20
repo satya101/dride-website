@@ -1,14 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import * as firebase from 'firebase/app';
-
-import { AuthService } from '../auth.service';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { introAnim } from '../router.animations';
 
@@ -16,6 +10,8 @@ import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 
 import { NgbdModalAskInForum } from './askInForum.modal';
 import { MetaService } from '../helpers/meta/meta.service';
+
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-forum',
@@ -25,10 +21,19 @@ import { MetaService } from '../helpers/meta/meta.service';
 })
 export class ForumComponent implements OnInit {
 	@Input() isFull = true;
-	threads: any;
+	threads = [];
+	public limitToLast = 6;
+	public lastThreadCreated = 9000000000000;
+
+	algoliaConfig: {
+		apiKey: '1c7d7f8c960f3ee5bfd5acc752a793ea';
+		appId: 'S2I95AGWAJ';
+		indexName: 'forum';
+		routing: true;
+	};
 
 	constructor(
-		private db: AngularFireDatabase,
+		private db: AngularFirestore,
 		private modalService: BsModalService,
 		public mixpanel: MixpanelService,
 		private meta: MetaService
@@ -36,21 +41,27 @@ export class ForumComponent implements OnInit {
 
 	ngOnInit() {
 		if (this.isFull) {
-			this.meta.set('Forum', "A community page for Dride users's");
+			this.meta.set('Forum', 'A community page for Dride users\'s');
 		}
-		const limitToLast = this.isFull ? 200 : 6;
+		this.limitToLast = this.isFull ? 20 : 6;
+		this.getThreads(this.limitToLast);
+	}
 
+	getThreads(limitToLast: number) {
 		this.db
-			.list('/threads', ref => ref.orderByChild('lastUpdate').limitToLast(limitToLast))
+			.collection('forum', ref =>
+				ref
+					.where('hidden', '==', false)
+					.orderBy('created', 'desc')
+					.limit(limitToLast)
+					.where('created', '<', this.lastThreadCreated)
+			)
 			.valueChanges()
-			.subscribe((arr: any) => {
-				const res = [];
-				arr.forEach(element => {
-					if (!element.hidden) {
-						res.unshift(element);
-					}
-				});
-				this.threads = res;
+			.subscribe(nodes => {
+				this.threads = this.threads.concat(nodes);
+				if (nodes.length) {
+					this.lastThreadCreated = nodes[nodes.length - 1]['created'];
+				}
 			});
 	}
 
@@ -73,5 +84,10 @@ export class ForumComponent implements OnInit {
 		}
 
 		return 'badge-secondary';
+	}
+
+	onScroll() {
+		this.limitToLast += 20;
+		this.getThreads(this.limitToLast);
 	}
 }

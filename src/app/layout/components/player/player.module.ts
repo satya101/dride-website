@@ -6,23 +6,11 @@ import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 
-import { PlayerComponent } from './player.component'
-import { MixpanelService } from '../../../helpers/mixpanel/mixpanel.service';
-
-
+import { PlayerComponent } from './player.component';
 
 @NgModule({
-	imports: [
-		VgCoreModule,
-		VgControlsModule,
-		VgOverlayPlayModule,
-		VgBufferingModule,
-		CommonModule
-	],
-	providers: [
-		MixpanelService,
-		VgAPI
-	],
+	imports: [VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule, CommonModule],
+	providers: [VgAPI],
 	declarations: [PlayerComponent],
 	exports: [PlayerComponent]
 })

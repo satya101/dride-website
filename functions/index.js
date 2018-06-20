@@ -25,6 +25,12 @@ var viewCounter = require(__dirname + '/cloud/viewCount.js');
 var getThumb = require(__dirname + '/cloud/getThumb.js');
 var purchase = require(__dirname + '/purchase/purchase.js');
 
+var algoliasearch = require('algoliasearch');
+
+const ALGOLIA_ID = functions.config().algolia.app_id;
+const ALGOLIA_ADMIN_KEY = functions.config().algolia.api_key;
+const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
+
 /*
  *	HTTP endpoint to subscribe a user to mailing list
  */
@@ -64,74 +70,75 @@ exports.viewCounter = functions.https.onRequest((req, res) => {
 /*
  * Add updated cmntsCount to threads & update the description for the thread with the latest post
  */
-exports.cmntsCount = functions.database.ref('/conversations/{threadId}/{conversationId}').onWrite((change, context) => {
-	return new Promise((resolve, reject) => {
-		var promises = [];
-		if (!context.params.threadId) {
-			console.log('not enough data');
-			return null;
-		}
-		// Only process data when it is first created.
-		if (change.before.val()) {
-			return;
-		}
-		return change.after.ref.root
-			.child('threads')
-			.child(context.params.threadId)
-			.child('slug')
-			.once('value')
-			.then(function(slug) {
-				var conv = change.after.val();
-				change.after.ref.root
-					.child('pushTokens')
-					.child(conv.autherId)
-					.child('value')
-					.once('value')
-					.then(pushToken => {
-						// try {
-						// 	promises.push(FCM.subscribeUserToTopic(pushToken.val(), slug.val()));
-						// } catch (e) {
-						// 	console.error('fcm', e);
-						// }
-						try {
-							promises.push(mailer.subscribeUserToTopic(conv.autherId, context.params.threadId));
-						} catch (e) {
-							console.error('mailer', e);
-						}
+exports.cmntsCount = functions.firestore
+	.document('forum/{threadId}/conversations/{conversationId}')
+	.onWrite((change, context) => {
+		return new Promise((resolve, reject) => {
+			var promises = [];
+			if (!context.params.threadId) {
+				console.log('not enough data');
+				reject();
+				return null;
+			}
+			// Only process data when it is first created.
+			if (change.before.data()) {
+				reject();
+				return;
+			}
+			var db = admin.firestore();
+			var rtdb = admin.database();
 
-						Promise.all(promises).then(
-							res => {
-								console.log('subsribed all');
-								change.after.ref.root
-									.child('conversations')
-									.child(context.params.threadId)
-									.once('value')
-									.then(conversation => {
-										//dispatch email
-										mailer.sendToTopic(context.params.threadId, context.params.threadId, conv);
-										var resObj = {
-											cmntsCount: conversation.numChildren(),
-											description: conv.body
-										};
-										//dispatch notifications
-										//FCM.sendToTopic(slug.val(), pushToken.val());
+			var conv = change.after.data();
 
-										if (conversation.numChildren() > 1) {
-											delete resObj['description'];
-										}
-										change.after.ref.root
-											.child('threads')
-											.child(context.params.threadId)
-											.update(resObj)
-											.then(res => resolve(res), err => reject(err));
-									});
-							},
-							err => reject(err)
-						);
-					});
-			});
+			rtdb
+				.ref('pushTokens')
+				.child(conv.autherId)
+				.child('value')
+				.once('value')
+				.then(pushToken => {
+					// try {
+					// 	promises.push(FCM.subscribeUserToTopic(pushToken.val(), slug.val()));
+					// } catch (e) {
+					// 	console.error('fcm', e);
+					// }
+					try {
+						promises.push(mailer.subscribeUserToTopic(conv.autherId, context.params.threadId));
+					} catch (e) {
+						console.error('mailer', e);
+					}
+
+					Promise.all(promises).then(
+						res => {
+							console.log('subsribed all');
+							db.collection('forum')
+								.doc(context.params.threadId)
+								.collection('conversations')
+								.get()
+								.then(conversation => {
+									//dispatch email
+									mailer.sendToTopic(context.params.threadId, context.params.threadId, conv);
+									var resObj = {
+										cmntsCount: conversation.size,
+										description: conv.body
+									};
+									//dispatch notifications
+									//FCM.sendToTopic(slug.val(), pushToken.val());
+
+									if (conversation.size > 1) {
+										delete resObj['description'];
+									}
+									console.log('update forum', resObj);
+									db.collection('forum')
+										.doc(context.params.threadId)
+										.update(resObj)
+										.then(res => resolve(res), err => reject(err));
+								});
+						},
+						err => reject(err)
+					);
+				});
+		});
 	});
-});
 /*
  * Add updated cmntsCount to clips
  */
@@ -450,3 +457,22 @@ exports.metaService = functions.https.onRequest((req, res) => {
 		res.status(200).sendFile(path.resolve('dist/index.html'));
 	}
 });
+
+// Update the search index every time a blog post is written.
+exports.onForumUpdate = functions.database
+	.ref('/conversations/{threadId}/{conversationId}')
+	.onCreate((snap, context) => {
+		// Get the post document
+		const data = snap.val();
+		const post = {
+			body: data.body,
+			auther: data.auther,
+			timestamp: data.timestamp,
+			threadId: context.params.threadId,
+			objectID: context.params.conversationId
+		};
+
+		// Write to the algolia index
+		const index = client.initIndex('forum');
+		return index.saveObject(post);
+	});

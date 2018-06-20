@@ -21,24 +21,17 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import 'firebase/messaging';
 
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { NgAisModule } from 'angular-instantsearch';
 
 import { AppComponent } from './app.component';
-
-import { AuthService, NgbdModalLogin } from './auth.service';
-
-import { PushNotificationsService } from './push-notifications.service';
-import { MetaService } from './helpers/meta/meta.service';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { NavComponent } from './layout/nav/nav.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { MixpanelService } from './helpers/mixpanel/mixpanel.service';
 
 import { routing } from './app.routing';
 import { SharedModule } from './helpers/shared.module';
-
-import { SsrService } from './helpers/ssr/ssr.service';
 
 import { NgbdModalPayement } from './store/product/payment.modal';
 import { NgbdModalAskInForum } from './forum/askInForum.modal';
@@ -59,7 +52,6 @@ export class RavenErrorHandler implements ErrorHandler {
 	declarations: [
 		AppComponent,
 		PageNotFoundComponent,
-		NgbdModalLogin,
 		NgbdModalPayement,
 		NgbdModalAskInForum,
 		NgbdModalAskToSubscribe,
@@ -82,10 +74,11 @@ export class RavenErrorHandler implements ErrorHandler {
 		FormsModule,
 		UiSwitchModule,
 		SharedModule,
-		SimpleNotificationsModule.forRoot()
+		SimpleNotificationsModule.forRoot(),
+		NgAisModule.forRoot()
 	],
-	providers: [AuthService, PushNotificationsService, MixpanelService, SsrService, MetaService, CookieService],
+	providers: [CookieService],
 	bootstrap: [AppComponent],
-	entryComponents: [NgbdModalLogin, NgbdModalPayement, NgbdModalAskInForum, NgbdModalAskToSubscribe]
+	entryComponents: [NgbdModalPayement, NgbdModalAskInForum, NgbdModalAskToSubscribe]
 })
 export class AppModule {}

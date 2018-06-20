@@ -12,7 +12,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { MixpanelService } from './helpers/mixpanel/mixpanel.service';
 import { NotificationsService } from 'angular2-notifications';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 	closeResult: string;
 	private _modal: BsModalRef;

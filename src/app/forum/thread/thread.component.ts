@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Location } from '@angular/common';
 import { finalize } from 'rxjs/operators';
 
 import { AuthService } from '../../auth.service';
 
+import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireStorage } from 'angularfire2/storage';
 
@@ -25,7 +26,7 @@ import { SsrService } from '../../helpers/ssr/ssr.service';
 	animations: [introAnim]
 })
 export class ThreadComponent implements OnInit, OnDestroy {
-	currentThread: Observable<any[]>;
+	currentThread: Observable<any>;
 	conversation: Observable<any[]>;
 	public threadId: string;
 	public conversationPreviusIsMine: Array<boolean> = [];
@@ -38,8 +39,8 @@ export class ThreadComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private route: ActivatedRoute,
-		public db: AngularFireDatabase,
-		private location: Location,
+		public db: AngularFirestore,
+		public rtdb: AngularFireDatabase,
 		private router: Router,
 		private auth: AuthService,
 		public mixpanel: MixpanelService,
@@ -68,10 +69,12 @@ export class ThreadComponent implements OnInit, OnDestroy {
 			if (this.threadId === params['slug']) {
 				this.threadId = params['slug'].split('__').pop();
 			}
+
 			this.db
-				.object<any>('/threads/' + this.threadId)
+				.collection('forum')
+				.doc(this.threadId)
 				.valueChanges()
-				.subscribe(snapshot => {
+				.subscribe((snapshot: any) => {
 					if (!snapshot) {
 						this.router.navigate(['/page-not-found']);
 					} else {
@@ -80,8 +83,16 @@ export class ThreadComponent implements OnInit, OnDestroy {
 					}
 				});
 
-			this.currentThread = this.db.object<any>('/threads/' + this.threadId).valueChanges();
-			this.conversation = this.db.list('/conversations/' + this.threadId).valueChanges();
+			this.currentThread = this.db
+				.collection('forum')
+				.doc(this.threadId)
+				.valueChanges();
+
+			this.conversation = this.db
+				.collection('forum')
+				.doc(this.threadId)
+				.collection('conversations', ref => ref.orderBy('timestamp', 'asc'))
+				.valueChanges();
 
 			this.conversation.subscribe(snapshot => {
 				this.sideThreadByAuther(snapshot, this.conversationPreviusIsMine);
@@ -114,15 +125,18 @@ export class ThreadComponent implements OnInit, OnDestroy {
 		this.auth.verifyLoggedIn().then(res => {
 			this.getUserData(this.firebaseUser.uid).subscribe((userData: any) => {
 				if (this.replyBox) {
-					this.db.list('conversations/' + this.threadId).push({
-						autherId: this.firebaseUser.uid,
-						auther: this.firebaseUser.displayName,
-						pic: userData.photoURL,
-						body: this.replyBox,
-						timestamp: new Date().getTime(),
-						fid: this.getFid()
-					});
-
+					this.db
+						.collection('forum')
+						.doc(this.threadId)
+						.collection('conversations')
+						.add({
+							autherId: this.firebaseUser.uid,
+							auther: this.firebaseUser.displayName,
+							pic: userData.photoURL,
+							body: this.replyBox,
+							timestamp: new Date().getTime(),
+							fid: this.getFid()
+						});
 					this.replyBox = '';
 					this.mixpanel.track('posted a comment', {});
 				} else {
@@ -156,7 +170,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	}
 
 	getUserData(uid) {
-		return this.db.object<any>('/userData/' + uid).valueChanges();
+		return this.rtdb.object<any>('/userData/' + uid).valueChanges();
 	}
 
 	uploadFile(event) {

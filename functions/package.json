@@ -16,6 +16,7 @@
     "@google-cloud/storage": "^1.5.1",
     "@sendgrid/client": "^6.2.1",
     "@sendgrid/mail": "^6.2.1",
+    "algoliasearch": "^3.28.0",
     "body-parser": "^1.18.2",
     "config": "^1.26.1",
     "core-js": "^2.4.1",
