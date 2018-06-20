@@ -40,6 +40,8 @@ import { NgbdModalAskToSubscribe } from './layout/nav/askToSubscribe.modal';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { CookieService } from 'ngx-cookie-service';
 
+import { NgbdModalLogin } from './auth.service';
+
 Raven.config('https://937047e5361c41349ef8dc829947575d@sentry.io/215964').install();
 
 export class RavenErrorHandler implements ErrorHandler {
@@ -56,7 +58,8 @@ export class RavenErrorHandler implements ErrorHandler {
 		NgbdModalAskInForum,
 		NgbdModalAskToSubscribe,
 		NavComponent,
-		FooterComponent
+		FooterComponent,
+		NgbdModalLogin
 	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: 'dride' }),
@@ -79,6 +82,6 @@ export class RavenErrorHandler implements ErrorHandler {
 	],
 	providers: [CookieService],
 	bootstrap: [AppComponent],
-	entryComponents: [NgbdModalPayement, NgbdModalAskInForum, NgbdModalAskToSubscribe]
+	entryComponents: [NgbdModalLogin, NgbdModalPayement, NgbdModalAskInForum, NgbdModalAskToSubscribe]
 })
 export class AppModule {}

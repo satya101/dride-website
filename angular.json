@@ -24,12 +24,7 @@
 							"src/firebase-messaging-sw.js",
 							"src/sitemap.xml"
 						],
-						"styles": [
-							"src/styles.scss",
-							"src/assets/fonts/icomoon/style.css",
-							"node_modules/angular-instantsearch/bundles/instantsearch.min.css",
-							"node_modules/angular-instantsearch/bundles/instantsearch-theme-algolia.min.css"
-						],
+						"styles": ["src/styles.scss", "src/assets/fonts/icomoon/style.css"],
 						"scripts": []
 					},
 					"configurations": {

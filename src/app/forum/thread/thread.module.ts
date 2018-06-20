@@ -13,7 +13,7 @@ import { AutosizeModule } from '../../helpers/autosize/autosize.module';
 import { WrapIframePipe } from '../../helpers/wrapIframePipe/wrap-iframe.pipe';
 
 import { routing } from './thread.routing';
-import { ProfilePicConvertorPipe } from './profile-pic-convertor.pipe';
+import { ProfilePicConvertorPipe } from '../pipes/profile-pic-convertor.pipe';
 
 @NgModule({
 	imports: [

@@ -24,12 +24,22 @@ export class ForumComponent implements OnInit {
 	threads = [];
 	public limitToLast = 6;
 	public lastThreadCreated = 9000000000000;
+	public showHits = false;
 
-	algoliaConfig: {
-		apiKey: '1c7d7f8c960f3ee5bfd5acc752a793ea';
-		appId: 'S2I95AGWAJ';
-		indexName: 'forum';
-		routing: true;
+	public algoliaConfig = {
+		apiKey: '1c7d7f8c960f3ee5bfd5acc752a793ea',
+		appId: 'S2I95AGWAJ',
+		indexName: 'forum',
+		routing: true,
+		searchFunction: helper => {
+			if (helper.state.query === '') {
+				this.showHits = false;
+				return;
+			} else {
+				helper.search();
+				this.showHits = true;
+			}
+		}
 	};
 
 	constructor(
@@ -69,25 +79,20 @@ export class ForumComponent implements OnInit {
 		this.modalService.show(NgbdModalAskInForum);
 	}
 
-	getColor(type: string) {
-		if (type.toLocaleLowerCase() === 'garmin') {
-			return 'badge-info';
-		}
-		if (type.toLocaleLowerCase() === 'yi') {
-			return 'badge-danger';
-		}
-		if (type.toLocaleLowerCase() === 'drideos') {
-			return 'badge-dark';
-		}
-		if (type.toLocaleLowerCase() === 'new-feature') {
-			return 'badge-warning';
-		}
-
-		return 'badge-secondary';
-	}
-
 	onScroll() {
 		this.limitToLast += 20;
 		this.getThreads(this.limitToLast);
+	}
+
+	transformHits(hits) {
+		console.log(hits);
+		hits.forEach(hit => {
+			hit.stars = [];
+			for (let i = 1; i <= 5; i) {
+				hit.stars.push(i <= hit.rating);
+				i += 1;
+			}
+		});
+		return hits;
 	}
 }

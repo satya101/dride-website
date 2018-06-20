@@ -77,7 +77,7 @@ export class NgbdModalAskInForum {
 					description: '',
 					cmntsCount: 1,
 					lastUpdate: new Date().getTime(),
-					hidden: true
+					hidden: false
 				})
 				.then(ref => {
 					this.db

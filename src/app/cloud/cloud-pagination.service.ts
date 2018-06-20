@@ -52,7 +52,6 @@ export class CloudPaginationService {
 	}
 
 	nextPage = function() {
-		console.log('next page', this.end, this.busy);
 		if (this.busy || (this.isFull && this.end)) {
 			return;
 		}
