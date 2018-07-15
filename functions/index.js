@@ -412,7 +412,6 @@ exports.logGPS = functions.https.onRequest((req, res) => {
 });
 
 exports.issuePurcahse = functions.https.onRequest((req, res) => {
-	console.log('issuePurcahse');
 	purchase.issuePurcahse(req.query).then(
 		() => {
 			cors(req, res, () => {

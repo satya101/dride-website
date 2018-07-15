@@ -60,3 +60,4 @@ functions/environments/*
 *firebase-adminsdk*
 appEngine/
 *.log
+scripts/

@@ -1,57 +1,63 @@
 <div class="product">
 
-  <div class="container-fluid greyBg" [ngClass]="productData?.class">
-    <div class="container productHead">
-      <div class="col-md-12">
-        <div class="row productHeader">
-          <div class="i col-12 col-xl-6 info animBox" *ngIf="productData?.title">
-            <h2>{{productData.mainTitle}}
-              <span>{{productData.subTitle}}</span>
-            </h2>
-            <h3>{{productData.title}}</h3>
-            <p class="price">${{quantity * productData.price}}
-              <label *ngIf="productData.shipping">{{productData.shipping}}</label>
-            </p>
+	<div class="container-fluid greyBg" [ngClass]="productData?.class">
+		<div class="container productHead">
+			<div class="col-md-12">
+				<div class="row productHeader">
+					<div class="i col-12 col-xl-6 info animBox" *ngIf="productData?.title">
+						<h2>{{productData.mainTitle}}
+							<span>{{productData.subTitle}}</span>
+						</h2>
+						<h3>{{productData.title}}</h3>
+						<p class="price">${{quantity * productData.price}}
+							<label *ngIf="productData.shipping">{{productData.shipping}}</label>
+						</p>
 
-            <div *ngIf="productData.warning" class="quantity">
-              <div class="circ minus" (click)="downQ()">-</div>
-              <div class="qu">{{quantity}}</div>
-              <div class="circ plus" (click)="upQ()">+</div>
-            </div>
-            <div class="divider"></div>
+						<div *ngIf="productData.warning" class="quantity">
+							<div class="circ minus" (click)="downQ()">-</div>
+							<div class="qu">{{quantity}}</div>
+							<div class="circ plus" (click)="upQ()">+</div>
+						</div>
+						<div class="divider"></div>
 
-            <a (click)="purchase()" class="btn btn-buy">{{productData.actionBtn}}</a>
-
-
-            <ul class="warning" *ngIf="productData.warning">
-              <li *ngFor="let warn of productData.warning">{{warn}}</li>
-            </ul>
-          </div>
-          <div class="col-12 col-xl-6 gallery text-center" *ngIf="productData?.title">
-            <img [ngClass]="{'fullPic': !productData.images[1] }" class="productMain img-fluid" src="{{productData.images[mainImageIndex].url}}"
-              alt="dride" />
-            <ul class="productPics" *ngIf="productData.images[1]">
-              <li *ngFor="let product of productData.images; index as key">
-                <img (click)="updateMainPicture(key)" class="img-fluid" src="{{product.url}}" alt="dride" />
-              </li>
+						<a (click)="purchase()" class="btn btn-buy">{{productData.actionBtn}}</a>
 
 
-            </ul>
-          </div>
-        </div>
-        <div class="clear"></div>
-      </div>
-    </div>
-  </div>
-  <div class="container specs">
-    <h2>Product Information</h2>
+						<ul class="warning" *ngIf="productData.warning">
+							<li *ngFor="let warn of productData.warning">{{warn}}</li>
+						</ul>
+					</div>
+					<div class="col-12 col-xl-6 gallery text-center" *ngIf="productData?.title">
+						<img [ngClass]="{'fullPic': !productData.images[1] }" class="productMain img-fluid" src="{{productData.images[mainImageIndex].url}}"
+						 alt="dride" />
+						<ul class="productPics" *ngIf="productData.images[1]">
+							<li *ngFor="let product of productData.images; index as key">
+								<img (click)="updateMainPicture(key)" class="img-fluid" src="{{product.url}}" alt="dride" />
+							</li>
 
-    <div class="productInfo animBox" *ngFor="let node of productData?.productInfo">
-      <div class="row" *ngIf="node">
-        <div class="col-md-2 upper">{{node.title}}</div>
-        <div class="col-md-10 txtFnt" [innerHTML]="node.body"></div>
-      </div>
-    </div>
-    <br>
-  </div>
+
+						</ul>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<div class="container specs">
+		<h2>Product Information</h2>
+
+		<div class="productInfo animBox" *ngFor="let node of productData?.productInfo">
+			<div class="row" *ngIf="node">
+				<div class="col-md-2 upper">{{node.title}}</div>
+				<div class="col-md-10 txtFnt" [innerHTML]="node.body"></div>
+			</div>
+		</div>
+		<br>
+	</div>
+</div>
+
+<div class="wrapLoader" *ngIf="showLoader">
+	<div class="loader">
+		<img src="./assets/images/loader.gif" alt="loading" />
+	</div>
 </div>

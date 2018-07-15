@@ -19,7 +19,6 @@
 
 // };
 
-
 export const environment = {
 	production: true,
 	firebase: {
@@ -32,5 +31,6 @@ export const environment = {
 	},
 	googleMapsApi: 'AIzaSyD_9g0R-z2-NpCQpiQrFrJ7_NzWK6rRyRM',
 	functionsURL: 'https://us-central1-dride-2384f.cloudfunctions.net',
-	mixpanel: 'eae916fa09f65059630c5ae451682939'
+	mixpanel: 'eae916fa09f65059630c5ae451682939',
+	stripe: 'pk_test_pGYDUfGo6YwruQotRnZCPo94'
 };

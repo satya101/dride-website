@@ -25,7 +25,7 @@ Support is included for these common programming languages/platforms:
 Intent
 ======
 
-The goal of drideOS is to build an open alternative for dashcam softwere so it could be easly implemented by both manufectorers and
+The goal of drideOS is to build an open alternative for dashcam softwere so it could be easly implemented by both manufacturers and
 developers.
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -10,7 +11,7 @@ import { NgbdModalPayement } from './payment.modal';
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 import { MetaService } from '../../helpers/meta/meta.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { NotificationsService } from 'angular2-notifications';
 
 declare var StripeCheckout: any;
 
@@ -27,7 +28,7 @@ export class ProductComponent {
 	public key: string;
 	public quantity = 1;
 	bsModalRef: BsModalRef;
-
+	public showLoader = false;
 	constructor(
 		db: AngularFireDatabase,
 		private route: ActivatedRoute,
@@ -36,7 +37,8 @@ export class ProductComponent {
 		private modalService: BsModalService,
 		public mixpanel: MixpanelService,
 		public http: HttpClient,
-		private meta: MetaService
+		private meta: MetaService,
+		private notificationsService: NotificationsService
 	) {
 		auth.getState().subscribe(user => {
 			if (!user) {
@@ -48,8 +50,7 @@ export class ProductComponent {
 
 		this.route.params.subscribe(params => {
 			if (params['productSlug']) {
-				db
-					.object('content/' + params['productSlug'])
+				db.object('content/' + params['productSlug'])
 					.valueChanges()
 					.subscribe((data: any) => {
 						this.productData = data;
@@ -76,16 +77,14 @@ export class ProductComponent {
 				this.payWithStripe(this.productData.price, this.productData.receiptTitle, this.productData.shippingPrice);
 			}
 			this.mixpanel.track('purchase', {});
-
-			// payment.makePayment($scope.data.price, $scope.data.key, $scope.data.actionBtn)
-			// TODO: track
 		});
 	};
 
 	initStripePayment(productId: string, price: number, shippingPrice: number, uid: string) {
 		let token_triggered = false;
+		this.showLoader = true;
 		this.handler = StripeCheckout.configure({
-			key: 'pk_live_iEgZDQdwTYeH66NG5BiN8IrP',
+			key: environment.stripe,
 			image: 'https://s3.amazonaws.com/stripe-uploads/acct_18WMZaEuDB8ope0pmerchant-icon-1489669824031-icon.png',
 			locale: 'auto',
 			token: token => {
@@ -109,9 +108,25 @@ export class ProductComponent {
 							JSON.stringify(token)
 					)
 					.subscribe(
-						data => {
-							// save purchase to DB
-							this.mixpanel.track('purchase resolved ', { tok: token });
+						(data: any) => {
+							this.showLoader = false;
+							if (data.error && data.error.type) {
+								this.mixpanel.track('purchase failed!', { error: data.error });
+								this.notificationsService.error(
+									'Oops..',
+									'An error occurred when trying to proccess your order, Please try again.',
+									{
+										timeOut: 3000,
+										showProgressBar: true,
+										pauseOnHover: true,
+										clickToClose: true
+									}
+								);
+							} else {
+								// save purchase to DB
+								this.mixpanel.track('purchase resolved ', { tok: token });
+								this.router.navigate(['/forum/super-secret-thread____-L0ER14GVL6GKDF5svCq']);
+							}
 						},
 						error => {
 							this.mixpanel.track('purchase failed!', { error: error });
@@ -126,7 +141,7 @@ export class ProductComponent {
 				} else {
 					// payment completion behavior goes here
 					this.mixpanel.track('purchase completed!', {});
-					this.router.navigate(['/forum/super-secret-thread____-L0ER14GVL6GKDF5svCq']);
+					// this.router.navigate(['/forum/super-secret-thread____-L0ER14GVL6GKDF5svCq']);
 				}
 			}
 		});

@@ -6,10 +6,7 @@ import { ProductComponent } from './product.component';
 import { routing } from './product.routing';
 
 @NgModule({
-	imports: [routing,
-		CommonModule,
-		ImageZoomModule
-	],
+	imports: [routing, CommonModule, ImageZoomModule],
 	declarations: [ProductComponent]
 })
-export class ProductModule { }
+export class ProductModule {}
