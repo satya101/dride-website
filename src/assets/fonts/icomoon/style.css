@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?qbb831');
-  src:  url('fonts/icomoon.eot?qbb831#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?qbb831') format('truetype'),
-    url('fonts/icomoon.woff?qbb831') format('woff'),
-    url('fonts/icomoon.svg?qbb831#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?63kx6a');
+  src:  url('fonts/icomoon.eot?63kx6a#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?63kx6a') format('truetype'),
+    url('fonts/icomoon.woff?63kx6a') format('woff'),
+    url('fonts/icomoon.svg?63kx6a#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-drag:before {
+  content: "\e947";
+}
+.icon-replay:before {
+  content: "\e945";
+}
+.icon-full-screen2:before {
+  content: "\e943";
+}
+.icon-comment:before {
+  content: "\e944";
+  color: #666;
+}
 .icon-search2:before {
   content: "\e942";
 }
@@ -162,7 +175,7 @@
 .icon-indicator:before {
   content: "\e909";
 }
-.icon-indicator.svg-full:before {
+.icon-indicatorsvg-full:before {
   content: "\e90a";
 }
 .icon-mic-full:before {
@@ -236,4 +249,7 @@
 }
 .icon-menu:before {
   content: "\e927";
+}
+.icon-replay2:before {
+  content: "\e946";
 }

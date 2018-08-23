@@ -1,181 +1,177 @@
-
 //navbar
-nav{
-    padding-bottom: 29px;
+nav {
+	padding-bottom: 29px;
 }
 @media (max-width: 992px) {
-	.fl{
+	.fl {
 		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.71) 0%, transparent 100%);
 		z-index: 100000;
 	}
 }
-.nav{
-    font-size: 14px;
-    padding-top: 3px;
-
+.nav {
+	font-size: 14px;
+	padding-top: 3px;
 }
 .nav > .active > a {
-    background: none !important;
-    border-bottom: 1px dashed #555555;
-    display: inline;
-    padding-bottom: 20px;
-    position: relative;
-    top: 6px;
-}
-.logInLink{
+	background: none !important;
+	border-bottom: 1px dashed #555555;
+	display: inline;
+	padding-bottom: 20px;
 	position: relative;
-    top: -6px;
-    padding: 4px;
-    color: #444 !important;
-    font-size: 14px;
+	top: 6px;
+}
+.logInLink {
+	position: relative;
+	top: -6px;
+	padding: 4px;
+	color: #444 !important;
+	font-size: 14px;
 }
 .navbar-brand {
-    color: #fff !important;
-    height: 70px;
-    padding: 28px 15px;
-    font-size: 26px;
-    font-weight: 100;
-    line-height: 20px;
-    background-color: #333;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    cursor: pointer;
+	color: #fff !important;
+	height: 70px;
+	padding: 28px 15px;
+	font-size: 26px;
+	font-weight: 100;
+	line-height: 20px;
+	background-color: #333;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	cursor: pointer;
 }
-.caret::after{
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: .255em;
-    vertical-align: .255em;
-    content: "";
-    border-top: .3em solid;
-    border-right: .3em solid transparent;
-    border-left: .3em solid transparent;
-    top: 17px;
-    left: -19px;
-    position: relative;
-    color: #333333;
+.caret::after {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 0.255em;
+	vertical-align: 0.255em;
+	content: '';
+	border-top: 0.3em solid;
+	border-right: 0.3em solid transparent;
+	border-left: 0.3em solid transparent;
+	top: 17px;
+	left: -19px;
+	position: relative;
+	color: #333333;
 }
 .navbar-light .navbar-brand:hover {
-    background-color: #333;
+	background-color: #333;
 }
 
-.nav-item{
-    margin-top: 13px;
-    padding-right: 2px;
+.nav-item {
+	margin-top: 13px;
+	padding-right: 2px;
 }
 
 .profilePicM {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-top: -17px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-top: -17px;
 }
 
 .login {
-    margin-top: 30px !important;
-    margin-left: 19px;
-    float: right !important;
-    cursor: pointer;
+	margin-top: 30px !important;
+	margin-left: 19px;
+	float: right !important;
+	cursor: pointer;
 }
-.buyBtn{
-    background-color: #333;
-    color: #fff;
-    margin-top: 19px;
-    font-size: 14px;
-    height: 33px;
-    width: 53px;
-    text-align: center;
-    padding: 0;
+.buyBtn {
+	background-color: #333;
+	color: #fff;
+	margin-top: 19px;
+	font-size: 14px;
+	height: 33px;
+	width: 53px;
+	text-align: center;
+	padding: 0;
 }
 
-.navbar-toggler{
-    margin-top: 17px;
-    cursor: pointer;
+.navbar-toggler {
+	margin-top: 17px;
+	cursor: pointer;
 }
-.navbar-toggler:focus{
-    outline: none;
+.navbar-toggler:focus {
+	outline: none;
 }
-.nav-item{
-    display: block;
-    text-align: center;
+.nav-item {
+	display: block;
+	text-align: center;
 }
-.collapse{
-      -webkit-transition: height .5s;
-	  transition: height .5s;
-	  z-index: 10000;
+.collapse {
+	-webkit-transition: height 0.5s;
+	transition: height 0.5s;
+	z-index: 10000 !important;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
-	.navbar{
+	.navbar {
 		background-color: #fff;
 	}
 }
 @media (max-width: 992px) {
-
-	nav{
+	nav {
 		width: 100%;
-	};
-    .navbar-brand{
-        width: 97px;
+	}
+	.navbar-brand {
+		width: 97px;
 		z-index: 100;
-    }
-    .bottomNav{
-        background-color: #fff;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
-        padding: 20px;
-    }
-    .nav{
+	}
+	.bottomNav {
+		background-color: #fff;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		padding: 20px;
+	}
+	.nav {
 		position: relative;
-    	top: 13px;
+		top: 13px;
 
 		display: inherit !important;
 		background-color: #fff;
 		margin-top: -13px !important;
-        .active a{
-                padding: 20px 15px 4px 15px;
-                border-bottom: 0;
-                top: 0px;
-                
-        }
-        .active a::before { 
-            content: "● ";
-        }
-		.nav-item{
+		.active a {
+			padding: 20px 15px 4px 15px;
+			border-bottom: 0;
+			top: 0px;
+		}
+		.active a::before {
+			content: '● ';
+		}
+		.nav-item {
 			padding-bottom: 34px;
 			margin-top: 0;
 		}
 	}
 
-	.nav:first-child{
-		 padding-top: 90px;
+	.nav:first-child {
+		padding-top: 90px;
 	}
-	.navbar-toggler{
+	.navbar-toggler {
 		background-color: #fff;
 		border-radius: 0;
 		margin-left: 4px;
 		padding: 5px 9px 5px 9px;
 		margin-top: 14px;
 	}
-    .navbar{
-        .show{
-            //margin-bottom: -554px;
-            z-index: 1;
-            background-color: rgb(255, 255, 255);
-        }
-    }
+	.navbar {
+		.show {
+			//margin-bottom: -554px;
+			z-index: 1;
+			background-color: rgb(255, 255, 255);
+		}
+	}
 	.darkOverlay {
 		position: fixed;
-		background-color: rgba(51,51,51,.72);
+		background-color: rgba(51, 51, 51, 0.72);
 		width: 100%;
 		height: 100%;
 		top: 0;
 		z-index: 1;
 	}
 }
-.open .dropdown-menu{
+.open .dropdown-menu {
 	display: block;
-    top: 82px !important;
-    right: 30px !important;
-    left: auto !important;
+	top: 82px !important;
+	right: 30px !important;
+	left: auto !important;
 }

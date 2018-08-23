@@ -21,8 +21,9 @@ var mailer = require(__dirname + '/mailer/send.js');
 var subscriber = require(__dirname + '/mailer/subscribe.js');
 var anonymizer = require(__dirname + '/user/anonymizer.js');
 var cloud = require(__dirname + '/cloud/cloud.js');
+var meta = require(__dirname + '/meta/meta.js');
 var viewCounter = require(__dirname + '/cloud/viewCount.js');
-var getThumb = require(__dirname + '/cloud/getThumb.js');
+//var getThumb = require(__dirname + '/cloud/getThumb.js');
 var purchase = require(__dirname + '/purchase/purchase.js');
 
 var algoliasearch = require('algoliasearch');
@@ -51,6 +52,27 @@ exports.subscriber = functions.https.onRequest(function(req, res) {
  */
 exports.viewCounter = functions.https.onRequest((req, res) => {
 	viewCounter.addView(req.query).then(
+		() => {
+			cors(req, res, () => {
+				res.status(200).send({
+					status: 1
+				});
+			});
+		},
+		err => {
+			cors(req, res, () => {
+				res.status(200).send({
+					status: -1
+				});
+			});
+		}
+	);
+});
+/*
+ *	HTTP endpoint to increase views counter
+ */
+exports.viewCounterFS = functions.https.onRequest((req, res) => {
+	viewCounter.addViewFS(req.query).then(
 		() => {
 			cors(req, res, () => {
 				res.status(200).send({
@@ -139,36 +161,50 @@ exports.cmntsCount = functions.firestore
 				});
 		});
 	});
-/*
- * Add updated cmntsCount to clips
- */
-exports.cmntsCountVideo = functions.database
-	.ref('/conversations_video/{uid}/{videId}/{conversationId}')
-	.onWrite((change, context) => {
-		if (!context.params.videId || !context.params.uid || !context.params.conversationId) {
-			console.log('not enough data');
-			return null;
-		}
-		change.after.ref.root
-			.child('conversations_video/' + context.params.uid + '/' + context.params.videId)
-			.once('value')
-			.then(conversationVideo => {
-				change.after.ref.root
-					.child('clips/' + context.params.uid + '/' + context.params.videId + '/cmntsCount')
-					.set(conversationVideo.numChildren());
 
-				var r = {};
-				r[context.params.conversationId] = change.after.val();
-				change.after.ref.root.child('clips/' + context.params.uid + '/' + context.params.videId + '/comments').set(r);
-			});
+// Update the search index every time a blog post is written.
+exports.onForumUpdate = functions.firestore
+	.document('forum/{threadId}/conversations/{conversationId}')
+	.onCreate((snap, context) => {
+		// Get the post document
+		const data = snap.data();
+		const post = {
+			body: data.body,
+			auther: data.auther,
+			timestamp: data.timestamp,
+			threadId: context.params.threadId,
+			objectID: context.params.conversationId
+		};
 
-		return change.after.ref.root
-			.child('clips')
-			.child(context.params.uid)
-			.child(context.params.videId)
-			.child('lastUpdate')
-			.set(new Date().getTime());
+		// Write to the algolia index
+		const index = client.initIndex('forum');
+		return index.saveObject(post);
 	});
+
+/**
+ * @description update comments counter for clips comments
+ */
+exports.cmntsCountVideo = functions.firestore.document('clipsComments/{conversationId}').onCreate((snap, context) => {
+	return new Promise((resolve, reject) => {
+		var comment = snap.data();
+		var db = admin.firestore();
+		db.settings({ timestampsInSnapshots: true });
+
+		db.collection('clipsComments')
+			.where('videoId', '==', comment.videoId)
+			.get()
+			.then(
+				conversation => {
+					db.collection('clips')
+						.doc(comment.videoId)
+						.update({ cmntsCount: conversation.size })
+						.then(() => resolve(), err => reject(err));
+				},
+				err => reject(err)
+			);
+	});
+});
+
 /*
  *   Save users data upon register
  */
@@ -229,6 +265,23 @@ exports.deleteVideo = functions.database.ref('/clips/{uid}/{videoId}/deleted').o
 		console.log('not enough data');
 		return null;
 	}
+	//REMOVE SOON: update RTDB with status
+	admin
+		.firestore()
+		.collection('clips')
+		.where('uid', '==', context.params.uid)
+		.where('id', '==', context.params.videoId)
+		.get()
+		.then(snapshot => {
+			snapshot.forEach(doc => {
+				admin
+					.firestore()
+					.collection('clips')
+					.doc(doc.id)
+					.delete();
+			});
+		});
+
 	var clipDeleteStatus = change.after.val();
 	if (clipDeleteStatus) return cloud.remvoeClip(context.params.videoId, context.params.uid);
 });
@@ -279,101 +332,183 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips').on
 	});
 });
 
+/**
+ * @deprecated RTDB is no longer actively maintained!
+ */
 exports.notifyVideoUploaded = functions.database.ref('/clips/{uid}/{videoId}/processed').onWrite((change, context) => {
 	return new Promise((resolve, reject) => {
-		let promiseCollector = [];
+		resolve();
+		// let promiseCollector = [];
 
-		if (!context.params.uid || !context.params.videoId) {
+		// if (!context.params.uid || !context.params.videoId) {
+		// 	reject('{"err": "not enough data"}');
+		// 	return;
+		// }
+
+		// const uid = context.params.uid;
+		// const filename = context.params.videoId;
+		// console.log(change.after.val());
+		// if (change.after.val() != 'true' && change.after.val() !== true) {
+		// 	console.log('{"err": "Already processed.."}');
+		// 	resolve('{"err": "Already processed.."}');
+		// 	return;
+		// }
+
+		// //track event
+		// mixpanel.track('video_upoload', {
+		// 	distinct_id: uid,
+		// 	filename: filename
+		// });
+		// //notify user his video is live!
+		// admin
+		// 	.auth()
+		// 	.getUser(uid)
+		// 	.then(
+		// 		userRecord => {
+		// 			console.log(uid);
+		// 			console.log(filename.split('.')[0]);
+		// 			admin
+		// 				.database()
+		// 				.ref('clips')
+		// 				.child(uid)
+		// 				.child(filename.split('.')[0])
+		// 				.once(
+		// 					'value',
+		// 					snapshot => {
+		// 						const user = userRecord.toJSON();
+		// 						const clip = snapshot.val();
+		// 						console.log(clip);
+		// 						//notify user his video is live!
+		// 						var template = fs.readFileSync('./mailer/templates/videoIsOn.mail', 'utf8');
+		// 						params = {
+		// 							FULL_NAME: user.displayName.split(' ')[0],
+		// 							VIDEO_POSTER:
+		// 								'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2F' +
+		// 								uid +
+		// 								'%2F' +
+		// 								filename.split('.')[0] +
+		// 								'.jpg?alt=media',
+		// 							VIDEO_LINK: 'https://dride.io/profile/' + uid + '/' + filename.split('.')[0],
+		// 							to: []
+		// 						};
+		// 						template = mailer.replaceParams(params, template);
+
+		// 						const sendObj = {
+		// 							to: user.email,
+		// 							from: 'hello@dride.io',
+		// 							subject: 'Your video is now on Dride Cloud',
+		// 							text: htmlToText.fromString(template),
+		// 							html: template,
+		// 							sendMultiple: true
+		// 						};
+
+		// 						promiseCollector.push(mailer.send(sendObj));
+
+		// 						sendObj.to = 'yossi@dride.io';
+		// 						promiseCollector.push(mailer.send(sendObj));
+
+		// 						sendObj.to = 'eitan@dride.io';
+		// 						promiseCollector.push(mailer.send(sendObj));
+
+		// 						Promise.all(promiseCollector).then(_ => {
+		// 							console.log('done!@!@!@!@!');
+		// 							resolve('{"status": "completed"}');
+		// 							return;
+		// 						});
+		// 					},
+		// 					errorObject => {
+		// 						console.log('The read failed: ' + errorObject.code);
+		// 						reject('{"status": "' + errorObject.code + '"}');
+		// 						return;
+		// 					}
+		// 				);
+		// 		},
+		// 		errorObject => {
+		// 			console.log('Error fetching user data: ' + errorObject.code);
+		// 			reject('{"status": "' + errorObject.code + '"}');
+		// 			return;
+		// 		}
+		// 	);
+	});
+});
+
+exports.notifyVideoUploadedFS = functions.firestore.document('clips/{videoId}').onCreate((snap, context) => {
+	return new Promise((resolve, reject) => {
+		let promiseCollector = [];
+		const clipObject = snap.data();
+		if (!context.params.videoId) {
 			reject('{"err": "not enough data"}');
 			return;
 		}
 
-		const uid = context.params.uid;
-		const filename = context.params.videoId;
-		cloud.isProcessed(uid, filename).then(
-			isProcessed => {
-				if (isProcessed != 'true' && isProcessed !== true) {
-					resolve('{"err": "Already processed.."}');
+		// if (typeof clipObject.processed == 'undefined' && clipObject.processed != 'true' && clipObject.processed !== true) {
+		// 	console.log(clipObject.processed);
+		// 	console.log('{"err": "Already processed.."}');
+		// 	resolve('{"err": "Already processed.."}');
+		// 	return;
+		// }
+
+		const uid = clipObject.uid;
+		const filename = clipObject.id;
+
+		//track event
+		mixpanel.track('video_upoload', {
+			distinct_id: uid,
+			filename: filename
+		});
+		//notify user his video is live!
+		console.log('uid', uid);
+		admin
+			.auth()
+			.getUser(uid)
+			.then(
+				userRecord => {
+					const user = userRecord.toJSON();
+					//notify user his video is live!
+					var template = fs.readFileSync('./mailer/templates/videoIsOn.mail', 'utf8');
+					params = {
+						FULL_NAME: user.displayName.split(' ')[0],
+						VIDEO_POSTER:
+							'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2F' +
+							uid +
+							'%2F' +
+							filename +
+							'.jpg?alt=media',
+						VIDEO_LINK: 'https://dride.io/clip/' + context.params.videoId,
+						to: []
+					};
+					template = mailer.replaceParams(params, template);
+
+					const sendObj = {
+						to: user.email,
+						from: 'hello@dride.io',
+						subject: 'Your video is now on Dride Cloud',
+						text: htmlToText.fromString(template),
+						html: template,
+						sendMultiple: true
+					};
+
+					promiseCollector.push(mailer.send(sendObj));
+
+					sendObj.to = 'yossi@dride.io';
+					promiseCollector.push(mailer.send(sendObj));
+
+					sendObj.to = 'eitan@dride.io';
+					promiseCollector.push(mailer.send(sendObj));
+
+					Promise.all(promiseCollector).then(_ => {
+						cloud
+							.processVideoFS(context.params.videoId, clipObject)
+							.then(() => resolve('{"status": "completed"}'), err => reject('{"status": "' + err + '"}'));
+						return;
+					});
+				},
+				errorObject => {
+					console.log('The read failed: ' + errorObject.code);
+					reject('{"status": "' + errorObject.code + '"}');
 					return;
 				}
-
-				//track event
-				mixpanel.track('video_upoload', {
-					distinct_id: uid,
-					filename: filename
-				});
-				//notify user his video is live!
-				admin
-					.auth()
-					.getUser(uid)
-					.then(
-						function(userRecord) {
-							admin
-								.database()
-								.ref('clips')
-								.child(uid)
-								.child(filename.split('.')[0])
-								.once(
-									'value',
-									function(snapshot) {
-										const user = userRecord.toJSON();
-										const clip = snapshot.val();
-										//notify user his video is live!
-										var template = fs.readFileSync('./mailer/templates/videoIsOn.mail', 'utf8');
-										params = {
-											FULL_NAME: user.displayName.split(' ')[0],
-											VIDEO_POSTER:
-												'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2F' +
-												uid +
-												'%2F' +
-												filename.split('.')[0] +
-												'.jpg?alt=media',
-											VIDEO_LINK: 'https://dride.io/profile/' + uid + '/' + filename.split('.')[0],
-											to: []
-										};
-										template = this.mailer.replaceParams(params, template);
-
-										const sendObj = {
-											to: user.email,
-											from: 'hello@dride.io',
-											subject: 'Your video is now on Dride Cloud',
-											text: htmlToText.fromString(template),
-											html: template,
-											sendMultiple: true
-										};
-
-										promiseCollector.push(this.mailer.send(sendObj));
-
-										sendObj.to = 'yossi@dride.io';
-										promiseCollector.push(this.mailer.send(sendObj));
-
-										sendObj.to = 'eitan@dride.io';
-										promiseCollector.push(this.mailer.send(sendObj));
-
-										Promise.all(promiseCollector).then(_ => {
-											resolve('{"status": "completed"}');
-											return;
-										});
-									},
-									function(errorObject) {
-										console.log('The read failed: ' + errorObject.code);
-										reject('{"status": "' + errorObject.code + '"}');
-										return;
-									}
-								);
-						},
-						function(errorObject) {
-							console.log('Error fetching user data: ' + errorObject.code);
-							reject('{"status": "' + errorObject.code + '"}');
-							return;
-						}
-					);
-			},
-			err => {
-				reject('{"status": "' + err + '"}');
-				return;
-			}
-		);
+			);
 	});
 });
 
@@ -448,30 +583,80 @@ exports.metaService = functions.https.onRequest((req, res) => {
 		userAgent.indexOf('XML Sitemaps Generator') !== -1 ||
 		userAgent.indexOf('DuckDuckBot') !== -1
 	) {
-		//send SSR content
-		request('http://34.249.141.56:4000/' + req.originalUrl, function(error, response, body) {
-			res.status(200).send(body);
-		});
+		const route = req.params[0].split('/');
+		if (route[1] == 'clip') {
+			meta.setMeta(fs.readFileSync('dist/index.html'), route[2]).then(
+				body => {
+					res.status(200).send(body);
+				},
+				e => res.status(500)
+			);
+		} else {
+			//send SSR content
+			request('http://34.249.141.56:4000/' + req.originalUrl, function(error, response, body) {
+				res.status(200).send(body);
+			});
+		}
 	} else {
 		res.status(200).sendFile(path.resolve('dist/index.html'));
 	}
 });
 
 // Update the search index every time a blog post is written.
-exports.onForumUpdate = functions.database
-	.ref('/conversations/{threadId}/{conversationId}')
-	.onCreate((snap, context) => {
-		// Get the post document
-		const data = snap.val();
-		const post = {
-			body: data.body,
-			auther: data.auther,
-			timestamp: data.timestamp,
-			threadId: context.params.threadId,
-			objectID: context.params.conversationId
-		};
-
-		// Write to the algolia index
-		const index = client.initIndex('forum');
-		return index.saveObject(post);
+exports.onClipUpload = functions.database.ref('/clips/{uid}/{clipId}').onCreate((snap, context) => {
+	// Get the post document
+	const clip = snap.val();
+	console.log(clip);
+	// push to firestore
+	var db = admin.firestore();
+	return db.collection('clips').add(
+		Object.assign(clip, {
+			uid: context.params.uid,
+			id: context.params.clipId,
+			isRTDB: true
+		})
+	);
+});
+// Update the search index every time a blog post is written.
+exports.cloneAllToFireStore = functions.database.ref('/clips/{uid}/{videoId}').onWrite((snap, context) => {
+	return new Promise((resolve, reject) => {
+		//REMOVE SOON: update RTDB with status
+		admin
+			.firestore()
+			.collection('clips')
+			.where('uid', '==', context.params.uid)
+			.where('id', '==', context.params.videoId)
+			.limit(1)
+			.get()
+			.then(
+				snapshot => {
+					snapshot.forEach(doc => {
+						admin
+							.firestore()
+							.collection('clips')
+							.doc(doc.id)
+							.update(snap.after.val())
+							.then(() => resolve(), err => reject(err));
+					});
+				},
+				e => reject(e)
+			);
 	});
+});
+
+/*
+ * remove clips on event
+ */
+exports.deleteVideoFS = functions.firestore.document('clips/{videoKey}').onUpdate((change, context) => {
+	const deletedValue = change.after.data();
+	if (!deletedValue.deleted) {
+		console.log('not delete');
+		return null;
+	}
+	if (!context.params.videoKey) {
+		console.log('not enough data');
+		return null;
+	}
+	console.warn('remove:', deletedValue.id, deletedValue.uid, context.params.videoKey);
+	return cloud.remvoeClipFS(deletedValue.id, deletedValue.uid, context.params.videoKey);
+});

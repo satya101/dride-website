@@ -57,7 +57,7 @@
 		</div>
 		<div class="clear spacer25"></div>
 		<div class="col-md-12 p-0">
-			<div *ngIf="!showHits" class="posts" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [infiniteScrollDisabled]="!isFull"
+			<div *ngIf="!showHits" class="posts" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" [infiniteScrollDisabled]="!isFull || working"
 			 (scrolled)="onScroll()">
 				<app-thread-block [post]="post" *ngFor="let post of threads" [fromSearch]="false" [@introAnim] [hidden]="!post.description"></app-thread-block>
 

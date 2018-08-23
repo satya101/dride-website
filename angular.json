@@ -94,8 +94,18 @@
 					"builder": "@angular-devkit/build-angular:server",
 					"options": {
 						"outputPath": "dist/server",
-						"main": "main.server.ts",
-						"tsConfig": "tsconfig.server.json"
+						"main": "src/main.server.ts",
+						"tsConfig": "src/tsconfig.server.json"
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.prod.ts"
+								}
+							]
+						}
 					}
 				}
 			}
@@ -131,6 +141,12 @@
 		},
 		"@schematics/angular:directive": {
 			"prefix": "app"
+		},
+		"@schematics/angular:module": {
+			"spec": false
+		},
+		"@schematics/angular:pipe": {
+			"spec": false
 		}
 	}
 }

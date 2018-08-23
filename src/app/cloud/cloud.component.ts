@@ -1,17 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { AuthService } from '../auth.service';
-import { CloudPaginationService } from '../cloud/cloud-pagination.service';
 
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service';
 
 import { introAnim } from '../router.animations';
 import { MetaService } from '../helpers/meta/meta.service';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-cloud',
@@ -20,16 +21,18 @@ import { MetaService } from '../helpers/meta/meta.service';
 	animations: [introAnim]
 })
 export class CloudComponent implements OnInit {
-	@Input() isFull: any = true;
+	@Input()
+	isFull: any = true;
 	hpClips: any;
 	public firebaseUser: any;
 	public replyBox: any = [];
 	public isBrowser = false;
-
+	public busy = true;
+	public lastThreadCreated = 9000000000000;
+	public clips = [];
+	public limitToLast = 6;
 	constructor(
-		private db: AngularFireDatabase,
-		public af: AngularFireDatabase,
-		private dCloud: CloudPaginationService,
+		private db: AngularFirestore,
 		private auth: AuthService,
 		private http: HttpClient,
 		public mixpanel: MixpanelService,
@@ -38,7 +41,7 @@ export class CloudComponent implements OnInit {
 	) {
 		this.isBrowser = ssr.isBrowser();
 		// get Auth state
-		auth.getState().subscribe(user => {
+		this.auth.getState().subscribe(user => {
 			if (!user) {
 				this.firebaseUser = null;
 				return;
@@ -52,17 +55,54 @@ export class CloudComponent implements OnInit {
 			this.meta.set('Dride Cloud', 'Best dashcam videos every day.');
 		}
 		// load first batch
-		this.dCloud.init(this.isFull);
-		this.hpClips = this.dCloud;
+		this.limitToLast = this.isFull ? 6 : 2;
+		if (!this.isFull) {
+			this.busy = false;
+		}
+		this.clips = [];
+		this.lastThreadCreated = 9000000000000;
+		this.getClips(this.limitToLast);
 	}
 
-	fbShare = function(uid, videoId) {
+	getClips(limitToLast: number) {
+		this.db
+			.collection('clips', ref =>
+				ref
+					.where('homepage', '==', true)
+					.where('dateUploaded', '<', this.lastThreadCreated)
+					.orderBy('dateUploaded', 'desc')
+					.limit(limitToLast)
+			)
+			.snapshotChanges()
+			.pipe(
+				map(actions =>
+					actions.map(a => {
+						const data = a.payload.doc.data() as any;
+						const videoId = a.payload.doc.id;
+						return { videoId, ...data };
+					})
+				)
+			)
+			.subscribe(nodes => {
+				this.clips = this.clips.concat(nodes);
+				if (nodes.length) {
+					this.lastThreadCreated = nodes[nodes.length - 1]['dateUploaded'];
+				}
+			});
+	}
+
+	onScroll() {
+		this.limitToLast += 6;
+		this.getClips(this.limitToLast);
+	}
+
+	fbShare = function(videoId) {
 		if (!this.ssr.isBrowser()) {
 			return;
 		}
 
 		window.open(
-			'https://www.facebook.com/sharer/sharer.php?u=https://dride.io/profile/' + uid + '/' + videoId,
+			encodeURI('https://www.facebook.com/sharer/sharer.php?u=https://dride.io/clip/' + videoId),
 			'Facebook',
 			'toolbar=0,status=0,resizable=yes,width=' +
 				500 +
@@ -75,12 +115,12 @@ export class CloudComponent implements OnInit {
 		);
 	};
 
-	twShare = function(uid, videoId) {
+	twShare = function(videoId) {
 		if (!this.ssr.isBrowser()) {
 			return;
 		}
 
-		const url = 'https://dride.io/profile/' + uid + '/' + videoId;
+		const url = 'https://dride.io/clip/' + videoId;
 		const txt = encodeURIComponent('You need to see this! #dride ' + url);
 		window.open(
 			'https://www.twitter.com/intent/tweet?text=' + txt,
@@ -100,15 +140,18 @@ export class CloudComponent implements OnInit {
 		return uid && this.firebaseUser && uid === this.firebaseUser.uid;
 	}
 
-	removeClip = function(op, vId, index) {
-		if (!op || !vId) {
+	removeClip = function(key, index) {
+		if (!key) {
 			console.error('Error: No Uid or videoId, Delete aborted');
 			return;
 		}
 		// TODO: prompt before remove
 
 		// firebase functions will take it from here..
-		this.db.object('/clips/' + op + '/' + vId).update({ deleted: true });
+		this.db
+			.collection('clips')
+			.doc(key)
+			.update({ deleted: true });
 
 		this.hpClips.items.splice(index, 1);
 	};
@@ -126,7 +169,7 @@ export class CloudComponent implements OnInit {
 			},
 			error => {
 				// TODO: log this
-				console.log('An error occurred when requesting comments.');
+				console.error('An error occurred when requesting comments.');
 			}
 		);
 	}
@@ -147,7 +190,7 @@ export class CloudComponent implements OnInit {
 					body: body,
 					timestamp: new Date().getTime()
 				})
-				.then(res => {
+				.then(() => {
 					this.loadMoreComments(op, videoId, index);
 					this.replyBox[index] = '';
 				});

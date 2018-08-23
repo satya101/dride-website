@@ -30,7 +30,7 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	conversation: Observable<any[]>;
 	public threadId: string;
 	public conversationPreviusIsMine: Array<boolean> = [];
-	private sub: any;
+	public _routeListener: any;
 	public replyBox: string;
 	public firebaseUser: any;
 	public profilePic: string;
@@ -61,43 +61,41 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// set meta tags
 		this.meta.set('Thread on Dride Forum', '', 'article');
-
-		this.sub = this.route.params.subscribe(params => {
+		this._routeListener = this.route.params.subscribe(params => {
 			this.threadId = params['slug'].split('____').pop();
-
 			// migrate to ___ in url
 			if (this.threadId === params['slug']) {
 				this.threadId = params['slug'].split('__').pop();
 			}
-
-			this.db
-				.collection('forum')
-				.doc(this.threadId)
-				.valueChanges()
-				.subscribe((snapshot: any) => {
-					if (!snapshot) {
-						this.router.navigate(['/page-not-found']);
-					} else {
-						// set meta tags
-						this.meta.set(snapshot.title, snapshot.description, 'article');
-					}
-				});
-
 			this.currentThread = this.db
 				.collection('forum')
 				.doc(this.threadId)
 				.valueChanges();
-
+			this.currentThread.subscribe((snapshot: any) => {
+				if (!snapshot) {
+					this.router.navigate(['/page-not-found']);
+				} else {
+					// set meta tags
+					this.meta.set(snapshot.title, snapshot.description, 'article');
+				}
+			});
 			this.conversation = this.db
 				.collection('forum')
 				.doc(this.threadId)
 				.collection('conversations', ref => ref.orderBy('timestamp', 'asc'))
 				.valueChanges();
-
 			this.conversation.subscribe(snapshot => {
 				this.sideThreadByAuther(snapshot, this.conversationPreviusIsMine);
 			});
 		});
+	}
+
+	ngOnDestroy() {
+		try {
+			this._routeListener.unsubscribe();
+		} catch (e) {
+			console.warn('no route to unsub..');
+		}
 	}
 
 	sideThreadByAuther(threadData, conversationPreviusIsMine) {
@@ -161,12 +159,6 @@ export class ThreadComponent implements OnInit, OnDestroy {
 
 	openLogin() {
 		this.auth.openLogin();
-	}
-
-	ngOnDestroy() {
-		if (this.ssr.isBrowser()) {
-			this.sub.unsubscribe();
-		}
 	}
 
 	getUserData(uid) {

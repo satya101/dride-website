@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { NotificationsService } from 'angular2-notifications';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { MetaService } from '../helpers/meta/meta.service';
 
 @Component({
@@ -14,12 +14,12 @@ import { MetaService } from '../helpers/meta/meta.service';
 export class StudioComponent implements OnInit {
 	public firebaseUser: any;
 	public video: any;
-	public videoId: number;
+	public videoId: string;
 	public description: string;
 
 	constructor(
 		private auth: AuthService,
-		public db: AngularFireDatabase,
+		public db: AngularFirestore,
 		private notificationsService: NotificationsService,
 		private meta: MetaService,
 		private route: ActivatedRoute,
@@ -40,7 +40,8 @@ export class StudioComponent implements OnInit {
 			this.videoId = params.vid;
 			this.auth.verifyLoggedIn().then(res => {
 				this.db
-					.object('/clips/' + this.firebaseUser.uid + '/' + params.vid)
+					.collection('clips')
+					.doc(params.vid)
 					.valueChanges()
 					.subscribe((snapshot: any) => {
 						this.video = snapshot;
@@ -52,7 +53,8 @@ export class StudioComponent implements OnInit {
 
 	save() {
 		this.db
-			.object('/clips/' + this.firebaseUser.uid + '/' + this.videoId)
+			.collection('clips')
+			.doc(this.videoId)
 			.update({ description: this.description })
 			.then(() => {
 				this.notificationsService.success('Beep Beep', 'Your video was updated successfully', {

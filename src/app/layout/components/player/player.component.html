@@ -1,36 +1,31 @@
 <div class="videogular-container" *ngIf="isBrowser && currentVideo">
-  <!-- <p class="dateLabel float-right">{{currentVideo.videoId | date:'MM-dd-yyyy'}}</p>	 -->
 
-  <div class="loader" *ngIf="!currentVideo.thumbs">
-    <img src="./assets/images/loader.gif" alt="processing" />
-    <p>
-      Proccessing, This can take a minute..
-    </p>
-  </div>
-  <vg-player *ngIf="currentVideo.thumbs" class="player" (onPlayerReady)="onPlayerReady($event, currentVideo, tag)">
+	<div class="loader" *ngIf="!currentVideo.thumb">
+		<img src="./assets/images/loader.gif" alt="processing" />
+		<p>
+			Proccessing, This can take a minute..
+		</p>
+	</div>
+	<div *ngIf="currentVideo.thumb">
+		<vg-player class="player" [ngClass]="{'standalone': !isCard, 'autoPlay': autoplay}" (onPlayerReady)="onPlayerReady($event, currentVideo, tag)">
+			<vg-overlay-play *ngIf="!showReplay"></vg-overlay-play>
+			<vg-buffering></vg-buffering>
+			<span *ngIf="showReplay" class="icon-replay" (click)="rePlay()"></span>
 
-    <vg-buffering [vgFor]="current"></vg-buffering>
+			<video [muted]="true" [vgMedia]="media" #media preload="auto" [autoplay]="autoplay" webkit-playsinline playsinline [poster]="currentVideo.thumb"
+			 class="videoPlayer" (click)="pause()">
+				<source src="{{currentVideo.clip}}" type="video/mp4">
+			</video>
 
-    <video [vgMedia]="media" #media id="current" preload="metadata" crossorigin class="videoPlayer" [muted]="currentVideo.mute"
-      [poster]="currentVideo.thumbs ? currentVideo.thumbs.src : null" src="{{currentVideo.clips.src}}">
-      <source src="{{currentVideo.clips.src}}" type="video/mp4">
-    </video>
+			<div *ngIf="total" [@introAnim] class="fullScreen" (click)="fullScreen()">
+				<span class="icon-full-screen2"></span>
+			</div>
 
+			<scrub-slider *ngIf="total" [@introAnim] [currentTime]="currentTime" [total]="total" [cue]="currentVideo.cue" [buffered]="buffered"
+			 (timeChange)="updateCurrentTime($event)"></scrub-slider>
 
-    <vg-controls>
-      <vg-play-pause></vg-play-pause>
+			<vg-time-display *ngIf="total" [@introAnim] class="elapsed" vgProperty="left" vgFormat="mm:ss"></vg-time-display>
 
-      <vg-scrub-bar [vgFor]="current">
-        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-      </vg-scrub-bar>
-      <vg-time-display [vgFor]="current" [vgProperty]="'current'" [vgFormat]="'mm:ss'"></vg-time-display>
-      <span class="divider">/</span>
-      <vg-time-display [vgFor]="current" [vgProperty]="'total'" [vgFormat]="'mm:ss'"></vg-time-display>
-
-      <vg-fullscreen></vg-fullscreen>
-    </vg-controls>
-
-    <vg-overlay-play></vg-overlay-play>
-
-  </vg-player>
+		</vg-player>
+	</div>
 </div>

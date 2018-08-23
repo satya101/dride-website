@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
 import { MetaService } from '../../helpers/meta/meta.service';
-import { HttpClient } from '@angular/common/http';
-import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
-import { NotificationsService } from 'angular2-notifications';
 import { SsrService } from '../../helpers/ssr/ssr.service';
 
 @Component({
@@ -60,24 +57,14 @@ export class ZeroComponent implements OnInit {
 		}
 	];
 
-	constructor(
-		private meta: MetaService,
-		private http: HttpClient,
-		private mixpanel: MixpanelService,
-		private notificationsService: NotificationsService,
-		public ssr: SsrService
-	) {
+	constructor(private meta: MetaService, public ssr: SsrService) {
 		this.videoObj = {
 			videoId: '2017_1102_105829',
 			op: 'XAPDVkxxfgfYfCXTLS0MILsfhPY2',
-			clips: {
-				src:
-					'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/clips%2FXAPDVkxxfgfYfCXTLS0MILsfhPY2%2F2017_1102_105829.mp4?alt=media&token=e672bea7-f66e-456d-8a9f-8ffeb57cc3d9'
-			},
-			thumbs: {
-				src:
-					'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2FXAPDVkxxfgfYfCXTLS0MILsfhPY2%2F2017_1102_105829.jpg?alt=media'
-			}
+			clip:
+				'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/clips%2FXAPDVkxxfgfYfCXTLS0MILsfhPY2%2F2017_1102_105829.mp4?alt=media&token=e672bea7-f66e-456d-8a9f-8ffeb57cc3d9',
+			thumb:
+				'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2FXAPDVkxxfgfYfCXTLS0MILsfhPY2%2F2017_1102_105829.jpg?alt=media'
 		};
 	}
 

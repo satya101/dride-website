@@ -24,6 +24,7 @@ const routes: Routes = [
 			{ path: 'store', loadChildren: './store/store.module#StoreModule' },
 			{ path: 'product/:productSlug', loadChildren: './store/product/product.module#ProductModule' },
 			{ path: 'profile/:uid/:videoId', loadChildren: './profile/profile.module#ProfileModule' },
+			{ path: 'clip/:videoId', loadChildren: './profile/profile.module#ProfileModule' },
 			{
 				path: 'profile/:uid',
 				loadChildren: './profile/profile.module#ProfileModule',

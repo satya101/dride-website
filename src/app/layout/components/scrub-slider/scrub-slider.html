@@ -1,0 +1,9 @@
+<div class="scruber">
+	<div class="buffer" [style.width.%]="buffered"></div>
+	<div [style.opacity]="cue > 0 ? 1 : 0" class="cue" [style.left.%]="cue*100/(total)"></div>
+
+	<div class="slider">
+		<ng5-slider [(value)]="currentTime" [options]="options" (userChange)="change()"></ng5-slider>
+	</div>
+
+</div>

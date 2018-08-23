@@ -1,0 +1,91 @@
+.platform-android {
+	.scruber {
+		padding-top: 1px;
+	}
+}
+scrub-slider {
+	.scruber {
+		margin-top: -28px;
+		width: calc(100% - 42px);
+		z-index: 1000000000;
+	}
+
+	ng5-slider {
+		padding: 0 !important;
+		.range-bar-active {
+			background: #f06060 !important;
+		}
+		.range-bar {
+			height: 4px !important;
+			top: 20px !important;
+		}
+	}
+	.range-knob {
+		background: #f06060 !important;
+		display: none;
+	}
+	.item {
+		background-color: inherit !important;
+		position: relative;
+		height: 50px !important;
+		padding: 0;
+		z-index: 1000000000;
+	}
+	.item-inner {
+		padding: 0 !important;
+	}
+	.range-ios .range-knob {
+		left: 15px !important;
+		top: 10px !important;
+		width: 14px !important;
+		height: 14px !important;
+	}
+
+	.range-md .range-knob {
+		left: 16px !important;
+		top: 14px !important;
+		width: 15px !important;
+		height: 15px !important;
+	}
+	.range-bar {
+		background-color: inherit !important;
+	}
+	.buffer {
+		float: left;
+		background-color: rgba(210, 115, 115, 0.5);
+		height: 4px;
+		position: relative;
+		top: 19px;
+		z-index: 100;
+	}
+	.slider {
+		position: relative;
+		top: -20px;
+		z-index: 10000000;
+		.ng5-slider .ng5-slider-pointer,
+		.ng5-slider .ng5-slider-bubble {
+			display: none;
+		}
+		.ng5-slider .ng5-slider-bar {
+			background: inherit;
+		}
+		.ng5-slider .ng5-slider-selection {
+			background-color: rgb(210, 115, 115);
+		}
+		.ng5-slider .ng5-slider-bar-wrapper.ng5-slider-right-out-selection .ng5-slider-bar,
+		.ng5-slider .ng5-slider-bar-wrapper.ng5-slider-left-out-selection .ng5-slider-bar {
+			background-color: inherit !important;
+		}
+		.ng5-slider-bar-wrapper {
+			visibility: visible !important;
+		}
+	}
+	.cue {
+		background-color: #f1ea18;
+		height: 4px;
+		width: 5px;
+		position: relative;
+		top: 19px;
+		z-index: 1000000000000;
+	}
+}

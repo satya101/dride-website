@@ -11,7 +11,32 @@ admin.initializeApp({
 // var res  = [];
 
 var db = admin.database();
-var ref = db.ref('userData');
+var fs = admin.firestore();
+
+var ref = db.ref('clips');
+ref.once(
+	'value',
+	function(snapshot) {
+		res = [];
+		clips = snapshot.val();
+		console.log(clips);
+		for (var key in clips) {
+			for (var clip in clips[key]) {
+				fs.collection('clips').add(
+					Object.assign(clips[key][clip], {
+						uid: key,
+						id: clip
+					})
+				);
+			}
+		}
+
+		console.log(res);
+	},
+	function(errorObject) {
+		console.log('The read failed: ' + errorObject.code);
+	}
+);
 
 // function listAllUsers(nextPageToken) {
 // 	var fbPhoto = '';

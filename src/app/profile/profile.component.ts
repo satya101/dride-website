@@ -1,6 +1,5 @@
 import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { environment } from '../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,9 +10,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service';
 import { MetaService } from '../helpers/meta/meta.service';
-import { PlayerComponent } from '../layout/components/player/player.component';
 
 import { introAnim } from '../router.animations';
+import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
 
 @Component({
 	selector: 'app-profile',
@@ -41,18 +40,18 @@ export class ProfileComponent implements OnInit {
 	public video404 = false;
 
 	constructor(
-		private db: AngularFireDatabase,
+		private rtdb: AngularFireDatabase,
+		private db: AngularFirestore,
 		private route: ActivatedRoute,
 		public http: HttpClient,
 		private router: Router,
 		private auth: AuthService,
 		public mixpanel: MixpanelService,
 		public ssr: SsrService,
-		private meta: MetaService,
-		private activatedRoute: ActivatedRoute
+		private meta: MetaService
 	) {
 		// get Auth state
-		auth.getState().subscribe(user => {
+		this.auth.getState().subscribe(user => {
 			if (!user) {
 				this.firebaseUser = null;
 				return;
@@ -67,39 +66,56 @@ export class ProfileComponent implements OnInit {
 			this.uid = params['uid'];
 			this.videoId = params['videoId'];
 
-			if (typeof params['videoId'] === 'undefined') {
-				const url = environment.firebase.databaseURL + '/clips/' + this.uid + '.json?limitToLast=1&orderBy="$key"';
-
-				this.http.get(url).subscribe(
-					data => {
-						if (data) {
-							this.router.navigate(['/profile/' + this.uid + '/' + Object.keys(data)[0]]);
-						} else {
-							this.userHaveNoVideos = true;
-						}
-					},
-					error => {
-						this.userHaveNoVideos = true;
-						// TODO: log this
-						console.error('An error occurred when requesting clips.');
-					}
-				);
+			// redirect old format videos to new format
+			if (this.videoId && this.uid) {
+				this.redirectIfOldFormat();
+				return;
 			}
 
-			if (params['uid']) {
-				this.opData = db.object('userData/' + params['uid']).valueChanges();
+			if (typeof this.videoId === 'undefined') {
+				this.db
+					.collection('clips', ref =>
+						ref
+							.where('uid', '==', this.uid)
+							.orderBy('dateUploaded', 'desc')
+							.limit(1)
+					)
+					.snapshotChanges()
+					.pipe(
+						map(actions =>
+							actions.map(a => {
+								const data = a.payload.doc.data() as any;
+								const key = a.payload.doc.id;
+								return { key, ...data };
+							})
+						)
+					)
+					.subscribe(
+						(data: any) => {
+							if (data[0]) {
+								this.router.navigate(['/clip/' + data[0].key]);
+							} else {
+								this.userHaveNoVideos = true;
+							}
+						},
+						error => {
+							this.userHaveNoVideos = true;
+							// TODO: log this
+							console.error('An error occurred when requesting clips.');
+						}
+					);
 			}
 		});
 	}
 
 	ngOnInit() {
-		if (!this.videoId || !this.uid) {
+		if (!this.videoId && !this.uid) {
 			return;
 		}
 
 		// subscribe to router event
 		this.route.params.subscribe(params => {
-			this.comments = null;
+			this.comments = [];
 			this.map.center = null;
 			this.map.path = null;
 
@@ -108,109 +124,105 @@ export class ProfileComponent implements OnInit {
 			this.uid = params['uid'];
 			this.videoId = params['videoId'];
 
-			this.comments = {};
-
-			this.clips = this.db.list('/clips/' + this.uid).snapshotChanges();
-
-			let wasSorted = false;
-			this.clips
-				.pipe(
-					map(clips => {
-						return clips.map(clip => ({ key: clip.key, ...clip.payload.val() }));
-					})
-				)
-				.subscribe(snapshot => {
-					if (!wasSorted) {
-						this.orderedClips = this.orderClipsByDate(snapshot);
-						wasSorted = true;
-					}
-				});
+			if (this.uid) {
+				this.loadUserDetails();
+			}
 
 			if (this.ssr.isBrowser()) {
 				window.scrollTo(0, 0);
 			}
 
 			if (!this.ssr.isBrowser()) {
-				this.setMetaTags(this.uid, this.videoId);
+				this.setMetaTags(this.videoId);
 			}
+			if (this.videoId) {
+				this.loadComments();
+				const subj = this.db
+					.collection('clips')
+					.doc(this.videoId)
+					.valueChanges()
+					.subscribe((currentVideoSanp: any) => {
+						const data = currentVideoSanp;
 
-			this.db
-				.object<any>('/clips/' + this.uid + '/' + this.videoId)
-				.valueChanges()
-				.subscribe(currentVideoSanp => {
-					const data = currentVideoSanp;
-
-					if (!data || !data.dateUploaded) {
-						this.video404 = true;
-						return;
-					}
-
-					this.currentVideo = data;
-					this.currentVideo['op'] = this.uid;
-					this.currentVideo['videoId'] = this.videoId;
-
-					this.meta.set(
-						this.currentVideo ? this.currentVideo['description'] : '',
-						this.currentVideo ? this.currentVideo['plates'] : ''
-					);
-
-					// concat old comments with new ones
-					Object.assign(this.comments, data.comments);
-					// load gps location
-					if (!data.gps) {
-						return;
-					}
-
-					this.http.get(data.gps.src).subscribe(
-						data => {
-							if (!data) {
-								return;
-							}
-
-							const s = this.prepGeoJsonToGoogleMaps(data);
-							const middleRoad = Math.ceil(s.length / 2);
-							if (s[middleRoad]) {
-								this.map['center'] = { latitude: s[middleRoad].latitude, longitude: s[middleRoad].longitude };
-								this.map['path'] = s;
-							}
-						},
-						error => {
-							this.userHaveNoVideos = true;
-							// TODO: log this
-							console.log('An error occurred when requesting clips.', error);
+						if (!data || !data.dateUploaded) {
+							this.video404 = true;
+							return;
 						}
-					);
-				});
+						this.currentVideo = data;
+						this.currentVideo['op'] = this.uid;
+						this.currentVideo['videoId'] = this.videoId;
+						this.uid = data.uid;
+						this.loadUserDetails();
+
+						this.meta.set(
+							this.currentVideo ? this.currentVideo['description'] : '',
+							this.currentVideo ? this.currentVideo['plates'] : ''
+						);
+
+						// load gps location
+						if (!data.gps) {
+							return;
+						}
+
+						this.http.get(data.gps.src).subscribe(
+							gpsData => {
+								if (!gpsData) {
+									return;
+								}
+
+								const s = this.prepGeoJsonToGoogleMaps(gpsData);
+								const middleRoad = Math.ceil(s.length / 2);
+								if (s[middleRoad]) {
+									this.map['center'] = { latitude: s[middleRoad].latitude, longitude: s[middleRoad].longitude };
+									this.map['path'] = s;
+								}
+							},
+							error => {
+								// TODO: log this
+								console.log('An error occurred when requesting clips.', error);
+							}
+						);
+						subj.unsubscribe();
+					});
+			}
 		});
 	}
-
-	getNextViewCount(views) {
-		return views ? +views + 1 : 1;
+	loadComments() {
+		this.db
+			.collection('clipsComments', ref => ref.where('videoId', '==', this.videoId))
+			.snapshotChanges()
+			.pipe(
+				map(actions =>
+					actions.map(a => {
+						const data = a.payload.doc.data() as any;
+						const key = a.payload.doc.id;
+						return { key, ...data };
+					})
+				)
+			)
+			.subscribe(comments => {
+				this.comments = comments;
+			});
 	}
 
-	sideThreadByAuther = function(comments) {
-		if (!comments) {
-			return;
-		}
-
-		let previusKey = null;
-		// angular.forEach(comments, function(k, key) {
-		for (const key in comments) {
-			if (key) {
-				if (!previusKey) {
-					previusKey = key;
-					return;
-				}
-				// if same author posted again
-				if (comments[key].autherId === comments[previusKey].autherId) {
-					this.conversationPreviusIsMine[previusKey] = true;
-				} else {
-					this.conversationPreviusIsMine[previusKey] = false;
-				}
-				previusKey = key;
-			}
-		}
-	};
+	loadUserDetails() {
+		this.opData = this.rtdb.object('userData/' + this.uid).valueChanges();
+		this.db
+			.collection('clips', ref => ref.where('uid', '==', this.uid))
+			.snapshotChanges()
+			.pipe(
+				map(actions =>
+					actions.map(a => {
+						const data = a.payload.doc.data() as any;
+						const key = a.payload.doc.id;
+						return { key, ...data };
+					})
+				)
+			)
+			.subscribe(snapshot => {
+				this.orderedClips = this.orderClipsByDate(snapshot);
+			});
+	}
 
 	orderClipsByDate(clips) {
 		const clipsBydate = {};
@@ -301,39 +313,20 @@ export class ProfileComponent implements OnInit {
 
 		this.auth.verifyLoggedIn().then(res => {
 			this.db
-				.list('/conversations_video/' + this.uid + '/' + this.videoId)
-				.push({
+				.collection('clipsComments')
+				.add({
 					autherId: res.uid,
 					auther: res.displayName,
 					pic: res.photoURL,
 					body: this.replyBox,
-					timestamp: new Date().getTime()
+					timestamp: new Date().getTime(),
+					videoId: this.videoId
 				})
-				.then(res => {
-					this.loadMoreComments(this.videoId);
+				.then(() => {
 					this.replyBox = '';
 				});
 			this.mixpanel.track('posted a comment', {});
 		});
-	};
-
-	// TODO: infinite scroll would be nice
-	loadMoreComments = function() {
-		this.http
-			.get(environment.firebase.databaseURL + '/conversations_video/' + this.uid + '/' + this.videoId + '.json')
-			.subscribe(
-				data => {
-					const items = data;
-					this.comments = items;
-
-					this.conversationPreviusIsMine = [];
-					this.sideThreadByAuther(this.comments);
-				},
-				error => {
-					// TODO: log this
-					console.log('An error occurred when requesting comments.');
-				}
-			);
 	};
 
 	fbShare = function() {
@@ -342,7 +335,7 @@ export class ProfileComponent implements OnInit {
 		}
 
 		window.open(
-			'https://www.facebook.com/sharer/sharer.php?u=https://dride.io/profile/' + this.uid + '/' + this.videoId,
+			'https://www.facebook.com/sharer/sharer.php?u=https://dride.io/clip/' + this.videoId,
 			'Facebook',
 			'toolbar=0,status=0,resizable=yes,width=' +
 				500 +
@@ -359,7 +352,7 @@ export class ProfileComponent implements OnInit {
 			return;
 		}
 
-		const url = 'https://dride.io/profile/' + this.uid + '/' + this.videoId;
+		const url = 'https://dride.io/clip/' + this.videoId;
 		const txt = encodeURIComponent('You need to see this! #dride ' + url);
 		window.open(
 			'https://www.twitter.com/intent/tweet?text=' + txt,
@@ -382,7 +375,10 @@ export class ProfileComponent implements OnInit {
 		// TODO: prompt before remove
 
 		// firebase functions will take it from here..
-		this.db.object('/clips/' + this.uid + '/' + this.videoId).update({ deleted: true });
+		this.db
+			.collection('clips')
+			.doc(this.videoId)
+			.update({ deleted: true });
 
 		this.router.navigate(['/profile/' + this.uid]);
 	};
@@ -399,35 +395,38 @@ export class ProfileComponent implements OnInit {
 		return videoRoute;
 	};
 
-	setMetaTags(uid, videoId) {
-		const url = environment.firebase.databaseURL + '/clips/' + uid + '/' + videoId + '.json';
-		this.http.get(url).subscribe(data => {
-			this.meta.addTag({
-				property: 'og:title',
-				content: data['description'] ? data['description'] : 'Event on Dride Cloud'
+	setMetaTags(videoId) {
+		this.db
+			.collection('clips')
+			.doc(videoId)
+			.valueChanges()
+			.subscribe(data => {
+				this.meta.addTag({
+					property: 'og:title',
+					content: data['description'] ? data['description'] : 'Event on Dride Cloud'
+				});
+				this.meta.addTag({
+					property: 'og:description',
+					content: data['plates'] ? data['plates'] : 'This video doesn\'t have a description yet.'
+				});
+				this.meta.addTag({ property: 'og:image:width', content: '320' });
+				this.meta.addTag({ property: 'og:image:height', content: '176' });
+				this.meta.addTag({ property: 'og:image', content: data['thumbs']['src'] });
+				this.meta.addTag({ property: 'og:video', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'og:video:secure_url', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'og:type', content: 'video.other' });
+				this.meta.addTag({ property: 'twitter:card', content: 'player' });
+				this.meta.addTag({ property: 'twitter:site', content: '@drideHQ' });
+				this.meta.addTag({ property: 'twitter:url', content: 'https://dride.io/clip/' + videoId });
+				this.meta.addTag({ property: 'twitter:title', content: data['description'] });
+				this.meta.addTag({ property: 'twitter:description', content: data['plates'] });
+				this.meta.addTag({ property: 'twitter:image:src', content: data['thumbs']['src'] });
+				this.meta.addTag({ property: 'twitter:player', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'twitter:player:width', content: '1280' });
+				this.meta.addTag({ property: 'twitter:player:height', content: '720' });
+				this.meta.addTag({ property: 'twitter:player:stream', content: data['clips']['src'] });
+				this.meta.addTag({ property: 'twitter:player:stream:content_type', content: 'video/mp4' });
 			});
-			this.meta.addTag({
-				property: 'og:description',
-				content: data['plates'] ? data['plates'] : 'This video doesn\'t have a description yet.'
-			});
-			this.meta.addTag({ property: 'og:image:width', content: '320' });
-			this.meta.addTag({ property: 'og:image:height', content: '176' });
-			this.meta.addTag({ property: 'og:image', content: data['thumbs']['src'] });
-			this.meta.addTag({ property: 'og:video', content: data['clips']['src'] });
-			this.meta.addTag({ property: 'og:video:secure_url', content: data['clips']['src'] });
-			this.meta.addTag({ property: 'og:type', content: 'video.other' });
-			this.meta.addTag({ property: 'twitter:card', content: 'player' });
-			this.meta.addTag({ property: 'twitter:site', content: '@drideHQ' });
-			this.meta.addTag({ property: 'twitter:url', content: 'https://dride.io/profile/' + uid + '/' + videoId });
-			this.meta.addTag({ property: 'twitter:title', content: data['description'] });
-			this.meta.addTag({ property: 'twitter:description', content: data['plates'] });
-			this.meta.addTag({ property: 'twitter:image:src', content: data['thumbs']['src'] });
-			this.meta.addTag({ property: 'twitter:player', content: data['clips']['src'] });
-			this.meta.addTag({ property: 'twitter:player:width', content: '1280' });
-			this.meta.addTag({ property: 'twitter:player:height', content: '720' });
-			this.meta.addTag({ property: 'twitter:player:stream', content: data['clips']['src'] });
-			this.meta.addTag({ property: 'twitter:player:stream:content_type', content: 'video/mp4' });
-		});
 	}
 
 	normalizeTimeStamp(timestamp, key = null) {
@@ -472,5 +471,32 @@ export class ProfileComponent implements OnInit {
 		} else {
 			return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + sec).getTime();
 		}
+	}
+
+	/**
+	 * @description will redirect old format /profile/:uid/:videoId to /clip/:id
+	 */
+	private redirectIfOldFormat() {
+		const sub = this.db
+			.collection('clips', ref =>
+				ref
+					.where('uid', '==', this.uid)
+					.where('id', '==', this.videoId)
+					.limit(1)
+			)
+			.snapshotChanges()
+			.pipe(
+				map(actions =>
+					actions.map(a => {
+						const data = a.payload.doc.data() as any;
+						const key = a.payload.doc.id;
+						return { key, ...data };
+					})
+				)
+			)
+			.subscribe(clip => {
+				sub.unsubscribe();
+				this.router.navigate(['/clip/' + clip[0].key]);
+			});
 	}
 }
