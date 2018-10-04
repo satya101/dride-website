@@ -1,13 +1,13 @@
 import { Injectable, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import * as firebase from 'firebase/app';
+import { auth } from 'firebase/app';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 import { MixpanelService } from './helpers/mixpanel/mixpanel.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -65,7 +65,8 @@ export class AuthService {
 	styleUrls: ['./layout/templates/modal/login/modal.scss']
 })
 export class NgbdModalLogin {
-	@Input() name;
+	@Input()
+	name;
 
 	isLoaded = false;
 	onWelcome = false;
@@ -77,7 +78,7 @@ export class NgbdModalLogin {
 	public l: { email: string; password: string };
 
 	userData: Observable<any[]>;
-	user: Observable<firebase.User>;
+	user: Observable<any>;
 
 	constructor(
 		public activeModal: BsModalRef,
@@ -102,11 +103,11 @@ export class NgbdModalLogin {
 	};
 
 	connectWithFacebook = function() {
-		this.connectWithProvider(new firebase.auth.FacebookAuthProvider());
+		this.connectWithProvider(new auth.FacebookAuthProvider());
 	};
 
 	connectWithGoogle = function() {
-		this.connectWithProvider(new firebase.auth.GoogleAuthProvider());
+		this.connectWithProvider(new auth.GoogleAuthProvider());
 	};
 
 	connectWithProvider = function(provider: any) {
@@ -135,8 +136,7 @@ export class NgbdModalLogin {
 						this.closeModal();
 					} else {
 						this.onWelcome = true;
-						firebase
-							.database()
+						this.db.database
 							.ref('userData')
 							.child(user.uid)
 							.update({ showedAnonymous: true });
@@ -150,14 +150,13 @@ export class NgbdModalLogin {
 
 	signInWithEmail() {
 		return new Promise((resolve, reject) => {
-			firebase
-				.auth()
+			this.afAuth.auth
 				.signInWithEmailAndPassword(this.r.email, this.r.password)
 				.then(() => {
 					this.closeModal();
 					resolve(true);
 				})
-				.catch((error: firebase.FirebaseError) => {
+				.catch((error: any) => {
 					console.error('error', error);
 					this.notificationsService.success('Oops..', error.message, {
 						timeOut: 3000,
@@ -172,17 +171,15 @@ export class NgbdModalLogin {
 
 	signUpWithEmail() {
 		return new Promise((resolve, reject) => {
-			firebase
-				.auth()
+			this.afAuth.auth
 				.createUserWithEmailAndPassword(this.r.email, this.r.password)
 				.then(userObj => {
 					const profilePic =
 						'https://storage.googleapis.com/dride-2384f.appspot.com/assets/profilePic/pic' +
 						this.randProfilePic() +
 						'.png';
-					firebase
-						.auth()
-						.currentUser.updateProfile({
+					this.afAuth.auth.currentUser
+						.updateProfile({
 							displayName: this.r.name,
 							photoURL: profilePic
 						})
@@ -205,7 +202,7 @@ export class NgbdModalLogin {
 							reject(error);
 						});
 				})
-				.catch((error: firebase.FirebaseError) => {
+				.catch((error: any) => {
 					console.error('error', error);
 					this.notificationsService.success('Oops..', error.message, {
 						timeOut: 3000,
@@ -219,9 +216,8 @@ export class NgbdModalLogin {
 	}
 	sendVerificationEmail() {
 		return new Promise((resolve, reject) => {
-			firebase
-				.auth()
-				.currentUser.sendEmailVerification()
+			this.afAuth.auth.currentUser
+				.sendEmailVerification()
 				.then(() => {
 					resolve(false);
 				})
@@ -233,10 +229,9 @@ export class NgbdModalLogin {
 	}
 
 	updateDisplayNameAndPhotoURL(name, photoULR) {
-		const uid = firebase.auth().currentUser.uid;
+		const uid = this.afAuth.auth.currentUser.uid;
 
-		firebase
-			.database()
+		this.db.database
 			.ref('userData')
 			.child(uid)
 			.update({ name: name, photoURL: photoULR });

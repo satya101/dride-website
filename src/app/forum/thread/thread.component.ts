@@ -5,9 +5,9 @@ import { finalize } from 'rxjs/operators';
 
 import { AuthService } from '../../auth.service';
 
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 import { introAnim } from '../../router.animations';
 

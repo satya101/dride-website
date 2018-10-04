@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { NotificationsService } from 'angular2-notifications';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { MetaService } from '../helpers/meta/meta.service';
 
 @Component({

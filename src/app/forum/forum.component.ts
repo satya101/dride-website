@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { introAnim } from '../router.animations';
 
@@ -21,7 +21,8 @@ import { map } from 'rxjs/operators';
 	animations: [introAnim]
 })
 export class ForumComponent implements OnInit {
-	@Input() isFull = true;
+	@Input()
+	isFull = true;
 	threads = [];
 	public limitToLast = 6;
 	public lastThreadCreated = 9000000000000;
@@ -53,7 +54,7 @@ export class ForumComponent implements OnInit {
 
 	ngOnInit() {
 		if (this.isFull) {
-			this.meta.set('Forum', 'A community page for Dride users\'s');
+			this.meta.set('Forum', "A community page for Dride users's");
 		}
 		this.limitToLast = this.isFull ? 50 : 6;
 		this.threads = [];

@@ -5,7 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthService } from '../auth.service';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
 	selector: 'ngbd-modal-content',
@@ -13,7 +13,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
 	styleUrls: ['../layout/templates/modal/askInForum/modal.scss']
 })
 export class NgbdModalAskInForum {
-	@Input() name;
+	@Input()
+	name;
 	qTitle: any;
 	public isLoaded = false;
 	showDanger = false;

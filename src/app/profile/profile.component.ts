@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service';
 import { MetaService } from '../helpers/meta/meta.service';
 
 import { introAnim } from '../router.animations';
-import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
 	selector: 'app-profile',
@@ -407,7 +407,7 @@ export class ProfileComponent implements OnInit {
 				});
 				this.meta.addTag({
 					property: 'og:description',
-					content: data['plates'] ? data['plates'] : 'This video doesn\'t have a description yet.'
+					content: data['plates'] ? data['plates'] : "This video doesn't have a description yet."
 				});
 				this.meta.addTag({ property: 'og:image:width', content: '320' });
 				this.meta.addTag({ property: 'og:image:height', content: '176' });
