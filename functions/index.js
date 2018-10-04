@@ -20,6 +20,7 @@ var FCM = require(__dirname + '/FCM/subscribe.js');
 var mailer = require(__dirname + '/mailer/send.js');
 var subscriber = require(__dirname + '/mailer/subscribe.js');
 var anonymizer = require(__dirname + '/user/anonymizer.js');
+var achievements = require(__dirname + '/user/achievements.js');
 var cloud = require(__dirname + '/cloud/cloud.js');
 var meta = require(__dirname + '/meta/meta.js');
 var viewCounter = require(__dirname + '/cloud/viewCount.js');
@@ -195,6 +196,9 @@ exports.cmntsCountVideo = functions.firestore.document('clipsComments/{conversat
 			.get()
 			.then(
 				conversation => {
+					//increase video counter
+					achievements.addTrophy(comment.autherId, 'FIRST_COMMENT');
+
 					db.collection('clips')
 						.doc(comment.videoId)
 						.update({ cmntsCount: conversation.size })
@@ -210,16 +214,14 @@ exports.cmntsCountVideo = functions.firestore.document('clipsComments/{conversat
  */
 exports.saveNewUserData = functions.auth.user().onCreate((user, context) => {
 	return new Promise((resolve, reject) => {
-		var usersRef = admin
-			.database()
-			.ref('userData')
-			.child(user.uid);
-
 		var resObj = {
-			name: user.displayName, //anonymizer.getRandomName()
-			photoURL: user.photoURL
+			name: user.displayName,
+			photoURL: user.photoURL,
+			uid: user.uid,
+			followers: 0,
+			videosUploaded: 0,
+			pts: 1
 		};
-		resObj = JSON.parse(JSON.stringify(resObj));
 
 		if (user.providerData && user.providerData[0] && user.providerData[0].providerId == 'facebook.com') {
 			resObj['fid'] = user.providerData[0].uid;
@@ -229,23 +231,59 @@ exports.saveNewUserData = functions.auth.user().onCreate((user, context) => {
 
 		var flName = user.displayName ? user.displayName.split(' ') : '';
 		resObj = JSON.parse(JSON.stringify(resObj));
-		usersRef.update(resObj).then(function() {
-			// create a user in Mixpanel Engage
-			mixpanel.people.set(user.displayName, {
-				$first_name: flName.length ? flName[0] : '',
-				$last_name: flName.length > 0 ? flName[1] : '',
-				$created: new Date().toISOString(),
-				email: user.email,
-				distinct_id: user.uid
-			});
-		});
 
-		//subscribe to list
-		subscriber.subscribeUser(user.email, user);
+		//DEPRECIATED update rtdb as as well for now,
+		try {
+			var usersRef = admin
+				.database()
+				.ref('userData')
+				.child(user.uid);
+			usersRef.update(resObj);
+		} catch (e) {
+			console.error(e);
+		}
+		admin
+			.firestore()
+			.collection('users')
+			.doc(user.uid)
+			.set(resObj)
+			.then(
+				() => {
+					//subscribe to list
+					subscriber.subscribeUser(user.email, user);
 
-		resolve();
+					resolve();
+
+					// // create a user in Mixpanel Engage
+					// mixpanel.people.set(user.displayName, {
+					// 	$first_name: flName.length ? flName[0] : '',
+					// 	$last_name: flName.length > 0 ? flName[1] : '',
+					// 	$created: new Date().toISOString(),
+					// 	email: user.email,
+					// 	distinct_id: user.uid
+					// });
+				},
+				e => reject(e)
+			);
 	});
 });
+/*
+ * TEMP: should be deleted when RTDB will retire
+ */
+exports.bridgeUsers = functions.database.ref('/userData/{uid}').onWrite((change, context) => {
+	if (!context.params.uid) {
+		console.log('not enough data');
+		return null;
+	}
+	var user = change.after.val();
+	user.uid = context.params.uid;
+	admin
+		.firestore()
+		.collection('users')
+		.doc(context.params.uid)
+		.update(user);
+});
+
 /*
  * Anonymise a user upon request
  */
@@ -257,6 +295,27 @@ exports.anonymizer = functions.database.ref('/userData/{uid}/anonymous').onWrite
 	var anonymStatus = change.after.val();
 	return anonymizer.start(anonymStatus, context.params.uid);
 });
+/*
+ * Anonymise a user upon request
+ */
+exports.anonymizerFS = functions.firestore.document('users/{userRef}').onUpdate((change, context) => {
+	if (!context.params.userRef) {
+		console.log('not enough data');
+		return null;
+	}
+	if (change.before.data() && change.before.data().name !== change.after.data().name) {
+		console.log('update user name');
+		admin.auth().updateUser(change.after.data().uid, {
+			displayName: change.after.data().name
+		});
+	} else if (change.before.data() && change.before.data().anonymous !== change.after.data().anonymous) {
+		var anonymStatus = change.after.data().anonymous;
+		return anonymizer.startFS(anonymStatus, context.params.userRef, change.after.data().uid);
+	} else {
+		return;
+	}
+});
+
 /*
  * remove clips on event
  */
@@ -495,6 +554,9 @@ exports.notifyVideoUploadedFS = functions.firestore.document('clips/{videoId}').
 
 					sendObj.to = 'eitan@dride.io';
 					promiseCollector.push(mailer.send(sendObj));
+
+					//increase video counter
+					promiseCollector.push(achievements.increaseVideoCounter(uid));
 
 					Promise.all(promiseCollector).then(_ => {
 						cloud

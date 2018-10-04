@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { PushNotificationsService } from '../push-notifications.service';
 
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { MetaService } from '../helpers/meta/meta.service';
 import { Observable } from 'rxjs';
 
@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
 
 	constructor(
 		private auth: AuthService,
-		public db: AngularFireDatabase,
+		public db: AngularFirestore,
 		public push: PushNotificationsService,
 		private route: ActivatedRoute,
 		private meta: MetaService
@@ -61,18 +61,19 @@ export class SettingsComponent implements OnInit {
 			this.email = this.firebaseUser.email;
 
 			this.db
-				.object('/userData/' + this.firebaseUser.uid)
+				.collection('users')
+				.doc(this.firebaseUser.uid)
 				.valueChanges()
 				.subscribe(snapshot => {
 					this.userData = Object.assign(this.userData, snapshot);
 				});
 
-			this.db
-				.object('/devices/' + this.firebaseUser.uid)
-				.valueChanges()
-				.subscribe(snapshot => {
-					this.userDevices = snapshot;
-				});
+			// this.db
+			// 	.object('/devices/' + this.firebaseUser.uid)
+			// 	.valueChanges()
+			// 	.subscribe(snapshot => {
+			// 		this.userDevices = snapshot;
+			// 	});
 
 			// TODO: add Push calss
 			this.push.setUid(this.firebaseUser.uid);
@@ -91,12 +92,18 @@ export class SettingsComponent implements OnInit {
 		// 	console.log(error)
 		// });
 	}
-	saveOption(field, value) {
-		this.db.object('/devices/' + this.firebaseUser.uid).update({ [field]: value });
+	saveNotificationOption(field, value) {
+		this.db
+			.collection('users')
+			.doc(this.firebaseUser.uid)
+			.update({ notification: { [field]: value } });
 	}
 
-	updateAnonymus(field, value) {
-		this.db.object('/userData/' + this.firebaseUser.uid).update({ [field]: value });
+	updateAnonymus(value) {
+		this.db
+			.collection('users')
+			.doc(this.firebaseUser.uid)
+			.update({ anonymous: value });
 	}
 
 	updateEmail() {

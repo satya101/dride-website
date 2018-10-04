@@ -15,7 +15,7 @@ import { MixpanelService } from '../../../helpers/mixpanel/mixpanel.service';
 	encapsulation: ViewEncapsulation.None,
 	animations: [introAnim]
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent {
 	@Input()
 	currentVideo: any;
 	@Input()
@@ -35,11 +35,13 @@ export class PlayerComponent implements OnInit {
 		this.isBrowser = this.ssr.isBrowser();
 	}
 
-	ngOnInit() {
-		this.currentVideo = this.reformatVideoObjectToLocal(this.currentVideo);
-		if (!this.currentTime) {
-			this.currentTime = 0;
-		}
+	ngOnChanges(change) {
+		this.currentVideo = null;
+		this.showReplay = false;
+		this.showPlay = true;
+		setTimeout(() => {
+			this.currentVideo = this.reformatVideoObjectToLocal(change.currentVideo.currentValue);
+		}, 100);
 	}
 
 	onPlayerReady(api: VgAPI, video, tag: string = 'Unknown') {
@@ -108,20 +110,23 @@ export class PlayerComponent implements OnInit {
 	}
 
 	reformatVideoObjectToLocal(videoUnformatted) {
-		console.log(videoUnformatted);
-		return {
-			key: videoUnformatted.videoId,
-			id: videoUnformatted.id,
-			timestamp: videoUnformatted.timestamp,
-			thumb: videoUnformatted.thumbs.src,
-			thumbPreloaded: videoUnformatted.thumbs.src,
-			clip: videoUnformatted.clips.src,
-			cue:
-				videoUnformatted.s.length >= 9
-					? this.normalizeTimeStamp(videoUnformatted.s) - this.normalizeTimeStamp(videoUnformatted.timestamp)
-					: videoUnformatted.s,
-			emr: false
-		};
+		try {
+			return {
+				key: videoUnformatted.videoId,
+				id: videoUnformatted.id,
+				timestamp: videoUnformatted.timestamp,
+				thumb: videoUnformatted.thumbs.src,
+				thumbPreloaded: videoUnformatted.thumbs.src,
+				clip: videoUnformatted.clips.src,
+				cue:
+					videoUnformatted.s.length >= 9
+						? this.normalizeTimeStamp(videoUnformatted.s) - this.normalizeTimeStamp(videoUnformatted.timestamp)
+						: videoUnformatted.s,
+				emr: false
+			};
+		} catch (e) {
+			return videoUnformatted;
+		}
 	}
 
 	normalizeTimeStamp(timestamp) {

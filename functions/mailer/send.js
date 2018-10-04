@@ -66,6 +66,7 @@ mailer = {
 						text: htmlToText.fromString(template),
 						html: template,
 						sendMultiple: true
+						//sendAt: 1500077141,
 					};
 
 					//update subscribers on a new post

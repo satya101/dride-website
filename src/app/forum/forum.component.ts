@@ -21,7 +21,8 @@ import { map } from 'rxjs/operators';
 	animations: [introAnim]
 })
 export class ForumComponent implements OnInit {
-	@Input() isFull = true;
+	@Input()
+	isFull = true;
 	threads = [];
 	public limitToLast = 6;
 	public lastThreadCreated = 9000000000000;
@@ -106,7 +107,6 @@ export class ForumComponent implements OnInit {
 	}
 
 	transformHits(hits) {
-		console.log(hits);
 		hits.forEach(hit => {
 			hit.stars = [];
 			for (let i = 1; i <= 5; i) {

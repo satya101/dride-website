@@ -1,7 +1,4 @@
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 var ffmpeg = require('ffmpeg');
-
-var fs = require('fs');
 var admin = require('firebase-admin');
 
 module.exports = class VideoEditor {

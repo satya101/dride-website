@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { MarkdownModule } from 'ngx-markdown';
@@ -21,7 +19,6 @@ import { ProfilePicConvertorPipe } from '../pipes/profile-pic-convertor.pipe';
 		routing,
 		FormsModule,
 		CommonModule,
-		AngularFireDatabaseModule,
 		AngularFireStorageModule,
 		MarkdownModule.forRoot(),
 		AutosizeModule

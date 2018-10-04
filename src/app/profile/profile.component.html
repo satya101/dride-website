@@ -3,9 +3,9 @@
 		<div class="headerBg">
 			<div class="gradBg">
 				<div class="container hidden-xs-down">
-					<div class="profilePic">
-						<img [src]="(opData|async)?.photoURL" />
-						<p>{{(opData|async)?.name}}
+					<div *ngIf="opData" class="profilePic">
+						<img [src]="opData.photoURL" />
+						<p>{{opData.name}}
 							<!-- TROPHYS HERE -->
 						</p>
 					</div>

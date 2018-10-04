@@ -15,8 +15,8 @@ meta = {
 					.doc(videoId)
 					.get()
 					.then(snapshot => {
+						var thumb = data['thumbs'] ? thumb : '';
 						const data = snapshot.data();
-						console.log(data);
 						root += meta.meta({
 							property: 'og:title',
 							content: data['description'] ? data['description'] : 'Event on Dride Cloud'
@@ -28,7 +28,7 @@ meta = {
 						root += meta.meta({ property: 'og:image:width', content: '320' });
 						root += meta.meta({ property: 'og:image:height', content: '176' });
 						if (data['thumbs']) {
-							root += meta.meta({ property: 'og:image', content: data['thumbs']['src'] });
+							root += meta.meta({ property: 'og:image', content: thumb });
 						}
 						root += meta.meta({ property: 'og:video', content: data['clips']['src'] });
 						root += meta.meta({
@@ -46,7 +46,7 @@ meta = {
 						root += meta.meta({ property: 'twitter:description', content: data['plates'] });
 						root += meta.meta({
 							property: 'twitter:image:src',
-							content: data['thumbs']['src']
+							content: thumb
 						});
 						root += meta.meta({ property: 'twitter:player', content: data['clips']['src'] });
 						root += meta.meta({ property: 'twitter:player:width', content: '1280' });
@@ -60,7 +60,6 @@ meta = {
 							content: 'video/mp4'
 						});
 
-						console.log(htmlDOM.replace('<head>', '<head>' + root));
 						resolve(htmlDOM.replace('<head>', '<head>' + root));
 					});
 			} catch (e) {

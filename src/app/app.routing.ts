@@ -2,7 +2,6 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { UploadVideoComponent } from './cloud/upload-video/upload-video.component';
 
 const routes: Routes = [
 	{
@@ -31,7 +30,6 @@ const routes: Routes = [
 				data: { meta: { title: 'Profile' } }
 			},
 			{ path: 'cloud', loadChildren: './cloud/cloud.module#CloudModule' },
-			{ path: 'cloud/uploadVideo', loadChildren: './cloud/upload-video/upload-video.module#UploadVideoModule' },
 			{ path: 'settings', loadChildren: './settings/settings.module#SettingsModule' },
 			{ path: 'invoice', loadChildren: './invoice/invoice.module#InvoiceModule' },
 			{ path: 'studio/:vid', loadChildren: './studio/studio.module#StudioModule' },

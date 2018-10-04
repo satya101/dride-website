@@ -6,7 +6,6 @@ import { finalize } from 'rxjs/operators';
 import { AuthService } from '../../auth.service';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireStorage } from 'angularfire2/storage';
 
 import { introAnim } from '../../router.animations';
@@ -40,7 +39,6 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	constructor(
 		private route: ActivatedRoute,
 		public db: AngularFirestore,
-		public rtdb: AngularFireDatabase,
 		private router: Router,
 		private auth: AuthService,
 		public mixpanel: MixpanelService,
@@ -120,32 +118,30 @@ export class ThreadComponent implements OnInit, OnDestroy {
 	*  Will push a new conversation object to DB (Add a comment in threadId)
 	*/
 	send() {
-		this.auth.verifyLoggedIn().then(res => {
-			this.getUserData(this.firebaseUser.uid).subscribe((userData: any) => {
-				if (this.replyBox) {
-					this.db
-						.collection('forum')
-						.doc(this.threadId)
-						.collection('conversations')
-						.add({
-							autherId: this.firebaseUser.uid,
-							auther: this.firebaseUser.displayName,
-							pic: userData.photoURL,
-							body: this.replyBox,
-							timestamp: new Date().getTime(),
-							fid: this.getFid()
-						});
-					this.replyBox = '';
-					this.mixpanel.track('posted a comment', {});
-				} else {
-					this.notificationsService.success('Oops..', 'Please write something to post..', {
-						timeOut: 3000,
-						showProgressBar: true,
-						pauseOnHover: true,
-						clickToClose: true
+		this.auth.verifyLoggedIn().then(userData => {
+			if (this.replyBox) {
+				this.db
+					.collection('forum')
+					.doc(this.threadId)
+					.collection('conversations')
+					.add({
+						autherId: this.firebaseUser.uid,
+						auther: this.firebaseUser.displayName,
+						pic: this.firebaseUser.photoURL,
+						body: this.replyBox,
+						timestamp: new Date().getTime(),
+						fid: this.getFid()
 					});
-				}
-			});
+				this.replyBox = '';
+				this.mixpanel.track('posted a comment', {});
+			} else {
+				this.notificationsService.success('Oops..', 'Please write something to post..', {
+					timeOut: 3000,
+					showProgressBar: true,
+					pauseOnHover: true,
+					clickToClose: true
+				});
+			}
 		});
 	}
 
@@ -159,10 +155,6 @@ export class ThreadComponent implements OnInit, OnDestroy {
 
 	openLogin() {
 		this.auth.openLogin();
-	}
-
-	getUserData(uid) {
-		return this.rtdb.object<any>('/userData/' + uid).valueChanges();
 	}
 
 	uploadFile(event) {

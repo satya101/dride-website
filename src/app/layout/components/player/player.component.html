@@ -14,7 +14,7 @@
 
 			<video [muted]="true" [vgMedia]="media" #media preload="auto" [autoplay]="autoplay" webkit-playsinline playsinline [poster]="currentVideo.thumb"
 			 class="videoPlayer" (click)="pause()">
-				<source src="{{currentVideo.clip}}" type="video/mp4">
+				<source [src]="currentVideo.clip" type="video/mp4">
 			</video>
 
 			<div *ngIf="total" [@introAnim] class="fullScreen" (click)="fullScreen()">

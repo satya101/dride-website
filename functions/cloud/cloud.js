@@ -151,23 +151,20 @@ cloud = {
 		}
 	},
 
-	processVideoFS(videoId, clip) {
+	processVideoFS(videoRef, clip) {
 		return new Promise((resolve, reject) => {
-			if (!clip.uid || !videoId) {
+			if (!videoRef) {
 				console.error('not enough data');
 				resolve();
 				return;
 			}
-			if (clip.isRTDB) {
+			if (clip && clip.isRTDB) {
 				console.error('from RTDB skip processing');
 				resolve();
 				return;
 			}
 
-			uid = clip.uid;
-			filename = clip.id;
-
-			request('http://34.249.141.56:8080/processVideoFS/' + videoId, function(error, response, body) {
+			request('http://34.249.141.56:8080/processVideoFS/' + videoRef, function(error, response, body) {
 				console.log('error:', error); // Print the error if one occurred
 				console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 				console.log('body:', body); // Print the HTML for the Google homepage.

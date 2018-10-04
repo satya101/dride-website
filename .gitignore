@@ -11,6 +11,7 @@
 /functions/node_modules
 /functions/appEngine/node_modules
 
+.firebase/
 # IDEs and editors
 /.idea
 .project

@@ -1,18 +1,17 @@
-import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 
-import { AngularFireDatabase } from 'angularfire2/database';
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service';
 import { MetaService } from '../helpers/meta/meta.service';
 
 import { introAnim } from '../router.animations';
-import { AngularFirestore } from '../../../node_modules/angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
 	selector: 'app-profile',
@@ -40,7 +39,6 @@ export class ProfileComponent implements OnInit {
 	public video404 = false;
 
 	constructor(
-		private rtdb: AngularFireDatabase,
 		private db: AngularFirestore,
 		private route: ActivatedRoute,
 		public http: HttpClient,
@@ -67,7 +65,7 @@ export class ProfileComponent implements OnInit {
 			this.videoId = params['videoId'];
 
 			// redirect old format videos to new format
-			if (this.videoId && this.uid) {
+			if (this.videoId && this.videoId.length < 15 && this.uid) {
 				this.redirectIfOldFormat();
 				return;
 			}
@@ -206,22 +204,31 @@ export class ProfileComponent implements OnInit {
 	}
 
 	loadUserDetails() {
-		this.opData = this.rtdb.object('userData/' + this.uid).valueChanges();
-		this.db
-			.collection('clips', ref => ref.where('uid', '==', this.uid))
-			.snapshotChanges()
-			.pipe(
-				map(actions =>
-					actions.map(a => {
-						const data = a.payload.doc.data() as any;
-						const key = a.payload.doc.id;
-						return { key, ...data };
-					})
+		try {
+			this.db
+				.collection('users')
+				.doc(this.uid)
+				.valueChanges()
+				.subscribe(user => (this.opData = user));
+
+			this.db
+				.collection('clips', ref => ref.where('uid', '==', this.uid))
+				.snapshotChanges()
+				.pipe(
+					map(actions =>
+						actions.map(a => {
+							const data = a.payload.doc.data() as any;
+							const key = a.payload.doc.id;
+							return { key, ...data };
+						})
+					)
 				)
-			)
-			.subscribe(snapshot => {
-				this.orderedClips = this.orderClipsByDate(snapshot);
-			});
+				.subscribe(snapshot => {
+					this.orderedClips = this.orderClipsByDate(snapshot);
+				});
+		} catch (e) {
+			console.error(e);
+		}
 	}
 
 	orderClipsByDate(clips) {
@@ -495,8 +502,8 @@ export class ProfileComponent implements OnInit {
 				)
 			)
 			.subscribe(clip => {
-				sub.unsubscribe();
 				this.router.navigate(['/clip/' + clip[0].key]);
+				sub.unsubscribe();
 			});
 	}
 }

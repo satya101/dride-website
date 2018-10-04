@@ -7,7 +7,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { MixpanelService } from './helpers/mixpanel/mixpanel.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -65,7 +65,8 @@ export class AuthService {
 	styleUrls: ['./layout/templates/modal/login/modal.scss']
 })
 export class NgbdModalLogin {
-	@Input() name;
+	@Input()
+	name;
 
 	isLoaded = false;
 	onWelcome = false;
@@ -82,7 +83,7 @@ export class NgbdModalLogin {
 	constructor(
 		public activeModal: BsModalRef,
 		public afAuth: AngularFireAuth,
-		public db: AngularFireDatabase,
+		public db: AngularFirestore,
 		private notificationsService: NotificationsService,
 		public mixpanel: MixpanelService
 	) {
@@ -128,17 +129,17 @@ export class NgbdModalLogin {
 			// TODO: //pushNotification.getPushToken(res.uid)
 
 			this.db
-				.object('/userData/' + user.uid)
+				.collection('users')
+				.doc(user.uid)
 				.valueChanges()
 				.subscribe(data => {
 					if (data && data.showedAnonymous === true) {
 						this.closeModal();
 					} else {
 						this.onWelcome = true;
-						firebase
-							.database()
-							.ref('userData')
-							.child(user.uid)
+						this.db
+							.collection('users')
+							.doc(user.uid)
 							.update({ showedAnonymous: true });
 
 						// first time logged in
@@ -235,10 +236,9 @@ export class NgbdModalLogin {
 	updateDisplayNameAndPhotoURL(name, photoULR) {
 		const uid = firebase.auth().currentUser.uid;
 
-		firebase
-			.database()
-			.ref('userData')
-			.child(uid)
+		this.db
+			.collection('users')
+			.doc(uid)
 			.update({ name: name, photoURL: photoULR });
 	}
 
