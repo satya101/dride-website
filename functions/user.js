@@ -1,44 +1,44 @@
-var admin = require('firebase-admin');
+// var admin = require('firebase-admin');
 
-var serviceAccount = require('./appEngine/dride-2384f-firebase-adminsdk-5lgyf-da8f444645.json');
+// var serviceAccount = require('./appEngine/dride-2384f-firebase-adminsdk-5lgyf-da8f444645.json');
 
-admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
-	databaseURL: 'https://dride-2384f.firebaseio.com'
-});
+// admin.initializeApp({
+// 	credential: admin.credential.cert(serviceAccount),
+// 	databaseURL: 'https://dride-2384f.firebaseio.com'
+// });
 
-var registrationToken =
-	'd_oYcKEldy4:APA91bHPvmjPoCqkltvYrjOrm5F9-yJBGpyjoBg11U_86MgeQvWOGyOs0dmjFdMCwwyWmmMs2d-bIzE1vpgRYw1mjfG8aHR3qLL6M25PR4T2io22Dhu0sMffj9nnaqNZGMAv_3Nd3SKk';
+// var registrationToken =
+// 	'd_oYcKEldy4:APA91bHPvmjPoCqkltvYrjOrm5F9-yJBGpyjoBg11U_86MgeQvWOGyOs0dmjFdMCwwyWmmMs2d-bIzE1vpgRYw1mjfG8aHR3qLL6M25PR4T2io22Dhu0sMffj9nnaqNZGMAv_3Nd3SKk';
 
-// See documentation on defining a message payload.
-var message = {
-	notification: {
-		title: 'New achievement unlocked 🔥',
-		body: 'You are now the owner of a shiny new trophy: "First Video Upload" 🏆'
-	},
-	data: {
-		'image-url':
-			'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2FtXuqLeiUr3blJK7JPG50UkeTzu92%2F1532698837000.jpg?alt=media',
-		media_type: 'image',
-		achievement: 'FIRST_VIDEO',
-		deepLink: 'achievement'
-	},
+// // See documentation on defining a message payload.
+// var message = {
+// 	notification: {
+// 		title: 'New achievement unlocked 🔥',
+// 		body: 'You are now the owner of a shiny new trophy: "First Video Upload" 🏆'
+// 	},
+// 	data: {
+// 		'image-url':
+// 			'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2FtXuqLeiUr3blJK7JPG50UkeTzu92%2F1532698837000.jpg?alt=media',
+// 		media_type: 'image',
+// 		achievement: 'FIRST_VIDEO',
+// 		deepLink: 'achievement'
+// 	},
 
-	token: registrationToken
-};
+// 	token: registrationToken
+// };
 
-// Send a message to the device corresponding to the provided
-// registration token.
-admin
-	.messaging()
-	.send(message)
-	.then(response => {
-		// Response is a message ID string.
-		console.log('Successfully sent message:', response);
-	})
-	.catch(error => {
-		console.log('Error sending message:', error);
-	});
+// // Send a message to the device corresponding to the provided
+// // registration token.
+// admin
+// 	.messaging()
+// 	.send(message)
+// 	.then(response => {
+// 		// Response is a message ID string.
+// 		console.log('Successfully sent message:', response);
+// 	})
+// 	.catch(error => {
+// 		console.log('Error sending message:', error);
+// 	});
 
 // // var tUser  = null;
 // // var r  = [];

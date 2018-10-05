@@ -11,7 +11,7 @@ import { SsrService } from '../helpers/ssr/ssr.service';
 import { MetaService } from '../helpers/meta/meta.service';
 
 import { introAnim } from '../router.animations';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
 	selector: 'app-profile',

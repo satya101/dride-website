@@ -12,11 +12,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import 'firebase/messaging';
 
 import { UiSwitchModule } from 'ngx-ui-switch';

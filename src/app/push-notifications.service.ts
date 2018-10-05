@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase/app'; // for typings
-import { FirebaseApp } from 'angularfire2';
+import { FirebaseApp } from '@angular/fire';
 
 @Injectable({ providedIn: 'root' })
 export class PushNotificationsService {

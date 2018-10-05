@@ -212,7 +212,7 @@ exports.cmntsCountVideo = functions.firestore.document('clipsComments/{conversat
 /*
  *   Save users data upon register
  */
-exports.saveNewUserData = functions.auth.user().onCreate((user, context) => {
+exports.saveNewUserData = functions.auth.user().onCreate(user => {
 	return new Promise((resolve, reject) => {
 		var resObj = {
 			name: user.displayName,
@@ -223,13 +223,17 @@ exports.saveNewUserData = functions.auth.user().onCreate((user, context) => {
 			pts: 1
 		};
 
+		if (!user.displayName || !user.photoURL) {
+			delete resObj.displayName;
+			delete resObj.photoURL;
+		}
+
 		if (user.providerData && user.providerData[0] && user.providerData[0].providerId == 'facebook.com') {
 			resObj['fid'] = user.providerData[0].uid;
 			resObj['photoURL_orig'] = resObj['photoURL'];
 			resObj['photoURL'] = 'https://graph.facebook.com/' + resObj['fid'] + '/picture?type=large&w‌​';
 		}
 
-		var flName = user.displayName ? user.displayName.split(' ') : '';
 		resObj = JSON.parse(JSON.stringify(resObj));
 
 		//DEPRECIATED update rtdb as as well for now,
@@ -250,9 +254,7 @@ exports.saveNewUserData = functions.auth.user().onCreate((user, context) => {
 			.then(
 				() => {
 					//subscribe to list
-					subscriber.subscribeUser(user.email, user);
-
-					resolve();
+					subscriber.subscribeUser(user.email, user).then(res => resolve(res), err => reject(err));
 
 					// // create a user in Mixpanel Engage
 					// mixpanel.people.set(user.displayName, {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { MarkdownModule } from 'ngx-markdown';
 import { ThreadComponent } from './thread.component';

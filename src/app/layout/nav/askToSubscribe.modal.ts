@@ -1,9 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 import { MixpanelService } from '../../helpers/mixpanel/mixpanel.service';
 
 import { environment } from '../../../environments/environment';
+import { CookieService } from 'ngx-cookie-service';
+import { NotificationsService } from 'angular2-notifications';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'ngbd-modal-content',
@@ -19,7 +22,13 @@ export class NgbdModalAskToSubscribe {
 	public firebaseUser: any;
 	public email: string;
 
-	constructor(public bsModalRef: BsModalRef, public mixpanel: MixpanelService) {}
+	constructor(
+		public bsModalRef: BsModalRef,
+		public mixpanel: MixpanelService,
+		private http: HttpClient,
+		private cookieService: CookieService,
+		private notificationsService: NotificationsService
+	) {}
 
 	onShown() {
 		this.isLoaded = true;
@@ -37,7 +46,7 @@ export class NgbdModalAskToSubscribe {
 			this.cookieService.set('subscribed', true);
 			this.mixpanel.track('subscribed', { location: 'popUp', email: email });
 
-			this.notificationsService.success('Thank you!', "We will let you know when we're ready", {
+			this.notificationsService.success('Thank you!', 'We will let you know when we\'re ready', {
 				timeOut: 3000,
 				showProgressBar: true,
 				pauseOnHover: true,

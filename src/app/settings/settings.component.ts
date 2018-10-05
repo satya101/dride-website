@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { PushNotificationsService } from '../push-notifications.service';
 
-import { AngularFirestore } from 'angularfire2/firestore';
 import { MetaService } from '../helpers/meta/meta.service';
 import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
 	selector: 'app-settings',

@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../auth.service';
 
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { MixpanelService } from '../helpers/mixpanel/mixpanel.service';
 import { SsrService } from '../helpers/ssr/ssr.service';
