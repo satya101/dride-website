@@ -12,8 +12,8 @@
 			<vg-buffering></vg-buffering>
 			<span *ngIf="showReplay" class="icon-replay" (click)="rePlay()"></span>
 
-			<video [muted]="true" [vgMedia]="media" #media preload="auto" [autoplay]="autoplay" webkit-playsinline playsinline [poster]="currentVideo.thumb"
-			 class="videoPlayer" (click)="pause()">
+			<video [muted]="true" [vgMedia]="media" #media preload="none" [autoplay]="autoplay" webkit-playsinline playsinline
+			 [poster]="currentVideo.thumb" class="videoPlayer" (click)="pause()">
 				<source [src]="currentVideo.clip" type="video/mp4">
 			</video>
 
@@ -21,8 +21,8 @@
 				<span class="icon-full-screen2"></span>
 			</div>
 
-			<scrub-slider *ngIf="total" [@introAnim] [currentTime]="currentTime" [total]="total" [cue]="currentVideo.cue" [buffered]="buffered"
-			 (timeChange)="updateCurrentTime($event)"></scrub-slider>
+			<scrub-slider *ngIf="total" [@introAnim] [currentTime]="currentTime" [total]="total" [cue]="currentVideo.cue"
+			 [buffered]="buffered" (timeChange)="updateCurrentTime($event)"></scrub-slider>
 
 			<vg-time-display *ngIf="total" [@introAnim] class="elapsed" vgProperty="left" vgFormat="mm:ss"></vg-time-display>
 
