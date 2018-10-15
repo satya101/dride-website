@@ -2,6 +2,7 @@
 	"name": "functions",
 	"description": "Firebase Functions",
 	"devDependencies": {
+		"functional-red-black-tree": "^1.0.1",
 		"typescript": "^2.3.2",
 		"webpack": "^3.5.5"
 	},

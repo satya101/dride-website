@@ -7,23 +7,31 @@
 // 	databaseURL: 'https://dride-2384f.firebaseio.com'
 // });
 
+// var topics = require('./dride-2384f-topics-export.json');
+// var fs = admin.firestore();
+
+// for (topicId in topics) {
+// 	for (j in topics[topicId]) {
+// 		fs.collection('topics').add({
+// 			uid: topics[topicId][j].uid,
+// 			email: topics[topicId][j].email,
+// 			topicId: topicId
+// 		});
+// 	}
+// }
 // var registrationToken =
-// 	'd_oYcKEldy4:APA91bHPvmjPoCqkltvYrjOrm5F9-yJBGpyjoBg11U_86MgeQvWOGyOs0dmjFdMCwwyWmmMs2d-bIzE1vpgRYw1mjfG8aHR3qLL6M25PR4T2io22Dhu0sMffj9nnaqNZGMAv_3Nd3SKk';
+// 	'durYV1ENnGM:APA91bE9ywfP3q2sUBQp2Km72tECTjf4Q51e1Ygi46723AblxaF-lwjHWIabi3s7eDkNgbhk5XmI8TVJpAtNSeP-LF5y3M1yTMXUovhRmb-JcihqM4STJsq59wG5oC22ZMCBo_D9Fl7z';
 
 // // See documentation on defining a message payload.
 // var message = {
 // 	notification: {
-// 		title: 'New achievement unlocked 🔥',
-// 		body: 'You are now the owner of a shiny new trophy: "First Video Upload" 🏆'
+// 		title: 'New response on Dride Forum 👩‍💻',
+// 		body: 'd sdjkasl djkas djas;kdj as'
 // 	},
 // 	data: {
-// 		'image-url':
-// 			'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2FtXuqLeiUr3blJK7JPG50UkeTzu92%2F1532698837000.jpg?alt=media',
-// 		media_type: 'image',
-// 		achievement: 'FIRST_VIDEO',
-// 		deepLink: 'achievement'
+// 		threadId: 'UyHESwCBKE5xuic3UkZy',
+// 		deepLink: 'forum'
 // 	},
-
 // 	token: registrationToken
 // };
 

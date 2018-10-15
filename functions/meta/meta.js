@@ -15,8 +15,8 @@ meta = {
 					.doc(videoId)
 					.get()
 					.then(snapshot => {
-						var thumb = data['thumbs'] ? thumb : '';
 						const data = snapshot.data();
+
 						root += meta.meta({
 							property: 'og:title',
 							content: data['description'] ? data['description'] : 'Event on Dride Cloud'
@@ -27,7 +27,9 @@ meta = {
 						});
 						root += meta.meta({ property: 'og:image:width', content: '320' });
 						root += meta.meta({ property: 'og:image:height', content: '176' });
-						if (data['thumbs']) {
+
+						var thumb = data['thumbs'] ? data['thumbs']['src'] : null;
+						if (thumb) {
 							root += meta.meta({ property: 'og:image', content: thumb });
 						}
 						root += meta.meta({ property: 'og:video', content: data['clips']['src'] });

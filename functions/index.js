@@ -108,58 +108,67 @@ exports.cmntsCount = functions.firestore
 				reject();
 				return;
 			}
+
 			var db = admin.firestore();
-			var rtdb = admin.database();
-
 			var conv = change.after.data();
+			var promiseCollector = [];
+			mailer.subscribeUserToTopic(conv.autherId, context.params.threadId).then(
+				r => {
+					db.collection('pushTokens')
+						.doc(conv.autherId)
+						.get()
+						.then(pushToken => {
+							var initiatorPush = null;
+							console.log('pushToken', pushToken);
+							if (pushToken.exists) {
+								var initiatorPush = pushToken.data().token;
+							}
 
-			rtdb
-				.ref('pushTokens')
-				.child(conv.autherId)
-				.child('value')
-				.once('value')
-				.then(pushToken => {
-					// try {
-					// 	promises.push(FCM.subscribeUserToTopic(pushToken.val(), slug.val()));
-					// } catch (e) {
-					// 	console.error('fcm', e);
-					// }
-					try {
-						promises.push(mailer.subscribeUserToTopic(conv.autherId, context.params.threadId));
-					} catch (e) {
-						console.error('mailer', e);
-					}
-
-					Promise.all(promises).then(
-						res => {
-							console.log('subsribed all');
-							db.collection('forum')
-								.doc(context.params.threadId)
-								.collection('conversations')
-								.get()
-								.then(conversation => {
-									//dispatch email
-									mailer.sendToTopic(context.params.threadId, context.params.threadId, conv);
-									var resObj = {
-										cmntsCount: conversation.size,
-										description: conv.body
-									};
-									//dispatch notifications
-									//FCM.sendToTopic(slug.val(), pushToken.val());
-
-									if (conversation.size > 1) {
-										delete resObj['description'];
-									}
-									console.log('update forum', resObj);
+							FCM.subscribeUserToTopic(initiatorPush, context.params.threadId).then(
+								res => {
+									console.log('subsribed all');
 									db.collection('forum')
 										.doc(context.params.threadId)
-										.update(resObj)
-										.then(res => resolve(res), err => reject(err));
-								});
-						},
-						err => reject(err)
-					);
-				});
+										.collection('conversations')
+										.get()
+										.then(conversation => {
+											//dispatch email
+											promiseCollector.push(mailer.sendToTopic(context.params.threadId, conv));
+											var resObj = {
+												cmntsCount: conversation.size,
+												description: conv.body
+											};
+											//dispatch notifications
+											promiseCollector.push(
+												FCM.sendToTopic(
+													initiatorPush,
+													context.params.threadId,
+													conv.body,
+													'New response on Dride Forum 👩‍💻'
+												)
+											);
+
+											if (conversation.size > 1) {
+												delete resObj['description'];
+											}
+
+											console.log('update forum', resObj);
+											promiseCollector.push(
+												db
+													.collection('forum')
+													.doc(context.params.threadId)
+													.update(resObj)
+											);
+
+											Promise.all(promiseCollector).then(res => resolve(res), err => reject(err));
+										});
+								},
+								err => reject(err)
+							);
+						});
+				},
+				err => reject(err)
+			);
 		});
 	});
 

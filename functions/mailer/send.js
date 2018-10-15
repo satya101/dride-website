@@ -17,92 +17,105 @@ mailer = {
 				.auth()
 				.getUser(autherId)
 				.then(userRecord => {
-					var db = admin.database();
-					var topicRef = db
-						.ref('topics')
-						.child(topicId)
-						.child(autherId)
-						.set({
-							email: userRecord.email,
-							uid: autherId
-						})
-						.then(res => resolve(res), err => reject(err));
+					var db = admin.firestore();
+
+					db.collection('topics')
+						.where('topicId', '==', topicId)
+						.where('uid', '==', autherId)
+						.get()
+						.then(
+							topic => {
+								//if user does not exists add him to the queue
+								if (!topic.size) {
+									db.collection('topics')
+										.add({
+											email: userRecord.email,
+											uid: autherId,
+											topicId: topicId
+										})
+										.then(res => resolve(res), err => reject(err));
+								} else {
+									resolve();
+								}
+							},
+							err => reject(err)
+						);
 				});
 		});
 	},
 	/*
    * Send mails to all subscribers
    */
-	sendToTopic: function(threadId, topicId, conv) {
-		var db = admin.firestore();
-		var rtdb = admin.database();
+	sendToTopic: function(topicId, conv) {
+		return new Promise((resolve, reject) => {
+			var db = admin.firestore();
 
-		db.collection('forum')
-			.doc(threadId)
-			.get()
-			.then(
-				threadSnap => {
-					var thread = threadSnap.data();
-					var template = fs.readFileSync('./mailer/templates/updateUser.mail', 'utf8');
-					params = {
-						TOPIC_URL: 'https://dride.io/thread/' + topicId,
-						FULL_NAME: conv.auther,
-						TITLE: thread.title,
-						PROFILE_PIC: conv.pic,
-						BODY: marked(conv.body),
-						TYPE: 'forum',
-						template_name: 'update-user',
-						SUBJECT: thread.title,
-						cmntCount: thread.cmntCount,
-						timestamp: conv.timestamp,
-						to: []
-					};
-					template = mailer.replaceParams(params, template);
+			db.collection('forum')
+				.doc(topicId)
+				.get()
+				.then(
+					threadSnap => {
+						var thread = threadSnap.data();
+						var template = fs.readFileSync('./mailer/templates/updateUser.mail', 'utf8');
+						params = {
+							TOPIC_URL: 'https://dride.io/thread/' + topicId,
+							FULL_NAME: conv.auther,
+							TITLE: thread.title,
+							PROFILE_PIC: conv.pic,
+							BODY: marked(conv.body),
+							TYPE: 'forum',
+							template_name: 'update-user',
+							SUBJECT: thread.title,
+							cmntCount: thread.cmntCount,
+							timestamp: conv.timestamp,
+							to: []
+						};
+						template = mailer.replaceParams(params, template);
 
-					const sendObj = {
-						to: [],
-						from: 'hello@dride.io',
-						subject: thread.title,
-						text: htmlToText.fromString(template),
-						html: template,
-						sendMultiple: true
-						//sendAt: 1500077141,
-					};
+						const sendObj = {
+							to: [],
+							from: 'hello@dride.io',
+							subject: thread.title,
+							text: htmlToText.fromString(template),
+							html: template,
+							sendMultiple: true
+							//sendAt: 1500077141,
+						};
 
-					//update subscribers on a new post
+						//update subscribers on a new post
 
-					//get subscribers email's
-					var topicRef = rtdb.ref('topics').child(topicId);
-
-					//get subscribers email's
-					topicRef.once(
-						'value',
-						function(topicSubscribersSnap) {
-							var t_SendTo = topicSubscribersSnap.val();
-
-							var res = [];
-							for (var opUID in t_SendTo) {
-								//exclude self
-								if (opUID != conv.autherId) {
-									if (sendObj.subject) {
-										sendObj.to = t_SendTo[opUID].email;
-										mailer.send(sendObj);
-									}
+						//get subscribers email's
+						db.collection('topics')
+							.where('topicId', '==', topicId)
+							.get()
+							.then(
+								topicSubscribersSnap => {
+									topicSubscribersSnap.forEach(snap => {
+										var userObject = snap.data();
+										//exclude self
+										if (userObject.uid != conv.autherId && !userObject.unsubscribe) {
+											if (sendObj.subject) {
+												sendObj.to = userObject.email;
+												mailer.send(sendObj).then(res => resolve(res), err => reject(err));
+											}
+										}
+									});
+								},
+								errorObject => {
+									console.log('The read failed: ' + errorObject.code);
+									reject(errorObject);
 								}
-							}
-						},
-						function(errorObject) {
-							console.log('The read failed: ' + errorObject.code);
-						}
-					);
-				},
-				function(errorObject) {
-					console.log('The read failed: ' + errorObject.code);
-				}
-			);
+							);
+					},
+					errorObject => {
+						console.log('The read failed: ' + errorObject.code);
+						reject(errorObject);
+					}
+				);
+		});
 	},
 	send: function(sendObj) {
-		sgMail.send(sendObj).then(done => console.log('done'), err => console.log('err', err));
+		return sgMail.send(sendObj).then(done => console.log('done'), err => console.log('err', err));
 	},
 	replaceParams: function(params, template) {
 		Object.keys(params).forEach(function(key) {
