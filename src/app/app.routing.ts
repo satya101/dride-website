@@ -35,6 +35,8 @@ const routes: Routes = [
 			{ path: 'studio/:vid', loadChildren: './studio/studio.module#StudioModule' },
 			{ path: 'purchases', loadChildren: './purchases/purchases.module#PurchasesModule' },
 
+			{ path: 'privacy', loadChildren: './content/privacy/privacy.module#PrivacyModule' },
+
 			{ path: 'page-not-found', component: PageNotFoundComponent },
 			{ path: '**', component: PageNotFoundComponent }
 		]
