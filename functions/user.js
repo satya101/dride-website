@@ -1,11 +1,11 @@
-// var admin = require('firebase-admin');
+var admin = require('firebase-admin');
 
-// var serviceAccount = require('./appEngine/dride-2384f-firebase-adminsdk-5lgyf-da8f444645.json');
+var serviceAccount = require('./appEngine/dride-2384f-firebase-adminsdk-5lgyf-da8f444645.json');
 
-// admin.initializeApp({
-// 	credential: admin.credential.cert(serviceAccount),
-// 	databaseURL: 'https://dride-2384f.firebaseio.com'
-// });
+admin.initializeApp({
+	credential: admin.credential.cert(serviceAccount),
+	databaseURL: 'https://dride-2384f.firebaseio.com'
+});
 
 // var topics = require('./dride-2384f-topics-export.json');
 // var fs = admin.firestore();
@@ -19,34 +19,33 @@
 // 		});
 // 	}
 // }
-// var registrationToken =
-// 	'durYV1ENnGM:APA91bE9ywfP3q2sUBQp2Km72tECTjf4Q51e1Ygi46723AblxaF-lwjHWIabi3s7eDkNgbhk5XmI8TVJpAtNSeP-LF5y3M1yTMXUovhRmb-JcihqM4STJsq59wG5oC22ZMCBo_D9Fl7z';
+var registrationToken =
+	'fv6nkhvGaMY:APA91bH4kSEAhYlAO0hAuv_dWxgMYcilk1qSQdxHal7soBUMW-RRiCXKjBjdkgrWXGtYY5S1SjgiDooGbdv98sz8_kTJwp44KqKzn3hO5nQpLgQMkaqJTMqK2uPEzSBlug1Ve81ATi74';
 
-// // See documentation on defining a message payload.
-// var message = {
-// 	notification: {
-// 		title: 'New response on Dride Forum 👩‍💻',
-// 		body: 'd sdjkasl djkas djas;kdj as'
-// 	},
-// 	data: {
-// 		threadId: 'UyHESwCBKE5xuic3UkZy',
-// 		deepLink: 'forum'
-// 	},
-// 	token: registrationToken
-// };
+// See documentation on defining a message payload.
+var message = {
+	notification: {
+		title: 'Your video was featured on the homepage 🔥',
+		body: 'Tap here to see it and edit any info about it.'
+	},
+	data: {
+		deepLink: 'cloud'
+	},
+	token: registrationToken
+};
 
-// // Send a message to the device corresponding to the provided
-// // registration token.
-// admin
-// 	.messaging()
-// 	.send(message)
-// 	.then(response => {
-// 		// Response is a message ID string.
-// 		console.log('Successfully sent message:', response);
-// 	})
-// 	.catch(error => {
-// 		console.log('Error sending message:', error);
-// 	});
+// Send a message to the device corresponding to the provided
+// registration token.
+admin
+	.messaging()
+	.send(message)
+	.then(response => {
+		// Response is a message ID string.
+		console.log('Successfully sent message:', response);
+	})
+	.catch(error => {
+		console.log('Error sending message:', error);
+	});
 
 // // var tUser  = null;
 // // var r  = [];

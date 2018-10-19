@@ -16,7 +16,8 @@ import { SsrService } from '../../helpers/ssr/ssr.service';
 	styleUrls: ['../../layout/templates/modal/payment/modal.scss']
 })
 export class NgbdModalPayement {
-	@Input() name;
+	@Input()
+	name;
 	productId: string;
 	qTitle: any;
 	isLoaded = true;
@@ -45,8 +46,9 @@ export class NgbdModalPayement {
 	}
 
 	onShow() {
-		this.canBuy =
-			this.bsModalRef.content.title === 'dride-kit' || this.bsModalRef.content.title === 'dride-hat' ? true : false;
+		// this.canBuy =
+		// 	this.bsModalRef.content.title === 'dride-kit' || this.bsModalRef.content.title === 'dride-hat' ? true : false;
+		this.canBuy = false;
 	}
 
 	setProductId(productId) {

@@ -63,6 +63,35 @@ push = {
 					reject(error);
 				});
 		});
+	},
+	getPushTokenByUid: function(uid) {
+		return new Promise((resolve, reject) => {
+			var db = admin.firestore();
+			db.collection('pushTokens')
+				.doc(uid)
+				.get()
+				.then(
+					pushToken => {
+						if (pushToken.exists && pushToken.data()) {
+							resolve(pushToken.data().token);
+						} else {
+							resolve(null);
+						}
+					},
+					err => reject(err)
+				);
+		});
+	},
+	sendPushByUid: function(uid, title, body, data) {
+		return new Promise((resolve, reject) => {
+			push.getPushTokenByUid(uid).then(
+				token => {
+					console.log('xxx', uid, token);
+					push.sendPushByToken(token, title, body, data).then(() => resolve(), err => reject(err));
+				},
+				err => reject(err)
+			);
+		});
 	}
 };
 

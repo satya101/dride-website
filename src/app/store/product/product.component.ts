@@ -70,7 +70,8 @@ export class ProductComponent {
 
 	purchase = function() {
 		this.auth.verifyLoggedIn().then(res => {
-			if (this.key !== 'dride-kit' && this.key !== 'dride-hat') {
+			if (true) {
+				// this.key !== 'dride-kit' && this.key !== 'dride-hat'
 				this.bsModalRef = this.modalService.show(NgbdModalPayement);
 				this.bsModalRef.content.title = this.key;
 			} else {

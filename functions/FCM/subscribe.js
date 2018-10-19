@@ -30,19 +30,18 @@ FCM = {
 	/*
    * send a post to a topic
    */
-	sendToTopic: (initiatorToken, topicId, body) => {
+	sendToTopic: (initiatorToken, topicId, body, title, data) => {
 		topicId = topicId.replace('a-zA-Z0-9-_.~%', '');
 
 		var payload = {
 			notification: {
-				title: 'New response on Dride Forum 👩‍💻',
-				body: body ? body : "Someone just posted a comment on a thread you've participating in.",
-				click_action: 'https://dride.io/thread/' + topicId,
+				title: title,
+				body: body,
 				icon: '/images/pwa/icon-144x144.png'
 			},
 			data: {
-				threadId: topicId,
-				deepLink: 'forum'
+				threadId: data.threadId,
+				deepLink: data.deepLink
 			}
 		};
 

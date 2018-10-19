@@ -119,12 +119,13 @@ export class PlayerComponent {
 				thumbPreloaded: videoUnformatted.thumbs.src,
 				clip: videoUnformatted.clips.src,
 				cue:
-					videoUnformatted.s.length >= 9
+					videoUnformatted.s && videoUnformatted.s.length >= 9
 						? this.normalizeTimeStamp(videoUnformatted.s) - this.normalizeTimeStamp(videoUnformatted.timestamp)
 						: videoUnformatted.s,
 				emr: false
 			};
 		} catch (e) {
+			console.error(e);
 			return videoUnformatted;
 		}
 	}

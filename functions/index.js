@@ -18,8 +18,10 @@ var Mixpanel = require('mixpanel');
 var mixpanel = Mixpanel.init('eae916fa09f65059630c5ae451682939');
 var FCM = require(__dirname + '/FCM/subscribe.js');
 var mailer = require(__dirname + '/mailer/send.js');
+var push = require(__dirname + '/push/push.js');
 var subscriber = require(__dirname + '/mailer/subscribe.js');
 var anonymizer = require(__dirname + '/user/anonymizer.js');
+var getUser = require(__dirname + '/user/getUser.js');
 var achievements = require(__dirname + '/user/achievements.js');
 var cloud = require(__dirname + '/cloud/cloud.js');
 var meta = require(__dirname + '/meta/meta.js');
@@ -114,58 +116,52 @@ exports.cmntsCount = functions.firestore
 			var promiseCollector = [];
 			mailer.subscribeUserToTopic(conv.autherId, context.params.threadId).then(
 				r => {
-					db.collection('pushTokens')
-						.doc(conv.autherId)
-						.get()
-						.then(pushToken => {
-							var initiatorPush = null;
-							console.log('pushToken', pushToken);
-							if (pushToken.exists) {
-								var initiatorPush = pushToken.data().token;
-							}
+					push.getPushTokenByUid(conv.autherId).then(initiatorPush => {
+						FCM.subscribeUserToTopic(initiatorPush, context.params.threadId).then(
+							res => {
+								console.log('subsribed all');
+								db.collection('forum')
+									.doc(context.params.threadId)
+									.collection('conversations')
+									.get()
+									.then(conversation => {
+										//dispatch email
+										promiseCollector.push(mailer.sendToTopic(context.params.threadId, conv));
+										var resObj = {
+											cmntsCount: conversation.size,
+											description: conv.body
+										};
+										//dispatch notifications
+										promiseCollector.push(
+											FCM.sendToTopic(
+												initiatorPush,
+												context.params.threadId,
+												conv.body,
+												'New response on Dride Forum 👩‍💻',
+												{
+													threadId: context.params.threadId,
+													deepLink: 'forum'
+												}
+											)
+										);
 
-							FCM.subscribeUserToTopic(initiatorPush, context.params.threadId).then(
-								res => {
-									console.log('subsribed all');
-									db.collection('forum')
-										.doc(context.params.threadId)
-										.collection('conversations')
-										.get()
-										.then(conversation => {
-											//dispatch email
-											promiseCollector.push(mailer.sendToTopic(context.params.threadId, conv));
-											var resObj = {
-												cmntsCount: conversation.size,
-												description: conv.body
-											};
-											//dispatch notifications
-											promiseCollector.push(
-												FCM.sendToTopic(
-													initiatorPush,
-													context.params.threadId,
-													conv.body,
-													'New response on Dride Forum 👩‍💻'
-												)
-											);
+										if (conversation.size > 1) {
+											delete resObj['description'];
+										}
 
-											if (conversation.size > 1) {
-												delete resObj['description'];
-											}
+										promiseCollector.push(
+											db
+												.collection('forum')
+												.doc(context.params.threadId)
+												.update(resObj)
+										);
 
-											console.log('update forum', resObj);
-											promiseCollector.push(
-												db
-													.collection('forum')
-													.doc(context.params.threadId)
-													.update(resObj)
-											);
-
-											Promise.all(promiseCollector).then(res => resolve(res), err => reject(err));
-										});
-								},
-								err => reject(err)
-							);
-						});
+										Promise.all(promiseCollector).then(res => resolve(res), err => reject(err));
+									});
+							},
+							err => reject(err)
+						);
+					});
 				},
 				err => reject(err)
 			);
@@ -196,22 +192,44 @@ exports.onForumUpdate = functions.firestore
  */
 exports.cmntsCountVideo = functions.firestore.document('clipsComments/{conversationId}').onCreate((snap, context) => {
 	return new Promise((resolve, reject) => {
+		var prom = [];
 		var comment = snap.data();
 		var db = admin.firestore();
 		db.settings({ timestampsInSnapshots: true });
-
 		db.collection('clipsComments')
 			.where('videoId', '==', comment.videoId)
 			.get()
 			.then(
 				conversation => {
 					//increase video counter
-					achievements.addTrophy(comment.autherId, 'FIRST_COMMENT');
-
-					db.collection('clips')
-						.doc(comment.videoId)
-						.update({ cmntsCount: conversation.size })
-						.then(() => resolve(), err => reject(err));
+					try {
+						achievements.addTrophy(comment.autherId, 'FIRST_COMMENT');
+					} catch (e) {
+						console.error(e);
+					}
+					try {
+						db.collection('clips')
+							.doc(comment.videoId)
+							.update({ cmntsCount: conversation.size });
+					} catch (e) {
+						console.error(e);
+					}
+					try {
+						getUser.getUserByVideoId(comment.videoId).then(
+							opId => {
+								push
+									.sendPushByUid(opId, 'New comment on Dride Cloud ☁️', comment.body, {
+										videoId: comment.videoId,
+										deepLink: 'cloud'
+									})
+									.then(() => resolve(), err => resolve());
+							},
+							err => reject(err)
+						);
+					} catch (e) {
+						console.error(e);
+						reject(e);
+					}
 				},
 				err => reject(err)
 			);
@@ -402,106 +420,6 @@ exports.processVideo = functions.database.ref('/clips/{uid}/{videoId}/clips').on
 	});
 });
 
-/**
- * @deprecated RTDB is no longer actively maintained!
- */
-exports.notifyVideoUploaded = functions.database.ref('/clips/{uid}/{videoId}/processed').onWrite((change, context) => {
-	return new Promise((resolve, reject) => {
-		resolve();
-		// let promiseCollector = [];
-
-		// if (!context.params.uid || !context.params.videoId) {
-		// 	reject('{"err": "not enough data"}');
-		// 	return;
-		// }
-
-		// const uid = context.params.uid;
-		// const filename = context.params.videoId;
-		// console.log(change.after.val());
-		// if (change.after.val() != 'true' && change.after.val() !== true) {
-		// 	console.log('{"err": "Already processed.."}');
-		// 	resolve('{"err": "Already processed.."}');
-		// 	return;
-		// }
-
-		// //track event
-		// mixpanel.track('video_upoload', {
-		// 	distinct_id: uid,
-		// 	filename: filename
-		// });
-		// //notify user his video is live!
-		// admin
-		// 	.auth()
-		// 	.getUser(uid)
-		// 	.then(
-		// 		userRecord => {
-		// 			console.log(uid);
-		// 			console.log(filename.split('.')[0]);
-		// 			admin
-		// 				.database()
-		// 				.ref('clips')
-		// 				.child(uid)
-		// 				.child(filename.split('.')[0])
-		// 				.once(
-		// 					'value',
-		// 					snapshot => {
-		// 						const user = userRecord.toJSON();
-		// 						const clip = snapshot.val();
-		// 						console.log(clip);
-		// 						//notify user his video is live!
-		// 						var template = fs.readFileSync('./mailer/templates/videoIsOn.mail', 'utf8');
-		// 						params = {
-		// 							FULL_NAME: user.displayName.split(' ')[0],
-		// 							VIDEO_POSTER:
-		// 								'https://firebasestorage.googleapis.com/v0/b/dride-2384f.appspot.com/o/thumbs%2F' +
-		// 								uid +
-		// 								'%2F' +
-		// 								filename.split('.')[0] +
-		// 								'.jpg?alt=media',
-		// 							VIDEO_LINK: 'https://dride.io/profile/' + uid + '/' + filename.split('.')[0],
-		// 							to: []
-		// 						};
-		// 						template = mailer.replaceParams(params, template);
-
-		// 						const sendObj = {
-		// 							to: user.email,
-		// 							from: 'hello@dride.io',
-		// 							subject: 'Your video is now on Dride Cloud',
-		// 							text: htmlToText.fromString(template),
-		// 							html: template,
-		// 							sendMultiple: true
-		// 						};
-
-		// 						promiseCollector.push(mailer.send(sendObj));
-
-		// 						sendObj.to = 'yossi@dride.io';
-		// 						promiseCollector.push(mailer.send(sendObj));
-
-		// 						sendObj.to = 'eitan@dride.io';
-		// 						promiseCollector.push(mailer.send(sendObj));
-
-		// 						Promise.all(promiseCollector).then(_ => {
-		// 							console.log('done!@!@!@!@!');
-		// 							resolve('{"status": "completed"}');
-		// 							return;
-		// 						});
-		// 					},
-		// 					errorObject => {
-		// 						console.log('The read failed: ' + errorObject.code);
-		// 						reject('{"status": "' + errorObject.code + '"}');
-		// 						return;
-		// 					}
-		// 				);
-		// 		},
-		// 		errorObject => {
-		// 			console.log('Error fetching user data: ' + errorObject.code);
-		// 			reject('{"status": "' + errorObject.code + '"}');
-		// 			return;
-		// 		}
-		// 	);
-	});
-});
-
 exports.notifyVideoUploadedFS = functions.firestore.document('clips/{videoId}').onCreate((snap, context) => {
 	return new Promise((resolve, reject) => {
 		let promiseCollector = [];
@@ -582,6 +500,75 @@ exports.notifyVideoUploadedFS = functions.firestore.document('clips/{videoId}').
 					return;
 				}
 			);
+	});
+});
+
+/**
+ * @description will be fired when clip has been added to the homepage, this function will let OP know about his clip being featured and upload the clip to Facebook
+ *
+ */
+exports.sendClipToHomePage = functions.https.onRequest((req, res) => {
+	return new Promise((resolve, reject) => {
+		let videoId = req.query.videoId;
+		let userToken = req.query.userToken;
+
+		let prom = [];
+
+		prom.push(
+			admin
+				.firestore()
+				.collection('clips')
+				.doc(videoId)
+				.update({ homepage: true })
+		);
+
+		admin
+			.firestore()
+			.collection('clips')
+			.doc(videoId)
+			.get()
+			.then(videoObject => {
+				push.getPushTokenByUid(videoObject.data().uid).then(
+					pushToken => {
+						prom.push(
+							push.sendPushByToken(
+								pushToken,
+								'Your video was featured on the homepage 🔥',
+								'Tap here to see it and edit any info about it.',
+								{
+									deepLink: 'cloud'
+								}
+							)
+						);
+
+						Promise.all(prom).then(
+							() => {
+								cors(req, res, () => {
+									res.status(200).send({
+										status: 1
+									});
+								});
+							},
+							err => {
+								cors(req, res, () => {
+									res.status(200).send({
+										status: -1,
+										error: err
+									});
+								});
+							}
+						);
+					},
+					err => {
+						cors(req, res, () => {
+							res.status(200).send({
+								status: -1,
+								error: err
+							});
+						});
+					}
+				);
+			});
 	});
 });
 
