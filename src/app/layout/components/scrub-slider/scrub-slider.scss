@@ -61,7 +61,6 @@ scrub-slider {
 	.slider {
 		position: relative;
 		top: -20px;
-		z-index: 10000000;
 		.ng5-slider .ng5-slider-pointer,
 		.ng5-slider .ng5-slider-bubble {
 			display: none;
@@ -86,6 +85,6 @@ scrub-slider {
 		width: 5px;
 		position: relative;
 		top: 19px;
-		z-index: 1000000000000;
+		z-index: 1000;
 	}
 }

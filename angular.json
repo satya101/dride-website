@@ -24,7 +24,11 @@
 							"src/firebase-messaging-sw.js",
 							"src/sitemap.xml"
 						],
-						"styles": ["src/styles.scss", "src/assets/fonts/icomoon/style.css"],
+						"styles": [
+							"src/styles.scss",
+							"src/assets/fonts/icomoon/style.css",
+							"./node_modules/ngx-ui-switch/ui-switch.component.css"
+						],
 						"scripts": []
 					},
 					"configurations": {

@@ -86,7 +86,7 @@
 	font-family: Comfortaa;
 	position: absolute;
 	height: 23px;
-	z-index: 100000;
+	z-index: 1000;
 	width: 42px;
 	span {
 		position: relative;
@@ -127,7 +127,6 @@ scrub-slider {
 	position: absolute;
 	width: 100%;
 	bottom: -35px;
-	z-index: 10000000;
 }
 
 @media (max-width: 442px) {

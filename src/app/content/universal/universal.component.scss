@@ -1,0 +1,124 @@
+.universal {
+	min-height: 100vh;
+	p {
+		font-weight: 100;
+	}
+	h2 {
+		font-size: 26px;
+		font-family: Raleway;
+		color: #666666;
+		text-transform: none;
+	}
+	.content {
+		background-color: #fff;
+	}
+
+	.b1 {
+		background-color: #333;
+		height: 66vh;
+		background-image: url('../../../assets/images/universal/bg1.jpg');
+		background-size: cover;
+
+		h1 {
+			color: #fff;
+			text-transform: none;
+			font-size: 50px;
+			padding-top: 140px;
+			label {
+				color: #f06060;
+			}
+		}
+	}
+	.app {
+		width: 17%;
+		min-width: 300px;
+		padding-top: 61px;
+	}
+	.step-1 img {
+		margin-left: 11%;
+		margin-top: -41px;
+	}
+	.b2 {
+		margin-top: -199px;
+		h1 {
+			color: #333;
+			padding-top: 0;
+			margin-top: -70px;
+		}
+		.trim {
+			width: 40%;
+		}
+		.step-2 img {
+			margin-left: -199px;
+			margin-top: -26px;
+			margin-bottom: -39px;
+		}
+	}
+	.b3 {
+		background-color: #e6e6e6;
+		h1 {
+			color: #333;
+			padding-top: 140px;
+		}
+		img {
+			width: 22%;
+			margin-bottom: -47px;
+			margin-top: 60px;
+		}
+	}
+	.b4 {
+		min-height: 300px;
+		h1 {
+			color: #333;
+			padding-top: 90px;
+			padding-bottom: 90px;
+		}
+	}
+	.b5 {
+		background-color: #333;
+		margin-top: 50px;
+		padding-top: 20px;
+		margin-bottom: 340px;
+		.dottedLine {
+			border-top: 2px dashed #fff;
+		}
+		img {
+			margin-bottom: -257px;
+		}
+		h1 {
+			color: #fff;
+			padding-top: 90px;
+		}
+		h2 {
+			padding-bottom: 30px;
+		}
+	}
+	.b6 {
+		background-color: #e6e6e6;
+		h1 {
+			color: #333;
+			padding-top: 140px;
+		}
+		img {
+			width: 22%;
+			margin-top: 60px;
+		}
+	}
+	.b7 {
+		h1 {
+			color: #333;
+			padding-top: 140px;
+		}
+		img {
+			width: 22%;
+			margin-top: 60px;
+		}
+	}
+	.b8 {
+		background-color: #333;
+		padding: 100px;
+		h1 {
+			color: #fff;
+		}
+	}
+}
